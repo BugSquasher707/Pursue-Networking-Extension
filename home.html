@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./Assets/css/style.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+        * {
+            margin: 0%;
+            padding: 0%;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .mainContainer {
+            width: 500px;
+            height: 600px;
+            background: #F7FBFF 0% 0% no-repeat padding-box;
+            /* padding: 15px; */
+            padding-top: 25px;
+            box-sizing: border-box;
+        }
+
+        .upperChatIcons {
+            width: 100%;
+            height: fit-content;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding: 2px 0px;
+            box-sizing: border-box;
+        }
+
+        .toastify {
+            padding: 12px 20px;
+            color: #ffffff;
+            display: inline-block;
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
+            background: -webkit-linear-gradient(315deg, #73a5ff, #5477f5);
+            background: linear-gradient(135deg, #73a5ff, #5477f5);
+            position: fixed;
+            top: 0%;
+            left: 50%;
+            white-space: nowrap;
+            transform: translateX(-50%) !important;
+            opacity: 0;
+            z-index: 1000000;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .toastify.on {
+            opacity: 1;
+        }
+
+        .upperChatIcons>img {
+            width: 27px;
+            height: 30px;
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
+
+        .imgContainer {
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .imgContainer img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .middleNav {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* margin-bottom: 20px; */
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .profileDiv,
+        .HomeDiv {
+            width: 70px;
+            height: 40px;
+            background: #DFE9FA 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+        }
+
+        .profileDiv:hover {
+            background: #084DD1 0% 0% no-repeat padding-box;
+        }
+
+        .profileDiv:hover .paperIcon {
+            color: white;
+        }
+
+        .HomeDiv {
+            background: #084DD1 0% 0% no-repeat padding-box;
+        }
+
+        .paperIcon {
+            font-size: 16px;
+            transition: all .2s ease-in-out;
+            color: #084DD1;
+        }
+
+        .homeIcon {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .searchDiv {
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .searchDiv input {
+            width: 190px;
+            height: 40px;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: inset 0px 2px 6px #00000033;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            padding: 0% 15px !important;
+            box-sizing: border-box;
+        }
+
+        .bottomContent {
+            width: 100%;
+            height: 330px;
+            margin-top: 20px !important;
+            overflow-y: auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: -18px;
+            position: relative;
+        }
+
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: all .2s ease-in-out;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .box1:hover {
+            border: 2px solid #084DD1;
+        }
+
+        .box1:hover i {
+            background: #DFE9FA 0% 0% no-repeat padding-box;
+        }
+
+        .box1 i {
+            font-size: 30px;
+            color: #084DD1;
+            transition: all .2s ease-in-out;
+            padding: 20px;
+            border-radius: 20px;
+            box-sizing: border-box;
+            /* margin-bottom: 20px; */
+        }
+
+        .box1 h1 {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0px;
+            transition: all .2s ease-in-out;
+            color: #030D47;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .box1 p {
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0px;
+            transition: all .2s ease-in-out;
+            color: #030D47;
+            margin-bottom: 0px;
+        }
+
+        .iconDiv {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+
+        .iconDiv img {
+            width: 30px;
+            height: 35px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px
+        }
+
+        /* / Track / */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* / Handle / */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* / Handle on hover / */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            cursor: pointer;
+        }
+
+        .new_header_right_imgs {
+            width: 475px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .smallgroupBox {
+            width: 45px;
+            height: 40px;
+            /* background-color: #edf4fd; */
+            border-radius: 5px;
+            margin-top: -5px;
+            margin-left: 5px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(2, 45%);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .countNum,
+        .countNum1 {
+            width: 15px;
+            height: 15px;
+            background-color: #084DD1;
+            color: white;
+            font-size: 10px;
+            position: absolute;
+            right: 0;
+            bottom: 0%;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .smalluserIconDemo {
+            width: 92%;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0 !important;
+            box-sizing: border-box;
+            margin: 5%;
+            margin-top: 0px;
+            border-radius: 55px;
+            padding: 2px 2px;
+            background: #E5E8ED 0% 0% no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            align-items: center;
+            font: normal normal bold 12px/14px Roboto;
+            color: #030D47;
+            line-height: 0%;
+            cursor: pointer;
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .iconMsgPicContainer {
+            width: fit-content;
+            position: relative;
+            margin: 2px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .iconMsgPicContainer .tooltiptext {
+            visibility: hidden;
+            width: fit-content;
+            background-color: #DFE9FA;
+            color: #000 !important;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            /* / Position the tooltip / */
+            position: absolute;
+            z-index: 1;
+            top: -100%;
+            left: 0%;
+
+        }
+
+        .iconMsgPicContainer:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .iconMsgPicContainer:hover {
+            cursor: pointer !important;
+        }
+
+        .smallgroupBox .tooltiptext {
+            visibility: hidden;
+            width: fit-content;
+            background-color: #DFE9FA;
+            color: #000 !important;
+            text-align: center;
+            border-radius: 6px;
+            padding: 3px 15px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 10;
+            top: -57%;
+            left: 0%;
+
+        }
+
+        .smallgroupBox:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .smallgroupBox:hover {
+            cursor: pointer !important;
+        }
+
+        .img__logo {
+            width: 27px;
+            height: 30px;
+            cursor: pointer;
+            margin: auto;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 80px;
+            height: 80px;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 1s linear infinite;
+            margin: 5px auto;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .moreSpan {
+            font-size: 12px;
+            font-weight: 800;
+            color: #084DD1;
+            position: absolute;
+            top: 10.3rem;
+            left: 21.5rem;
+            z-index: 100;
+            transform: translateY(0px);
+            transition: all .2s ease-in-out;
+        }
+
+        .moreSpan1 {
+            top: 24rem;
+        }
+
+        .moreSpan:hover {
+            cursor: pointer;
+            transform: translateY(-3px);
+            text-decoration: underline;
+        }
+
+        .loaderIcons {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite;
+            position: relative;
+            margin-left: 20px;
+            margin-bottom: 0px;
+        }
+
+        .loadergroupIcons {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite;
+            position: relative;
+            margin-right: 30px !important;
+            margin-bottom: 0px;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .membersModal {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            transform: scale(0);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .membersModalContainer {
+            width: 85%;
+            height: 520px;
+            background: #F7FBFF 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            box-sizing: border-box;
+            margin-top: 40px;
+        }
+
+        .membersMainContentContainer {
+            width: 100%;
+            height: 430px;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .membersContainer {
+            width: 370px;
+            height: 100%;
+            border: none;
+            background-color: transparent;
+            border-radius: 20px;
+            padding: 0px 15px;
+            padding-bottom: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .prospectContainer::-webkit-scrollbar {
+            display: block;
+        }
+
+        .prospectContent {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            position: relative;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 0% 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .prospectContent:hover {
+            background-color: #084DD1;
+        }
+
+        .prospectContent:hover h1 {
+            color: white;
+        }
+
+        .prospectContent:hover i {
+            color: white;
+        }
+
+        .prospectContent i {
+            font-size: 18px;
+            margin-right: 15px;
+            color: black;
+            transition: all .3s ease-in-out;
+        }
+
+        .prospectContent img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .prospectContent h1 {
+            width: fit-content;
+            font: normal normal normal 14.5px Roboto;
+            letter-spacing: 0px;
+            font-weight: 400;
+            margin: 0%;
+            color: black;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .prospectContent span {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #084DD1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .showMembersAll,
+        .showGroupsAll {
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #DFE9FA;
+            color: #0375FF !important;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            margin-left: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+        }
+
+        .showMembersAll:hover,
+        .showGroupsAll:hover {
+            background-color: #084DD1;
+        }
+
+        .showMembersAll:hover .fa-eye {
+            color: #fff !important;
+        }
+
+        .showGroupsAll:hover .fa-eye {
+            color: #fff !important;
+        }
+
+        .closeDiv {
+            width: 30px;
+            height: 30px;
+            background: #C4DEFF 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .closeDiv img {
+            width: 13px;
+            height: 13px;
+        }
+
+        .upperRow {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upperRow h1 {
+            font: normal normal bold 19px Roboto;
+            letter-spacing: 0px;
+            color: #030D47;
+            margin: 0%;
+        }
+
+        .groupContainer {
+            width: 100%;
+            height: 100%;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            padding: 0px 15px;
+            padding-bottom: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .groupBoxContainer {
+            width: 100%;
+            height: fit-content;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            justify-content: space-between;
+        }
+
+        .groupBox {
+            width: 100%;
+            height: 100px;
+            /* background-color: #edf4fd; */
+            border-radius: 50%;
+            position: relative;
+            padding: 0px 10px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(2, 40%);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .groupBox:hover {
+            background-color: #084DD1;
+        }
+
+        .userIconDemo {
+            width:75%;
+            height: 75%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-sizing: border-box;
+            margin: 0%;
+            /* margin-top: 10px; */
+            border-radius: 10px;
+            background: #E5E8ED 0% 0% no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            align-items: center;
+            font: normal normal bold 12px/14px Roboto;
+            color: #030D47;
+            line-height: 0%;
+            cursor: pointer;
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+            border-radius: 50% !important;
+        }
+
+        .groupName {
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 2px;
+            color: black !important;
+            z-index: 10;
+            width: 100%;
+            height: 25px;
+            border-radius: 5px;
+            cursor: default;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .notificationBox {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #084DD1;
+            color: white;
+            position: absolute;
+            top: 70%;
+            right: 0%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: default;
+            font-size: 12px;
+        }
+
+        .new-header {
+            width: 95%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .imgContainer {
+            width: 475px;
+            height: fit-content;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="mainContainer" style="padding: 0px 10px; padding-top: 30px; box-sizing: border-box;">
+        <div class="new-header" style="position: relative;">
+
+            <div class="imgContainer">
+                <div class="loaderIcons"></div>
+            </div>
+
+            <div class="logoContainer">
+                <img src="./Assets/img/index-logo.png" class="img__logo" alt="">
+            </div>
+
+
+            <div class="new_header_right_imgs" >
+                <div class="loadergroupIcons"></div>
+            </div>
+        </div>
+
+        <div class="middleNav">
+            <div class="profileDiv" id="profile_btn">
+
+                <i class="fas fa-paperclip paperIcon"></i>
+
+            </div>
+
+            <div class="searchDiv">
+                <input type="text" id="search_box" placeholder="Search" autocomplete="off">
+            </div>
+
+            <div class="signoutDiv profileDiv" id="signoutDiv">
+                <i class="fas fa-sign-out paperIcon"></i>
+            </div>
+
+            <div class="HomeDiv">
+                <i class="fas fa-home homeIcon"></i>
+            </div>
+
+        </div>
+
+        <div class="row m-0 tabs-row" style="display: none;">
+            <div class="tabs_layer_box" style="width: 100% !important;">
+                <div class="tab-content tabs-data" id="pills-tabContent">
+                    <div class="tab-pane fade tabs_two_list_view show active" id="pills-profile" role="tabpanel"
+                        aria-labelledby="pills-profile-tab">
+
+                        <div class="tab_2_main_x_scroll" id="items-container">
+
+                            <div class="tab_2_main_y_scroll">
+                                <div class="slide-1">
+
+                                    <div class="row m-0 tabs_two_main">
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Full Name</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Profile
+                                                Image</span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Title</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Company</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Location</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Status</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                        <div class="tabs_cols_two_main"
+                                            style="width: 162.9px;height: 38px; font-size:13px; padding-top: 9px; padding-left: 8px; padding-right: 8px;">
+                                            <span class="left" style="color: white !important;">Follow Up
+                                                Date</span>
+                                            <span class="right"><i class="fas fa-caret-down down_arow_tabs_two"
+                                                    style="color: white !important; font-size: 18px !important;"></i></span>
+                                        </div>
+                                    </div>
+                                    <div id="getAll"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="errorMessage"></div>
+
+        <div class="loaderContainer"
+            style="width: 100%; height: 420px; justify-content: center; align-items: center; display: none;">
+            <div class="loader"></div>
+        </div>
+        <div class="user-img-and-text" style=" text-align: center;">
+            <div class="userImage">
+                <img src=""
+                    style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px;"
+                    id="profilePic">
+            </div>
+            <span class="new-header-record" style="color: #757575 !important;
+            font-size: 14px !important;" id="savedUserMessage"></span>
+        </div>
+        <div class="bottomContent">
+
+            <div class="box1 box1Current">
+                <i class="fas fa-chart-pie"></i>
+                <h1>Dashboard</h1>
+
+                <p>Manage your CRM</p>
+            </div>
+
+            <div class="box1 box2" id="pipelines">
+                <i class="fas fa-th-list"></i>
+                <h1>Pipelines</h1>
+                <p>Manage LinkedIn Prospect</p>
+                <p class="hidePipeParas" style="display: none;">Create and Manage Lists</p>
+                <p class="hidePipeParas" style="display: none;">Filter Prospect Data</p>
+                <p class="hidePipeParas" style="display: none;">Manage Pipelines</p>
+            </div>
+
+            <span id="moreSpan" class="moreSpan">more</span>
+
+            <div class="box1 box3" id="calender">
+                <i class="fas fa-calendar-alt"></i>
+                <h1>Calendar</h1>
+                <p>Manage Follow Up Calendar</p>
+            </div>
+
+            <div class="box1 box4" id="msg_btn">
+                <i class="fas fa-comment-dots"></i>
+                <h1>Collaboration</h1>
+                <p>Manage Direct Message</p>
+                <p class="hidePipeParas1" style="display: none;">Manage Group Conversations</p>
+            </div>
+
+            <span id="moreSpan1" class="moreSpan moreSpan1">more</span>
+
+        </div>
+
+    </div>
+
+    <!-- Top Members Modal -->
+
+    <div class="membersModal" id="membersDynamicModal">
+
+        <div class="membersModalContainer">
+
+            <div class="upperRow">
+
+                <h1 id="membersDynamicModalH1">Chat Members</h1>
+
+                <div class="closeDiv" id='membersDynamicModalCloseBtn'>
+                    <img src="./Assets/img/close.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="membersMainContentContainer">
+
+                <div class="membersContainer"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Top Groups Modal -->
+
+    <div class="membersModal" id="groupsDynamicModal">
+
+        <div class="membersModalContainer">
+
+            <div class="upperRow">
+
+                <h1 id="groupsDynamicModalH1"></h1>
+
+                <div class="closeDiv" id='groupsDynamicModalCloseBtn'>
+                    <img src="./Assets/img/close.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="membersMainContentContainer">
+
+                <div class="groupContainer">
+
+                    <div class="groupBoxContainer groupDynamicContainer"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script type="text/javascript" src="./customHome.js"></script>
+<script src="js/toastify.js"></script>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+    
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   
+	<title>Linkedin Tester</title>
+
+	 <style>
+    body {
+      width: 500px;
+      height: 500px;
+      background-color: #F7FBFF;
+    }.bg{
+    	 background-color: lightgrey;
+    }.form-check-input {
+    position: absolute;
+    margin-top: 0.3rem;
+	margin-left: -1rem;
+	}.bg-light{
+		background-color:#ffffff !important;
+		border-radius: 5%
+	}span{
+		color:#0375FF !important;
+	}strong{
+		color:#cbcbcb !important;
+		font-weight: 500;
+	}i{
+		color:#0375FF !important;
+	}select{
+		border-color: white;
+	}input{
+		border-color: white !important;
+	}
+    </style>
+
+    <style>
+		.loader {
+		  border: 16px solid #f3f3f3;
+		  border-radius: 50%;
+		  border-top: 16px solid #3498db;
+		  width: 120px;
+		  height: 120px;
+		  -webkit-animation: spin 1s linear infinite; /* Safari */
+		  animation: spin 1s linear infinite;
+		  margin: auto;
+		  margin-top: 50%;
+		}
+
+		/* Safari */
+		@-webkit-keyframes spin {
+		  0% { -webkit-transform: rotate(0deg); }
+		  100% { -webkit-transform: rotate(360deg); }
+		}
+
+		@keyframes spin {
+		  0% { transform: rotate(0deg); }
+		  100% { transform: rotate(360deg); }
+		}
+		/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  cursor: pointer;
+}
+.scrolTd{
+	max-width: 100px; 
+	white-space: nowrap; 
+	overflow-x: auto;
+	font-size: 14px;
+}
+.address{
+	max-width: 280px;
+	display: inline-block;
+	white-space: nowrap; 
+	overflow-x: auto;
+	padding-left: 10px;
+	}
+	.form-control:focus{
+		box-shadow: none !important;
+	}
+				</style>
+   
+
+</head>
+<body id="body">
+	
+	<div class="justify-content-center">
+		<div class="loader" id="loader" style="display: none;"></div>
+	<div>
+
+	<div id="api_return" class="text-center mt-5" style="display: none;">
+		<h3 id="message" class="mb-3">Data Saved!</h3>
+		<button class="btn btn-lg btn-success" id="view_profile">View Profile</button>
+		<button class="btn btn-lg btn-warning" id="view_all">View All</button>
+	</div>
+
+	<div style="display: none" id="results">
+		<div>
+			
+		</div>
+		<div id="not_logged_in_buttons">
+			<i class="far fa-user fa-2x m-3" style="color: green; cursor: pointer;" id="login"></i>
+			<i class="fas fa-user-plus fa-2x m-3" style="color: green; cursor: pointer; float: right" id="register"></i>
+		</div>
+		<div id="logged_in_buttons" style="display: none">
+			<i class="far fa-save fa-2x m-3" style="color: green; cursor: pointer;" id="request"></i>
+			<strong id="username"></strong>
+			<i class="fas fa-sign-out-alt fa-2x m-3" style="color: green; cursor: pointer; float: right" id="logout"></i>
+			<i class="fas fa-search fa-2x m-3" style="color: green; cursor: pointer; float: right" id="view_all_1"></i>
+
+		</div>
+		<div id="admin_buttons" style="display: none">
+			<i class="fas fa-home fa-2x m-3" style="color: green; cursor: pointer;" id="admin_home"></i>
+			<strong id="username"></strong>
+			<i class="fas fa-sign-out-alt fa-2x m-3" style="color: green; cursor: pointer; float: right" id="logout1"></i>
+			
+
+		</div>
+		<div class="text-center mt-3" >
+			<h4 id="name">LinkedIn Tester</h4>
+			<p>Prospect <span id="alreadyStored" style="color: red"></span></p>
+			<hr>
+
+		</div>
+
+		<div style="position: absolute; right: 10px; top: 185px;">
+			<img 
+			style="border-radius: 8%; height:100px; width: 100px;  margin-right: 3%" 
+			src="" id="image">
+		</div>
+		<div>
+			<table class="table" style="width: 68%; margin-left: 2.5%;">
+				<tr class="py-2">
+					<td class="py-2 bg-light " >
+						<strong>Full Name: </strong>
+					</td>
+					<td class="py-2 bg-light scrolTd">
+						<span id="fname"></span>
+					</td>
+				</tr>
+				<tr class="py-2">
+					<td class="py-2 bg-light">
+						<strong>Work Title: </strong>
+					</td>
+					<td class="py-2 bg-light scrolTd">
+						<span id="description"></span>
+					</td>
+				</tr>
+				<tr class="py-2">
+					<td class="py-2 bg-light">
+						<strong>Company: </strong>
+					</td>
+					<td class="py-2 bg-light scrolTd">
+						<span id="company"></span>
+					</td>
+				</tr>
+			</table>
+			<span class="p-3 bg-light" style="margin: 10px 2%; display: flex;">
+				<strong>Address: </strong><span class="address" id="address"></span></span>
+			
+			<div class="aboutDiv bg-light py-2 mx-2">
+				<strong class="p-3">About: </strong>
+				<textarea rows="3" class="px-3 form-control border-0 shadow-0 " id="about"></textarea>
+			</div>
+			
+			<div  class="mt-2 bg-light d-flex justify-content-between py-2 mx-2">
+				<label for="input-select-1" class="p-1 input-select-1 ml-3 font-weight-bold "><strong>Status</strong></label>
+				<select class="form-select p-1 mr-3" aria-label="Default select example" id="status">Select</select>
+			</div>
+
+			<div class="mt-3 py-2 bg-light mx-2 d-flex">
+				<strong class="p-2" >Follow Up Date</strong>
+				<input type="date" name="date" id="follow_up" class="form-control mr-1 float-right" style="max-width: 60%">
+			</div>
+
+			<div class="mt-3" style="display: flex">
+				<strong class="p-3">Notes</strong>
+				<textarea  rows="5" id="notes" class="form-control" style="max-width: 80%"></textarea>
+			</div>
+
+			<div class="mt-5 text-center">
+				<h4>Campaign Data</h4>
+			</div>
+			<hr>
+
+			<div class="mt-3 py-2 bg-light mx-2 d-flex">
+				<strong class="p-2" style="font-size: 14px">Discovery Call Date</strong>
+				<input type="date" name="date" id="discovery_call" class="form-control mr-1" style="max-width: 60%">
+			</div>
+
+			<div  class="mt-2 bg-light d-flex justify-content-between py-2 mx-2">
+				<strong class="p-1">Conversion Messages</strong>
+				<select class="form-select p-1 px-2 mt-1 mr-2" id="conversion"  aria-label="Default select example">
+				  <option selected>Organic Messages</option>
+				  
+				</select>
+			</div>
+
+			<div  class="mt-2 bg-light d-flex justify-content-between py-2 mx-2">
+				<strong class="p-1">Total Messages Sent</strong>
+				<select class="form-select p-1 px-2 mt-1 mr-2" id="total_messages"  aria-label="Default select example">
+				  <option selected>1x</option>
+				  <option >2x</option>
+				  <option >3x</option>
+				  <option >4x</option>
+				</select>
+			</div>
+
+			<div class="mt-3 clearfix bg-light py-2 mx-2">
+				<strong class="p-3">Endorsement Given</strong>
+				<div class="d-flex float-right">
+					<div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" name="endorsement" value="Yes" id="flexRadioDefault1">
+					  <label class="form-check-label" for="flexRadioDefault1">
+					    Yes
+					  </label>
+					</div>
+					<div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" name="endorsement" value="No" id="flexRadioDefault2" checked>
+					  <label class="form-check-label" for="flexRadioDefault2">
+					    No
+					  </label>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-3 clearfix bg-light py-2 mx-2">
+				<strong class="p-3">Prospects Priority</strong>
+				
+				<div class="d-flex float-right">
+						<div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" value="A" name="priority" >
+					  <label class="form-check-label" for="flexRadioDefault1">
+					    A
+					  </label>
+					</div>
+					<div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" value="B" name="priority"  checked>
+					  <label class="form-check-label" for="flexRadioDefault2">
+					    B
+					  </label>
+					</div><div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" value="C" name="priority" >
+					  <label class="form-check-label" for="flexRadioDefault1">
+					    C
+					  </label>
+					</div>
+					<div class="form-check mr-3">
+					  <input class="form-check-input" type="radio" value="D" name="priority">
+					  <label class="form-check-label" for="flexRadioDefault2">
+					    D
+					  </label>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-3 py-2 bg-light mx-2 d-flex">
+				<strong class="p-2" style="font-size: 14px">Weekly source</strong>
+				<input type="date" id="week" max="" class="form-control mr-1" style="max-width: 60%">
+				<button class="btn btn-primary btn-sm" style="border-radius: 100%" id="weekly_source"></button>
+			</div>
+
+			<div class="mt-3">
+				<strong class="p-3">Profile Link</strong>
+				<span id="profile_link" style="font-size: 10px"></span>
+			</div>
+
+
+		</div>
+	</div>
+
+<!-- 	<div id="getAllButtons" style="display: none">
+		<div><i class="fas fa-times fa-2x mr-3 mb-3" style="color: green; cursor: pointer; float: right" id="go_back"></i></div><div class="text-center m-3"> <h3>All Profiles </h3></div>
+
+		<div class="m-3" style="display: flex">
+			<div  class="mt-2 bg-light d-flex justify-content-between py-2 mx-2" style="width: 50%">
+				<label for="input-select-1" class="p-1 m-1 input-select-1 ml-3 font-weight-bold "><strong>Status</strong></label>
+				<select class="form-select p-1 mr-3" aria-label="Default select example" id="status_filter">Select</select>
+			</div>
+			<div  class="mt-2 bg-light d-flex justify-content-between py-2 mx-2" style="width: 50%">
+				<label for="input-select-1" class="p-1 m-1 input-select-1 ml-3 font-weight-bold "><strong>Weekly</strong></label>
+				<select class="form-select p-1 mr-3" aria-label="Default select example" id="weekly_filter">Select</select>
+			</div>
+		</div>
+
+		<div id="get_all_message" class="text-center" style="color: red; display: none">
+			No Records Found..
+		</div>
+	</div> -->
+
+	<!-- <div style="display: none" id="getAll">
+	</div> -->
+</body>
+ <script type="text/javascript" src="popup.js"></script>
+</html>

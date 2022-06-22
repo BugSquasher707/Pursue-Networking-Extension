@@ -1,0 +1,4800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Chat</title>
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+
+  <link rel="stylesheet" href="modalAndPopUpCss.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+    * {
+      margin: 0%;
+      padding: 0%;
+    }
+
+    body {
+      font-family: "Roboto"sans-serif;
+    }
+
+    .main__container {
+      width: 500px;
+      height: auto;
+      padding: 15px 0%;
+      box-sizing: border-box;
+      background: #f7fbff 0% 0% no-repeat padding-box;
+      font-family: "Roboto", sans-serif;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container__content {
+      width: 460px;
+      height: 450px;
+      margin: auto;
+      border-radius: 20px;
+      background-color: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .leftBox {
+      width: 70px;
+      height: 100%;
+      background-color: transparent;
+      border: 1px solid #c4deff;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 25px 0px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .leftBox__container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .leftBox__container {
+      width: 100%;
+      height: 92%;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      flex-wrap: nowrap;
+      overflow-y: scroll;
+      align-items: center;
+    }
+
+    .userIcon,
+    .groupDiv,
+    .usersDiv {
+      width: 54px;
+      height: 54px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: #e5e8ed 0% 0% no-repeat;
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      font: normal normal bold 12px/14px "Roboto", sans-serif;
+      color: #030d47;
+      line-height: 0%;
+      cursor: pointer;
+      opacity: 0;
+      position: relative;
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .userIcon,
+    .dmsDiv,
+    .usersDiv {
+      width: 54px;
+      height: 54px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: #e5e8ed 0% 0% no-repeat;
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      font: normal normal bold 12px/14px "Roboto", sans-serif;
+      color: #030d47;
+      line-height: 0%;
+      cursor: pointer;
+      opacity: 0;
+      position: relative;
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .userIcon,
+    .notificationDiv,
+    .usersDiv {
+      width: 54px;
+      height: 54px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: #e5e8ed 0% 0% no-repeat;
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      font: normal normal bold 12px/14px "Roboto", sans-serif;
+      color: #030d47;
+      line-height: 0%;
+      cursor: pointer;
+      opacity: 0;
+      position: relative;
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .userIconDemo {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: scale-down;
+      box-sizing: border-box;
+      margin-top: 10px;
+      border-radius: 10px;
+      background: #e5e8ed 0% 0% no-repeat;
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      font: normal normal bold 12px/14px "Roboto", sans-serif;
+      color: #030d47;
+      line-height: 0%;
+      cursor: pointer;
+      opacity: 0;
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      transition: all 0.2s ease-in-out;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      margin: 0;
+      width: 100%;
+      height: auto;
+    }
+
+    .groupName {
+      font-size: 13px;
+      line-height: 19px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 600;
+      margin-top: 2px;
+      color: black !important;
+      z-index: 10;
+      width: 100%;
+      height: 19px;
+      border-radius: 5px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-top: 7px;
+    }
+
+    .groupDiv {
+      padding: 21px 0px;
+      margin-bottom: 20px;
+    }
+
+    .dmsDiv {
+      padding: 21px 0px;
+      margin-bottom: 20px;
+    }
+
+    .notificationDiv {
+      padding: 21px 0px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes scaleAnim {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes scaleAnim {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .userIcon img {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+    }
+
+    .userClicked {
+      width: 50px !important;
+      height: 50px !important;
+      background: #c4deff 0% 0% no-repeat padding-box;
+      border-radius: 50% !important;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .userClicked img {
+      border-radius: 50% !important;
+    }
+
+    .addUser {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: #dfe9fa 0% 0% no-repeat padding-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .addUser img {
+      width: 14px;
+      height: 14px;
+      object-fit: fill;
+    }
+
+    .rightBox {
+      width: 380px;
+      height: 100%;
+      border: 1px solid #c4deff;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 15px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .rightUpperBox {
+      width: 340px;
+      height: 45px;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #0000001a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+      cursor: default;
+    }
+
+    .rightUperLeft,
+    .defaultIcon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .defaultIcon {
+      margin-right: 10px;
+    }
+
+    .defaultIcon img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .defaultIcon i {
+      margin: 0% !important;
+    }
+
+    .rightUperLeft img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .rightUperLeft i,
+    .defaultIcon i {
+      font-size: 14px !important;
+      color: #999 !important;
+    }
+
+    .rightUperRight {
+      width: calc(100% - 90px);
+      height: fit-content;
+      padding-left: 10px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      flex-wrap: wrap;
+      overflow: hidden;
+      transition: all 1s ease-in-out !important;
+    }
+
+    .rightUperRight p {
+      font: normal normal normal 12.5px/14px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      font-weight: 500;
+      color: #030d47;
+      padding: 1px 0px;
+      margin: 2px 0%;
+      margin-right: 10px;
+      word-wrap: break-word;
+      animation: scaleAnim 0.1s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.1ss cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+    }
+
+    .chatMessageContent {
+      width: 100%;
+      height: 280px;
+      position: relative;
+      overflow: scroll;
+      margin-top: 15px;
+      /* overflow-x: hidden; */
+    }
+
+    .chatMessageContent::-webkit-scrollbar {
+      display: none;
+    }
+
+    .myMessageDiv,
+    .userMessageDiv {
+      max-width: fit-content;
+      width: 250px;
+      min-height: 42px;
+      height: fit-content;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      background: #fff1de 0% 0% no-repeat padding-box;
+      border-radius: 20px 20px 5px 20px;
+      position: relative;
+      left: 100%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      transform: translate(-100%, 0%);
+      opacity: 0;
+      margin-top: 10px;
+    }
+
+    .senderMsgContainer,
+    .groupUserMsgContainer {
+      width: 100%;
+      height: fit-content;
+      position: relative;
+      padding-top: 30px;
+      box-sizing: border-box;
+    }
+
+    .messageImage {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .imageNameContainer,
+    .imageNameContainer1 {
+      width: 100%;
+      height: fit-content;
+      position: relative;
+      top: 0px !important;
+      left: 0px;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .imageNameContainer1 {
+      width: fit-content;
+    }
+
+    .senderName,
+    .groupUserName {
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      margin-right: 5px;
+    }
+
+    .myMessageDiv {
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+    }
+
+    .myMessageDiv p,
+    .userMessageDiv p {
+      width: 100%;
+      margin: 0%;
+      font: normal normal normal 14px "Roboto", sans-serif;
+      line-height: 20px;
+      /* word-break: break-all; */
+      word-wrap: break-word;
+    }
+
+    .userMessageDiv {
+      background: #deeeff 0% 0% no-repeat padding-box;
+      border-radius: 20px 20px 20px 5px;
+      left: 0%;
+      transform: translate(0px);
+      opacity: 0;
+      animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+    }
+
+    .chatControlBtn {
+      width: 100%;
+      height: fit-content;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    .attachmentDiv {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .attachmentDiv img {
+      width: 20px;
+      height: 20px;
+      margin-left: 25px;
+      cursor: pointer;
+    }
+
+    .messageInputDiv {
+      width: 100%;
+      height: fit-content;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .messageInputDiv form {
+      width: 100%;
+    }
+
+    .messageInputDiv input {
+      width: 100%;
+      height: 35px;
+      background: #f5f5f5 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      padding-left: 15px;
+      padding-right: 60px !important;
+      box-sizing: border-box;
+      font: normal normal normal 14px/17px "Roboto", sans-serif;
+      color: #757575;
+    }
+
+    .messageInputDiv button {
+      position: absolute;
+      top: 50%;
+      right: 2%;
+      z-index: 10;
+      transform: translate(0%, -50%);
+      font: normal normal bold 14px/17px "Roboto", sans-serif;
+      color: #084dd1;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      margin-right: 10px;
+    }
+
+    .startChatModalOverlay,
+    .startChatModalOverlay1 {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: scale(0);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      z-index: 100;
+    }
+
+    .modalContainer {
+      width: 460px;
+      height: 92%;
+      background: #fff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 30px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .upperRow {
+      width: 100%;
+      height: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .upperRow h1 {
+      font: normal normal bold 16px/19px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      color: #030d47;
+      margin: 0%;
+    }
+
+    .closeDiv,
+    .closeDiv1 {
+      width: 40px;
+      height: 40px;
+      background: #084dd1 0% 0% no-repeat padding-box;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transform: translate(32px, -18px);
+      font-size: 26px;
+      font-weight: 400;
+    }
+
+    .closeDiv img,
+    .closeDiv1 img {
+      width: 15px;
+      height: 15px !important;
+    }
+
+    .mainContentContainer {
+      width: 100%;
+      height: 340px;
+      overflow: scroll;
+      margin-top: 10px;
+      padding: 0px 10px;
+    }
+
+    .mainContentContainer::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chatContent,
+    .prospectContent,
+    .prospectContent1 {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      position: relative;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 0% 15px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      height: 78px;
+      box-shadow: 0px 3px 6px #00000029;
+      margin-right: 5px;
+    }
+
+    .chatContent:hover h1 {
+      color: #084dd1;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .prospectContent:hover,
+    .prospectContent1:hover {
+      background-color: #084dd1;
+    }
+
+    .prospectContent:hover h1,
+    .prospectContent1:hover h1 {
+      color: white;
+    }
+
+    .prospectContent:hover h2 {
+      color: white;
+    }
+
+    .prospectContent:hover i,
+    .prospectContent1:hover i {
+      color: white;
+    }
+
+    .chatContent:hover .dotCircle {
+      background: #084dd1 0% 0% no-repeat padding-box;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .chatContent i,
+    .prospectContent i,
+    .prospectContent1 i {
+      font-size: 18px;
+      margin-right: 15px;
+      color: black;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .chatContent img,
+    .prospectContent img,
+    .prospectContent1 img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      /* margin-right: 15px; */
+    }
+
+    .prospectContent img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    .chatContent h1,
+    .prospectContent h1,
+    .prospectContent1 h1 {
+      width: fit-content;
+      font: normal normal normal 14.5px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      font-weight: 700;
+      margin: 0%;
+      color: black;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .prospectContent h1 {
+      font-size: 16px;
+    }
+
+    .chatContent .userEmail {
+      padding-left: 17px;
+    }
+
+    .prospectContent h2 {
+      width: fit-content;
+      font: normal normal normal 10px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      font-weight: 400;
+      margin: 0%;
+      transition: all 0.2s ease-in-out;
+      color: red;
+      font-weight: 500;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .dotCircle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      /* background: #e4e4e4 0% 0% no-repeat padding-box; */
+      border: 1px solid #084dd1;
+      transition: all 0.2s ease-in-out;
+      position: absolute;
+      right: 3.5%;
+    }
+
+    .chatContentH1DotActive .dotCircle {
+      background: #084dd1 0% 0% no-repeat padding-box;
+    }
+
+    .startChartBtn,
+    .startChartBtn1 {
+      width: 90%;
+      height: 40px;
+      background: #084dd1 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      font: normal normal normal 14px/17px "Roboto", sans-serif;
+      color: #f7fbff;
+      outline: none;
+      border: none;
+      text-transform: uppercase;
+      position: absolute;
+      left: 50%;
+      bottom: 5%;
+      transform: translate(-50%, 0%);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .startChartBtn,
+    .AddingMember {
+      width: 90%;
+      height: 40px;
+      background: #084dd1 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      font: normal normal normal 14px/17px "Roboto", sans-serif;
+      color: #f7fbff;
+      outline: none;
+      border: none;
+      text-transform: uppercase;
+      position: absolute;
+      left: 50%;
+      bottom: 5%;
+      transform: translate(-50%, 0%);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .startChartBtn:hover,
+    .startChartBtn1:hover {
+      background: #07368f 0% 0% no-repeat padding-box;
+    }
+
+    .startChartBtn:hover,
+    .AddingMember:hover {
+      background: #07368f 0% 0% no-repeat padding-box;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+      cursor: pointer;
+    }
+
+    .upperChatIcons {
+      width: 100%;
+      height: 50px;
+      margin-bottom: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .upperChatIcons>img {
+      width: 27px;
+      height: 30px;
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+
+    .imgContainer {
+      width: fit-content;
+      height: fit-content;
+    }
+
+    .imgContainer img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+    .middleNav {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* margin-bottom: 10px; */
+      padding: 0% 20px;
+      box-sizing: border-box;
+      margin-top: 10px !important;
+    }
+
+    .profileDiv,
+    .HomeDiv,
+    .msgDiv {
+      width: 70px;
+      height: 40px;
+      background: #dfe9fa 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .profileDiv:hover {
+      background: #084dd1 0% 0% no-repeat padding-box;
+    }
+
+    .profileDiv:hover .paperIcon {
+      color: white;
+    }
+
+    .HomeDiv:hover {
+      background: #084dd1 0% 0% no-repeat padding-box;
+    }
+
+    .HomeDiv:hover .homeIcon {
+      color: white;
+    }
+
+    .msgDiv {
+      background: #084dd1 0% 0% no-repeat padding-box;
+    }
+
+    .paperIcon,
+    .homeIcon {
+      font-size: 16px;
+      transition: all 0.2s ease-in-out;
+      color: #084dd1;
+    }
+
+    .msgIcon {
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .searchDiv {
+      width: fit-content;
+      height: fit-content;
+    }
+
+    .searchDiv input {
+      width: 190px;
+      height: 40px;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      box-shadow: inset 0px 2px 6px #00000033;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      padding: 0% 15px !important;
+      box-sizing: border-box;
+    }
+
+    .viewBtn,
+    .hideBtn {
+      width: 60px;
+      height: 30px;
+      border-radius: 10px;
+      font: normal normal normal 12.5px/14px "Roboto", sans-serif;
+      font-weight: 600 !important;
+      color: #084dd1;
+      border: none;
+      background-color: white;
+      outline: none;
+      box-shadow: 0px 2px 6px #00000033;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .viewBtn:hover,
+    .hideBtn:hover {
+      background-color: #084dd1;
+      color: white;
+      cursor: pointer;
+    }
+
+    .customHr {
+      width: 50%;
+      height: 1px;
+      background-color: #e5e8ed !important;
+      margin-bottom: 15px;
+    }
+
+    .groupDiv i {
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #084dd1;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .groupDiv:hover i {
+      color: white;
+    }
+
+    .groupDivClicked {
+      background-color: #084dd1 !important;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .groupDivClicked i {
+      color: #fff;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .groupDiv:hover {
+      cursor: pointer;
+      background-color: #084dd1 !important;
+    }
+
+    .dmsDiv i {
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #084dd1;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .dmsDiv:hover i {
+      color: white;
+    }
+
+    .dmsDiv {
+      background-color: #084dd1 !important;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .dmsDivClicked i {
+      color: #fff;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .dmsDiv:hover {
+      cursor: pointer;
+      background-color: #084dd1 !important;
+    }
+
+    .notificationDiv i {
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #084dd1;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .notificationDiv:hover i {
+      color: white;
+    }
+
+    .notificationDiv {
+      background-color: #084dd1 !important;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .notificationDivClicked i {
+      color: #fff;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .notificationDiv:hover {
+      cursor: pointer;
+      background-color: #084dd1 !important;
+    }
+
+    .groupContainer,
+    .SettingContainer,
+    .profileMainBox {
+      width: 380px;
+      height: 100%;
+      border: 1px solid #c4deff;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 0px 15px;
+      /* padding-bottom: 15px; */
+      box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    .profileMainBox {
+      border: none;
+      background-color: transparent;
+    }
+
+    .SettingContainer {
+      border: none;
+      background-color: transparent;
+    }
+
+    .groupBoxContainer,
+    .settingBoxContainer {
+      width: 100%;
+      height: fit-content;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      grid-template-columns: repeat(3, 30%);
+      justify-content: flex-start;
+      margin-bottom: 100px;
+    }
+
+    .groupBoxContainer {
+      padding-top: 15px;
+    }
+
+    .groupBoxContainer>div {
+      width: 84px;
+      margin: 0 15px;
+    }
+
+    .settingBoxContainer {
+      align-items: center;
+    }
+
+    .groupBox,
+    .settingBox,
+    .subGroupBox {
+      width: 84px;
+      height: 84px;
+      background-color: #edf4fd;
+      border-radius: 10px;
+      padding: 0px 10px;
+      margin-top: 15px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(2, 40%);
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      border-radius: 50%;
+    }
+
+    .settingBox {
+      text-align: center;
+    }
+
+    #deleteBox,
+    #editBox,
+    #subGroupEditBox {
+      line-height: 20px;
+    }
+
+    .notificationBox {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: #084dd1;
+      color: white;
+      position: absolute;
+      top: 80%;
+      right: 0%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+      font-size: 12px;
+    }
+
+    .chatNotificationBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #084dd1;
+      color: white;
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+      font-size: 10px;
+      z-index: 100;
+    }
+
+    .deleteGroupBox,
+    .deleteSubGroupBox {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ffd4d4;
+      color: white;
+      position: absolute;
+      top: 5%;
+      right: -8%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .deleteSubGroupBox {
+      right: 0%;
+    }
+
+    .leaveGroupBox,
+    .leaveSubGroupBox {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #666;
+      color: white;
+      position: absolute;
+      top: 65%;
+      left: -7%;
+      right: -8%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .settingBox {
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #c4deff;
+      font-size: 14px;
+      font-weight: 700;
+      color: black;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .settingBox:hover {
+      background-color: #084dd1;
+      color: white;
+    }
+
+    .usersDiv {
+      margin: 0%;
+      margin-top: 10px;
+    }
+
+    .rightProspectBox {
+      width: 100%;
+      height: fit-content;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #0000001a;
+      border-radius: 10px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 0px 10px;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .rightProspectUperLeft {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+    }
+
+    .rightProspectUperLeft img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      object-fit: fill;
+    }
+
+    .rightProspectUperRight {
+      width: 220px;
+      height: fit-content;
+      padding: 5px 0px;
+      box-sizing: border-box;
+      margin-left: 10px;
+      display: flex;
+      justify-content: start;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .rightProspectUperRight h1 {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0px;
+      color: #084dd1;
+      margin: 0px;
+    }
+
+    .rightProspectUperRight h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0px;
+      color: #757575;
+      margin: 0;
+      margin-left: 5px;
+    }
+
+    .rightProspectUperRight p {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0px;
+      color: #030d47;
+      margin: 0%;
+      margin-top: 1px;
+    }
+
+    .settingIcon {
+      font-size: 18px;
+      color: #084dd1;
+      transform: rotate(0deg);
+      transition: all 0.3s ease-in-out;
+      margin-left: 5px;
+    }
+
+    .settingIcon:hover {
+      transform: rotate(360deg);
+    }
+
+    .prospectModal,
+    .nameModal {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      z-index: 100;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      transform: scale(0);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .nameModal {
+      align-items: center;
+    }
+
+    .prospectModalContainer,
+    .nameModalContainer {
+      width: 460px;
+      height: 520px;
+      background: #fff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 20px;
+      position: relative;
+      box-sizing: border-box;
+      margin-top: 50px;
+    }
+
+    .nameModalContainer {
+      width: 65%;
+      height: auto;
+      padding-bottom: 20px !important;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    .prospectMainContentContainer,
+    .prospectMainContentContainer1 {
+      width: 100%;
+      height: 320px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .prospectChatContent {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      position: relative;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 0% 15px;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .prospectChatContent:hover h1 {
+      color: #084dd1;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .prospectChatContent:hover .dotCircle {
+      background: #084dd1 0% 0% no-repeat padding-box;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .prospectChatContent img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .prospectChatContent h1 {
+      width: fit-content;
+      font: normal normal normal 14.5px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      font-weight: 400;
+      margin: 0%;
+      color: black;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .groupContainer h1 {
+      width: fit-content;
+      margin: 0%;
+      line-height: 0%;
+      font-size: 15px;
+      color: #ff0000;
+      font-weight: 500;
+      margin: 0% auto;
+      position: absolute;
+      top: 44%;
+      transform: translate(85%, -50%);
+    }
+
+    .iconMsgPicContainer .tooltiptext {
+      visibility: hidden;
+      width: fit-content;
+      background-color: #dfe9fa;
+      color: #000 !important;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+      top: -100%;
+      left: 0%;
+    }
+
+    .iconMsgPicContainer:hover .tooltiptext {
+      visibility: visible;
+    }
+
+    .groupBox .tooltiptext {
+      /* visibility: hidden; */
+      width: 150%;
+      background-color: #f7fbff;
+      color: #084dd1 !important;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      display: block;
+      word-break: break-all;
+      position: absolute;
+      z-index: 11;
+      top: -5%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: all 0.5s;
+      box-shadow: 0px 2px 4px #00000026;
+      word-break: break-word;
+    }
+
+    .tooltiptext span {
+      font-weight: 500;
+    }
+
+    .groupBox .tooltiptext::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-top: 8px solid #dfe9fa;
+      border-right: 5px solid transparent;
+    }
+
+    .groupBox:hover .tooltiptext {
+      /* visibility: visible; */
+      opacity: 1;
+    }
+
+    .subGroupBox .tooltiptext {
+      visibility: hidden;
+      width: 100%;
+      background-color: #dfe9fa;
+      color: #000 !important;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0px;
+      font-size: 13px;
+      font-weight: 700;
+      display: block;
+      word-break: break-all;
+      position: absolute;
+      z-index: 1;
+      top: 45%;
+      left: 0%;
+    }
+
+    .subGroupBox:hover .tooltiptext {
+      visibility: visible;
+    }
+
+    .countNum,
+    .countNum1 {
+      width: 15px;
+      height: 15px;
+      background-color: #084dd1;
+      color: white;
+      font-size: 10px;
+      position: absolute;
+      right: 0;
+      bottom: 0%;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .iconMsgPicContainer {
+      width: fit-content;
+      position: relative;
+      margin: 2px;
+      cursor: pointer;
+    }
+
+    .middleNav {
+      margin-top: 10px;
+    }
+
+    .prospectDiv,
+    .prospectDiv1,
+    .prospectReplyDiv,
+    .prospectReplyDiv1,
+    .prospectTopDiv {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      background-color: #ffdcaa;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .prospectTopDiv {
+      height: fit-content;
+      position: sticky;
+      top: 0%;
+      z-index: 10;
+      opacity: 0.8;
+    }
+
+    .prospectDiv1,
+    .prospectReplyDiv1 {
+      background-color: #b0d6ff;
+    }
+
+    .prospectDiv img,
+    .prospectDiv1 img,
+    .prospectReplyDiv img,
+    .prospectReplyDiv1 img,
+    .prospectTopDiv img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .prospectDiv h1,
+    .prospectDiv1 h1,
+    .prospectReplyDiv h1,
+    .prospectReplyDiv1 h1,
+    .prospectTopDiv h1 {
+      font-size: 13px;
+      font-weight: 600;
+      width: fit-content;
+      max-width: 192px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prospectDiv h2,
+    .prospectDiv1 h2,
+    .prospectReplyDiv h2,
+    .prospectReplyDiv1 h2,
+    .prospectTopDiv h2 {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    #img__logo {
+      cursor: pointer;
+    }
+
+    .searchDiv {
+      position: relative;
+    }
+
+    .searchBoxContainer {
+      width: 100%;
+      height: 290px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      transition: all 0.2s ease-in-out;
+      padding: 15px;
+      padding-bottom: 7px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 120%;
+      left: 0%;
+      z-index: 1000;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.22),
+        0px 0px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .searchBoxContainer p {
+      width: 100%;
+      font-size: 14px;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    @keyframes scaleAnim1 {
+      from {
+        transform: scale(0.6);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .searchProspect,
+    .searchUser {
+      transform: scale(0);
+      animation: scaleAnim1 0.2s ease-in-out forwards;
+    }
+
+    .row1TimeSpecial1 {
+      background: #ffd4d4 0% 0% no-repeat padding-box;
+      color: #ff0000;
+    }
+
+    .row1TimeSpecial2 {
+      background: #ecdcff 0% 0% no-repeat padding-box;
+      color: #7500ff;
+    }
+
+    .row1TimeSpecial3 {
+      background: #dcfff2 0% 0% no-repeat padding-box;
+      color: #00a266;
+    }
+
+    .userTitle {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #3498db;
+      width: 30px;
+      height: 30px;
+      -webkit-animation: spin 1s linear infinite;
+      /* Safari */
+      animation: spin 1s linear infinite;
+      margin: 5px auto;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .prospectContent span,
+    .prospectContent1 span {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: #084dd1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .userContainer,
+    .prospectContainer {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    .userContainer::-webkit-scrollbar,
+    .prospectContainer::-webkit-scrollbar {
+      display: block;
+    }
+
+    .nullHeading {
+      font-size: 16px;
+      font-weight: 600;
+      color: red;
+    }
+
+    .nameMainContentContainer {
+      width: 100%;
+      height: fit-content;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nameBox {
+      width: 100%;
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid #999;
+      outline: none;
+      margin-bottom: 10px;
+      padding: 0% 10px;
+      box-sizing: border-box;
+    }
+
+    .createGroupBtn,
+    .updateGroupBtn,
+    .createSubGroupBtn {
+      width: 100%;
+      height: 40px;
+      background: #084dd1 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      font: normal normal normal 14px/17px "Roboto", sans-serif;
+      color: #ffffff;
+      outline: none;
+      border: none;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+    }
+
+    .createGroupBtn:hover,
+    .updateGroupBtn:hover,
+    .createSubGroupBtn:hover {
+      background: #07368f 0% 0% no-repeat padding-box;
+    }
+
+    .loaderIcons {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #3498db;
+      width: 25px;
+      height: 25px;
+      animation: spin 1s linear infinite;
+      position: relative;
+      margin-left: 20px;
+      margin-bottom: auto;
+    }
+
+    .timestampDiv,
+    .timestampUserDiv {
+      position: relative;
+      text-align: right;
+      margin-top: 15px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-right: 3px;
+    }
+
+    .timestampUserDiv {
+      text-align: left;
+      margin-right: 0%;
+      margin-left: 3px;
+    }
+
+    .replyIcon {
+      position: absolute;
+      top: 30%;
+      right: -25px;
+      transform: translateY(-50%) !important;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .myReplyIcon {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      position: absolute;
+      top: 40%;
+      left: -25px;
+      transform: rotateY(180deg) translateY(-50%);
+    }
+
+    .menuGroupIcon,
+    .menuDMIcon {
+      font-size: 16px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      margin-bottom: 5px;
+    }
+
+    .replyIcon:hover,
+    .myReplyIcon:hover {
+      color: #084dd1;
+    }
+
+    .replyIconClicked,
+    .myReplyIconClicked {
+      color: #084dd1;
+    }
+
+    .toastify {
+      padding: 12px 20px;
+      color: #ffffff;
+      display: inline-block;
+      box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12),
+        0 10px 36px -4px rgba(77, 96, 232, 0.3);
+      background: -webkit-linear-gradient(315deg, #73a5ff, #5477f5);
+      background: linear-gradient(135deg, #73a5ff, #5477f5);
+      position: fixed;
+      top: 0%;
+      left: 50%;
+      white-space: nowrap;
+      transform: translateX(-50%) !important;
+      opacity: 0;
+      z-index: 1000000;
+      transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .toastify.on {
+      opacity: 1;
+    }
+
+    .prospectContentContainer {
+      width: 394px;
+      height: fit-content;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .prospectDeleteIcon {
+      font-size: 22px;
+      color: red;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      margin-left: 15px;
+      margin-top: -15px;
+      transform: translateX(-7px);
+    }
+
+    .prospectDeleteIcon:hover {
+      margin-top: -23px;
+    }
+
+    .menuBox {
+      width: 100px;
+      height: fit-content;
+      background-color: white;
+      border-radius: 10px;
+      position: absolute;
+      top: 12px;
+      left: 136px;
+      padding: 8px 5px;
+      box-sizing: border-box;
+      z-index: 100;
+      display: none;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0px 2px 6px #00000033;
+    }
+
+    .editContainer,
+    .deleteContainer {
+      width: 90%;
+      height: fit-content;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      margin: auto;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: transparent;
+      transition: all 0.2s ease-in-out;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .editContainer:hover {
+      background-color: #084dd1;
+    }
+
+    .deleteContainer:hover {
+      background-color: #ffd4d4;
+    }
+
+    .editContainer:hover i {
+      color: white !important;
+    }
+
+    .deleteContainer:hover i {
+      color: red !important;
+    }
+
+    .editContainer:hover h1 {
+      color: white !important;
+    }
+
+    .deleteContainer:hover h1 {
+      color: red !important;
+    }
+
+    .editContainer i {
+      font-size: 15px;
+      color: black !important;
+    }
+
+    .deleteContainer i {
+      font-size: 15px;
+      color: red !important;
+    }
+
+    .editContainer h1,
+    .deleteContainer h1 {
+      font-size: 14px;
+      line-height: 0%;
+      margin-bottom: 0%;
+      font-weight: 500;
+      color: black;
+      margin-top: 3px;
+      margin-left: 8px;
+    }
+
+    .deleteContainer h1 {
+      color: red;
+    }
+
+    #cancelMsgBtn,
+    #updateMsgBtn,
+    #updateGroupMsgBtn,
+    #cancelGroupMsgBtn,
+    #updateSubGroupMsgBtn,
+    #cancelSubGroupMsgBtn {
+      position: relative;
+      top: 0%;
+      left: 0%;
+      margin-top: 16px;
+      margin-left: 13px;
+      margin-right: auto;
+    }
+
+    .blockIcon {
+      color: #555;
+      font-size: 16px;
+      margin-right: 5px;
+    }
+
+    .prospectContentDiv {
+      width: 140px;
+      height: fit-content;
+      overflow: hidden;
+      margin-right: 13px;
+    }
+
+    .replyImage1 {
+      width: 25px !important;
+      height: 25px !important;
+      border-radius: 50%;
+    }
+
+    .groupDeleteIcon,
+    .subGroupDeleteIcon {
+      font-size: 14px;
+      color: red;
+      cursor: pointer;
+    }
+
+    #groupNamePara,
+    #subGroupNamePara {
+      text-transform: capitalize;
+    }
+
+    .dbMessageDM {
+      width: 100%;
+      font: normal normal normal 12px "Roboto", sans-serif;
+      letter-spacing: 0px;
+      font-weight: 500;
+      color: #030d47;
+      white-space: nowrap;
+      animation: scaleAnim 0.1s cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+      -webkit-animation: scaleAnim 0.1ss cubic-bezier(0.445, 0.05, 0.55, 0.95) 1 forwards;
+    }
+
+    #dbNameMessage,
+    .dbMessageDM {
+      font-style: italic;
+      color: red;
+    }
+
+    #dbNameMessagesecond,
+    .dbMessageDM {
+      font-style: italic;
+      color: red;
+    }
+
+    #showMembers {
+      color: #084dd1;
+      cursor: pointer;
+      margin: 3px;
+      background-color: alice#084DD1;
+      border: 1px solid deepsky#084DD1;
+      border-radius: 4px;
+      padding: 3px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    #showMembers:hover {
+      text-decoration: underline;
+    }
+
+    #showprospectBox,
+    #showSubGroupProspectBox {
+      color: #084dd1;
+      cursor: pointer;
+      margin: 0 3px;
+      background-color: alice#084DD1;
+      border: 1px solid deepsky#084DD1;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    #showprospectBox:hover,
+    #showSubGroupProspectBox:hover {
+      text-decoration: underline;
+    }
+
+    #showDirectBox,
+    #showSubGroupDirectBox {
+      color: #084dd1;
+      cursor: pointer;
+      margin: 3px;
+      background-color: alice#084DD1;
+      border: 1px solid deepsky#084DD1;
+      border-radius: 4px;
+      font-size: 11px;
+      padding: 3px;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    #showDirectBox:hover,
+    #showSubGroupDirectBox:hover {
+      text-decoration: underline;
+    }
+
+    .subGroupBtnContainer {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .styleSubGroup,
+    .viewSubGroupBtn {
+      background-color: #084dd1;
+      color: white;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600 !important;
+      padding: 9px 15px;
+      box-sizing: border-box;
+      border: none;
+      cursor: pointer;
+    }
+
+    .subGroupContainer {
+      width: 100%;
+      height: 310px;
+      overflow-y: auto;
+      padding-bottom: 50px !important;
+      position: relative;
+      /* display: grid; */
+      grid-template-columns: repeat(3, 30%);
+      justify-content: space-between;
+      padding: 0 5px;
+    }
+
+    .groupNullHeading {
+      position: absolute;
+      top: 180px;
+      left: 120px;
+      font-size: 15px;
+      font-weight: 600;
+      color: red;
+    }
+
+    #dynamicGroupName {
+      font-size: 15px;
+      font-weight: 600;
+      color: red;
+      text-transform: uppercase;
+    }
+
+    .profile-image {
+      border: 1px solid #084dd1;
+      width: 70px;
+      height: 70px;
+    }
+
+    .top-img .icon {
+      content: "";
+      width: 23px;
+      height: 23px;
+      padding-top: 2px;
+      border-radius: 50%;
+      background-color: #084dd1;
+      color: #fff;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+
+    label.top-img~input {
+      visibility: hidden;
+      position: absolute;
+    }
+
+    .group-details-modal {
+      overflow-y: auto;
+      height: 90%;
+    }
+
+    .card {
+      box-shadow: 0px 0px 2px #b3a8a8;
+    }
+
+    .notify_icon {
+      position: absolute;
+      background: red;
+      z-index: 10;
+      top: 7px;
+      right: 0px;
+      border-radius: 50%;
+      padding: 5px 6px;
+      color: #fff;
+      font-size: 8px;
+      outline: 1px solid red;
+      outline-offset: 3px;
+      width: 14px;
+      height: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rounded-full,
+    .customScreenChattBox {
+      border-radius: 20px;
+      border: 1px solid #c4deff;
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+    }
+
+    .rounded-full:first-child {
+      /* width: calc(30% - 17px); */
+      width: 127px;
+      margin-right: 10px;
+    }
+
+    .w-70 {
+      width: calc(100% - 137px);
+    }
+
+    .top-profile-box {
+      background-color: #dfe9fa;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .top-profile-box:hover,
+    .top-profile-box:hover #nameofgroups {
+      background-color: #084dd1;
+      color: #fff !important;
+    }
+
+    .top-profile-box img {
+      border-radius: 50%;
+      border: 1px solid #084dd1;
+      width: 60px;
+      height: 60px;
+      object-fit: scale-down;
+    }
+
+    .nav-list-ui {
+      padding: 10px;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .nav-list-ui ul li a {
+      color: darkgray;
+      margin: 2.2px auto;
+      white-space: nowrap;
+      display: inline-block;
+      width: 95%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-right: 23px;
+    }
+
+    .nav-list-ui ul li.active a,
+    .nav-list-ui ul li:hover a {
+      color: black;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .top-info-box {
+      box-shadow: 0px -3px 8px black;
+      margin-bottom: 5px;
+    }
+
+    .top-info-box .row {
+      justify-content: space-between;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      width: 100%;
+      margin: auto;
+    }
+
+    .list_name a {
+      font-size: 14px;
+      line-height: 14px;
+    }
+
+    .list_name p {
+      font-size: 12px;
+      line-height: 12px;
+    }
+
+    .notify_img {
+      /* display: flex; */
+      border: 1px solid #c4deff;
+      border-radius: 10px;
+      height: 18px;
+      padding: 7px 5px 7px 1px;
+    }
+
+    .notify_img a {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      transform: translateY(-12px);
+    }
+
+    .notify_img a img {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 0.5px solid #084dd1;
+      margin: 0 2px;
+    }
+
+    .btn-own {
+      font-size: 11px;
+      padding: 0.4em;
+      border: 1px solid #084dd1;
+      background-color: #fff;
+      line-height: 10px;
+    }
+
+    .profileMainBox .btn-own.btn-active,
+    .btn-own:hover,
+    .profileMainBox-2 .btn-own.btn-active,
+    .btn-own:hover {
+      background-color: #084dd1;
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+
+    .bottom-content-box {
+      padding: 10px;
+      max-height: 290px;
+      overflow-y: auto;
+    }
+
+    .bottom-content-box .heading {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .bottom-content-box .desc_general {
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0;
+    }
+
+    .chatt-box-2,
+    .chatt-box {
+      padding: 15px 0px;
+    }
+
+    .today-date {
+      color: #5477f5;
+      border: 1px solid #c4deff;
+      width: 39%;
+      border-radius: 50px;
+      text-align: center;
+      margin: auto;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1;
+      background-color: #fff;
+    }
+
+    .all-date {
+      color: #5477f5;
+      border: 1px solid #c4deff;
+      width: 27%;
+      border-radius: 50px;
+      text-align: center;
+      margin: auto;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1;
+      background-color: #fff;
+    }
+
+    .today-date::before,
+    .today-date::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 79px;
+      height: 1px;
+      background-color: #c4deff;
+      z-index: 0;
+    }
+
+    .all-date::before,
+    .all-date::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 141px;
+      height: 1px;
+      background-color: #c4deff;
+      z-index: 0;
+    }
+
+    .today-date::before {
+      left: -10px;
+    }
+
+    .all-date::before {
+      left: -10px;
+    }
+
+    .today-date::after {
+      right: -10px;
+    }
+
+    .all-date::after {
+      right: -10px;
+    }
+
+    .f-10 {
+      font-size: 10px;
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+
+    .chatt-box-2,
+    .chatt-box .card .card-body {
+      margin: auto;
+    }
+
+    .chatt-box-2 .card,
+    .chatt-box .card {
+      box-shadow: none;
+      border: none;
+    }
+
+    .chatt-box-2 .msg-box-chat {
+      font-size: 12px;
+    }
+
+    .msg-box-chat {
+      font-size: 12px;
+      color: #636363;
+    }
+
+    .type-msg-box-input {
+      position: absolute;
+      bottom: 0px;
+      right: 0;
+      width: 100%;
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    .input-box {
+      background-color: #ededed;
+      padding: 5px;
+      border-radius: 12px;
+      margin-top: 5px;
+    }
+
+    .type-msg-box-input input {
+      width: 80%;
+      background-color: transparent;
+      border: 0;
+      outline: 0;
+    }
+
+    .type-msg-box-input button {
+      color: #084dd1;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .top-right-icon button {
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .top-right-icon button:nth-child(5),
+    .top-right-icon button:nth-child(3) {
+      color: rgb(42, 206, 206);
+    }
+
+    .top-right-icon button:nth-child(4) {
+      color: magenta;
+    }
+
+    .top-right-icon button:nth-child(2) {
+      color: gold;
+    }
+
+    .top-right-icon button:nth-child(1) {
+      color: red;
+    }
+
+    .upload-heading {
+      text-align: center;
+      font-size: 16px;
+      line-height: 19px;
+      font-family: "Roboto", sans-serif;
+      letter-spacing: 0px;
+      color: #000000;
+      opacity: 1;
+    }
+
+    .modalContainer label {
+      text-align: left;
+      font-size: 14px;
+      line-height: 17px;
+      font-family: "Roboto", sans-serif;
+      letter-spacing: 0px;
+      color: #000000;
+      opacity: 1;
+    }
+
+    .modalContainer .form-control {
+      height: 52px;
+      padding: 10px;
+      box-shadow: 0px 3px 6px #0000001c;
+      border: 1px solid #084dd140;
+      border-radius: 5px;
+    }
+
+    .modalContainer .form-control::placeholder {
+      font-size: 12px;
+      padding-left: 15px;
+      color: #acacac;
+    }
+
+    .input-group {
+      box-shadow: 0px 3px 6px #0000001c;
+    }
+
+    .submit-btn button {
+      width: 20% !important;
+      display: block;
+      margin: auto;
+    }
+
+    .btn-own-add {
+      width: 55%;
+      margin: 20px auto;
+      display: block;
+      border: 0;
+      outline: 0;
+      padding: 7px;
+      border-radius: 7px;
+      background-color: #e6edfa;
+      color: #084dd1;
+      position: fixed;
+      bottom: 30px;
+      left: 59%;
+      transform: translateX(-50%);
+      z-index: 100;
+      font-weight: bold;
+    }
+
+    .btn-own-add:hover {
+      background-color: #084dd1;
+      color: #fff;
+    }
+
+    #emailHelp {
+      font-size: 12px;
+      line-height: 16px;
+      color: #acacac !important;
+      margin-top: 10px;
+    }
+
+    .font-weight-bolder {
+      font-weight: bolder !important;
+    }
+
+    .btn-own-btm {
+      font-size: 12px;
+      padding: 0.4em;
+      /* border: 1px solid #084dd1; */
+      background-color: #fff;
+      line-height: 14px;
+      font-weight: 500;
+    }
+
+    .btn-own-btm i {
+      padding: 5px 7px;
+      color: #084dd1;
+    }
+
+    .btn-own-btm svg {
+      font-size: 4px;
+      padding: 2px;
+      transform: translateY(5px);
+      margin-right: 6px;
+    }
+
+    .btn-own-btm:hover svg,
+    .btn-own-btm:hover svg g,
+    .btn-own-btm:hover svg line {
+      background-color: #084dd1;
+      color: #fff !important;
+      border-radius: 3px;
+      stroke: #fff !important;
+    }
+
+    .btn-own-btm:hover svg .hov-light {
+      fill: #fff !important;
+    }
+
+    .img-p {
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .img-p img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .card-left-content-box {
+      width: 175px;
+      background-color: #f7fbff;
+      padding: 5px;
+    }
+
+    .chatt-box-2 .card-left-content-box {
+      width: calc(100% - 43px);
+    }
+
+    .reply-box {
+      width: calc(86% + -15px);
+      height: 15px;
+      background-color: #f3f3f3;
+      font-size: 8px;
+      padding: 2px 5px;
+      transform: translate(45px, -8px);
+      font-family: "Roboto"sans-serif;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .card.card-child {
+      background-color: #e6edfa;
+      width: calc(74% + 10px);
+      border-radius: 0;
+      transform: translate(45px, -8px);
+      /* transform: translate(-5px, 5px); */
+    }
+
+    .card.card-child .img-p img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .sand-msg-input-box {
+      background-color: #f5f5f5;
+    }
+
+    .sand-msg-input::placeholder,
+    .sand-msg-input {
+      font-size: 12px;
+      padding: 5px;
+      color: #757575;
+    }
+
+    .profile-container-modal-main {
+      width: 460px;
+      height: 551px;
+      background: #fff 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      padding: 0px;
+      position: relative;
+      box-sizing: border-box;
+      margin-top: 25px;
+    }
+
+    .profile-container-modal-main .closeDiv {
+      transform: translate(13px, 5px);
+    }
+
+    .profile-container-modal .profile-image {
+      width: 98px;
+      height: 98px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px auto 10px;
+    }
+
+    .profile-container-modal .profile-image>img {
+      vertical-align: middle;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: scale-down;
+    }
+
+    .profile-container-modal .upload-heading {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .b-tab {
+      display: none;
+    }
+
+    .b-tab.active {
+      display: block;
+    }
+
+    .top-div {
+      z-index: 1;
+      width: 397px;
+      margin: auto;
+    }
+
+    .top-div::after {
+      content: "";
+      position: absolute;
+      background-color: #084dd142;
+      width: 100vw;
+      height: 1px;
+      left: -31px;
+      bottom: 16px;
+      z-index: -1;
+    }
+
+    .top-div .b-nav-tab {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 25px;
+      color: #a1a1a1;
+      font-family: "Roboto"sans-serif;
+      text-decoration: none !important;
+      position: relative;
+      margin-right: 35px;
+    }
+
+    .top-div .b-nav-tab.active {
+      color: #676767;
+      font-weight: 500;
+    }
+
+    .top-div .b-nav-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #084dd1;
+      z-index: 111;
+    }
+
+    .profile-container-modal .SettingContainer.dynamicContainer {
+      width: 397px;
+      height: auto;
+      max-height: 100%;
+      margin: auto;
+      padding: 0px;
+      border-radius: 0;
+    }
+
+    .group-name-box {
+      width: 100%;
+      min-height: 66px;
+      background-color: #f7fbff;
+      border: 1px solid #084dd126;
+      border-radius: 4px;
+      padding: 10px 15px;
+      position: relative;
+    }
+
+    .group-name-box .name {
+      font-size: 14px;
+      line-height: 25px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .group-name-box .dessc {
+      color: #a1a1a1;
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0;
+    }
+
+    .group-name-box .edit_btn {
+      color: #084dd1;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .profile-container-modal {
+      height: auto;
+      max-height: 95%;
+      padding-bottom: 50px;
+    }
+
+    .userEmail .role {
+      color: #084dd1;
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 400;
+    }
+
+    .prospectsHeading {
+      font-size: 24px !important;
+      line-height: 29px !important;
+      margin: 27px 18px 10px !important;
+      display: block !important;
+    }
+
+    .placeholder-blue::placeholder {
+      color: #084dd1;
+      font-size: 14px;
+    }
+
+    .dropdown-list {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 5px;
+      visibility: hidden;
+      position: absolute;
+      right: 3px;
+      top: 0px;
+    }
+
+    .dropdown-list_another {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 5px;
+      visibility: hidden;
+      position: absolute;
+      right: -8px;
+      top: -8px;
+      width: 100px;
+    }
+
+    .dropdown-btn:hover .dropdown-list {
+      visibility: visible;
+    }
+
+    .dropdown-btn:hover .dropdown-list_another {
+      visibility: visible;
+    }
+
+    .dropdown-list span:hover {
+      background-color: #f7fbff;
+      cursor: pointer;
+    }
+
+    .dropdown-list_another span:hover {
+      background-color: #f7fbff;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none !important;
+    }
+
+    .plus-icon {
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .plus-icon button {
+      background-color: #e6edfa;
+      color: #084dd1;
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      outline: 0;
+      border: 0;
+      font-size: 24px;
+    }
+
+    .plus-icon button:hover {
+      background-color: #084dd1;
+      color: #fff;
+    }
+
+    .edit-group-name-modal {
+      width: 459px;
+      height: 273px;
+      background-color: #fff;
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+      z-index: 10;
+      padding: 25px;
+    }
+
+    .edit-group-name-modal::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      background-color: #b2b2b2b3;
+      width: 100vw;
+      height: 100vh;
+      transform: translate(-4%, -27%);
+    }
+
+    .edit-group-name-modal::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      background-color: #ffff;
+      width: 459px;
+      height: 107%;
+      top: 0;
+      left: 0px;
+      border-radius: 10px;
+    }
+
+    #edit-group-close-btn {
+      position: absolute;
+      top: -9px;
+      right: -13px;
+      transform: none;
+    }
+
+    #Subgroup_edit-group-close-btn {
+      position: absolute;
+      top: -9px;
+      right: -13px;
+      transform: none;
+    }
+
+    .edit-group-name-modal h3 {
+      font-size: 20px;
+      line-height: 24px;
+      font-family: "Roboto"sans-serif;
+      margin-bottom: 25px;
+    }
+
+    .edit-group-name-modal input {
+      background: #f7fbff;
+      outline: 0 !important;
+      box-shadow: none !important;
+      border: 1px solid #084dd126;
+      border-radius: 5px;
+      width: 398px;
+      color: #474747;
+      margin: auto;
+      height: 44px;
+      font-size: 12px;
+      padding: 10px;
+    }
+
+    .edit-group-name-modal input::placeholder {
+      color: #474747;
+      font-size: 12px;
+    }
+
+    .edit-group-name-modal small {
+      font-size: 12px;
+      line-height: 16px;
+      display: inline-block;
+      margin: 10px 0px 25px;
+    }
+
+    .edit-group-name-modal textarea {
+      background: #f7fbff;
+      outline: 0 !important;
+      box-shadow: none !important;
+      border: 1px solid #084dd126;
+      border-radius: 5px;
+      width: 398px;
+      color: #474747;
+      margin: auto;
+      height: 89px;
+      font-size: 12px;
+      padding: 10px;
+    }
+
+    #subGroupModal .prospectModalContainer {
+      padding: 27px;
+    }
+
+    #subGroupModal h1 {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .subGroupContainer h1.userEmail {
+      font-size: 16px !important;
+      line-height: 19px !important;
+    }
+
+    .new-own-input-group {
+      box-shadow: none !important;
+    }
+
+    .new-own-input-group input::placeholder {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .new-own-input-group input,
+    .new-own-input-group .input-group-text.bg-transparent.border-right-0 {
+      border-color: #084dd126 !important;
+      padding-left: 18px;
+    }
+
+    .btn-light-new {
+      border: 1px solid #a1a1a1;
+      font-size: 14px;
+      line-height: 17px;
+      width: 83px;
+      height: 35px;
+      margin-right: 22px;
+    }
+
+    .btn-danger-new {
+      background-color: #ff0000;
+      color: #fff;
+      font-size: 14px;
+      line-height: 17px;
+      width: 83px;
+      height: 35px;
+    }
+
+    .edit-text-msg-box {
+      background-color: #f7fbff;
+      width: 100%;
+      border-radius: 10px;
+      min-height: 48px;
+      padding: 5px 8px;
+      font-family: "Roboto", sans-serif;
+      display: none;
+    }
+
+    .prospect_edit-text-msg-box {
+      background-color: #f7fbff;
+      width: 100%;
+      border-radius: 10px;
+      min-height: 48px;
+      padding: 5px 8px;
+      font-family: "Roboto", sans-serif;
+      display: none;
+    }
+
+    .edit-text-msg-box .name-edit-box {
+      font-size: 12px;
+      line-height: 14px;
+      margin-bottom: 1px;
+    }
+
+    .prospect_edit-text-msg-box .name-edit-box {
+      font-size: 12px;
+      line-height: 14px;
+      margin-bottom: 1px;
+    }
+
+    .edit-text-msg-box .msg {
+      font-size: 10px;
+      line-height: 13px;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+
+    .prospect_edit-text-msg-box .msg {
+      font-size: 10px;
+      line-height: 13px;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+
+    .new-filter-row {
+      position: absolute;
+      top: 10px;
+      width: calc(100% + -13px) !important;
+      left: 7px;
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .new-filter-row label {
+      color: #000;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      padding-top: 3px;
+    }
+
+    .new-filter-row select {
+      width: 120px;
+      height: 24px;
+      color: #084dd1;
+      border: 1px solid #c4deff;
+      border-radius: 3px;
+      outline: none !important;
+      background-color: #f7fbff;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 16px;
+      padding-left: 6px;
+    }
+
+    .new-filter-row select:hover {
+      background-color: #084dd1;
+      color: #fff;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #fff;
+      transition: 0.4s;
+      border: 1px solid #c4deff;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      top: 2px;
+      background-color: #084dd1;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(19px);
+      top: 1px;
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .customScreenChattBox {
+      width: 380px;
+      margin: 0px auto;
+      height: 100%;
+      display: none;
+    }
+
+    .userInfoBoxChattModal .imgBox {
+      width: 59px;
+      height: 59px;
+      margin-right: 11px;
+    }
+
+    .userInfoBoxChattModal .nameHeading {
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: bold;
+    }
+
+    .userInfoBoxChattModal .desigination,
+    .userInfoBoxChattModal .group_name,
+    .userInfoBoxChattModal .Clipper {
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: bold;
+      margin: 4px 0;
+      display: block;
+    }
+
+    .userInfoBoxChattModal {
+      padding: 0px 15px;
+    }
+
+    .chatt-box-2 .reply-box_ {
+      /* width: calc(86% - 2%); */
+      width: 323px;
+      height: 15px;
+      transform: translate(35px, -8px);
+      font-family: "Roboto", sans-serif;
+      background-color: #f3f3f3;
+      font-size: 8px;
+      padding: 2px 5px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .on_hover-Child_show:hover .dropdown-list {
+      visibility: visible;
+    }
+
+    .on_hover-Child_show:hover .dropdown-list_another {
+      visibility: visible;
+    }
+
+    .custom_toltip {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      background: #dfe9fa;
+      width: 100%;
+      border-radius: 4px;
+      padding: 2px;
+      color: #084DD1;
+      visibility: hidden;
+      font-weight: bold;
+      font-family: "Roboto", sans-serif;
+    }
+
+    .subgroups_div:hover .custom_toltip {
+      visibility: visible;
+      font-size: 10px;
+
+    }
+
+    .custom_toltip:hover {
+      cursor: pointer;
+    }
+
+    .nameIssue {
+      display: inline-block;
+      width: 88px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .nameIssue+span {
+      line-height: 19px !important;
+    }
+
+    .font-weight-bold.name-top {
+      display: flex;
+    }
+
+    .groupBoxContainerListView {
+      position: relative;
+    }
+
+    .groupContainer .new-filter-row {
+      position: absolute;
+      top: 10px;
+      width: 96% !important;
+      left: 10px;
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1111;
+    }
+
+    .card-list-box {
+      background-color: #F7FBFF;
+      border-radius: 10px;
+      width: 100%;
+      height: 71px;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .card-list-box img {
+      width: 54px;
+      height: 54px;
+      display: inline-block;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: auto 15px;
+    }
+
+    .card-list-box .img.active {
+      position: relative;
+    }
+
+    .card-list-box .img.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 18px;
+      border-radius: 50%;
+      background-color: #0DFF0D;
+      width: 14px;
+      height: 14px;
+    }
+
+    .card-list-box h5 {
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 7px;
+    }
+
+    .card-list-box p {
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 0;
+    }
+
+    .card-list-box .badge {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: red;
+      color: #fff;
+      border-radius: 7px;
+      width: 26px;
+      height: 14px;
+      font-size: 8px;
+      line-height: 12px;
+    }
+
+    #listOfSubGroups {
+      height: 245px;
+      overflow: auto;
+    }
+
+    .SelectOption {
+      background-color: #fff;
+      color: #000;
+      cursor: pointer;
+      border-top: 1px solid black;
+    }
+
+    .SelectOption:hover {
+      background-color: blue;
+      color: #fff;
+    }
+
+    .SelectOption::before {
+      content: 'asasasasa';
+    }
+
+    .prospects_shared_box {
+      background-color: #ffffA1;
+      width: 158px;
+      min-height: 36px;
+      margin: 8px 4px;
+      box-shadow: 0px 2px 6px #0000001a;
+      border-radius: 5px;
+    }
+
+    .screenprospects_shared_box {
+      background-color: #ffffA1;
+      width: 302px;
+      min-height: 50px;
+      margin: 8px 4px;
+      box-shadow: 0px 2px 6px #0000001a;
+      border-radius: 5px;
+    }
+
+    .prospects_shared_box img {
+      width: 26px;
+      height: 26px;
+      object-fit: cover;
+      border-radius: 50%;
+
+    }
+
+    .screenprospects_shared_box img {
+      width: 26px;
+      height: 26px;
+      object-fit: cover;
+      border-radius: 50%;
+
+    }
+
+    .prospects_shared_box .desc {
+      font-size: 12px;
+      line-height: 14px;
+      margin: 0 0;
+    }
+
+    .screenprospects_shared_box .desc {
+      font-size: 12px;
+      line-height: 14px;
+      margin: 0 0;
+    }
+
+    .prospects_shared_box .title {
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    .screenprospects_shared_box .title {
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    .new_class {
+      width: 14px;
+      height: 14px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+
+
+    .lastcss {}
+  </style>
+</head>
+
+<body>
+
+  <div class="main__container">
+    <div class="upperChatIcons" id="upperChatIcons" style="margin-top: 10px">
+      <div class="imgContainer" style="display: flex">
+      </div>
+
+      <img src="./Assets/img/index-logo.png" id="img__logo" alt="" />
+    </div>
+
+    <div class="middleNav">
+      <div class="profileDiv" id="profile_btn">
+        <i class="fas fa-paperclip paperIcon"></i>
+      </div>
+
+      <div class="searchDiv">
+        <input type="text" id="search_box" autocomplete="off" placeholder="Search" />
+
+        <div class="searchBoxContainer" style="display: none">
+          <div class="usersSection">
+            <div class="userTitle">Users</div>
+            <div class="userContainer">
+              <div class="loader"></div>
+            </div>
+          </div>
+
+          <div class="usersSection">
+            <div class="userTitle">Prospects</div>
+            <div class="prospectContainer">
+              <div class="loader"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="msgDiv">
+        <i class="fas fa-comment-dots msgIcon"></i>
+      </div>
+
+      <div class="HomeDiv" id="home_btn">
+        <i class="fas fa-home homeIcon"></i>
+      </div>
+    </div>
+
+    <div class="container__content" style="margin-top:9px !important">
+      <div class="leftBox">
+        <div class="leftBox__container"></div>
+
+        <!-- <div class="addUser">
+            <img src="./Assets/img/add.png" alt="" />
+          </div> -->
+      </div>
+      <div class="customScreenChattBox" id="customScreenChattBox" style="display: none;">
+        <div class="top-info-box">
+          <div class="row" style="padding: 15px 15px 0 0; justify-content: right">
+            <div id="Screen_notify_img" class="notify_img">
+              <a href="#"><img src="https://picsum.photos/200/200" alt=""></a>
+              <a href="#"><img src="https://picsum.photos/200/200" alt=""></a>
+              <a href="#"><img src="https://picsum.photos/200/200" alt=""></a>
+            </div>
+          </div>
+          <div class="userInfoBoxChattModal d-flex">
+            <div class="imgBox">
+              <img id="prospect_image_heading" src="" alt="" style="width: 59px; height: 59px"
+                class="img-fluid rounded-circle">
+            </div>
+            <div class="rightImgSideContent">
+              <div class="prospect_name_heading"></div>
+              <div class="desigination"></div>
+              <div id="group_name_division" class="group_name">
+                Group Name:
+                <span class="prospect_group_name" style="color: #084dd1"></span>
+              </div>
+              <div id="prospect_subgroup_name" class="group_name" style="display: none">
+                Sub Group Name:
+                <span class="prospect_subgroup_name" style="color: #084dd1"></span>
+              </div>
+              <div class="Clipper" id="for_clipper">
+
+                <span class="nameCliper" style="color: #ff0000"></span>
+              </div>
+              <div class="Clipper" id="for_DB">
+
+                <span class="nameCliper" style="color: #ff0000"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row profileMainBox-2">
+            <div class="w-100 btn-boxs my-2">
+              <button id="Conversations_button" class="btn btn-own  btn-sm" style="margin-right: 10px;">
+                Conversations
+              </button>
+              <button id="showprospectsanother" class="btn btn-own btn-active btn-sm font-weight-bold">
+                Prospect:0
+              </button>
+              <div class="social-btn-box" style="display: inline-block;margin: 0px 10px;">
+
+              </div>
+              <button class="opening_background" style="
+                  border: 0;
+                  background: none;
+                  cursor:pointer;
+                  ">
+                <svg class="open_prospect" style="display:none" id="Group_596" data-name="Group 596"
+                  xmlns="http://www.w3.org/2000/svg" width="20.708" height="25.672" viewBox="0 0 7.708 7.672">
+                  <rect id="Rectangle_673" data-name="Rectangle 673" width="10.423" height="10.78"
+                    transform="translate(1.038 1.058)" fill="#fff"></rect>
+                  <path id="Path_139" data-name="Path 139"
+                    d="M2993.72,167.672h-5.212a1.246,1.246,0,0,1-1.248-1.243v-5.187a1.246,1.246,0,0,1,1.248-1.243h5.212a1.246,1.246,0,0,1,1.248,1.243v5.187A1.246,1.246,0,0,1,2993.72,167.672Zm-3.855-1.33h0v-3.309h-1.032v3.309Zm-.515-3.761a.6.6,0,1,0-.6-.6A.6.6,0,0,0,2989.349,162.581Zm4.377,3.761v-1.814c0-.891-.2-1.577-1.237-1.577a1.083,1.083,0,0,0-.975.534h-.014v-.452h-.989v3.309h1.031v-1.638c0-.432.082-.85.619-.85s.535.494.535.878v1.61Z"
+                    transform="translate(-2987.26 -157)" fill="#084dd1"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-content-box" id="another-bottom-content-box">
+          <div class="chatt-box-2" id="chatt-box-2" style="padding-bottom: 110px;">
+
+          </div>
+        </div>
+        <div class="type-msg-box-input flex-wrap">
+          <div class="top-right-icon w-100 d-flex flex-row-reverse">
+            <button> <label for="screenaddimageInput" style="margin-bottom: 0;
+              cursor: pointer;"> <i class="fas fa-image"></i> </label></button>
+            <input type="file" id="screenaddimageInput" style="display: none;"
+              accept="image/png, image/gif, image/jpeg">
+            <button> <label for="screenaddFileInput" style="margin-bottom: 0;
+              cursor: pointer;"> <i class="far fa-paperclip"></i> </label> </button>
+            <input type="file" id="screenaddFileInput" style="display: none;">
+            <button><i class="fad fa-microphone"></i></button>
+            <button class="farfar"><i class="far fa-grin-beam"></i></button>
+            <button id="add_member_in_screen"><i class="fal fa-user-plus"></i></button>
+          </div>
+          <div class="prospect_edit-text-msg-box">
+            <h5 style="font-size: 1rem !important;" class="prospect_name-edit-box"></h5>
+            <p style="margin-bottom: 0 !important;font-size: 13px !important" class="prospect_msg"></p>
+          </div>
+
+          <div class="input-box w-100 d-flex justify-content-center sand-msg-input-box">
+            <input id="second_message_div" type="text" class="yen sand-msg-input" placeholder="Type Your Message">
+            <button id="second_send_message_button" class="" style="cursor: pointer; display: block">
+              SEND
+            </button>
+            <button id="second_update_message_button" class="second_update_message_button"
+              style="cursor: pointer; display: none; font-size: 11px">
+              Update
+            </button>
+            <button id="second_cancel_message_button" class="second_cancel_message_button" style="
+                cursor: pointer;
+                display: none;
+                margin-left: 5px;
+                font-size: 11px;
+              ">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="rightBox" style="display: block">
+        <div id="nullHeading" style="
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+          <h1 class="nullHeading">Select user to see chats</h1>
+        </div>
+
+        <div class="rightProspectBox" style="display: none">
+          <div class="rightProspectUperLeft">
+            <img src="./Assets/img/user.png" id="prospectImage" alt="" data-link="" />
+          </div>
+
+          <div class="rightProspectUperRight">
+            <div id="showprospectDiv">
+              <div style="display: flex">
+                <h1 id="prospectName"></h1>
+                <h2 id="companyName"></h2>
+              </div>
+
+              <p id="descriptionName"></p>
+            </div>
+            <p id="groupNamePara"></p>
+            <p id="subGroupNamePara" style="display: none"></p>
+            <p id="dbNameMessage"></p>
+            <p id="dbNameMessagesecond"></p>
+            <div class="showBtnContainer" style="display: flex"></div>
+          </div>
+
+          <i class="fas fa-cog settingIcon"></i>
+        </div>
+
+        <div class="rightUpperBox" style="display: none">
+          <div class="rightUperLeft"></div>
+
+          <div class="rightUperRight"></div>
+        </div>
+
+        <div class="chatMessageContent" style="display: none"></div>
+
+        <div class="chatControlBtn" style="display: none">
+          <div class="attachmentDiv">
+            <img src="./Assets/img/add-friend.png" class="addFriendIcon" alt="" />
+            <img src="./Assets/img/smile.png" class="emojiIcon" alt="" />
+            <img src="./Assets/img/microphone.png" alt="" />
+            <img src="./Assets/img/paperclip.png" alt="" />
+            <img src="./Assets/img/image.png" alt="" />
+          </div>
+
+          <div class="messageInputDiv">
+            <!-- <form id="msgForm"> -->
+
+            <input type="text" id="msgInp" placeholder="Type your message" autocomplete="off" />
+
+            <button type="button" id="sendMsgBtn" style="display: block">
+              Send
+            </button>
+            <button type="button" id="updateMsgBtn" style="display: none">
+              Update
+            </button>
+            <button type="button" id="cancelMsgBtn" style="display: none">
+              Cancel
+            </button>
+
+            <button type="button" id="sendGroupMsgBtn" style="display: none">
+              Send
+            </button>
+            <button type="button" id="updateGroupMsgBtn" style="display: none">
+              Update
+            </button>
+            <button type="button" id="cancelGroupMsgBtn" style="display: none">
+              Cancel
+            </button>
+            <button type="button" id="sendSubGroupMsgBtn" style="display: none">
+              Send
+            </button>
+            <button type="button" id="updateSubGroupMsgBtn" style="display: none">
+              Update
+            </button>
+            <button type="button" id="cancelSubGroupMsgBtn" style="display: none">
+              Cancel
+            </button>
+
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="groupContainer" style="display: none">
+        <div class='new-filter-row'>
+          <label>Filter by:</label>
+          <select name="" id="select1">
+
+          </select>
+          <select name="" id="select2">
+
+          </select>
+          <label class="switch">
+            <input id="axes" type="checkbox" checked>
+            <span id="changing_view" class="slider round"></span>
+          </label>
+        </div>
+        <div class="groupBoxContainer" style="padding-top: 30px;"></div>
+        <div class="groupBoxContainerListView" style="padding-top: 30px;display:none">
+
+          <div class="card-list-box">
+            <div class="img active">
+              <img
+                src="https://media-exp1.licdn.com/dms/image/C4D03AQFtQOnQERCW2g/profile-displayphoto-shrink_800_800/0/1640344017521?e=1658361600&v=beta&t=hNpI8kCqb5iUzj6F_uHUnqXZCTYNPxyadnEPlTWclUY"
+                alt="">
+            </div>
+            <div class="content">
+              <h5 class="name">Lorem, ipsum dolor.</h5>
+              <p class="detail">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+            <div class="badge">10</div>
+          </div>
+
+
+
+
+
+
+          <div class="card-list-box">
+            <div class="img">
+              <img
+                src="https://media-exp1.licdn.com/dms/image/C4D03AQFtQOnQERCW2g/profile-displayphoto-shrink_800_800/0/1640344017521?e=1658361600&v=beta&t=hNpI8kCqb5iUzj6F_uHUnqXZCTYNPxyadnEPlTWclUY"
+                alt="">
+            </div>
+            <div class="content">
+              <h5 class="name">Lorem, ipsum dolor.</h5>
+              <p class="detail">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+          </div>
+        </div>
+        <div class="group-btn-box">
+          <button id="open_add_group" class="btn-own-add">
+            + ADD NEW GROUP
+          </button>
+        </div>
+
+        <h1 id="noGroupHeading" style="display: none">No groups to show</h1>
+      </div>
+      <div class="profileMainBox" style="display: none">
+        <div class="row h-100">
+          <div class="rounded-full position-relative">
+            <div class="top-profile-box" id="settingsModal">
+              <img src="" alt="" class="" id="image_group" />
+              <h6 id="nameofgroups" style="
+                    color: #084dd1;
+                    font-size: 12px;
+                    line-height: 14px;
+                    margin-top: 10px;
+                    font-weight: 700;
+                  "></h6>
+            </div>
+            <div class="nav-list-ui">
+              <nav>
+                <ul id="listOfSubGroups" class="list-unstyled">
+                  <li class="general_div active">
+                    <a href="#">#General</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="plus-icon position-absolute">
+              <button id="open_sub_group"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="w-70 rounded-full">
+            <div class="top-info-box">
+              <div class="row">
+                <div class="list_name" style="display: flex;
+                align-items: center;">
+                  <a id="subgroup_name" href="#" class="text-dark font-weight-bolder" style="margin-right: 10px;">#General <i
+                      class="fas fa-sort-down"></i></a>
+                  <p id="nameofgroup" class="m-0">Ui Design</p>
+                  <span></span>
+                </div>
+                <div id="notify_img_second" class="notify_img">
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                </div>
+                <div id="subgroup_notify_img_second" class="notify_img" style="display:none">
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                  <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
+                </div>
+                <div class="w-100 btn-boxs mt-2">
+                  <button class="btn btn-own btn-active btn-sm">
+                    Conversations
+                  </button>
+                  <button id="showprospectBox" class="btn btn-own btn-sm">
+                    Prospects:5
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="bottom-content-box" class="bottom-content-box">
+              <div class="General_modal">
+                <h6 id="heading_group" class="heading">General</h6>
+                <p class="desc_general">
+                  <span id="admin_name" class="text-primary"></span>
+                  <span id="created_at_date"></span><br><br>
+                  <span id="description">
+                  </span> <span id="opening_description_here" style="color:#007bff;cursor: pointer"> Edit
+                    Description</span>
+                </p>
+                <div class="btn-box">
+                  <button id="AddTheMembers" class="btn btn-own-btm mx-3" style="margin: 0 !important;">
+                    <!-- <i class="fas fa-user-plus"></i> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.199" height="19.775" viewBox="0 0 23.199 19.775">
+                      <g id="Group_468" data-name="Group 468" transform="translate(-1555.051 -527)">
+                        <g id="Path_129" data-name="Path 129" transform="translate(1555.131 536)" fill="none">
+                          <path
+                            d="M9.87,0C15.321,0,20.4,4.519,19.74,8.771,20.185,11.06-.44,11.8,0,8.771-.789,3.777,4.419,0,9.87,0Z"
+                            stroke="none" />
+                          <path class="hov-light"
+                            d="M 9.869955062866211 1.500000953674316 C 8.466924667358398 1.500000953674316 7.049294471740723 1.787631034851074 5.77032470703125 2.33181095123291 C 4.523075103759766 2.862480163574219 3.461845397949219 3.61345100402832 2.701364517211914 4.503540515899658 C 2.001983642578125 5.322116851806641 1.228918075561523 6.659556865692139 1.464336395263672 8.418354034423828 C 1.740058898925781 8.549238204956055 2.391408920288086 8.78515625 3.765144348144531 8.978060722351074 C 5.147785186767578 9.172220230102539 6.900534629821777 9.274850845336914 8.833924293518066 9.274850845336914 C 11.05474472045898 9.274850845336914 13.30523490905762 9.140110969543457 15.1708345413208 8.895450592041016 C 17.01523590087891 8.65357494354248 17.90397453308105 8.379167556762695 18.29189109802246 8.222817420959473 C 18.35993766784668 7.090594291687012 17.87134170532227 5.858506679534912 16.89425468444824 4.71729040145874 C 15.22090530395508 2.762860298156738 12.46370506286621 1.500000953674316 9.869955062866211 1.500000953674316 M 9.869955062866211 9.5367431640625e-07 C 15.32101440429688 9.5367431640625e-07 20.40283393859863 4.518550395965576 19.73997497558594 8.770510673522949 C 20.18505477905273 11.0595703125 -0.4399471282958984 11.80078125 -5.53131103515625e-05 8.770510673522949 C -0.7890644073486328 3.777340888977051 4.41889476776123 9.5367431640625e-07 9.869955062866211 9.5367431640625e-07 Z"
+                            stroke="none" fill="#084dd1" />
+                        </g>
+                        <g id="Ellipse_168" data-name="Ellipse 168" transform="translate(1561 527)" fill="none"
+                          stroke="#084dd1" stroke-width="1.5">
+                          <circle cx="4" cy="4" r="4" stroke="none" />
+                          <circle cx="4" cy="4" r="3.25" fill="none" />
+                        </g>
+                        <line id="Line_33" data-name="Line 33" y2="6" transform="translate(1574.5 531.5)" fill="none"
+                          stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                        <line id="Line_34" data-name="Line 34" x2="6" transform="translate(1571.5 534.5)" fill="none"
+                          stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                      </g>
+                    </svg> Add Member
+                  </button>
+                </div>
+              </div>
+              <div id="new_chat_box" class="chatt-box">
+
+
+
+                
+              </div>
+            </div>
+            <div class="type-msg-box-input flex-wrap">
+              <div class="top-right-icon w-100 d-flex flex-row-reverse">
+                <button><label for="addimageInput" style="margin-bottom: 0;
+                  cursor: pointer;"><i class="fas fa-image"></i></label></button>
+                <input type="file" id="addimageInput" style="display: none;" accept="image/png, image/gif, image/jpeg">
+                <button><label for="addFileInput" style="margin-bottom: 0;
+                  cursor: pointer;"><i class="far fa-paperclip"></i> </label></button>
+                <input type="file" id="addFileInput" style="display: none;">
+
+                <button><i class="fad fa-microphone"></i></button>
+                <button class="emojiIconn"><i class="far fa-grin-beam"></i></button>
+                <button id="add_member_in_chat"><i class="fal fa-user-plus"></i></button>
+              </div>
+              <div class="edit-text-msg-box">
+                <h5 class="name-edit-box"></h5>
+                <p class="msg"></p>
+              </div>
+              <div class="input-box w-100 d-flex justify-content-center sand-msg-input-box">
+                <input id="send_message_div" type="text" class="yeeeen sand-msg-input"
+                  placeholder="Type Your Message" />
+                <button id="send_message_button" class="" style="cursor: pointer">
+                  SEND
+                </button>
+                <button id="update_message_button" class="" style="cursor: pointer;display: none;font-size: 11px">
+                  Update
+                </button>
+                <button id="cancel_message_button" class=""
+                  style="cursor: pointer;display: none;margin-left: 5px;font-size: 11px;">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 1 -->
+
+    <div class="startChatModalOverlay">
+      <div class="modalContainer">
+        <div class="upperRow">
+          <h1>People</h1>
+          <button href="share.html" style="
+                background-color: dodger#084DD1;
+                color: white;
+                border-radius: 7%;
+                border: dodger#084DD1;
+                padding: 2%;
+                cursor: pointer;
+              " id="add_member2">
+            Add Member
+          </button>
+
+          <div class="closeDiv">
+            <img src="./Assets/img/close.png" alt="" />
+          </div>
+        </div>
+
+        <div class="mainContentContainer">
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+
+          <div class="chatContent">
+            <img src="./Assets/img/demo.jpg" alt="" />
+
+            <h1>Michaela</h1>
+
+            <div class="dotCircle"></div>
+          </div>
+        </div>
+
+        <button type="button" class="startChartBtn">Start Chart</button>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+
+    <div class="startChatModalOverlay1">
+      <div class="modalContainer">
+        <div class="upperRow">
+          <h1></h1>
+          <!-- <button href="share.html" id="add_member1"
+                        style="background-color: dodger#084DD1;color: white; border-radius: 7%;border: dodger#084DD1; padding: 2%; cursor: pointer;">Add
+                        Member</button> -->
+
+          <div class="closeDiv1">
+            <img src="./Assets/img/close.svg" alt="" />
+            <!-- <span class="img">X</span> -->
+          </div>
+        </div>
+
+        <div class="group-details-modal" id="whole_container">
+          <div class="text-center" id="adding_image_div">
+            <label for="profile_image_icon" class="top-img text-center position-relative">
+              <img src="./Assets/img/group-bg.png" alt="profile img" class="profile-image rounded-circle"
+                id="groupAvatar" />
+              <span class="icon">
+                <img src="./Assets/img/cam.svg" alt="cam" />
+                <!-- <i class="fas fa-camera"></i> -->
+              </span>
+            </label>
+            <input type="file" name="filee" id="profile_image_icon" accept="image/png, image/jpeg" />
+            <h5 class="mb-2 upload-heading">Upload Image</h5>
+          </div>
+          <div class="form-group">
+            <label id="group_heading" for="gName" class="font-weight-bold">Group Name:</label><span
+              style="color: red;">*</span>:
+            <input type="text" value="" class="form-control" id="groupName" placeholder="#    e.g team-discussion" />
+          </div>
+          <div id="topic_div" class="form-group" style="display:none">
+            <label for="topic1" class="font-weight-bold">Topic:</label>
+            <input type="email" class="form-control" aria-describedby="emailHelp" id="topic"
+              placeholder="Add a Topic" />
+          </div>
+
+          <div class="form-group" style="display:none" id="get_description">
+            <label for="discrpition" class="font-weight-bold">Description
+              <small class="" style="color: #8a8a8a">(Optional)</small></label>
+            <input type="email" class="form-control" id="discrpition" aria-describedby="emailHelp" />
+            <small id="emailHelp" class="form-text">
+              What's the group about?
+            </small>
+          </div>
+
+          <div class="add-members-box">
+            <div class="row">
+              <div class="col-3">
+                <p class="font-weight-bold my-2" style="
+                        font-size: 14px;
+                        white-space: nowrap;
+                        font-family: 'Roboto', sans-serif;
+                      ">
+                  Select Members<span style="color:red">*</span>: <br>
+                  <small style="    color: #acacac !important;
+                      font-size: 10px;
+                      transform: translateY(-3px);
+                      display: inline-block;">Select atleast one members</small>
+                </p>
+              </div>
+              <div class="col-9">
+                <div class="input-group" style="width: 270px; float: right">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-right-0" id="basic-addon1"><i
+                        class="fas fa-search"></i></span>
+                  </div>
+                  <input id="searching_members_to_create" type="text" class="form-control border-left-0"
+                    placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" style="
+                          padding: 5px !important ;
+                          box-shadow: none;
+                          height: 31px;
+                        " />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="add-members-box-list">
+            <div class="mainContentContainer mainContentContainer1"></div>
+          </div>
+          <div class="submit-btn text-center">
+            <button type="button" class="startChartBtn1">Create</button>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+      <!-- <div class="mainContentContainer mainContentContainer1"></div>
+
+                <button type="button" class="startChartBtn1">Create Group</button> -->
+    </div>
+  </div>
+
+  <!-- Modal 3 (Setting) -->
+
+  <div class="prospectModal" id="settingModal">
+    <div class="prospectModalContainer">
+      <div class="upperRow">
+        <h1>Setting</h1>
+
+        <div class="closeDiv" id="settingModalCloseBtn">
+          <img src="./Assets/img/close.png" alt="" />
+        </div>
+      </div>
+
+      <div class="prospectMainContentContainer">
+        <div class="SettingContainer">
+          <div class="settingBoxContainer">
+            <div class="settingBox" id="membersBox">Members</div>
+
+            <div class="settingBox" id="prospectBox">Prospects</div>
+
+            <div class="settingBox" id="DMBox">DM</div>
+
+            <div class="settingBox" id="editBox">Change Group Name</div>
+
+            <div class="settingBox" id="subGroupEditBox" style="display: none">
+              Change Sub Group Name
+            </div>
+
+            <div class="settingBox" id="deleteBox" style="display: none">
+              Delete Group
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forth Modal (Setting Child) -->
+
+  <div class="prospectModal" id="dynamicModal">
+    <div class="prospectModalContainer">
+      <div class="upperRow" style="padding: 20px 0">
+        <h1 id="dynamicModalH1" class="prospectsHeading">Prospects</h1>
+        <div class="closeDiv" id="dynamicModalCloseBtn" style="transform: translate(28px, -30px)">
+          <img src="./Assets/img/close.svg" alt="" />
+        </div>
+      </div>
+      <div class="input-group hover-blue" style="
+              width: 394px;
+              background: #e6edfa;
+              border-radius: 10px;
+              margin: 30px auto;
+              box-shadow: none;
+              border: 1px solid #084dd152;
+            ">
+        <div class="input-group-prepend w-100">
+          <input type="text" id="search_prospects" class="form-control placeholder-blue" placeholder="Search Prospects"
+            aria-label="Search" aria-describedby="basic-addon1" style="
+                  height: 57px;
+                  border: 0 !important;
+                  box-shadow: none !important;
+                  background: transparent;
+                  color: #084dd1;
+                  padding-left: 20px;
+                " />
+          <span style="border: 0; color: #084dd1; padding-right: 20px"
+            class="input-group-text bg-transparent border-right-0" id="basic-addon1"><i
+              class="fas fa-search"></i></span>
+        </div>
+      </div>
+      <div class="prospectMainContentContainer" style="width: 404px">
+        <div class="SettingContainer dynamicContainer" style="width: 100%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prospectModal" id="settingModl">
+    <div class="prospectModalContainer profile-container-modal-main">
+      <div class="upperRow">
+        <h1 id="dynamicModalH1"></h1>
+
+        <div class="closeDiv" id="settingmodlCloseBtn">
+          <img src="./Assets/img/close.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="prospectMainContentContainer1 profile-container-modal">
+        <div class="text-center top-profile-image-container" style="margin: 25px">
+          <label for="profile_image_icon-main"
+            class="top-img text-center position-relative profile-image rounded-circle">
+            <img id="group_chat_icon" src="./Assets/img/index-logo.png" alt="profile img" class="" />
+            <span class="icon" style="padding-top: 0">
+              <img id="" src="./Assets/img/cam.svg" alt="cam" />
+            </span>
+          </label>
+          <input type="file" name="filee" id="profile_image_icon-main" />
+          <h5 id="group_setting_name" class="mb-2 upload-heading">
+            Pursue Networking
+          </h5>
+        </div>
+        <div class="top-div pb-3 position-relative">
+          <a href="#" id="opening_about" data-tab="AboutDiv" class="b-nav-tab active">About</a>
+          <a href="#" id="opening_members" data-tab="MembersDiv" class="b-nav-tab"> Members </a>
+          <a href="#" data-tab="SettingDiv" class="b-nav-tab"> Settings </a>
+        </div>
+        <div class="SettingContainer dynamicContainer">
+          <div class="bottom-div">
+            <div id="AboutDiv" class="b-tab active">
+              <div class="group-name-box" style="margin-bottom: 20px">
+                <h1 class="name">Group Name</h1>
+                <p id="group_setting_name_sub" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="edit_btn_group_name" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="
+                      border-bottom: 0;
+                      border-bottom-left-radius: 0;
+                      border-bottom-right-radius: 0;
+                      display: none;
+                    ">
+                <h1 class="name">Topic</h1>
+                <p id="subgroup_setting_topic" class="dessc">
+
+                </p>
+                <buttun id="edit_btn_group_topic" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="border-bottom: 0; border-radius: 0;display: none;
+              ">
+                <h1 class="name">Description</h1>
+                <p id="group_setting_description" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="edit_btn_group_description" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="border-bottom: 0; border-radius: 0">
+                <h1 class="name">Created By</h1>
+                <p id="created_by" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div id="Leave_current_group" class="group-name-box" style="
+                      border-top-left-radius: 0;
+                      border-top-right-radius: 0;cursor: pointer;;
+                    ">
+                <h1 class="name" style="color: red">Leave Group</h1>
+              </div>
+              <div id="Delete_current_group" class="group-name-box" style="
+                      border-top-left-radius: 0;
+                      border-top-right-radius: 0;cursor: pointer; 
+                    ">
+                <h1 class="name" style="color: red">Delete Group</h1>
+              </div>
+
+
+
+            </div>
+
+            <div id="MembersDiv" class="b-tab">
+              <div class="input-group" style="
+                      background-color: #f7fbff;
+                      border-color: #084dd126;
+                      margin-top: 15px;
+                    ">
+                <div class="input-group-prepend">
+                  <span style="border-color: #084dd126" class="input-group-text bg-transparent border-right-0"
+                    id="basic-addon1"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" id="find_members" class="form-control border-left-0" placeholder="Find members"
+                  aria-label="Search" aria-describedby="basic-addon1" style="
+                        padding: 5px !important ;
+                        box-shadow: none;
+                        height: 46px;
+                        background-color: transparent;
+                        border-color: #084dd126;
+                      " />
+              </div>
+              <div class="btn-box" style="margin: 20px 0">
+                <button id="AddMemberSecond" style="display:none" class="btn btn-own-btm">
+                  <!-- <i class="fas fa-user-plus"></i>  -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23.199" height="19.775" viewBox="0 0 23.199 19.775">
+                    <g id="Group_468" data-name="Group 468" transform="translate(-1555.051 -527)">
+                      <g id="Path_129" data-name="Path 129" transform="translate(1555.131 536)" fill="none">
+                        <path
+                          d="M9.87,0C15.321,0,20.4,4.519,19.74,8.771,20.185,11.06-.44,11.8,0,8.771-.789,3.777,4.419,0,9.87,0Z"
+                          stroke="none" />
+                        <path class="hov-light"
+                          d="M 9.869955062866211 1.500000953674316 C 8.466924667358398 1.500000953674316 7.049294471740723 1.787631034851074 5.77032470703125 2.33181095123291 C 4.523075103759766 2.862480163574219 3.461845397949219 3.61345100402832 2.701364517211914 4.503540515899658 C 2.001983642578125 5.322116851806641 1.228918075561523 6.659556865692139 1.464336395263672 8.418354034423828 C 1.740058898925781 8.549238204956055 2.391408920288086 8.78515625 3.765144348144531 8.978060722351074 C 5.147785186767578 9.172220230102539 6.900534629821777 9.274850845336914 8.833924293518066 9.274850845336914 C 11.05474472045898 9.274850845336914 13.30523490905762 9.140110969543457 15.1708345413208 8.895450592041016 C 17.01523590087891 8.65357494354248 17.90397453308105 8.379167556762695 18.29189109802246 8.222817420959473 C 18.35993766784668 7.090594291687012 17.87134170532227 5.858506679534912 16.89425468444824 4.71729040145874 C 15.22090530395508 2.762860298156738 12.46370506286621 1.500000953674316 9.869955062866211 1.500000953674316 M 9.869955062866211 9.5367431640625e-07 C 15.32101440429688 9.5367431640625e-07 20.40283393859863 4.518550395965576 19.73997497558594 8.770510673522949 C 20.18505477905273 11.0595703125 -0.4399471282958984 11.80078125 -5.53131103515625e-05 8.770510673522949 C -0.7890644073486328 3.777340888977051 4.41889476776123 9.5367431640625e-07 9.869955062866211 9.5367431640625e-07 Z"
+                          stroke="none" fill="#084dd1" />
+                      </g>
+                      <g id="Ellipse_168" data-name="Ellipse 168" transform="translate(1561 527)" fill="none"
+                        stroke="#084dd1" stroke-width="1.5">
+                        <circle cx="4" cy="4" r="4" stroke="none" />
+                        <circle cx="4" cy="4" r="3.25" fill="none" />
+                      </g>
+                      <line id="Line_33" data-name="Line 33" y2="6" transform="translate(1574.5 531.5)" fill="none"
+                        stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                      <line id="Line_34" data-name="Line 34" x2="6" transform="translate(1571.5 534.5)" fill="none"
+                        stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                    </g>
+                  </svg> Add Member
+                </button>
+              </div>
+              <div class="add-members-box-list">
+                <div id="view_members" class="mainContentContainer mainContentContainer1"></div>
+              </div>
+            </div>
+
+            <div id="SettingDiv" class="b-tab">
+              <div class="group-name-box" style="margin-bottom: 20px">
+                <h1 class="name">Group Name</h1>
+                <p id="group_name_in_settings" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="second_group_edit" class="edit_btn">Edit</buttun>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- edit group text name  -->
+        <div class="edit-group-name-modal" id="edit-group-name-modal">
+          <div class="closeDiv edit-group-close-btn" id="edit-group-close-btn">
+            <img src="./Assets/img/close.svg" alt="">
+          </div>
+          <div class="modal-body-text">
+            <h3 id="edit_modal_heading" class="">Rename this Group</h3>
+            <div id="edit_modal_div" class="input-box-group-name">
+              <!-- <label  for="group-name-input">Group name</label>
+                  <input type="text" id="group-name-input" placeholder="#Pursue-Networking">
+                  <small class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim pariatur architecto itaque ?</small> -->
+            </div>
+            <div class="btns-row text-right">
+              <button class="edit-group-close-btn btn">Cancel</button>
+              <button id="save_changes" class="btn">Save Changes</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- SubGroup Setting Modal-->
+
+  <div class="prospectModal" id="SubgroupsettingModl">
+    <div class="prospectModalContainer profile-container-modal-main">
+      <div class="upperRow">
+        <h1 id="dynamicModalH1"></h1>
+
+        <div class="closeDiv" id="SubgroupsettingModlCloseBtn">
+          <img src="./Assets/img/close.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="prospectMainContentContainer1 profile-container-modal">
+
+        <div class="text-center top-profile-image-container" style="margin: 25px">
+          <h5 id="subgroup_setting_name" class="mb-2 upload-heading">
+            Pursue Networking
+          </h5>
+        </div>
+
+        <div class="top-div pb-3 position-relative">
+          <a href="#" id="Subgroup_opening_about" data-tab="Subgroup_AboutDiv" class="b-nav-tab active">About</a>
+          <a href="#" id="Subgroup_opening_members" data-tab="Subgroup_MembersDiv" class="b-nav-tab"> Members </a>
+          <a href="#" data-tab="Subgroup_SettingDiv" class="b-nav-tab"> Settings </a>
+        </div>
+        <div class="SettingContainer dynamicContainer">
+          <div class="bottom-div">
+            <div id="Subgroup_AboutDiv" class="b-tab active">
+              <div class="group-name-box" style="margin-bottom: 20px">
+                <h1 class="name">Sub Group Name</h1>
+                <p id="Subgroup_group_setting_name_sub" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="Subgroup_edit_btn_group_name" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="
+                      border-bottom: 0;
+                      border-bottom-left-radius: 0;
+                      border-bottom-right-radius: 0;
+                    ">
+                <h1 class="name">Topic</h1>
+                <p id="subgroup_group_setting_topic" class="dessc">
+                </p>
+                <buttun id="Subgroup_edit_btn_group_topic" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="border-bottom: 0; border-radius: 0">
+                <h1 class="name">Description</h1>
+                <p id="Subgroup_group_setting_description" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="Subgroup_edit_btn_group_description" class="edit_btn">Edit</buttun>
+              </div>
+              <div class="group-name-box" style="border-bottom: 0; border-radius: 0">
+                <h1 class="name">Created By</h1>
+                <p id="Subgroup_created_by" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div id="Subgroup_Leave_current_group" class="group-name-box" style="
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;cursor: pointer;;
+                  ">
+                <h1 class="name" style="color: red">Leave Group</h1>
+              </div>
+            </div>
+
+            <div id="Subgroup_MembersDiv" class="b-tab">
+              <div class="input-group" style="
+                    background-color: #f7fbff;
+                    border-color: #084dd126;
+                    margin-top: 15px;
+                  ">
+                <div class="input-group-prepend">
+                  <span style="border-color: #084dd126" class="input-group-text bg-transparent border-right-0"
+                    id="basic-addon1"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" id="Subgroup_find_members" class="form-control border-left-0"
+                  placeholder="Find members" aria-label="Search" aria-describedby="basic-addon1" style="
+                      padding: 5px !important ;
+                      box-shadow: none;
+                      height: 46px;
+                      background-color: transparent;
+                      border-color: #084dd126;
+                    " />
+              </div>
+              <div class="btn-box" style="margin: 20px 0">
+                <button id="AddMemberSecond" style="display:none"  class="btn btn-own-btm">
+                  <!-- <i class="fas fa-user-plus"></i>  -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23.199" height="19.775" viewBox="0 0 23.199 19.775">
+                    <g id="Group_468" data-name="Group 468" transform="translate(-1555.051 -527)">
+                      <g id="Path_129" data-name="Path 129" transform="translate(1555.131 536)" fill="none">
+                        <path
+                          d="M9.87,0C15.321,0,20.4,4.519,19.74,8.771,20.185,11.06-.44,11.8,0,8.771-.789,3.777,4.419,0,9.87,0Z"
+                          stroke="none" />
+                        <path class="hov-light"
+                          d="M 9.869955062866211 1.500000953674316 C 8.466924667358398 1.500000953674316 7.049294471740723 1.787631034851074 5.77032470703125 2.33181095123291 C 4.523075103759766 2.862480163574219 3.461845397949219 3.61345100402832 2.701364517211914 4.503540515899658 C 2.001983642578125 5.322116851806641 1.228918075561523 6.659556865692139 1.464336395263672 8.418354034423828 C 1.740058898925781 8.549238204956055 2.391408920288086 8.78515625 3.765144348144531 8.978060722351074 C 5.147785186767578 9.172220230102539 6.900534629821777 9.274850845336914 8.833924293518066 9.274850845336914 C 11.05474472045898 9.274850845336914 13.30523490905762 9.140110969543457 15.1708345413208 8.895450592041016 C 17.01523590087891 8.65357494354248 17.90397453308105 8.379167556762695 18.29189109802246 8.222817420959473 C 18.35993766784668 7.090594291687012 17.87134170532227 5.858506679534912 16.89425468444824 4.71729040145874 C 15.22090530395508 2.762860298156738 12.46370506286621 1.500000953674316 9.869955062866211 1.500000953674316 M 9.869955062866211 9.5367431640625e-07 C 15.32101440429688 9.5367431640625e-07 20.40283393859863 4.518550395965576 19.73997497558594 8.770510673522949 C 20.18505477905273 11.0595703125 -0.4399471282958984 11.80078125 -5.53131103515625e-05 8.770510673522949 C -0.7890644073486328 3.777340888977051 4.41889476776123 9.5367431640625e-07 9.869955062866211 9.5367431640625e-07 Z"
+                          stroke="none" fill="#084dd1" />
+                      </g>
+                      <g id="Ellipse_168" data-name="Ellipse 168" transform="translate(1561 527)" fill="none"
+                        stroke="#084dd1" stroke-width="1.5">
+                        <circle cx="4" cy="4" r="4" stroke="none" />
+                        <circle cx="4" cy="4" r="3.25" fill="none" />
+                      </g>
+                      <line id="Line_33" data-name="Line 33" y2="6" transform="translate(1574.5 531.5)" fill="none"
+                        stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                      <line id="Line_34" data-name="Line 34" x2="6" transform="translate(1571.5 534.5)" fill="none"
+                        stroke="#084dd1" stroke-linecap="round" stroke-width="1.5" />
+                    </g>
+                  </svg> Add Member
+                </button>
+              </div>
+              <div class="add-members-box-list">
+                <div id="subgroup_view_members" class="mainContentContainer mainContentContainer1"></div>
+              </div>
+            </div>
+
+            <div id="Subgroup_SettingDiv" class="b-tab">
+              <div class="group-name-box" style="margin-bottom: 20px">
+                <h1 class="name">Group Name</h1>
+                <p id="Subgroup_group_name_in_settings" class="dessc">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <buttun id="Subgroup_second_group_edit" class="edit_btn">Edit</buttun>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- edit group text name  -->
+        <div class="edit-group-name-modal" id="subgroup_edit-group-name-modal">
+          <div class="closeDiv subgroup_edit-group-close-btn" id="Subgroup_edit-group-close-btn">
+            <img src="./Assets/img/close.svg" alt="">
+          </div>
+          <div class="modal-body-text">
+            <h3 id="subgroup_edit_modal_heading" class="">Rename this Group</h3>
+            <div id="subgroup_edit_modal_div" class="input-box-group-name">
+              <!-- <label  for="group-name-input">Group name</label>
+                <input type="text" id="group-name-input" placeholder="#Pursue-Networking">
+                <small class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim pariatur architecto itaque ?</small> -->
+            </div>
+            <div class="btns-row text-right">
+              <button class="subgroup_edit-group-close-btn btn">Cancel</button>
+              <button id="subgroup_save_changes" class="btn">Save Changes</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <!-- Fifth Modal (Sub Group) -->
+
+  <div class="prospectModal" id="MessageDeleteModal">
+    <div class="prospectModalContainer"
+      style="height: 206px;margin: 0 auto; top: 50%; transform: translateY(-50%); padding: 30px;">
+      <div class="upperRow">
+        <h1 style="font-size: 20px; line-height: 24px;margin-top: 20px;">Delete Text</h1>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;transform: translate(-3px, 10px);"
+          id="MessageDeleteModalCloseBtn" width="19.092" height="19.092" viewBox="0 0 19.092 19.092">
+          <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(9.546 -15.91) rotate(45)">
+            <path id="Path_93" data-name="Path 93" d="M18,7.5v21" fill="none" stroke="#474747" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="3" />
+            <path id="Path_94" data-name="Path 94" d="M7.5,18h21" fill="none" stroke="#474747" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="3" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="prospectMainContentContainer" style="height: auto; margin-top: 60px;">
+        <div class="subGroupContainer">
+          <p class="del_msg" style="font-size: 18px; line-height: 24px; font-weight: 400;">Are you sure you want to
+            delete this text?</p>
+          <div id="temporary_buttons" class="text-right" style="margin-top: 38px;">
+            <button id="closeIt" class="btn ">Cancel</button>
+            <button class="btn ">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="prospectModal" id="subGroupModal">
+    <div class="prospectModalContainer" style="padding-top: 42px;">
+      <div class="upperRow">
+        <h1 id="add_members_heading"></h1>
+
+        <div class="closeDiv" id="subGroupModalCloseBtn" style="transform: translate(32px, -32px);">
+          <img src="./Assets/img/close.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="prospectMainContentContainer">
+        <div class="input-group new-own-input-group"
+          style="background-color: #F7FBFF; margin: 20px auto;color: #676767;">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-transparent border-right-0" id="basic-addon1">
+              <!-- <i class="fas fa-search"></i> -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.161" height="17.165" viewBox="0 0 17.161 17.165">
+                <path id="Icon_ionic-ios-search" data-name="Icon ionic-ios-search"
+                  d="M21.459,20.416,16.687,15.6a6.8,6.8,0,1,0-1.032,1.046L20.4,21.43a.734.734,0,0,0,1.037.027A.739.739,0,0,0,21.459,20.416ZM11.342,16.7a5.371,5.371,0,1,1,3.8-1.573A5.338,5.338,0,0,1,11.342,16.7Z"
+                  transform="translate(-4.5 -4.493)" fill="#676767" />
+              </svg>
+
+            </span>
+          </div>
+          <input id="searching_members_to_add" type="text" class="form-control border-left-0" placeholder="Find members"
+            aria-label="Search" aria-describedby="basic-addon1" style="
+                  padding: 5px !important ;
+                  box-shadow: none;
+                  height: 46px;
+                  background-color: transparent;
+                  color: #676767;
+                ">
+        </div>
+        <div id="add_member_container" class="subGroupContainer">
+          <!-- <div class="chatContent" date-linkedid="3">
+                  <div class="defaultIcon" style="border: none; margin-left: 10px">
+                  <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFcGCB5dB9BTw/profile-displayphoto-shrink_800_800/0/1516259389314?e=1657756800&amp;v=beta&amp;t=tG873yvhChowKj3Ik8xEiBzHh0IwJkA4wvUUjumN5uM">
+                      
+                  </div>
+      
+                  <h1 class="userEmail">ggoldstein@insynctive.com</h1>
+      
+                  <div class="dotCircle"></div>
+                      
+                </div> -->
+
+        </div>
+        <div class="submit-btn text-center">
+          <button type="button" class="AddingMember">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sixth Modal (Sub Group Members) -->
+
+  <div class="prospectModal" id="subGroupMembersModal">
+    <div class="modalContainer" style="margin-top: 25px;">
+      <div class="upperRow">
+        <h1></h1>
+
+        <div class="closeDiv1" id="subGroupMembersModalCloseBtn">
+          <img src="./Assets/img/close.svg" alt="">
+          <!-- <span class="img">X</span> -->
+        </div>
+      </div>
+
+      <div class="group-details-modal">
+        <div class="text-center">
+          <label for="profile_image_icon" class="top-img text-center position-relative">
+            <img src="./Assets/img/group-bg.png" alt="profile img" class="profile-image rounded-circle">
+            <span class="icon">
+              <img src="./Assets/img/cam.svg" alt="cam">
+              <!-- <i class="fas fa-camera"></i> -->
+            </span>
+          </label>
+          <input type="file" name="filee" id="profile_image_icon">
+          <h5 class="mb-2 upload-heading">Upload Image</h5>
+        </div>
+        <div class="form-box">
+          <!-- <form > -->
+          <div class="form-group">
+            <label for="gName" class="font-weight-bold">Sub Group Name:</label>
+            <input type="text" value="" class="form-control" id="groupName" placeholder="#    e.g team-discussion">
+          </div>
+
+          <div class="form-group">
+            <label for="discrpition" class="font-weight-bold">Description
+              <small class="" style="color: #8a8a8a">(Optional)</small></label>
+            <input type="email" class="form-control" id="discrpition" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text">
+              What's the group about?
+            </small>
+          </div>
+
+          <div class="add-members-box">
+            <div class="row">
+              <div class="col-3">
+                <p class="font-weight-bold my-2" style="
+                      font-size: 14px;
+                      white-space: nowrap;
+                      font-family: 'Roboto', sans-serif;
+                    ">
+                  Add Members<span style="color: red;">*</span>:
+                </p>
+              </div>
+              <div class="col-9">
+                <div class="input-group" style="width: 270px; float: right">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-right-0" id="basic-addon1"><i
+                        class="fas fa-search"></i></span>
+                  </div>
+                  <input type="text" class="form-control border-left-0" placeholder="Search" aria-label="Search"
+                    aria-describedby="basic-addon1" style="
+                        padding: 5px !important ;
+                        box-shadow: none;
+                        height: 31px;
+                      ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="add-members-box-list">
+            <div class="prospectMainContentContainer">
+              <div class="SettingContainer subGroupMembersModalContainer"></div>
+            </div>
+          </div>
+          <div class="submit-btn text-center">
+            <button type="button" class="startChartBtn1">Create</button>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nameModal" id="nameModal">
+    <div class="nameModalContainer">
+      <div class="upperRow">
+        <h1>Enter Name for a group</h1>
+
+        <div class="closeDiv" id="nameModalCloseBtn">
+          <img src="./Assets/img/close.png" alt="" />
+        </div>
+      </div>
+
+      <div class="nameMainContentContainer">
+        <input type="text" class="nameBox" placeholder="Enter Group Name" />
+
+        <button type="button" class="createGroupBtn">Create</button>
+        <button type="button" class="updateGroupBtn" style="display: none">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nameModal" id="subGroupNameModal">
+    <div class="nameModalContainer">
+      <div class="upperRow">
+        <h1>Enter Name for a sub group</h1>
+
+        <div class="closeDiv" id="subGroupNameModalCloseBtn">
+          <img src="./Assets/img/close.png" alt="" />
+        </div>
+      </div>
+
+      <div class="nameMainContentContainer">
+        <input type="text" class="nameBox" id="subGroupName" placeholder="Enter Sub Group Name" />
+
+        <button type="button" class="createSubGroupBtn">Update</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="prospectModalll" id="dynamicModalll" style="transform: scale(0); opacity: 0;width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;">
+
+    <div class="prospectModalllContainer" style="width: 220px;
+    min-height: 360px;
+    max-height: fit-content;
+    background: #f7fbff 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;">
+
+      <div class="imageContainerr" style="width: 180px;
+        height: 160px;
+        border-radius: 10px;">
+
+      </div>
+
+      <h1 id="prospectName_modal" style="font-size: 13px;
+        font-weight: 600;
+        line-height: 0px;
+        margin-bottom: 0%;
+        color: black;
+        margin-top: 15px;"></h1>
+
+      <div class="followUpContainer" style="width: 100%;
+        height: 40px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0% 10px;
+        margin-top: 10px;
+        cursor: default;
+        position: relative;">
+        <p id="follow_up_print" style="font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0px;
+            color: #757575;
+            margin-bottom: 0%;"></p>
+
+
+      </div>
+
+      <div class="workExperience" style="width: 100%;
+        height: fit-content;
+        margin-top: 10px;">
+        <p style="font-size: 12px;
+            font-weight: 400;
+            color: #757575;">Work Title</p>
+        <h1 id="workExp" style="font-size: 13px;
+            font-weight: 500;
+            color: black;
+            margin-top: 5px;"></h1>
+      </div>
+
+      <div class="companyNamee" style="width: 100%;
+        height: fit-content;
+        margin-top: 10px;">
+        <p style="font-size: 12px;
+            font-weight: 400;
+            color: #757575;">Company Name</p>
+        <h1 id="companyNamee" style="font-size: 13px;
+            font-weight: 500;
+            color: black;
+            margin-top: 5px;"></h1>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div data-ml-modal id="modal-12">
+    <a href="#!" class="modal-overlay">
+      <div class="modal-dialog modal-dialog-lg">
+        <div class="top-info-box">
+          <div class="row d-none" style="padding: 15px 15px 0 0; justify-content: right">
+            <div id="Screen_notify_img" class="notify_img" style="display: none;">   <a href="#"><img src="https://media-exp2.licdn.com/dms/image/C4D03AQFUxaX7FjH2kA/profile-displayphoto-shrink_800_800/0/1644700707608?e=1660176000&amp;v=beta&amp;t=tA996kdoGg50E4spy50_1nnL5O8LVBPvy482TEZOeVA" alt=""></a>   <a href="#"><img src="https://media-exp2.licdn.com/dms/image/C4E03AQEDC4g8-vMEQQ/profile-displayphoto-shrink_800_800/0/1636762353634?e=1661385600&amp;v=beta&amp;t=vWFkPXVqCuBaO81asqdJYO9kuBr2hRgGUEhEXIRAzKE" alt=""></a>   <a href="#"><img src="./Assets/img/user.png" alt=""></a></div>
+          </div>
+          <div class="userInfoBoxChattModal d-flex">
+            <div class="imgBox">
+              <img id="prospect_image_heading_comment" src="" alt="" style="width: 59px; height: 59px" class="img-fluid rounded-circle">
+            </div>
+            <div class="rightImgSideContent">
+              <div class="prospect_name_heading_comment" style="margin-top: 0px;"></div>
+              <div class="desigination_comment" style="display: block;">(Business Legal Management)</div>
+              <div id="group_name_division" class="group_name" style="display: block;">
+                Company:
+                <span class="prospect_group_name_comment" style="color: #084dd1"></span>
+              </div>
+              <div id="prospect_subgroup_name" class="group_name" style="display: block">
+                Location:
+                <span class="prospect_subgroup_name_comment" style="color: #084dd1"></span>
+              </div>
+              <div id="prospect_subgroup_name" class="group_name" style="display: block">
+                Status:
+                <span class="prospect_subgroup_status_comment" style="color: #084dd1"></span>
+              </div>
+        <div>        <p class="notes_comment" style="    display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          max-width: 328px;"></p>
+        </div>
+            </div>
+          </div>
+          <div class="row profileMainBox-2 d-none">
+            <div class="w-100 btn-boxs my-2">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+        <a href="#!" class="modal-close">&times;</a>
+        <h3>Comments</h3>
+        <input type="hidden" id="temporary_sender" value="">
+        <input type="hidden" id="temporary_url" value="">
+
+        <div class="modal-content modal-content-comments">
+          <div id="comments_data">
+            <div class="loader1"></div>
+          </div>
+          <span style="text-align: left;">
+            <div class="taggedUser"
+              style="width: 100%; height: fit-content; max-height: 80px; overflow-y: scroll; margin-bottom: 10px; display: flex; justify-content: start; flex-wrap: wrap;">
+            </div>
+            <div style="position: relative; display: flex; justify-content: center; align-items: center;">
+              <textarea id="comment_box" class="popup_input"
+                style="width:75%; height: 70px; margin-right: 5%; outline: none; padding: 5px 10px; box-sizing: border-box;"></textarea>
+              <button id="add_comment" class="btn btn-sm"
+                style="background-color: #0375FF; color: white; width: 20%; height: 40px;">ADD</button>
+              <button id="update_comment" class="btn btn-sm"
+                style="background-color: #0375FF; color: white; width: 20%; height: 40px; display: none;">Update</button>
+              <button id="cancel_comment" class="btn btn-sm"
+                style="background-color: #0375FF; color: white; width: 20%; height: 40px; display: none; margin-left: 8px;">Cancel</button>
+              <div id="myDropdown" class="dropdown-content">
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  <!-- group name edit modal  -->
+
+</body>
+<script src="js/vanillaEmojiPicker.js"></script>
+<script type="text/javascript" src="./customMessage.js"></script>
+<script src="js/toastify.js"></script>
+
+</html>

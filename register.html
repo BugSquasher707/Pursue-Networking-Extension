@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register Page</title>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+    
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+		 <style>
+    body {
+      width: 400px;
+      height: 400px;
+      background-color: #F7FBFF;
+    }.bg{
+    	 background-color: lightgrey;
+    }.form-check-input {
+    position: absolute;
+    margin-top: 0.3rem;
+	margin-left: -1rem;
+	}.bg-light{
+		background-color:#ffffff !important;
+		border-radius: 5%
+	}span{
+		color:#0375FF !important;
+	}strong{
+		color:#cbcbcb !important;
+		font-weight: 500;
+	}i{
+		color:#0375FF !important;
+	}
+	button{
+		background-color:#0375FF !important;
+	}
+	select{
+		border-color: white;
+	}input{
+		border-color: white !important;
+	}
+
+	#registerLogo{
+		cursor: pointer;
+	}
+
+    </style>
+</head>
+<body id="body">
+	<div class="m-4 text-center">
+		<img src="logo.png" id="registerLogo" style="height: 50px; width: 50px">
+		<h3>Create An Account</h3>
+		<div class="m-2 mt-5">
+			<input type="text" class="form-control" name="username" placeholder="Enter Email" id="username_register">
+		</div>
+		<div class="m-2">
+			<input type="password" class="form-control" name="password" placeholder="Enter Password" id="password_register">
+		</div>
+		<div class="m-2">
+			<input type="password" class="form-control" name="confirm_password" placeholder="Re-type Password" id="confirm_password_register">
+		</div>
+		<div class="m-2 mt-4">
+			<button class="btn btn-success btn-block" id="register_submit">Register</button>
+		</div>
+		<div class="m-2 mt-2">
+			<button class="btn btn-success btn-block" id="register_linkedIn">Register via LinkedIn</button>
+		</div>
+		<div class="m-2 mt-4">
+			<p style="color:red" id="message"></p>
+		</div>
+		
+	</div>
+</body>
+	<script type="text/javascript" src="./customLoginReg.js"></script>
+</html>

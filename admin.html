@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Admin Panel</title>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+	<style>
+		body {
+			width: 400px;
+			height: 400px;
+			background-color: #F7FBFF;
+		}
+
+		.bg {
+			background-color: lightgrey;
+		}
+
+		.form-check-input {
+			position: absolute;
+			margin-top: 0.3rem;
+			margin-left: -1rem;
+		}
+
+		.bg-light {
+			background-color: #ffffff !important;
+			border-radius: 5%
+		}
+
+		span {
+			color: #0375FF !important;
+		}
+
+		strong {
+			color: #cbcbcb !important;
+			font-weight: 500;
+		}
+
+		i {
+			color: #0375FF !important;
+		}
+
+		select {
+			border-color: white;
+		}
+
+		input {
+			border-color: white !important;
+		}
+
+		button {
+			background-color: #0375FF !important;
+		}
+
+		a {
+			color: white !important;
+			text-decoration: none !important;
+		}
+
+		p {
+			color: #cbcbcb !important;
+		}
+
+		h3,
+		h2,
+		h4 {
+			color: #0375FF !important;
+		}
+	</style>
+
+</head>
+
+<body id="body">
+	<div class="m-4 text-center">
+		<h2>Admin Panel</h2>
+	</div>
+	<div class="m-3" style="display: flex" id="options">
+		<div class="row">
+			<div class="card text-white bg-primary m-3 col-4">
+				<div class="card-header text-center">Users</div>
+				<div class="card-body">
+					<h5 class="card-title">Total Users: <span id="totalUsers"></span></h5>
+					<p id="users_listing" style="cursor: pointer;" class="card-text">View All</p>
+				</div>
+			</div>
+			<div class="card text-white bg-primary m-3 col-4">
+				<div class="card-header text-center">Leads</div>
+				<div class="card-body">
+					<h5 class="card-title">Total Leads: </h5>
+					<a href="#" class="card-text">View All</a>
+				</div>
+			</div>
+			<div class="card text-white bg-primary m-3 col-8">
+				<div class="card-header text-center">Categories</div>
+				<div class="card-body">
+					<h5 class="card-title">Total Categories: </h5>
+					<p id="view_categories" class="card-text">View All</p>
+					<p id="add_category" class="card-text">Add Category</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="m-3 pb-3 text-center" id="message" style="display: none">
+		<p style="color: green">Loading</p>
+	</div>
+
+	<div id="users" style="display: none">
+		<h4 class="text-center">All Users</h4>
+		<div id="users">
+
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="popup.js"></script>
+
+</html>

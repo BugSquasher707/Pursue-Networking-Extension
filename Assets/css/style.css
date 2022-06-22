@@ -1,0 +1,1056 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F5F5F5;
+}
+
+.main {
+    /* padding: 10px; */
+    max-width: 425px;
+    border-radius: 15px;
+    background-color: #F7FBFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 20px;
+}
+
+.img {
+    display: block !important;
+}
+
+.header_btn {
+    border: none;
+    font-size: 14px;
+    background-color: #DEEDFF;
+}
+
+.header_icon {
+    color: #489BFF;
+}
+
+.arrow {
+    display: none !important;
+}
+
+.search {
+    font-size: 14px;
+    border: none;
+    outline: none;
+    box-shadow: inset 8px 14px 6px -10px #ccc, inset 0px -7px 11px -10px #ccc;
+}
+
+.tabs-data {
+    display: block !important;
+}
+
+.tabs-row {
+    /*width: 100% !important;*/
+    flex-direction: column;
+    /* margin-left: 20px !important;
+    margin-right: 20px !important; */
+}
+
+.tabs_btns {
+    width: 50%;
+}
+
+.tabs_index {
+    border: 2px solid #7BB6FF;
+    border-radius: 6px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.btn_tabs_link {
+    padding: 5px;
+}
+
+/* .banner_slider_container {
+    max-width: 425px;
+} */
+
+.date_col_2 {
+    background-color: white !important;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+    margin-left: 1px;
+}
+
+.date_col_1 {
+    background-color: white !important;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+    margin-right: 1px;
+}
+
+.tab_below_col {
+    color: #0073FF;
+}
+
+.tabs_layer_box {
+
+    border-radius: 11px;
+    background-color: #F5F5F5;
+    margin: 5px;
+    padding-bottom: 10px;
+    cursor: grab;
+}
+
+.header_img {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+}
+
+.itms_btns {
+    text-align: center;
+    border-radius: 7px;
+    padding: 5px;
+    color: #0073FF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.item_imgs {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 17px;
+    width: 197px;
+}
+
+
+/* .owl_items {
+    border-radius: 15px !important;
+} */
+
+.banner_card_slider {
+    border-radius: 15px !important;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.banner_card_slider::-webkit-scrollbar {
+    display: none;
+}
+
+.c_name {
+    color: #0073FF;
+    font-size: 14px;
+}
+
+/* .ceo_name {
+    
+} */
+
+.card_body {
+    text-align: left;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.c_paragraph {
+    font-size: 12px;
+    color: #A6A6A6;
+    margin-top: -8px;
+}
+
+.ceo_name {
+    margin-top: -3px;
+}
+
+.Location_name {
+    margin-top: -5px;
+    color: #000000;
+}
+
+.location_paragraph {
+    font-size: 12px;
+    color: #5F758F;
+    margin-top: -10px;
+}
+
+.down_arrow {
+    color: #0073FF;
+    /* font-size: 13px; */
+}
+
+.c_paragraph_box {
+    font-size: 12px;
+    color: #A6A6A6;
+    margin-top: -8px;
+    background-color: #F5F5F5;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.c_paragraph_url {
+    color: #0073FF;
+    font-size: 12px;
+    margin-top: -8px;
+}
+
+.badg-1 {
+    background-color: #E5F1FF;
+    color: #67ACFF;
+    border-radius: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.badg-2 {
+    background-color: #FFE5E5;
+    color: #FF8F8F;
+    border-radius: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.badg-3 {
+    background-color: #FFF6E5;
+    color: #FFC259;
+    border-radius: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.badg-4 {
+    background-color: #E5F7EB;
+    color: #56C87B;
+    border-radius: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.c-date {
+    float: left;
+}
+
+.c-calender {
+    float: right;
+}
+
+.c_paragraph_date_calender {
+    font-size: 12px;
+    color: #A6A6A6;
+    margin-top: -8px;
+    background-color: #F5F5F5;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.last_c_btn {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
+/* .owl-nav {
+    display: none;
+}
+
+.owl-dots {
+    display: none;
+} */
+
+.tabs_two_main {
+    font-size: 13px;
+}
+
+.tabs_cols_two_main {
+    background-color: #00234D;
+    border-radius: 5px;
+    color: white;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.tabs_cols_two_main {
+    border: 1px solid #F5F5F5;
+}
+
+.down_arow_tabs_two {
+    font-size: 12px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.tabs_two_imgs {
+    max-height: 25px;
+    max-width: 25px;
+    border-radius: 10%;
+}
+
+.comment_icon {
+    color: #0073FF;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+/* .tabs_cols_two_main_1 { */
+    /* background-color: #ffffff;
+    border-radius: 5px;
+    color: rgb(8, 8, 8);
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 1px solid #E4E4E4; */
+/* } */
+/*.tabs_cols_two_main_1_custom_img{
+    max-height: 39px;
+    padding-top: 8px !important;
+    background-color: #ffffff;
+    border-radius: 5px;
+    color: black !important;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    border: 1px solid #E4E4E4;
+}*/
+
+.july_left {
+    background-color: #E5F1FF !important;
+}
+
+.calender_icon_last_tab_3 {
+    color: #0073FF;
+    /*margin-top: 5px;*/
+    font-size: 14px;
+}
+.weekly-source-clendar-new-class{
+    background-color: yellow !important;
+}
+
+
+.tab_2_main_x_scroll {
+    overflow-y: auto;
+    max-height: 245px;
+}
+
+.tab_2_main_x_scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs_two_list_view {
+    max-width: 850px !important;
+}
+
+.add_icon {
+    float: right;
+}
+
+.add_icon {
+    color: white;
+    font-size: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.congrats_msg {
+    color: #3FC03F;
+    font-size: 12px;
+}
+
+.Address_msg {
+    color: #1F3E63;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.slide-1,
+.slide-2 {
+    width: 50%;
+}
+
+.new-list-icon{
+    position: absolute;
+    color: red !important;
+    right: 8px;
+    bottom: 3px;
+    height: 24px;
+    width: 24px;
+}
+.card-img{
+    position: relative;
+}
+
+/* tabs style modal first by css ..................................... */
+
+/* Set the default switch box rendering context. */
+.radio {
+  position: relative;
+  float: left;
+  display: block;
+}
+
+/* Set a specific box rendering context, positioning and other details.*/
+#this-tab-set {
+  margin: 1em;
+  font-size: 16px;
+  color: #555;
+  font-family: helvetica;
+  position: absolute; /**/
+  
+  box-shadow: 
+    0px .5em 1.2em -.20em rgba(0,0,0, .4),
+    0 .6em .5em -.5em rgba(0,0,0, 1);
+}
+
+/* Custom Default Label Styles */
+#this-tab-set > label,
+#this-tab-set > .display {
+  position: relative;
+  float: left;
+  background-color: rgb(100, 100, 100);
+  color: rgba(255,255,255, .99);
+  padding: 1em;
+}
+#this-tab-set > label {
+  background-color: rgb(150, 150, 150);
+  padding-bottom: .5em;
+  margin-top: 0em;
+  transition: margin .25s;
+  -webkit-transition: margin .25s;
+  z-index: 1;
+}
+#this-tab-set > input:checked + label {
+  background-color: rgb(100, 100, 100);
+  margin-top: -.75em;
+  
+
+  box-shadow: 
+    0em .5em 1em -.2em rgba(0,0,0, .5),
+    0em .5em .5em -.2em rgba(0,0,0, .7);
+  z-index: 3;
+}
+#this-tab-set > label:hover {
+  box-shadow: 
+    0em .5em 1em -.2em rgba(0,0,0, .25),
+    0em .5em .5em -.2em rgba(0,0,0, .3);
+  z-index: 2;
+  margin-top: -.3em;
+}
+
+#this-tab-set > input:checked + label {
+  background-color: rgb(100, 100, 100);
+}
+#this-tab-set > .display {
+  clear: both;
+  width: 329px; /* somthing to do qith context rendering is causing this prop to be required */ /* the value is the width of the container subtract the padding */
+  padding: 1em;
+  z-index: 3;
+}
+/* Color block for tab animation */
+#this-tab-set > label:after {
+  content: ' ';
+  width: 100%;
+  position: absolute;
+  height: 1em;
+  left: 0;
+  bottom: -1em;
+  background-color: inherit;
+  z-index: 0;
+}
+
+/* Round Corners */
+#this-tab-set {
+  border-radius: .5em;
+}
+
+#this-tab-set > label:nth-child(2) {
+  border-top-left-radius: inherit;
+}
+#this-tab-set > label:nth-child(10) {
+  border-top-right-radius: inherit;
+}
+#this-tab-set > .display {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+/* Hide switch inputs. */
+.radio-tabs > input {
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Set up state switching indicators. */
+.radio-tabs > label {
+  cursor: pointer;
+}
+
+/* Indicator call to action. */
+
+/* Set up Display positioning. */
+.display {
+  position: relative;
+  float:left;
+  padding-top: 1em;
+}
+
+/* Set basic off states. */
+.radio-tabs > .display {
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Set the default state. */
+.radio-tabs > .tab-1-display {
+  position: relative;
+  visibility: visible;
+}
+
+/* State switching interaction. */
+.radio-tabs > #tab-1:checked ~ .tab-1-display {
+  position: relative;
+  visibility: visible;
+}
+.radio-tabs > #tab-1:checked ~ .tab-2-display,
+.radio-tabs > #tab-1:checked ~ .tab-3-display,
+.radio-tabs > #tab-1:checked ~ .tab-4-display,
+.radio-tabs > #tab-1:checked ~ .tab-5-display {
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-tabs > #tab-2:checked ~ .tab-2-display {
+  position: relative;
+  visibility: visible;
+}
+.radio-tabs > #tab-2:checked ~ .tab-3-display,
+.radio-tabs > #tab-2:checked ~ .tab-4-display,
+.radio-tabs > #tab-2:checked ~ .tab-5-display,
+.radio-tabs > #tab-2:checked ~ .tab-1-display {
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-tabs > #tab-3:checked ~ .tab-3-display {
+  position: relative;
+  visibility: visible;
+}
+.radio-tabs > #tab-3:checked ~ .tab-2-display,
+.radio-tabs > #tab-3:checked ~ .tab-4-display,
+.radio-tabs > #tab-3:checked ~ .tab-5-display,
+.radio-tabs > #tab-3:checked ~ .tab-1-display {
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-tabs > #tab-4:checked ~ .tab-4-display {
+  position: relative;
+  visibility: visible;
+}
+.radio-tabs > #tab-4:checked ~ .tab-2-display,
+.radio-tabs > #tab-4:checked ~ .tab-3-display,
+.radio-tabs > #tab-4:checked ~ .tab-5-display,
+.radio-tabs > #tab-4:checked ~ .tab-1-display {
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-tabs > #tab-5:checked ~ .tab-5-display {
+  position: relative;
+  visibility: visible;
+}
+.radio-tabs > #tab-5:checked ~ .tab-2-display,
+.radio-tabs > #tab-5:checked ~ .tab-4-display,
+.radio-tabs > #tab-5:checked ~ .tab-1-display,
+.radio-tabs > #tab-5:checked ~ .tab-3-display {
+  position: absolute;
+  visibility: hidden;
+}
+
+/* tabs style modal first by css ..................................... */
+
+/* Set the default switch box rendering context. */
+.radio {
+    position: relative;
+    float: left;
+    display: block;
+  }
+
+  /* Set a specific box rendering context, positioning and other details.*/
+  #this-tab-set {
+    margin: 1em;
+    font-size: 16px;
+    color: #555;
+    font-family: helvetica;
+    position: absolute; /**/
+
+    box-shadow: 
+      0px .5em 1.2em -.20em rgba(0,0,0, .4),
+      0 .6em .5em -.5em rgba(0,0,0, 1);
+  }
+
+  /* Custom Default Label Styles */
+  #this-tab-set > label,
+  #this-tab-set > .display {
+    position: relative;
+    float: left;
+    background-color: rgb(100, 100, 100);
+    color: rgba(255,255,255, .99);
+    padding: 1em;
+  }
+  #this-tab-set > label {
+    background-color: rgb(150, 150, 150);
+    padding-bottom: .5em;
+    margin-top: 0em;
+    transition: margin .25s;
+    -webkit-transition: margin .25s;
+    z-index: 1;
+  }
+  #this-tab-set > input:checked + label {
+    background-color: rgb(100, 100, 100);
+    margin-top: -.75em;
+
+    box-shadow: 
+      0em .5em 1em -.2em rgba(0,0,0, .5),
+      0em .5em .5em -.2em rgba(0,0,0, .7);
+    z-index: 3;
+  }
+  #this-tab-set > label:hover {
+    box-shadow: 
+      0em .5em 1em -.2em rgba(0,0,0, .25),
+      0em .5em .5em -.2em rgba(0,0,0, .3);
+    z-index: 2;
+    margin-top: -.3em;
+  }
+
+  #this-tab-set > input:checked + label {
+    background-color: rgb(100, 100, 100);
+  }
+  #this-tab-set > .display {
+    clear: both;
+    width: 329px; /* somthing to do qith context rendering is causing this prop to be required */ /* the value is the width of the container subtract the padding */
+    padding: 1em;
+    z-index: 3;
+  }
+  /* Color block for tab animation */
+  #this-tab-set > label:after {
+    content: ' ';
+    width: 100%;
+    position: absolute;
+    height: 1em;
+    left: 0;
+    bottom: -1em;
+    background-color: inherit;
+    z-index: 0;
+  }
+
+  /* Round Corners */
+  #this-tab-set {
+    border-radius: .5em;
+  }
+
+  #this-tab-set > label:nth-child(2) {
+    border-top-left-radius: inherit;
+  }
+  #this-tab-set > label:nth-child(10) {
+    border-top-right-radius: inherit;
+  }
+  #this-tab-set > .display {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  /* Hide switch inputs. */
+  .radio-tabs > input {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  /* Set up state switching indicators. */
+  .radio-tabs > label {
+    cursor: pointer;
+  }
+
+  /* Indicator call to action. */
+
+  /* Set up Display positioning. */
+  .display {
+    position: relative;
+    float:left;
+    padding-top: 1em;
+  }
+
+  /* Set basic off states. */
+  .radio-tabs > .display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  /* Set the default state. */
+  .radio-tabs > .tab-1-display {
+    position: relative;
+    visibility: visible;
+  }
+
+  /* State switching interaction. */
+  .radio-tabs > #tab-1:checked ~ .tab-1-display {
+    position: relative;
+    visibility: visible;
+  }
+  .radio-tabs > #tab-1:checked ~ .tab-2-display,
+  .radio-tabs > #tab-1:checked ~ .tab-3-display,
+  .radio-tabs > #tab-1:checked ~ .tab-4-display,
+  .radio-tabs > #tab-1:checked ~ .tab-5-display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .radio-tabs > #tab-2:checked ~ .tab-2-display {
+    position: relative;
+    visibility: visible;
+  }
+  .radio-tabs > #tab-2:checked ~ .tab-3-display,
+  .radio-tabs > #tab-2:checked ~ .tab-4-display,
+  .radio-tabs > #tab-2:checked ~ .tab-5-display,
+  .radio-tabs > #tab-2:checked ~ .tab-1-display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .radio-tabs > #tab-3:checked ~ .tab-3-display {
+    position: relative;
+    visibility: visible;
+  }
+  .radio-tabs > #tab-3:checked ~ .tab-2-display,
+  .radio-tabs > #tab-3:checked ~ .tab-4-display,
+  .radio-tabs > #tab-3:checked ~ .tab-5-display,
+  .radio-tabs > #tab-3:checked ~ .tab-1-display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .radio-tabs > #tab-4:checked ~ .tab-4-display {
+    position: relative;
+    visibility: visible;
+  }
+  .radio-tabs > #tab-4:checked ~ .tab-2-display,
+  .radio-tabs > #tab-4:checked ~ .tab-3-display,
+  .radio-tabs > #tab-4:checked ~ .tab-5-display,
+  .radio-tabs > #tab-4:checked ~ .tab-1-display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .radio-tabs > #tab-5:checked ~ .tab-5-display {
+    position: relative;
+    visibility: visible;
+  }
+  .radio-tabs > #tab-5:checked ~ .tab-2-display,
+  .radio-tabs > #tab-5:checked ~ .tab-4-display,
+  .radio-tabs > #tab-5:checked ~ .tab-1-display,
+  .radio-tabs > #tab-5:checked ~ .tab-3-display {
+    position: absolute;
+    visibility: hidden;
+  }
+
+
+  /* / ............................. Monthly slider AW............................................ / */
+
+  .monthly_slider {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  
+  .imageDiv, .imageDiv1,
+  .imageDiv2, .imageDiv3 {
+    opacity: 0;
+    position: absolute;
+    top:0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 1rem 4rem;
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+  }
+  .carousel_months {
+    opacity: 0;
+    position: absolute;
+    top:0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 1rem 4rem;
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+  }
+  .imageDiv.initial,
+  .imageDiv.active,
+  .imageDiv1.initial,
+  .imageDiv1.active,
+  .imageDiv2.initial,
+  .imageDiv2.active
+  .imageDiv3.initial,
+  .imageDiv3.active {
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+  }
+  .carousel_months.initial,
+  .carousel_months.active {
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+  }
+  
+  .imageDiv.prev,
+  .imageDiv.next,
+  .imageDiv1.prev,
+  .imageDiv1.next,
+  .imageDiv2.prev,
+  .imageDiv2.next,
+  .imageDiv3.prev,
+  .imageDiv3.next {
+    z-index: 800;
+  }
+  .carousel_months.prev,
+  .carousel_months.next {
+    z-index: 800;
+  }
+  
+  .imageDiv.prev,
+  .imageDiv1.prev,
+  .imageDiv2.prev,
+  .imageDiv3.prev {
+    transform: translateX(-100%);
+  }
+  .carousel_months.prev {
+    transform: translateX(-100%);
+  }
+  .imageDiv.next,
+  .imageDiv1.next,
+  .imageDiv2.next,
+  .imageDiv3.next {
+    transform: translateX(100%);
+  }
+  .carousel_months.next {
+    transform: translateX(100%);
+  }
+  
+  .stopSlider, .stopSlider1,.stopSlider2{
+    transform: translate(0px);
+  }
+  
+  .new_slide_arrow_second,
+  .new_slide_arrow_first,
+  .new_slide_arrow_first1,
+  .new_slide_arrow_second1,
+  .new_slide_arrow_first2,
+  .new_slide_arrow_second2,
+  .new_slide_arrow_first3,
+  .new_slide_arrow_second3 {
+    position: absolute;
+    top:50%;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    transform: translateY(-50%);
+    cursor: pointer; 
+    color: blue;
+    z-index: 1001;
+    background-color: transparent;
+    color: #0073FF;
+  }
+  
+  .carousel_m_btns--prev,
+  .carousel_m_btns--next {
+    position: absolute;
+    top:50%;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+    cursor: pointer; 
+    color: blue !important;
+    z-index: 1001;
+    background-color: transparent;
+    color: #0073FF;
+  }
+  
+  button:focus{
+          outline: none;
+       outline: none;
+  }
+  
+  .new_slide_arrow_second,
+  .new_slide_arrow_second1,
+  .new_slide_arrow_second2,
+  .new_slide_arrow_second3 {
+    left: 25px ;
+  }
+  .carousel_m_btns--prev {
+    left: 25px ;
+  }
+  
+  .new_slide_arrow_first,
+  .new_slide_arrow_first1,
+  .new_slide_arrow_first2,
+  .new_slide_arrow_first3 {
+    right: 25px;
+  }
+  .carousel_m_btns--next {
+    right: 25px;
+  }
+  
+  .new_slide_arrow_second::after,
+  .new_slide_arrow_first::after,
+  .new_slide_arrow_first1::after,
+  .new_slide_arrow_second1::after,
+  .new_slide_arrow_first2::after,
+  .new_slide_arrow_second2::after,
+  .new_slide_arrow_first3::after,
+  .new_slide_arrow_second3::after {
+    content: " ";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 54%;
+    border-right: 2px solid #084DD1;
+    border-bottom: 2px solid #084DD1;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  
+  .carousel_m_btns--prev::after,
+  .carousel_m_btns--next::after {
+    content: " ";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 54%;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  
+  .new_slide_arrow_first::after,
+  .new_slide_arrow_first1::after,
+  .new_slide_arrow_first2::after,
+  .new_slide_arrow_first3::after {
+    left: 47%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .carousel_m_btns--next::after {
+    left: 47%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .slider_months_second_tab,
+  .slider_months_second_tab1,
+  .slider_months_second_tab2,
+  .slider_months_second_tab3{
+      border-radius: 9px;
+      background-color: #C6E0FF;
+      padding-left: 17px;
+      padding-right: 17px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      font-weight: bold;
+  }
+
+  .slider_2_checks_btns {
+    background-color: white;
+    border-radius: 7px;
+    padding-right: 4px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    color: #A6A6A6;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid transparent;
+    border-radius: 10px;
+  }
+
+  .slider_2_checks_btns:hover {
+    border: 2px solid #084DD1;
+    border-radius: 10px;
+    transition: 1s;
+  }
+
+  .invisible_checkboxes_slider_2 input[type=checkbox] {
+    display: none;
+  }
+
+  .invisible_checkboxes_slider_2 input[type=checkbox]:checked+.slider_2_checkbox_alias {
+    color: #084DD1;
+    position: relative;
+  }
+
+  .invisible_checkboxes_slider_2 input[type=checkbox]:checked+.slider_2_checkbox_alias::before {
+    content: '';
+    width: 14px;
+    height: 4px;
+    background-color: #084DD1;
+    position: absolute;
+    bottom: 9px;
+    left: calc(50% - -57px);
+    border-radius: 3px;
+    transition: 5s;
+
+  }
+
+  .invisible_checkboxes_slider_2 input[type=checkbox]:checked+.slider_2_checkbox_alias::after {
+    content: '';
+    width: 14px;
+    height: 4px;
+    background-color: #084DD1;
+    position: absolute;
+    bottom: 9px;
+    left: calc(50% - 72px);
+    border-radius: 3px;
+    transition: 5s;
+  }
+
+  .slider_2_checkbox_alias {
+    z-index: 1;
+    margin-left: 5px;
+    padding-top: 3px;
+    position: relative;
+    transition: all 250ms ease-out;
+    cursor: pointer;
+    /*padding-left: 150px;
+  padding-right: 150px;*/
+  }
+
+  
+
+  
+  

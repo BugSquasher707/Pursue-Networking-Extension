@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+    
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+		 <style>
+    body {
+      width: 400px;
+      height: 400px;
+      background-color: #F7FBFF;
+    }.bg{
+    	 background-color: lightgrey;
+    }.form-check-input {
+    position: absolute;
+    margin-top: 0.3rem;
+	margin-left: -1rem;
+	}.bg-light{
+		background-color:#ffffff !important;
+		border-radius: 5%
+	}span{
+		color:#0375FF !important;
+	}strong{
+		color:#cbcbcb !important;
+		font-weight: 500;
+	}i{
+		color:#0375FF !important;
+	}select{
+		border-color: white;
+	}input{
+		border-color: white !important;
+	}button{
+		background-color:#0375FF !important;
+	}
+	.logo{
+		width: 100%;
+		height: fit-content;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 30px;
+		cursor: pointer;
+	}
+    </style>
+</head>
+<body id="body">
+		<div class="logo" id="shareLogo">
+			<img src="./Assets/img/index-logo.png" height="30px;" width="27px;">
+		</div>
+	<div class="m-4 text-center">
+		<h2>Pursue Networking</h2>
+		<h3>Share Your database</h3>
+		
+		<div class="m-2 mt-5">
+			<input type="text" class="form-control" name="username" placeholder="Enter User's Email" id="username">
+		</div>
+
+		<div class="m-2 mt-4">
+			<button class="btn btn-success btn-block" id="share_submit">Share</button>
+		</div>
+		
+		<div class="m-2 mt-4">
+			<p style="color:red" id="message1"></p>
+		</div>
+		
+	</div>
+</body>
+	<script type="text/javascript" src="popup.js"></script>
+</html>

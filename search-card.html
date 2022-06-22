@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>search card</title>
+    <style>
+        .main-card{
+            max-width: 500px !important;
+            max-height: 650px !important;
+            background-color: #F7FBFF;
+            border-radius: 20px;
+            margin: 50px;
+            border: none;
+            padding-bottom: 20px;
+        }
+
+        .caban-main-top-row{
+    	    display: flex;
+    justify-content: space-between;
+    margin-left: 13px;
+    margin-right: 13px;
+    margin-bottom: 13px;
+    }
+
+    .canban_header_btn{
+    	width: 60px;
+    	height: 40px;
+    	border-radius: 8px;
+    	background-color: #DEEDFF;
+    }
+
+.header_icon {
+    color: #489BFF;
+}
+.search-card-items{
+    width: 227px;
+    height: 340px;
+    display: inline-block;
+    margin-left: 14px;
+    margin-right: -1px;
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 15px;
+}
+.search-card-img{
+    height: 160px; 
+    width: 185px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.search-card-name{
+    color: #030D47;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+.search-card-tag{
+    background-color: #CEDBF6;
+    color: #084DD1;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 20px;
+    margin-right: 23px;
+    font-weight: 600;
+    margin-top: -6px;
+}
+.search-card-text{
+    color: black;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-right: 24px;
+    margin-top: 9px;
+    font-weight: 500;
+}
+.search-card{
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.search-card::-webkit-scrollbar {
+    display: none;
+}
+.redfamily {
+	color: red;	
+}
+.search-box,.close-icon,.search-wrapper {
+	position: relative;
+	padding: 10px;
+}
+.search-wrapper {
+    margin: auto;
+    margin-top: -10px;
+}
+.search-box {
+    height: 41px;
+    width: 117%;
+    margin-left: -15px;
+	border: 1px solid #ccc;
+  outline: 0;
+  border-radius: 3px;
+  font-size: 14px;
+    border: 2px solid #F7FBFF;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: inset 8px 14px 6px -10px #ccc, inset 0px -7px 11px -10px #ccc;
+}
+.search-box:focus {
+    box-shadow: none;
+    border: 2px solid #084DD1;
+}
+.close-icon {
+    position: absolute;
+    top: 20px;
+    right: 9px;
+    border: none !important;
+}
+.close-icon:after {
+	content: "X";
+    display: block;
+    width: 24px;
+    font-weight: bolder;
+    height: 23px;
+    position: absolute;
+    background-color: #084DD1;
+    z-index: 1;
+    right: 0;
+    top: -5px;
+    left: -2px;
+    bottom: -5px;
+    margin: auto;
+    padding: 2px;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 12px;
+    cursor: pointer;
+}
+.search-box:not(:valid) ~ .close-icon {
+	display: none;
+}
+    </style>
+  </head>
+  <body>
+    <div class="main-card">
+        <div class="row mx-0 py-3">
+            <div class="col-12 p-0 text-center">
+                <img src="./Assets/img/index-logo.png" height="30px;" width="27px;">
+            </div>
+        </div>
+
+        <div class="caban-main-top-row my-3">
+            <div class="canban-item-1">
+                <button id="go_back" type="button" class="btn canban_header_btn"><i class="fas fa-paperclip header_icon"></i></button>
+            </div>
+            <div class="canban-item-2">
+            
+
+                <div class="search-wrapper">
+                    <form>
+                    <input type="text" name="focus" required class="search-box" placeholder="Search" />
+                        <button class="close-icon" type="reset"></button>
+                    </form>
+                </div>
+
+
+                
+            </div>
+            <div class="canban-item-3">
+                <button type="button" class="btn canban_header_btn"><i class="far fa-adjust header_icon"></i></button>
+            </div>
+            <div class="canban-item-4">
+                <button type="button" class="btn canban_header_btn"><i class="far fa-adjust header_icon"></i></button>
+            </div>
+        </div>
+
+        <div class="search-card">
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+            <div class="search-card-items">
+                <img src="./Assets/img/actress.jpg" class="search-card-img">
+                <p class="search-card-name">Lina Adams</p>
+                <div class="search-card-tag">Talking / Replied</div>
+                <p class="search-card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt nostrum perferend</p>
+            </div>
+        </div>
+
+    </div>
+
+       
+
+			 
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

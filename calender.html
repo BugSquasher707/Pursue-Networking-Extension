@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calender Module</title>
+    <link rel="stylesheet" href="./Assets/css/style.css">
+    <link rel="stylesheet" href="./Assets/css/calender.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+
+<body>
+    <style>
+        .openDatePickerDiv {
+            transform: scale(1);
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .datePickerDiv {
+            width: 85%;
+            height: 85px;
+            margin-left: -10px;
+            position: absolute;
+            top: 65%;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .openDatePickerDiv {
+            transform: scale(1);
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .triangleDiv {
+            width: 30px;
+            height: 15px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background-color: #fff;
+            position: relative;
+            left: 147px;
+            margin: 0%;
+        }
+
+        .textBox {
+            width: 100%;
+            height: 55px;
+            background-color: #fff;
+            margin-top: -5px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.22), 0px 0px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .filterInputField {
+            width: 100%;
+            height: 30px;
+            outline: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 9px;
+            padding: 0px 10px;
+            font-size: 13.5px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #999 !important;
+        }
+
+        .iconMsgPicContainer .tooltiptext {
+            visibility: hidden;
+            width: fit-content;
+            background-color: #DFE9FA;
+            color: #000 !important;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            /* / Position the tooltip / */
+            position: absolute;
+            z-index: 1;
+            top: -80%;
+            left: 0%;
+
+        }
+
+        .iconMsgPicContainer:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .iconMsgPicContainer:hover {
+			cursor: pointer !important;
+		}
+
+        .smallgroupBox .tooltiptext {
+			visibility: hidden;
+			width: fit-content;
+			background-color: #DFE9FA;
+			color: #000 !important;
+			text-align: center;
+			border-radius: 6px;
+			padding: 3px 15px;
+			font-size: 10px;
+			font-weight: 500;
+			white-space: nowrap;
+			/* Position the tooltip */
+			position: absolute;
+			z-index: 10;
+			top: -57%;
+			left: 0%;
+
+		}
+
+		.smallgroupBox:hover .tooltiptext {
+			visibility: visible;
+		}
+
+		.smallgroupBox:hover {
+			cursor: pointer !important;
+		}
+
+        .countNum,
+        .countNum1 {
+            width: 15px;
+            height: 15px;
+            background-color: #084DD1;
+            color: white;
+            font-size: 10px;
+            position: absolute;
+            right: 0;
+            bottom: 0%;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .iconMsgPicContainer {
+            width: fit-content;
+            position: relative;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .middleNav {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .img__logo {
+            margin-left: -25px;
+            cursor: pointer;
+        }
+
+        .new_header_right_imgs {
+            width: 100%;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .smallgroupBox {
+            width: 45px;
+            height: 40px;
+            background-color: #edf4fd;
+            border-radius: 5px;
+            margin-top: -5px;
+            margin-left: 5px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(2, 45%);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .smalluserIconDemo {
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            margin: 5%;
+            margin-top: 0px;
+            border-radius: 55px;
+            padding: 2px 2px;
+            background: #E5E8ED 0% 0% no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            align-items: center;
+            font: normal normal bold 12px/14px Roboto;
+            color: #030D47;
+            line-height: 0%;
+            cursor: pointer;
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .searchDiv {
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .searchDiv input {
+            width: 190px;
+            height: 40px;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: inset 0px 2px 6px #00000033;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            padding: 0% 15px !important;
+            box-sizing: border-box;
+        }
+
+        .new-top-img {
+            width: 30px !important;
+            height: 30px !important;
+        }
+
+        .loaderIcons {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite;
+            position: relative;
+            margin-left: 20px;
+            margin-bottom: 0px;
+        }
+        .loadergroupIcons {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite;
+            position: relative;
+            margin-right: 30px !important;
+            margin-bottom: 0px;
+        }
+
+        .loader {
+			border: 7px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 7px solid #3498db;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 1s linear infinite;
+            margin: 0%;
+            position: relative;
+            top: 40%;
+            left: 35%;
+		}
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .membersModal{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            transform: scale(0);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .membersModalContainer{
+            width: 85%;
+            height: 520px;
+            background: #F7FBFF 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            box-sizing: border-box;
+            margin-top: 40px;
+        }
+
+        .membersMainContentContainer{
+            width: 100%;
+            height: 430px;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .membersContainer {
+            width: 370px;
+            height: 100%;
+            border: none;
+            background-color: transparent;
+            border-radius: 20px;
+            padding: 0px 15px;
+            padding-bottom: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .prospectContainer::-webkit-scrollbar {
+            display: block;
+        }
+
+        .prospectContent{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            position: relative;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 0% 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .prospectContent:hover{
+            background-color: #084DD1;
+        }
+
+        .prospectContent:hover h1{
+            color: white;
+        }
+
+        .prospectContent:hover i{
+            color: white;
+        }
+
+        .prospectContent i{
+            font-size: 18px;
+            margin-right: 15px;
+            color: black;
+            transition: all .3s ease-in-out;
+        }
+
+        .prospectContent img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .prospectContent h1{
+            width: fit-content;
+            font: normal normal normal 14.5px Roboto;
+            letter-spacing: 0px;
+            font-weight: 400;
+            margin: 0%;
+            color: black;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .prospectContent span{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #084DD1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .showMembersAll, .showGroupsAll{
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #DFE9FA;
+            color: #0375FF !important;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            margin-left: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+        }
+
+        .showMembersAll:hover,
+		.showGroupsAll:hover{
+            background-color: #084DD1;
+        }
+
+		.showMembersAll:hover .fa-eye{
+			color: #fff !important;
+		}
+
+		.showGroupsAll:hover .fa-eye{
+			color: #fff !important;
+		}
+
+        .closeDiv{
+            width: 30px;
+            height: 30px;
+            background: #C4DEFF 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .closeDiv img{
+            width: 13px;
+            height: 13px;
+        }
+
+        .upperRow {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upperRow h1 {
+            font: normal normal bold 19px Roboto;
+            letter-spacing: 0px;
+            color: #030D47;
+            margin: 0%;
+        }
+
+        .groupContainer {
+			width: 100%;
+			height: 100%;
+			background: #FFFFFF 0% 0% no-repeat padding-box;
+			border-radius: 20px;
+			padding: 0px 15px;
+			padding-bottom: 15px;
+			box-sizing: border-box;
+			position: relative;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		.groupBoxContainer {
+			width: 100%;
+			height: fit-content;
+			position: relative;
+			display: grid;
+			grid-template-columns: repeat(3, 30%);
+			justify-content: space-between;
+		}
+
+		.groupBox {
+			width: 100%;
+			height: 100px;
+			background-color: #edf4fd;
+			border-radius: 10px;
+			padding: 0px 10px;
+			margin-top: 15px;
+			box-sizing: border-box;
+			display: grid;
+			grid-template-columns: repeat(2, 40%);
+			justify-content: space-between;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;	
+		}
+
+        .groupBox:hover {
+			background-color: #084DD1;
+		}
+        
+        .userIconDemo {
+			width: 30px;
+			height: 30px;
+			box-sizing: border-box;
+			margin: 0%;
+			margin-top: 10px;
+			border-radius: 10px;
+			background: #E5E8ED 0% 0% no-repeat;
+			display: flex;
+			justify-content: center;
+			flex-wrap: nowrap;
+			align-items: center;
+			font: normal normal bold 12px/14px Roboto;
+			color: #030D47;
+			line-height: 0%;
+			cursor: pointer;
+			opacity: 1;
+			transition: all 0.2s ease-in-out;
+		}
+
+        .groupName {
+			font-size: 13px;
+			font-weight: 600;
+			margin-top: 2px;
+			color: black !important;
+			z-index: 10;
+			width: 100%;
+			height: 25px;
+			border-radius: 5px;
+			cursor: default;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+
+        .notificationBox {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #084DD1;
+            color: white;
+            position: absolute;
+            top: 70%;
+            right: 0%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: default;
+            font-size: 12px;
+        }
+
+    </style>
+    <div class="main__container" style="margin-top: 5px;">
+
+        <div class="upperChatIcons" style="margin-top: 10px !important;">
+
+            <div class="imgContainer" style="display: flex; position: relative; z-index: 100">
+                <div class="loaderIcons"></div>
+            </div>
+
+            <img src="./Assets/img/index-logo.png" class="img__logo" alt="">
+
+            <div class="new_header_right_imgs">
+                <div class="loadergroupIcons"></div>
+            </div>
+
+        </div>
+
+        <div class="middleNav" id="middleNav">
+
+            <div class="profileDiv" id="profile_btn">
+
+                <i class="fas fa-paperclip paperIcon"></i>
+
+            </div>
+
+            <div class="searchDiv">
+                <input type="text" id="search_box" autocomplete="off" placeholder="Search">
+
+                <div class="searchBoxContainer" style="display: none;"></div>
+            </div>
+
+            <div class="msgDiv">
+                <i class="fas fa-comment-dots msgIcon"></i>
+            </div>
+
+            <div class="HomeDiv home_btn">
+                <i class="fas fa-home homeIcon"></i>
+            </div>
+
+        </div>
+
+        <div class="user-img-and-text" style=" text-align: center; padding-bottom: 10px;">
+            <div class="userImage" style="margin-bottom:13px !important">
+                <img src="" style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px;" id="profilePic">
+            </div>
+            <span class="new-header-record" style="color: #757575 !important;
+            font-size: 14px !important;" id="savedUserMessage"></span>
+        </div>
+
+        <div class="sliderContainer">
+
+            <div class="slideBtn monthlyBtn activeSlideBtn">Monthly</div>
+            <div class="slideBtn weeklyBtn">Weekly</div>
+            <div class="slideBtn dailyBtn">Daily</div>
+
+        </div>
+
+        <div class="monthlyScreen">
+
+            <div class="monthlySlider">
+
+                <div class="monthlySlider_prev"></div>
+                <div class="slider_overlay">
+                    <div id="slider1">
+                        <div class="sliderItem">Jan</div>
+                        <div class="sliderItem">Feb</div>
+                        <div class="sliderItem">Mar</div>
+                        <div class="sliderItem">Apr</div>
+                        <div class="sliderItem">May</div>
+                        <div class="sliderItem">Jun</div>
+                        <div class="sliderItem">Jul</div>
+                        <div class="sliderItem">Aug</div>
+                        <div class="sliderItem">Sep</div>
+                        <div class="sliderItem">Oct</div>
+                        <div class="sliderItem">Nov</div>
+                        <div class="sliderItem">Dec</div>
+                    </div>
+                </div>
+                <div class="monthlySlider_next"></div>
+
+            </div>
+
+            <div class="monthlyCalenderDiv">
+
+                <div class="calenderContainer monthlyCalenderContainer">
+
+                    <div class="weekContainer week1Section">
+
+                        <div class="leftSection">
+                            <p>week&nbsp1</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek1"></div>
+
+                    </div>
+
+                    <div class="weekContainer week2Section">
+
+                        <div class="leftSection">
+                            <p>week&nbsp2</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek2"></div>
+
+                    </div>
+
+                    <div class="weekContainer week3Section">
+
+                        <div class="leftSection">
+                            <p>week&nbsp3</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek3"></div>
+
+                    </div>
+
+                    <div class="weekContainer week4Section">
+
+                        <div class="leftSection">
+                            <p>week&nbsp4</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek4"></div>
+
+                    </div>
+
+                    <div class="weekContainer week5Section">
+
+                        <div class="leftSection">
+                            <p>week&nbsp5</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek5"></div>
+
+                    </div>
+
+                    <div class="weekContainer week6Section monthlyWeekContainer6" style="display: none;">
+
+                        <div class="leftSection">
+                            <p>week&nbsp6</p>
+                        </div>
+
+                        <div class="rightSection monthlyWeek6"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="weeklyScreen" style="display: none;">
+
+            <div class="weeklySlider">
+                <div class="weeklySlider_prev1"></div>
+                <div class="slider_overlay">
+                    <div id="slider2">
+                        <div class="sliderItem">Jan</div>
+                        <div class="sliderItem">Feb</div>
+                        <div class="sliderItem">Mar</div>
+                        <div class="sliderItem">Apr</div>
+                        <div class="sliderItem">May</div>
+                        <div class="sliderItem">Jun</div>
+                        <div class="sliderItem">Jul</div>
+                        <div class="sliderItem">Aug</div>
+                        <div class="sliderItem">Sep</div>
+                        <div class="sliderItem">Oct</div>
+                        <div class="sliderItem">Nov</div>
+                        <div class="sliderItem">Dec</div>
+                    </div>
+                </div>
+                <div class="weeklySlider_next1"></div>
+            </div>
+
+            <div class="weeklyDateSlider">
+
+                <div class="weeklySlider_prev2"></div>
+                <div class="slider_overlay">
+                    <div id="slider3">
+                        <div class="sliderItem1">Week 1</div>
+                        <div class="sliderItem1">Week 2</div>
+                        <div class="sliderItem1">Week 3</div>
+                        <div class="sliderItem1">Week 4</div>
+                        <div class="sliderItem1">Week 5</div>
+                        <div class="sliderItem1">Week 6</div>
+                    </div>
+                </div>
+                <div class="weeklySlider_next2"></div>
+
+            </div>
+
+            <div class="weeklyCalenderDiv weeklyCalenderDiv1">
+                <div class="weekContainer weekContainer1" style="padding: 0% 10px; margin-top: 10px;">
+
+                    <div class="rightSection weeklyWeek1"></div>
+
+                </div>
+                <div class="weekContainer weekContainer2" style="padding: 0% 10px; margin-top: 10px; display: none;">
+
+                    <div class="rightSection weeklyWeek2"></div>
+
+                </div>
+                <div class="weekContainer weekContainer3" style="padding: 0% 10px; margin-top: 10px; display: none;">
+
+                    <div class="rightSection weeklyWeek3"></div>
+
+                </div>
+                <div class="weekContainer weekContainer4" style="padding: 0% 10px; margin-top: 10px; display: none;">
+
+                    <div class="rightSection weeklyWeek4"></div>
+
+                </div>
+                <div class="weekContainer weekContainer5" style="padding: 0% 10px; margin-top: 10px; display: none;">
+
+                    <div class="rightSection weeklyWeek5"></div>
+
+                </div>
+                <div class="weekContainer weeklyWeekContainer6" style="padding: 0% 10px; margin-top: 10px; display: none;">
+
+                    <div class="rightSection weeklyWeek6"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dailyScreen" style="display: none;">
+
+            <div class="dailySlider">
+
+                <div class="dailySlider_prev1"></div>
+                <div class="slider_overlay">
+                    <div id="slider4">
+                        <div class="sliderItem">Jan</div>
+                        <div class="sliderItem">Feb</div>
+                        <div class="sliderItem">Mar</div>
+                        <div class="sliderItem">Apr</div>
+                        <div class="sliderItem">May</div>
+                        <div class="sliderItem">Jun</div>
+                        <div class="sliderItem">Jul</div>
+                        <div class="sliderItem">Aug</div>
+                        <div class="sliderItem">Sep</div>
+                        <div class="sliderItem">Oct</div>
+                        <div class="sliderItem">Nov</div>
+                        <div class="sliderItem">Dec</div>
+                    </div>
+                </div>
+                <div class="dailySlider_next1"></div>
+
+            </div>
+
+            <div class="dailyDateSlider">
+
+                <div class="dailySlider_prev2"></div>
+                <div class="slider_overlay">
+                    <div id="slider5"></div>
+                </div>
+                <div class="dailySlider_next2"></div>
+
+            </div>
+
+            <div class="weeklyCalenderDiv weeklyCalenderDiv1">
+                <div class="weekContainer weekContainer1" style="padding: 0% 10px; margin-top: -10px;">
+
+                    <div class="rightTimeSection" id="dailyRightSection"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- View Prospect Data -->
+
+    <div class="prospectModal" id="dynamicModal" style="transform: scale(0); opacity: 0;">
+
+        <div class="prospectModalContainer">
+
+            <div class="imageContainer" style="cursor: pointer;"></div>
+
+            <h1 id="prospectName"></h1>
+
+            <div class="followUpContainer">
+                <p id="follow_up_print">Follow Up Date</p>
+
+                <i class="fas fa-calendar-alt" id="openDatePicker"></i>
+                <div class="datePickerDiv" style="width: 100%; ">    
+                    <div class="triangleDiv"></div>
+                    <div class="textBox">
+                        <input type="date" class="filterInputField" style="width: 90%; margin-top: 12px;" id="follow_up">
+                        <input id="profile_url" type="hidden" value="">
+                    </div>
+    
+                </div>
+            </div>
+
+            <div class="workExperience">
+                <p>Work Title</p>
+                <h1 id="workExp"></h1>
+            </div>
+
+            <div class="companyName">
+                <p>Company Name</p>
+                <h1 id="companyName"></h1>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Top Members Modal -->
+
+    <div class="membersModal" id="membersDynamicModal">
+
+        <div class="membersModalContainer">
+
+            <div class="upperRow">
+
+                <h1 id="membersDynamicModalH1">Chat Members</h1>
+
+                <div class="closeDiv" id='membersDynamicModalCloseBtn'>
+                    <img src="./Assets/img/close.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="membersMainContentContainer">
+
+                <div class="membersContainer"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Top Groups Modal -->
+
+    <div class="membersModal" id="groupsDynamicModal">
+
+        <div class="membersModalContainer">
+
+            <div class="upperRow">
+
+                <h1 id="groupsDynamicModalH1"></h1>
+
+                <div class="closeDiv" id='groupsDynamicModalCloseBtn'>
+                    <img src="./Assets/img/close.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="membersMainContentContainer">
+
+                <div class="groupContainer">
+
+					<div class="groupBoxContainer groupDynamicContainer"></div>
+
+				</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="./calender.js"></script>
+
+</html>
