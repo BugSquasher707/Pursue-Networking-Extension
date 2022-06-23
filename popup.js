@@ -1483,9 +1483,10 @@ if (document.getElementById("view_type")) {
     .addEventListener("change", weekFilterChange);
 }
 if (document.getElementById("search_box")) {
+  console.log("searched")
   document
     .getElementById("search_box")
-    .addEventListener("input", searchProspects);
+    .addEventListener("change", searchProspects);
 }
 /// Filters End ////
 
@@ -3683,27 +3684,27 @@ function apiCategories(tag) {
 }
 
 function apiWeekly(tag) {
-  var user_id = localStorage.getItem("user_id");
-  const url = `${globalURl}/getFilterWeeks/` + user_id;
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send();
-  var all = '<option value="">Select</option>';
-  xhr.onreadystatechange = function () {
-    //Call a function when the state changes.
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      arr = xhr.responseText;
-      arr = JSON.parse(arr);
+  // var user_id = localStorage.getItem("user_id");
+  // const url = `${globalURl}/getFilterWeeks/` + user_id;
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("GET", url, true);
+  // xhr.setRequestHeader("Content-Type", "application/json");
+  // xhr.send();
+  // var all = '<option value="">Select</option>';
+  // xhr.onreadystatechange = function () {
+  //   Call a function when the state changes.
+  //   if (xhr.readyState == 4 && xhr.status == 200) {
+  //     arr = xhr.responseText;
+  //     arr = JSON.parse(arr);
 
-      var finalArray = arr.map(function (obj, key) {
-        // row = `<option>` + obj.weekly_source + `</option>`;
-        // all += row;
-      });
+  //     var finalArray = arr.map(function (obj, key) {
+  //       row = `<option>` + obj.weekly_source + `</option>`;
+  //       all += row;
+  //     });
 
-      // document.getElementById(tag).innerHTML = all;
-    }
-  };
+  //     document.getElementById(tag).innerHTML = all;
+  //   }
+  // };
 }
 
 function filtersChange(
@@ -4677,7 +4678,8 @@ function ArrayMaker() {
   if (second_user_id != null) {
     user_id = second_user_id;
   }
-
+  var i = setTimeout(() => {
+    console.log("finding")
   const url = `${globalURl}/filters`;
 
   let xhr = new XMLHttpRequest();
@@ -5016,6 +5018,8 @@ function ArrayMaker() {
       listView.scroll(0, 0);
     }
   };
+  clearInterval(i)
+}, 1000)
 }
 
 function addFilterDiv() {
