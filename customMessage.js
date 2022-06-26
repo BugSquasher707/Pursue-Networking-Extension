@@ -163,12 +163,10 @@ function showSharedProspectChat() {
     x = document.getElementById("groupIcon");
     r = document.getElementById("dmsIcon");
   console.log(x.src, "src")
-  if (x.src == "chrome-extension://eapkooldagebebacpnohklglembnapcp/Assets/img/notselectedGroup.svg") {
+  
     x.src = "./Assets/img/selected_group.svg"
     r.src = "./Assets/img/notselectdms.svg"
-  } else {
-
-  }
+  
   clearInterval(i)
 
 }, 300)
@@ -596,6 +594,7 @@ document.getElementById("add_member_in_screen").style.display ="block"
   document.getElementById("send_message_button").style.display = "block"
   document.getElementById("update_message_button").style.display = "none"
   document.getElementById("cancel_message_button").style.display = "none"
+  document.querySelector(".groupBoxContainerListView").style.display = "none"
 
   
 
@@ -5434,6 +5433,8 @@ function updateSubbGroupTopic() {
           // document.getElementById("subgroup_setting_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           // document.getElementById("subgroup_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           document.getElementById("subgroup_group_setting_topic").innerText = userData.name
+          document.getElementById("nameofgroup").innerText = `${userData.name ? `${userData.name.length > 8 ? `${userData.name.slice(0,8)}...` : `${userData.name}`}` : ``}` 
+
           // document.getElementById("heading_group").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           
           // document.getElementById("Subgroup_group_name_in_settings").innerText = userData.name
@@ -6946,6 +6947,7 @@ document.getElementById("opening_description_here").style.display = "none"
 
   // document.querySelector(".dynamicContainer").style.display = "block"
   document.querySelector(".groupContainer ").style.display = "none"
+  document.querySelector(".groupBoxContainerListView").style.display = "none"
 
 
   // dynamicModal.style.transform = "scale(1)";
@@ -12412,9 +12414,9 @@ function nullSubGroupChats() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let userData = JSON?.parse(xhr.responseText);
-      document.getElementById('subgroup_name').innerHTML =  userData.sub_group_name?.length > 20 ? `#${userData.sub_group_name.slice(0, 20)}...` : `#${userData.sub_group_name}` + ` <i class="fas fa-sort-down"></i>`
+      document.getElementById('subgroup_name').innerHTML =  userData.sub_group_name?.length > 10 ? `#${userData.sub_group_name.slice(0, 10)}...` : `#${userData.sub_group_name}` + ` <i class="fas fa-sort-down"></i>`
       // document.getElementById('nameofgroup').innerHTML = `${userData.sub_group_topic.length > 10 ? `${userData.sub_group_topic.slice(0,10)}` : `${userData.sub_group_topic}`}` 
-       document.getElementById('nameofgroup').innerHTML = `${userData.sub_group_topic ? `${userData.sub_group_topic.length > 10 ? `${userData.sub_group_topic.slice(0,10)}...` : `${userData.sub_group_topic}`}` : ``}` 
+       document.getElementById('nameofgroup').innerHTML = `${userData.sub_group_topic ? `${userData.sub_group_topic.length > 8 ? `${userData.sub_group_topic.slice(0,8)}...` : `${userData.sub_group_topic}`}` : ``}` 
 
       document.getElementById('heading_group').innerHTML = userData.sub_group_name?.length > 20 ? `${userData.sub_group_name.slice(0, 20)}...` : userData.sub_group_name
       localStorage.removeItem("Subgroup_name");

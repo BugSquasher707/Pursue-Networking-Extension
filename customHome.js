@@ -401,6 +401,7 @@ if (document.getElementById("search_box")) {
     document.querySelector(".tabs-row").style.display = "none";
     document.querySelector(".bottomContent").style.display = "none";
     document.getElementById("errorMessage").innerHTML = "";
+    document.querySelector(".user-img-and-text").style.display = "none"
 
     setTimeout(() => {
       var user_id = localStorage.getItem("user_id");
@@ -577,7 +578,7 @@ function getSinglePage(e) {
 if (document.getElementById("search_box")) {
   document
     .getElementById("search_box")
-    .addEventListener("keyup", filterSearchProspect);
+    .addEventListener("change", filterSearchProspect);
 }
 
 function filterSearchProspect(e) {

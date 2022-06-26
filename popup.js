@@ -5327,14 +5327,16 @@ function outsideClick3(e) {
 document.getElementById("openDatePicker").addEventListener("click", () => {
   var access_token = localStorage.getItem("access_token");
   var user_id = localStorage.getItem("user_id");
+  var prospect = localStorage.getItem("prospect_id");
 
-  if (access_token && user_id) {
+
+  if (access_token && user_id && prospect) {
     document
       .querySelector(".datePickerDiv")
       .classList.toggle("openDatePickerDiv");
   } else {
     var myToast = Toastify({
-      text: "Login to access",
+      text: "Prospect not saved",
       duration: 2000,
     });
 
