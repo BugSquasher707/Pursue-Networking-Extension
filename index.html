@@ -4,27 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- bootstrap 4.7.0 v  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap 4.0.0 v  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- font awesome pro free link -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- select 2 css link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css">
     <!-- custom style sheet  -->
     <link rel="stylesheet" href="./Assets/css/style.css">
-    <title>Document</title>
+    <title>Extension Dashboard</title>
 </head>
 
 <body>
-    <h1>Extension Dashboard</h1>
-
-
+    <!-- header start  -->
+    <header class="header my-3" id="header">
+        <div class="wraper-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <strong>
+                        <a href="index.html" class="d-flex logo align-items-center ">
+                            <img src="./Assets/img/logo.png" alt="main_Logo_Img">
+                            <h1 class="logoHeading mb-0">Dashboard</h1>
+                        </a>
+                    </strong>
+                </div>
+                <div class="col-7">
+                    <div class="input-con">
+                        <div class="input-inner">
+                            <img src="./Assets/img/search.png" alt="search-img-icon">
+                            <input type="search" name="search" id="search" placeholder="Search Prspects">
+                            <!-- select with search functionality  -->
+                            <select id="searchTopSelect">
+                                <option value="DB">Select Database</option>
+                                <option value="DB">Kolin's Database</option>
+                                <option value="DB">Jawad Database</option>
+                                <option value="DB">Michael's Database</option>
+                                <option value="DB">MJ Pactores Database</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 offset-1 d-flex justify-content-around">
+                    <button class="notify">
+                        <img src="./Assets/img/bell.png" alt="notify_btn">
+                    </button>
+                    <div class="dropdown">
+                        <button class="pointer" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <div class="dropdown-inner d-flex align-items-center mx-3">
+                                <div class="drop-name d-flex flex-column">
+                                    <span class="name text-main font-weight-bold text-capitalize">Kolin</span>
+                                    <span class="role text-secondary text-capitalize">admin</span>
+                                </div>
+                                <div class="profile-pix">
+                                    <img src="./Assets/img/Avatar.png" alt="avatar" class="profile-img">
+                                </div>
+                                <img src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
+                            </div>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Profile Settings</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end  -->
+    <!-- main start  -->
+    <main>
+        <!-- filter container  -->
+        <div class="filter-con">
+            <div class="wraper-fluid">
+                <div class="filter-items">
+                    <div class="filter-item"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main end  -->
 
     <!-- bootstrap cdn js link  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <!-- select 2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <!-- custom  js script  -->
     <script src="./Assets/js/script.js"></script>
 </body>
