@@ -1,0 +1,27 @@
+{
+  "name": "extension-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp sass:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thaheem001/extension_dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thaheem001/extension_dashboard/issues"
+  },
+  "homepage": "https://github.com/Thaheem001/extension_dashboard#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.1.0",
+    "node-sass": "^7.0.1"
+  }
+}
