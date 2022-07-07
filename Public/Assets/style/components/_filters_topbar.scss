@@ -2,6 +2,9 @@
 
 .filter-con {
     border-top: 1px solid rgba(7, 77, 209, 0.1);
+    border-bottom: 1px solid rgba(7, 77, 209, 0.1);
+    margin-top: 10px;
+    background-color: #fff;
     .filter-items {
         display: flex;
         margin: 15px auto 5px;

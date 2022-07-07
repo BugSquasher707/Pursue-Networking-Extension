@@ -1,0 +1,120 @@
+@import "../global";
+
+.converstion-messages {
+    .inner-con {
+        background-color: #fff;
+        padding: 25px;
+        border: 1px solid rgba(7, 77, 209, 0.1);
+        border-radius: 10px;
+        margin: 10px auto 30px;
+        h1 {
+            font-weight: 600;
+            font-size: 24px;
+            color: #020d47;
+            padding: 0px 10px;
+        }
+        .Status {
+            background-color: $mainColor;
+            color: #fff;
+            display: block;
+            text-align: center;
+            padding: 5px;
+            border-radius: 7px;
+        }
+        .converstation-messages {
+            width: 100%;
+            thead {
+                tr {
+                    th {
+                        &.first-heading {
+                            min-width: 280px;
+                        }
+                        span {
+                            background-color: $mainColor;
+                            color: #fff;
+                            padding: 5px;
+                            border-radius: 5px;
+                            font-size: 12px;
+                            margin: auto 5px;
+                            min-width: 50px;
+                            max-width: 150px;
+                            text-align: center;
+                            display: block;
+                            &.talking {
+                                background-color: #0fb2f8;
+                            }
+                            &.serious {
+                                background-color: #f8630f;
+                            }
+                            &.call-scheduled {
+                                background-color: #f80f0f;
+                            }
+                            &.call-completed {
+                                background-color: #ebb71c;
+                            }
+                            &.boom {
+                                background-color: #5ac57e;
+                            }
+                            &.lost {
+                                background-color: #7c7c7c;
+                            }
+                            &.total {
+                                background-color: #7d5af7;
+                            }
+                        }
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    &:first-child td {
+                        padding-top: 10px;
+                    }
+                    td {
+                        &.first-heading-td {
+                            min-width: 280px;
+                            .first-heading {
+                                min-width: 280px;
+                                text-align: left;
+                                background-color: #edf2f6;
+                            }
+                        }
+                        span {
+                            background-color: rgba($mainColor, 0.25);
+                            color: #000;
+                            padding: 25px 10px;
+                            font-size: 12px;
+                            margin: auto 5px;
+                            min-width: 50px;
+                            max-width: 150px;
+                            text-align: right;
+                            display: block;
+                            border-bottom: 2px solid #fff;
+                            &.talking {
+                                background-color: rgba(15, 178, 248, 0.25);
+                            }
+                            &.serious {
+                                background-color: rgba(248, 99, 15, 0.25);
+                            }
+                            &.call-scheduled {
+                                background-color: rgba(248, 15, 15, 0.25);
+                            }
+                            &.call-completed {
+                                background-color: rgba(235, 183, 28, 0.25);
+                            }
+                            &.boom {
+                                background-color: rgba(90, 197, 126, 0.25);
+                            }
+                            &.lost {
+                                background-color: rgba(124, 124, 124, 0.25);
+                            }
+                            &.total {
+                                background-color: rgba(125, 90, 247, 0.25);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

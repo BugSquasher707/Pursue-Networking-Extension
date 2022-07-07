@@ -1,4 +1,9 @@
 header {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    z-index: 99;
+    background-color: #fff;
     a.logo {
         img {
             width: 40px;
