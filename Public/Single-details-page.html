@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- bootstrap 4.0.0 v  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font awesome pro free link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- select 2 css link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css">
+    <!-- slick carasoule cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css">
+    <!-- custom style sheet  -->
+    <link rel="stylesheet" href="./Assets/style/main.css">
+    <title>Details Page</title>
+</head>
+
+<body>
+    <!-- header start  -->
+    <header class="header pt-3" id="header">
+        <div class="wraper-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <strong>
+                        <a href="index.html" class="d-flex logo align-items-center ">
+                            <img src="./Assets/img/logo.png" alt="main_Logo_Img">
+                            <h1 class="logoHeading mb-0">Dashboard</h1>
+                        </a>
+                    </strong>
+                </div>
+                <div class="col-xxl-7 col-8">
+                    <div class="input-con">
+                        <div class="input-inner">
+                            <img src="./Assets/img/search.png" alt="search-img-icon">
+                            <input type="search" name="search" id="search" placeholder="Search Prspects">
+                            <!-- select with search functionality  -->
+                            <select id="searchTopSelect">
+                                <option value="DB">Select Database</option>
+                                <option value="DB">Kolin's Database</option>
+                                <option value="DB">Jawad Database</option>
+                                <option value="DB">Michael's Database</option>
+                                <option value="DB">MJ Pactores Database</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 offset-xxl-1 d-flex justify-content-around">
+                    <button class="notify">
+                        <img src="./Assets/img/bell.png" alt="notify_btn">
+                    </button>
+                    <div class="dropdown">
+                        <button class="pointer" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <div class="dropdown-inner d-flex align-items-center mx-3">
+                                <div class="drop-name d-flex flex-column">
+                                    <span class="name text-main font-weight-bold text-capitalize">Kolin</span>
+                                    <span class="role text-secondary text-capitalize">admin</span>
+                                </div>
+                                <div class="profile-pix">
+                                    <img src="./Assets/img/Avatar.png" alt="avatar" class="profile-img">
+                                </div>
+                                <img src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
+                            </div>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Profile Settings</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- filter container  -->
+        <div class="filter-con">
+            <div class="wraper">
+                <div class="filter-items">
+                    <div class="filter-item">
+                        <label for="dateFilter" class="filter-item-heading">Filter By Date
+                            <img src="./Assets/img/arrow.png" alt="">
+                        </label>
+                        <input type="checkbox" id="dateFilter">
+                        <div class="filter-item-list date-filter-list">
+                            <div class="topRow">
+                                <span class="">Custom</span>
+                                <span class="">June 16-23, 2022</span>
+                            </div>
+                            <div class="btn-boxs">
+                                <div class="date-btn">This month</div>
+                                <div class="date-btn">Last month</div>
+                                <div class="date-btn">This week</div>
+                                <div class="date-btn">Last week</div>
+                            </div>
+                            <button class="btn-main">Custom</button>
+                        </div>
+                    </div>
+                    <div class="filter-item">
+                        <label for="dateFilter2" class="filter-item-heading">Filter By
+                            <img src="./Assets/img/arrow.png" alt="">
+                        </label>
+                        <input type="checkbox" id="dateFilter2">
+                        <div class="filter-item-list date-filter-list-by">
+                            <div class="filter-row">
+                                <select name="" id="" class="where">
+                                    <option value="where">Where</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Status</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Is</option>
+                                    <option value="exp">Is Not</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Select Options</option>
+                                    <option value="exp">Is Not</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <button class="btn-own">
+                                    <img src="./Assets/img/refresh.png" alt="refresh-button">
+                                </button>
+                            </div>
+                            <div class="filter-row">
+                                <select name="" id="" class="where">
+                                    <option value="where">Where</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Status</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Is</option>
+                                    <option value="exp">Is Not</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <select name="" id="" class="where">
+                                    <option value="where">Select Options</option>
+                                    <option value="exp">Is Not</option>
+                                    <option value="exp">Example</option>
+                                    <option value="exp">Example</option>
+                                </select>
+                                <button class="btn-own">
+                                    <img src="./Assets/img/refresh.png" alt="refresh-button">
+                                </button>
+                            </div>
+                            <div class="add-btn-row">
+                                <button class="add-another">+ Add Another</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-item">
+                        <label for="dateFilter3" class="filter-item-heading">Select List
+                            <img src="./Assets/img/arrow.png" alt="">
+                        </label>
+                        <input type="checkbox" id="dateFilter3">
+                        <div class="filter-item-list date-filter-select-list">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- main start  -->
+    <main>
+        <!-- single page details  -->
+        <section class="single-page">
+            <div class="wraper">
+                <div class="inner-con">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="profile-left-side-con">
+                                <div class="profile-details">
+                                    <img src="https://picsum.photos/200" alt="user-img" class="single-profile-img">
+                                    <div class="name-listing">
+                                        <h1 class="name-heading">
+                                            <span class="name mr-3">Jawad Bashir</span>
+                                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M19.5948 0H6.36866C3.39355 0 0.98175 2.4118 0.98175 5.38691V18.6131C0.98175 21.5882 3.39355 24 6.36866 24H19.5948C22.57 24 24.9818 21.5882 24.9818 18.6131V5.38691C24.9818 2.4118 22.57 0 19.5948 0Z"
+                                                    fill="#0B86CA" />
+                                                <path
+                                                    d="M7.63226 9.97576H10.1262V18.0229H7.63226V9.97576ZM8.90416 5.97714C9.1899 5.97715 9.46923 6.06178 9.70692 6.22035C9.94461 6.37893 10.13 6.60435 10.2397 6.86818C10.3494 7.132 10.3786 7.42242 10.3234 7.70278C10.2683 7.98314 10.1314 8.24089 9.92989 8.44351C9.72842 8.64613 9.47146 8.78455 9.19142 8.8413C8.91138 8.89804 8.62081 8.87058 8.35636 8.76237C8.0919 8.65417 7.86543 8.47006 7.70549 8.23329C7.54555 7.99651 7.45932 7.71767 7.45768 7.43194C7.45659 7.24129 7.49319 7.0523 7.56539 6.87584C7.63759 6.69938 7.74397 6.53894 7.8784 6.40374C8.01282 6.26854 8.17265 6.16125 8.34869 6.08804C8.52473 6.01483 8.71351 5.97714 8.90416 5.97714Z"
+                                                    fill="white" />
+                                                <path
+                                                    d="M11.7223 9.97576H14.1248V11.0731C14.3653 10.6627 14.7127 10.3253 15.13 10.0968C15.5473 9.86845 16.0187 9.75764 16.4941 9.77624C18.988 9.77624 19.4951 11.4389 19.4951 13.6086V18.0229H17.0012V14.1323C17.0012 13.2012 17.0012 11.9958 15.7043 11.9958C14.4075 11.9958 14.2079 13.01 14.2079 14.0575V18.0395H11.714L11.7223 9.97576Z"
+                                                    fill="white" />
+                                            </svg>
+
+                                        </h1>
+                                        <select name="" id="select-listing" class="select-listing">
+                                            <option value="compain">LinkedIn Compain</option>
+                                            <option value="talking">Talking/Repling</option>
+                                            <option value="t1">Example</option>
+                                            <option value="t2">Example</option>
+                                            <option value="t3">Example</option>
+                                            <option value="t4">Example</option>
+                                            <option value="t5">Example</option>
+                                            <option value="t6">Example</option>
+                                            <option value="t7">Example</option>
+                                            <option value="t8">Example</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="comments-box">
+                                <div class="inner-con">
+                                    <div class="user-comment-con">
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="reply-box">
+                                        <div class="img mr-3">
+                                            <img src="./Assets/img/profile.png" alt="">
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="text" name="" id="" placeholder="Comments">
+                                            <button class="btn-@">@</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- bootstrap cdn js link  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- select 2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- slick carasoule cdn link js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- pie donut charte script  -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!-- custom  js script  -->
+    <script src="./Assets/js/script.js"></script>
+</body>
+
+</html>

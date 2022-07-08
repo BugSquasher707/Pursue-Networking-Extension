@@ -50,8 +50,10 @@ header {
 #searchTopSelect {
     display: none;
 }
-.select2-results__option:first-child {
-    display: none;
+#select2-searchTopSelect-results {
+    .select2-results__option:first-child {
+        display: none;
+    }
 }
 
 .drop-name span {
