@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp sass:watch",
-    "build": "npm run build --output public"
+    "build": "gulp sass"
   },
   "repository": {
     "type": "git",
