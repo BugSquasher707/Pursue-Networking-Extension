@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     // Initialize select2
     $("#searchTopSelect").select2();
     $(".select-listing").select2({ minimumResultsForSearch: Infinity });
@@ -23,8 +22,9 @@ $(document).ready(function () {
     $('.slider-canban').slick({
         slidesToShow: 4,
         slidesToScroll: 1,
+        infinite: true,
         dots: false,
-        focusOnSelect: true
+        focusOnSelect: false
     });
     // set dynamic height box 
     let userBoxHeight = $(".user-box").height();
@@ -100,6 +100,52 @@ $(document).ready(function () {
         $(".highcharts-credits").hide();
 
     });
+
+    // calander script 
+    $('#calendarMain').evoCalendar({
+        sidebarToggler: true,
+        sidebarDisplayDefault: false,
+        eventListToggler: true,
+        eventDisplayDefault: false,
+        // theme: 'Midnight Blue',
+        calendarEvents: [
+            {
+                id: 'bHay68s', // Event's ID (required)
+                name: "New Year", // Event name (required)
+                date: "January/1/2022", // Event date (required)
+                type: "holiday", // Event type (required)
+                everyYear: true // Same event every year (optional)
+            },
+            {
+                name: "Vacation Leave",
+                badge: "02/13 - 02/15", // Event badge (optional)
+                date: ["February/13/2022", "February/15/2022"], // Date range
+                description: "Vacation leave for 3 days.", // Event description (optional)
+                type: "event",
+            }
+        ]
+    })
+    // second tabs calnader event 
+    $('#calanderTab').evoCalendar({
+        // theme: 'Midnight Blue',
+        calendarEvents: [
+            {
+                id: 'bHay68s', // Event's ID (required)
+                name: "New Year", // Event name (required)
+                date: "January/1/2022", // Event date (required)
+                type: "holiday", // Event type (required)
+                everyYear: true // Same event every year (optional)
+            },
+            {
+                name: "Vacation Leave",
+                badge: "02/13 - 02/15", // Event badge (optional)
+                date: ["February/13/2022", "February/15/2022"], // Date range
+                description: "Vacation leave for 3 days.", // Event description (optional)
+                type: "event",
+                color: "#63d867" // Event custom color (optional)
+            }
+        ]
+    })
 });
 
 // text editor
