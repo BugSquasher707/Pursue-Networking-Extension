@@ -4,7 +4,8 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp sass:watch"
+    "start": "gulp sass:watch",
+    "build": "gulp sass"
   },
   "repository": {
     "type": "git",
