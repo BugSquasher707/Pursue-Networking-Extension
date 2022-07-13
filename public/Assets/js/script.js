@@ -107,7 +107,6 @@ $(document).ready(function () {
         sidebarDisplayDefault: false,
         eventListToggler: true,
         eventDisplayDefault: false,
-        // theme: 'Midnight Blue',
         calendarEvents: [
             {
                 id: 'bHay68s', // Event's ID (required)
@@ -127,13 +126,26 @@ $(document).ready(function () {
     })
     // second tabs calnader event 
     $('#calanderTab').evoCalendar({
-        // theme: 'Midnight Blue',
         calendarEvents: [
             {
                 id: 'bHay68s', // Event's ID (required)
                 name: "New Year", // Event name (required)
                 date: "January/1/2022", // Event date (required)
                 type: "holiday", // Event type (required)
+                everyYear: true // Same event every year (optional)
+            },
+            {
+                id: 'bHay68s', // Event's ID (required)
+                name: "New Year Test", // Event name (required)
+                date: "January/2/2022", // Event date (required)
+                type: "holiday", // Event type (required)
+                everyYear: true // Same event every year (optional)
+            },
+            {
+                id: 'bHay68s', // Event's ID (required)
+                name: "Event", // Event name (required)
+                date: "January/2/2022", // Event date (required)
+                type: "event", // Event type (required)
                 everyYear: true // Same event every year (optional)
             },
             {

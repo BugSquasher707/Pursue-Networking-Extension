@@ -1,0 +1,41 @@
+/* calander custom css */
+button.icon-button > span.bars {
+    margin-bottom: 5px;
+}
+tr.calendar-body .calendar-day .day {
+    border-radius: 0px;
+}
+.calendar-sidebar {
+    background-color: #f7fbff;
+    color: #000;
+    box-shadow: 5px 0 18px -3px #074ed16c;
+}
+.calendar-sidebar > .calendar-year > button.icon-button > span {
+    border-color: #074dd1;
+}
+
+.calendar-sidebar > .month-list > .calendar-months > li.active-month {
+    background-color: #074dd1;
+    color: #fff;
+}
+.calendar-sidebar > .month-list > .calendar-months > li:hover {
+    background-color: #074ed1b4;
+    color: #fff;
+}
+.calendar-sidebar > span#sidebarToggler,
+#eventListToggler {
+    background-color: #074dd1;
+}
+.calendar-events {
+    background-color: #fff;
+}
+.event-list > .event-empty {
+    background-color: #f7fbff;
+    border-color: #074dd1;
+}
+tr.calendar-body .calendar-day .day.calendar-active,
+tr.calendar-body .calendar-day .day.calendar-active:hover {
+    border-color: #074dd1;
+    background-color: #074dd1;
+    color: #fff;
+}
