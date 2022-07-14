@@ -127,11 +127,52 @@
                         }
                     }
                 }
-                &.date-filter-select-list{
+                &.date-filter-select-list {
                     width: 100%;
                     border-radius: 0px;
                 }
             }
+            &.select-db-list {
+                margin: 0% 15px;
+                #searchTopSelect-2 {
+                    display: none;
+                }
+                .select2 {
+                    .selection {
+                        .select2-selection {
+                            height: auto;
+                            border: none;
+                            .select2-selection__rendered {
+                                border: 1px solid rgba(7, 77, 209, 0.1);
+                                color: $mainColor;
+                                background-color: $lightBlueMainColor;
+                                padding: 10px 35px 10px 15px;
+                                font-size: 16px;
+                                font-weight: 500;
+                                user-select: none;
+                                padding-left: 35px;
+                                line-height: 22px;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    .select2-selection__arrow {
+                        background: url("./../img/arrow.png") no-repeat center;
+                        top: 50%;
+                        right: 20px;
+                        transform: translateY(-50%);
+                        b {
+                            border: none;
+                        }
+                    }
+                }
+            }
         }
+    }
+}
+#select2-searchTopSelect-2-results {
+    .select2-results__option:first-child {
+        display: none;
     }
 }

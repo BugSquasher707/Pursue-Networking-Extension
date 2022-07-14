@@ -15,8 +15,6 @@
     <!-- slick carasoule cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css">
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="./Assets/evo-calendar/css/evo-calendar.css" />
     <!-- Themes? Add them right after the main css -->
     <link rel="stylesheet" type="text/css" href="./Assets/evo-calendar/css/evo-calendar-custom.css" />
     <!-- custom style sheet  -->
@@ -171,14 +169,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-item">
-                        <label for="dateFilter3" class="filter-item-heading">Select List
+                    <div class="filter-item select-db-list">
+                        <!-- select with search functionality  -->
+                        <select id="searchTopSelect-2">
+                            <option value="DB">Select List</option>
+                            <option value="DB">(family) Kolin's Database</option>
+                            <option value="DB">(Client) Jawad Database</option>
+                            <option value="DB">(Reach) Daud Database</option>
+                            <option value="DB">(New) Daud Database</option>
+                        </select>
+                        <!-- <label for="dateFilter3" class="filter-item-heading">Select List
                             <img src="./Assets/img/arrow.png" alt="">
                         </label>
                         <input type="checkbox" id="dateFilter3">
                         <div class="filter-item-list date-filter-select-list">
-
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

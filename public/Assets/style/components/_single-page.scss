@@ -2,7 +2,7 @@
 
 .single-page {
     padding-top: 30px;
-    max-height: calc(100vh - 155px);
+    height: calc(100vh - 155px);
     overflow: auto;
     .inner-con {
         background-color: #fff;
@@ -12,7 +12,7 @@
         .profile-left-side-con {
             max-height: 100%;
             overflow: auto;
-            .profile-details {
+            .profile-details-top {
                 display: flex;
                 align-items: center;
                 .single-profile-img {
@@ -50,17 +50,93 @@
                     }
                 }
             }
+            .profile-details-bottom {
+                margin-top: 45px;
+                .row2 {
+                    width: 100%;
+                    display: flex;
+                    margin-top: 15px;
+                    justify-content: space-between;
+                    .left {
+                        width: 30%;
+                        font-weight: 500;
+                        font-size: 20px;
+                        color: #7c7c7c;
+                        display: flex;
+                        align-items: center;
+                        padding-left: 15px;
+                    }
+                    .right {
+                        width: 60%;
+                        margin-right: 10%;
+                        .select-db-list {
+                            select {
+                                display: none;
+                            }
+                            .select2 {
+                                width: 100% !important;
+                                .selection {
+                                    .select2-selection {
+                                        height: auto;
+                                        border: none;
+                                        .select2-selection__rendered {
+                                            border: 1px solid rgba(7, 77, 209, 0.1);
+                                            color: #979797;
+                                            background-color: #fff;
+                                            padding: 10px 35px 10px 10px;
+                                            font-size: 16px;
+                                            font-weight: 500;
+                                            user-select: none;
+                                            line-height: 22px;
+                                            border-radius: 5px;
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                                .select2-selection__arrow {
+                                    background: url("./../img/arrow.png") no-repeat center;
+                                    top: 50%;
+                                    right: 20px;
+                                    transform: translateY(-50%);
+                                    b {
+                                        border: none;
+                                    }
+                                }
+                            }
+                        }
+                        input,
+                        textarea {
+                            width: 100%;
+                            border: 1px solid rgba(7, 77, 209, 0.1);
+                            background-color: #fff;
+                            padding: 10px;
+                            padding-right: 20px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            line-height: 22px;
+                            border-radius: 5px;
+                            color: #979797;
+                            &::placeholder {
+                                color: #979797;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .comments-box {
             position: sticky;
             top: 0;
+            height: calc(100% - 30px);
             .inner-con {
                 background-color: $lightBlueMainColor;
                 padding: 0px;
                 border: 2px solid $lightBlueMainColor;
+                height: calc(100% - 30px);
                 .user-comment-con {
-                    max-height: 300px;
+                    max-height: calc(100vh - 310px);
                     overflow-y: auto;
                     padding: 20px 10px 0px;
                     .user-comment {

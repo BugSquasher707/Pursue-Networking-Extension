@@ -1,3 +1,5 @@
+@import "./evo-calendar.css";
+
 /* calander custom css */
 button.icon-button > span.bars {
     margin-bottom: 5px;
@@ -38,4 +40,13 @@ tr.calendar-body .calendar-day .day.calendar-active:hover {
     border-color: #074dd1;
     background-color: #074dd1;
     color: #fff;
+}
+.calendar-table tbody tr:first-child {
+    display: none;
+}
+.event-header p {
+    color: #074dd1 !important;
+}
+#calanderTab {
+    margin-top: 25px;
 }

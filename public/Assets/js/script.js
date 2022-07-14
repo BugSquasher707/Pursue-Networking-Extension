@@ -1,6 +1,8 @@
 $(document).ready(function () {
     // Initialize select2
     $("#searchTopSelect").select2();
+    $("#searchTopSelect-2").select2();
+    $("#searchTopSelect-3").select2();
     $(".select-listing").select2({ minimumResultsForSearch: Infinity });
     // $("#searchTopSelect").select2("val", "4");}
     // $('#searchTopSelect option:selected').text('Vizag');

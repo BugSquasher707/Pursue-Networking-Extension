@@ -167,14 +167,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-item">
-                        <label for="dateFilter3" class="filter-item-heading">Select List
-                            <img src="./Assets/img/arrow.png" alt="">
-                        </label>
-                        <input type="checkbox" id="dateFilter3">
-                        <div class="filter-item-list date-filter-select-list">
-
-                        </div>
+                    <div class="filter-item select-db-list">
+                        <!-- select with search functionality  -->
+                        <select id="searchTopSelect-2">
+                            <option value="DB">Select List</option>
+                            <option value="DB">(family) Kolin's Database</option>
+                            <option value="DB">(Client) Jawad Database</option>
+                            <option value="DB">(Reach) Daud Database</option>
+                            <option value="DB">(New) Daud Database</option>
+                        </select>
+                        <!-- <label for="dateFilter3" class="filter-item-heading">Select List
+                        <img src="./Assets/img/arrow.png" alt="">
+                    </label>
+                    <input type="checkbox" id="dateFilter3">
+                    <div class="filter-item-list date-filter-select-list">
+                    </div> -->
                     </div>
                 </div>
             </div>
@@ -185,13 +192,15 @@
     <main>
         <!-- single page details  -->
         <section class="single-page">
-            <div class="wraper">
-                <div class="inner-con">
-                    <div class="row">
+            <div class="wraper h-100">
+                <div class="inner-con h-100">
+                    <div class="row h-100">
                         <div class="col-8">
-                            <div class="profile-left-side-con">
-                                <div class="profile-details">
-                                    <img src="https://picsum.photos/200" alt="user-img" class="single-profile-img">
+                            <div class="profile-left-side-con h-100">
+                                <div class="profile-details-top">
+                                    <div class="profile-img-box">
+                                        <img src="https://picsum.photos/200" alt="user-img" class="single-profile-img">
+                                    </div>
                                     <div class="name-listing">
                                         <h1 class="name-heading">
                                             <span class="name mr-3">Jawad Bashir</span>
@@ -223,12 +232,108 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="profile-details-bottom">
+                                    <div class="row2">
+                                        <div class="left">List: </div>
+                                        <div class="right">
+                                            <div class="select-db-list">
+                                                <select id="searchTopSelect-3">
+                                                    <option value="DB">Select List</option>
+                                                    <option value="DB">(family) Kolin's Database</option>
+                                                    <option value="DB">(Client) Jawad Database</option>
+                                                    <option value="DB">(Reach) Daud Database</option>
+                                                    <option value="DB">(New) Daud Database</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Follow Up:</div>
+                                        <div class="right">
+                                            <input type="datetime-local" name="date-time" id="" class="date-time-local">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Note:</div>
+                                        <div class="right">
+                                            <h3>Text Editor</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Work Title:</div>
+                                        <div class="right">
+                                            <input type="text" name="" id="" placeholder="Creative Director">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Company:</div>
+                                        <div class="right">
+                                            <input type="text" name="" id="" placeholder="SIZ Pure Drinking Water">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Location:</div>
+                                        <div class="right">
+                                            <input type="text" name="" id="" placeholder="Location"
+                                                value="Los Angeles , California , United State">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">About:</div>
+                                        <div class="right">
+                                            <textarea name="" rows="8"
+                                                placeholder="About">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsum possimus tempore! Aperiam, amet? Reiciendis esse laboriosam quia neque. Aut at sit officia facere, dolore consectetur libero eos officiis porro doloremque hic voluptatum omnis cum voluptates iure consequuntur autem quam saepe deleniti suscipit culpa reiciendis nesciunt. Quibusdam deleniti cum et!</textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="comments-box">
                                 <div class="inner-con">
                                     <div class="user-comment-con">
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment">
+                                            <div class="img-box">
+                                                <img src="./Assets/img/profile.png" alt="" class="profile">
+                                            </div>
+                                            <div class="comment-text">
+                                                <div class="top-content">
+                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
+                                                    <span class="time-ago">3 Minute Ago</span>
+                                                </div>
+                                                <div class="bottom-box-content">
+                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="user-comment">
                                             <div class="img-box">
                                                 <img src="./Assets/img/profile.png" alt="" class="profile">
