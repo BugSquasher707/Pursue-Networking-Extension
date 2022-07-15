@@ -161,6 +161,10 @@ $(document).ready(function () {
             }
         ]
     })
+    // js check for tab and mobile screen 
+    if (window.innerWidth < 1024) {
+        $('body').html("<h1 class='no-screen'>Sorry Your Device Is Not Supported this Screen</h1>");
+    }
 });
 
 // text editor
