@@ -6,9 +6,17 @@
     overflow: auto;
     .inner-con {
         background-color: #fff;
-        padding: 20px;
+        padding: 20px 20px 0px;
         border-radius: 10px;
         position: relative;
+        height: calc(100% - 30px);
+        .overflow-y-custom {
+            overflow-y: auto;
+            height: calc(100% - 50px);
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        }
         .profile-left-side-con {
             max-height: 100%;
             overflow: auto;
@@ -42,6 +50,7 @@
                                     padding: 0px 15px;
                                     border-radius: 15px;
                                 }
+
                                 .select2-selection__arrow b {
                                     border-color: #fff transparent transparent;
                                 }
@@ -55,7 +64,7 @@
                 .row2 {
                     width: 100%;
                     display: flex;
-                    margin-top: 15px;
+                    margin-top: 25px;
                     justify-content: space-between;
                     .left {
                         width: 30%;
@@ -120,6 +129,82 @@
                                 color: #979797;
                                 font-weight: 400;
                             }
+                            &.week {
+                                color: red;
+                            }
+                        }
+                        .redio-box {
+                            display: flex;
+                            justify-content: end;
+                            input[type="radio"] {
+                                display: none;
+                                & + label {
+                                    background-color: #edf2f6;
+                                    border: 0.5px solid rgba(0, 0, 0, 0.475);
+                                    border-radius: 5px;
+                                    padding: 10px 15px;
+                                    margin: 0px 15px;
+                                    display: inline-block;
+                                    cursor: pointer;
+                                    &:hover {
+                                        background-color: $mainColor;
+                                        color: #fff;
+                                    }
+                                }
+                                &:checked {
+                                    & + label {
+                                        background-color: $mainColor !important;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                            &.prospects {
+                                justify-content: space-around;
+                                border: 0.5px solid rgba(0, 0, 0, 0.534);
+                                border-radius: 5px;
+                                padding: 5px 0px;
+                                label {
+                                    border: 0 !important;
+                                    background-color: transparent !important;
+                                    &:hover {
+                                        background-color: $mainColor !important;
+                                    }
+                                }
+                            }
+                        }
+                        &.url {
+                            position: relative;
+                            input + i {
+                                position: absolute;
+                                top: 50%;
+                                right: 25px;
+                                transform: translateY(-50%);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                .compaign-data {
+                    margin: 20px auto;
+                    .compaign {
+                        text-align: center;
+                        margin: auto;
+                        position: relative;
+                        color: #000;
+                        &::before,
+                        &::after {
+                            content: "";
+                            width: calc(50% - 100px);
+                            height: 2px;
+                            background-color: #000;
+                            position: absolute;
+                            top: 50%;
+                            left: 0%;
+                            transform: translateY(-50%);
+                        }
+                        &::after {
+                            left: auto;
+                            right: 0;
                         }
                     }
                 }
@@ -129,12 +214,12 @@
         .comments-box {
             position: sticky;
             top: 0;
-            height: calc(100% - 30px);
+            height: calc(100% - 50px);
             .inner-con {
                 background-color: $lightBlueMainColor;
                 padding: 0px;
                 border: 2px solid $lightBlueMainColor;
-                height: calc(100% - 30px);
+                height: calc(100% - 50px);
                 .user-comment-con {
                     max-height: calc(100vh - 310px);
                     overflow-y: auto;
