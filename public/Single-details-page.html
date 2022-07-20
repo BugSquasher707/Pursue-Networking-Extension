@@ -193,9 +193,9 @@
         <!-- single page details  -->
         <section class="single-page">
             <div class="wraper h-100">
-                <div class="inner-con h-100">
+                <div class="inner-con ">
                     <div class="row h-100">
-                        <div class="col-8">
+                        <div class="col-7 overflow-y-custom">
                             <div class="profile-left-side-con h-100">
                                 <div class="profile-details-top">
                                     <div class="profile-img-box">
@@ -256,7 +256,14 @@
                                     <div class="row2">
                                         <div class="left">Note:</div>
                                         <div class="right">
-                                            <h3>Text Editor</h3>
+                                            <div class="text-editor">
+                                                <div class="editor-wrapper">
+                                                    <div id="content" class="content" contenteditable></div>
+                                                    <div id="toolbar" class="toolbar"></div>
+                                                </div>
+                                                <input id="image-upload-input" class="image-upload-input" type="file"
+                                                    accept="image/*" />
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row2">
@@ -285,10 +292,100 @@
                                                 placeholder="About">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsum possimus tempore! Aperiam, amet? Reiciendis esse laboriosam quia neque. Aut at sit officia facere, dolore consectetur libero eos officiis porro doloremque hic voluptatum omnis cum voluptates iure consequuntur autem quam saepe deleniti suscipit culpa reiciendis nesciunt. Quibusdam deleniti cum et!</textarea>
                                         </div>
                                     </div>
+                                    <div class="compaign-data">
+                                        <h3 class="compaign">Compain Data</h3>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Discovery Call Date:</div>
+                                        <div class="right">
+                                            <input type="date" name="" id="">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Strategy Session Date:</div>
+                                        <div class="right">
+                                            <input type="date" name="" id="">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Conversion Messages: </div>
+                                        <div class="right">
+                                            <div class="select-db-list">
+                                                <select id="searchTopSelect-4">
+                                                    <option value="a">New Job Congrats</option>
+                                                    <option value="a">Example</option>
+                                                    <option value="a">Example</option>
+                                                    <option value="a">Example</option>
+                                                    <option value="a">Example</option>
+                                                    <option value="a">Example</option>
+                                                    <option value="a">Example</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Weekly Source:</div>
+                                        <div class="right">
+                                            <input type="week" name="" id="week" value="2024-W04" class="week">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Total Messages Sent:</div>
+                                        <div class="right">
+                                            <input type="text" name="" id="">
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Endorsement Given:</div>
+                                        <div class="right">
+                                            <div class="redio-box">
+                                                <input type="radio" name="end-given" value="yes" id="end-given-yes">
+                                                <label for="end-given-yes">Yes</label>
+                                                <input type="radio" name="end-given" value="no" id="end-given-no">
+                                                <label for="end-given-no">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Prospects Priority:</div>
+                                        <div class="right">
+                                            <div class="redio-box prospects">
+                                                <input type="radio" name="prospects" value="yes" id="prospects-a">
+                                                <label for="prospects-a">A</label>
+                                                <input type="radio" name="prospects" value="yes" id="prospects-b">
+                                                <label for="prospects-b">B</label>
+                                                <input type="radio" name="prospects" value="yes" id="prospects-c">
+                                                <label for="prospects-c">C</label>
+                                                <input type="radio" name="prospects" value="yes" id="prospects-d">
+                                                <label for="prospects-d">D</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Record Link:</div>
+                                        <div class="right url">
+                                            <input type="url" name="" id="">
+                                            <i class="fas fa-copy"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Inbox Link:</div>
+                                        <div class="right url">
+                                            <input type="url" name="" id="">
+                                            <i class="fas fa-copy"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row2">
+                                        <div class="left">Last Modified:</div>
+                                        <div class="right">
+                                            <input type="date" name="" id="">
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="comments-box">
                                 <div class="inner-con">
                                     <div class="user-comment-con">
@@ -440,7 +537,8 @@
     <!-- pie donut charte script  -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <!-- for calander cdn link  -->
+    <script src="./Assets/evo-calendar/js/evo-calendar.js"></script>
     <!-- custom  js script  -->
     <script src="./Assets/js/script.js"></script>
 </body>

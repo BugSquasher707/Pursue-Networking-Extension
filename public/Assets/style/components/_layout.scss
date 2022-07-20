@@ -26,6 +26,20 @@ body {
     padding: 0%;
     background-color: $lightBlueMainColor;
     font-family: $roboto-font;
+    @media (max-width: 1020px) {
+        & > *:not(.no-screen) {
+            display: none;
+        }
+        .no-screen{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            text-transform: capitalize;
+        }
+    }
 }
 
 .bg-main {
