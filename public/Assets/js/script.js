@@ -1,11 +1,11 @@
 $(document).ready(function () {
     // Initialize select2
     $("#searchTopSelect").select2();
-    $("#searchTopSelect-2").select2();
+    // $("#searchTopSelect-2").select2();
     $("#searchTopSelect-3").select2();
     $(".select-listing").select2({ minimumResultsForSearch: Infinity });
     // $("#searchTopSelect").select2("val", "4");}
-    // $('#searchTopSelect option:selected').text('Vizag');
+    //  $('#searchTopSelect option:selected').text('Vizag');
     // Read selected option
     // $('#but_read').click(function () {
     //     var username = $('#searchTopSelect option:selected').text();
@@ -21,16 +21,16 @@ $(document).ready(function () {
     });
 
     // slider script 
-    $('.slider-canban').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: false,
-        focusOnSelect: false
-    });
+    // $('.slider-canban').slick({
+    //     slidesToShow: 4,
+    //     slidesToScroll: 1,
+    //     infinite: true,
+    //     dots: false,
+    //     focusOnSelect: false
+    // });
     // set dynamic height box 
-    let userBoxHeight = $(".user-box").height();
-    $(".item-slider-inner").height(userBoxHeight + userBoxHeight / 2);
+    // let userBoxHeight = $(".user-box").height();
+    // $(".item-slider-inner").height(userBoxHeight + userBoxHeight / 2);
 
     // pie donut percentage chart 
     $(function () {

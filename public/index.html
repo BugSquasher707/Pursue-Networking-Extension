@@ -23,6 +23,41 @@
 </head>
 
 <body>
+<style>
+    .loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  position: relative;
+    left: 150% !important;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+.loader_canban {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 60px;
+  position: relative;
+    left: 40% !important;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
     <!-- header start  -->
     <header class="header pt-3" id="header">
         <div class="wraper-fluid">
@@ -39,14 +74,14 @@
                     <div class="input-con">
                         <div class="input-inner">
                             <img src="./Assets/img/search.png" alt="search-img-icon">
-                            <input type="search" name="search" id="search" placeholder="Search Prspects">
+                            <input type="search" name="search" id="search" placeholder="Search Prospects">
                             <!-- select with search functionality  -->
                             <select id="searchTopSelect">
                                 <option value="DB">Select Database</option>
-                                <option value="DB">Kolin's Database</option>
-                                <option value="DB">Jawad Database</option>
-                                <option value="DB">Michael's Database</option>
-                                <option value="DB">MJ Pactores Database</option>
+                                <option value="Kolin's Database">Kolin's Database</option>
+                                <option value="Jawad Database">Jawad Database</option>
+                                <option value="Michael's Database">Michael's Database</option>
+                                <option value="MJ Pactores Database">MJ Pactores Database</option>
                             </select>
                         </div>
                     </div>
@@ -106,77 +141,86 @@
                         </label>
                         <input type="checkbox" id="dateFilter2">
                         <div class="filter-item-list date-filter-list-by">
+                            <div id="containing_div">
                             <div class="filter-row">
-                                <select name="" id="" class="where">
-                                    <option value="where">Where</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="where" id="where" class="where">
+                                    <option value="and" selected>Where</option>
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Status</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="status" id="status" class="where statuss">
+                                    <option value="status" selected>Status</option>
+                                    <option value="priority">Priority</option>
+                                    <option value="conversion">Conversion Messages</option>
+                                    <option value="discovery_call">Discovery</option>
+                                    <option value="follow_up">Follow</option>
+
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Is</option>
-                                    <option value="exp">Is Not</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="operator" id="operator" class="where">
+                                    <option value="="selected>is</option>
+                                    <option value="!=">is not</option>
+                                    <option value="LIKE">contain</option>
+                                    <option value="exp">not contain</option>
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Select Options</option>
-                                    <option value="exp">Is Not</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <div class="removeing">
+                                <select name="option" id="option" class="where optionss">
+                                    <option value selected>Select Options</option>
+                                    <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+                                    <option value="Talking/Replied">Talking/Replied</option>
+                                    <option value="Serious Conversations">Serious Conversations</option>
+                                    <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+                                    <option value="Discovery Call Completed">Discovery Call Completed</option>
+                                    <option value="Boom">Boom</option>
+                                    <option value="Lost">Lost</option>
+
                                 </select>
+                                </div>
                                 <button class="btn-own">
-                                    <img src="./Assets/img/refresh.png" alt="refresh-button">
+                                    <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
                                 </button>
                             </div>
                             <div class="filter-row">
-                                <select name="" id="" class="where">
-                                    <option value="where">Where</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="where" id="" class="where">
+                                    <option value="and" selected>Where</option>
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Status</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="status" id="" class="where statuss">
+                                    <option value="status" selected>Status</option>
+                                    <option value="priority">Priority</option>
+                                    <option value="conversion">Conversion Messages</option>
+                                    <option value="discovery_call">Discovery</option>
+                                    <option value="follow_up">Follow</option>
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Is</option>
-                                    <option value="exp">Is Not</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <select name="operator" id="" class="where">
+                                    <option value="="selected>is</option>
+                                    <option value="!=">is not</option>
+                                    <option value="LIKE">contain</option>
+                                    <option value="exp">not contain</option>
                                 </select>
-                                <select name="" id="" class="where">
-                                    <option value="where">Select Options</option>
-                                    <option value="exp">Is Not</option>
-                                    <option value="exp">Example</option>
-                                    <option value="exp">Example</option>
+                                <div class="removeing">
+                                <select name="option" id="" class="where optionss">
+                                    <option value selected>Select Options</option>
+                                    <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+                                    <option value="Talking/Replied">Talking/Replied</option>
+                                    <option value="Serious Conversations">Serious Conversations</option>
+                                    <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+                                    <option value="Discovery Call Completed">Discovery Call Completed</option>
+                                    <option value="Boom">Boom</option>
+                                    <option value="Lost">Lost</option>
                                 </select>
-                                <button class="btn-own">
-                                    <img src="./Assets/img/refresh.png" alt="refresh-button">
+                            </div>
+                                <button class="btn-own " >
+                                    <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
                                 </button>
                             </div>
+                        </div>
                             <div class="add-btn-row">
-                                <button class="add-another">+ Add Another</button>
+                                <button class="add-another" id="add_another">+ Add Another</button>
+                                <button class="ml-5 btn btn-info" id="apply_filter">Apply</button>
                             </div>
                         </div>
                     </div>
                     <div class="filter-item select-db-list">
                         <!-- select with search functionality  -->
                         <select id="searchTopSelect-2">
-                            <option value="DB">Select List</option>
-                            <option value="DB">(family) Kolin's Database</option>
-                            <option value="DB">(Client) Jawad Database</option>
-                            <option value="DB">(Reach) Daud Database</option>
-                            <option value="DB">(New) Daud Database</option>
+                            <!-- <option value="">Select List</option> -->
                         </select>
                         <!-- <label for="dateFilter3" class="filter-item-heading">Select List
                             <img src="./Assets/img/arrow.png" alt="">
@@ -198,12 +242,12 @@
                 <div class="inner-con">
                     <div class="top-row">
                         <div class="prospects-count">
-                            <h1>Prospects: <span class="count">48</span></h1>
+                            <h1>Prospects: <span class="count">...</span></h1>
                         </div>
                         <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                                    role="tab" aria-controls="pills-home" aria-selected="true">
+                                    role="tab" aria-controls="pills-home" aria-selected="false" onclick="setWidthSlider()">
                                     <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect y="1.24265" width="5.9045" height="6" rx="1" fill="white" />
@@ -217,8 +261,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                                    role="tab" aria-controls="pills-profile" aria-selected="true">
                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_201_138)">
@@ -253,530 +297,63 @@
                         <!-- canban View Container  -->
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
-                            <div class="canban-con">
+                            <div class="canban-con" id="the_canban">
                                 <div class="slider slider-canban">
-                                    <div class="items-slider compain">
-                                        <div class="heading">LinkedIn Campaign <span>(5)</span></div>
+                                    <div class="items-slider compain" id="linkdin_campaign">
+                                        <div class="heading">LinkedIn Campaign <span></span></div>
                                         <div class="item-slider-inner">
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
+                                            <div class="user-box" id="for_linkdin_campaign">
+                                                <div class="loader_canban"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="items-slider talking">
-                                        <div class="heading">Talking/Replied <span>(5)</span></div>
+                                    <div class="items-slider talking" id="talking">
+                                        <div class="heading">Talking/Replied <span></span></div>
                                         <div class="item-slider-inner">
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
+                                            <div class="user-box" id="for_talking">
+                                                <div class="loader_canban"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="items-slider Serious">
-                                        <div class="heading">Serious Conversations <span>(5)</span></div>
+                                    <div class="items-slider Serious" id="serious">
+                                        <div class="heading">Serious Conversations <span></span></div>
+                                        <div class="item-slider-inner" >
+                                            <div class="user-box" id="for_serious">
+                                                <div class="loader_canban"></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="items-slider call-Scheduled" id="scheduled">
+                                        <div class="heading">Discovery-Call Scheduled <span></span></div>
+                                        <div class="item-slider-inner" >
+                                            <div class="user-box" id="for_scheduled">
+                                                <div class="loader_canban"></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="items-slider call-completed" id="completed">
+                                        <div class="heading">Call Completed <span></span></div>
                                         <div class="item-slider-inner">
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
+                                            <div class="user-box" id="for_completed">
+                                                <div class="loader_canban"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="items-slider call-Scheduled">
-                                        <div class="heading">Discovery-Call Scheduled <span>(5)</span></div>
+                                    <div class="items-slider boom" id="boom">
+                                        <div class="heading" style="background-color: rgb(133, 187, 101) !important;">Boom <span></span></div>
                                         <div class="item-slider-inner">
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
+                                            <div class="user-box" id="for_boom">
+                                                <div class="loader_canban"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="items-slider call-completed">
-                                        <div class="heading">Call Completed <span>(5)</span></div>
+                                    <div class="items-slider lost" id="lost">
+                                        <div class="heading" style="background-color: rgb(128, 128, 128) !important;">Lost <span></span></div>
                                         <div class="item-slider-inner">
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
-                                            </div>
-                                            <div class="user-box">
-                                                <div class="img-box">
-                                                    <img src="https://picsum.photos/200" alt="user-img">
-                                                </div>
-                                                <div class="name-box">
-                                                    <div class="name">Jawad Bashir</div>
-                                                    <div class="desig">Creative Director</div>
-                                                </div>
-                                                <div class="company">
-                                                    <span class="co">Company:</span>
-                                                    <div class="co-con">SIZ Pure Drinking Water</div>
-                                                </div>
-                                                <div class="location">
-                                                    <span class="lo">Location:</span>
-                                                    <div class="lo-content">Los Angeles, California, United States</div>
-                                                </div>
-                                                <div class="view-btn">
-                                                    <a href="Single-details-page.html" class="view-btn">View Details</a>
-                                                </div>
+                                            <div class="user-box" id="for_lost">
+                                                <div class="loader_canban"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -784,13 +361,13 @@
                             </div>
                         </div>
                         <!-- List View COntainer  -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                        <div class="tab-pane fade " id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab">
                             <div class="list-view-con">
                                 <table class="list-view-table">
                                     <thead>
 
-                                        <tr>
+                                        <tr >
                                             <th>Name</th>
                                             <th>Title</th>
                                             <th>Company</th>
@@ -800,111 +377,8 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own compain"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">3</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own reply"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">1</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own serious"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">5</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own call-scheduled"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">9+</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own compain"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">3</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own compain"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">6</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own compain"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">3</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://picsum.photos/200" alt="user-image">
-                                                <span class="name">Jawad Bashir</span>
-                                            </td>
-                                            <td>Creative Direcor</td>
-                                            <td>Size Pure Drinking Water</td>
-                                            <td>Los Angeles , California , United State</td>
-                                            <td class="badge-own compain"><span>LinkedIn Compain</span></td>
-                                            <td><a href="Single-details-page.html" class="view-btn">View Details</a>
-                                            </td>
-                                            <td><span class="reply-count">3</span></td>
-                                        </tr>
+                                    <tbody id="adding_lists">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -1222,6 +696,7 @@
     <!-- for calander cdn link  -->
     <script src="./Assets/evo-calendar/js/evo-calendar.js"></script>
     <!-- custom  js script  -->
+    <script type="text/javascript" src="index.js"></script>
     <script src="./Assets/js/script.js"></script>
 </body>
 

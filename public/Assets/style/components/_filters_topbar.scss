@@ -93,12 +93,13 @@
                     }
                 }
                 &.date-filter-list-by {
-                    width: 340%;
+                    min-width: 360%;
                     .filter-row {
                         width: 100%;
                         display: flex;
                         justify-content: space-around;
                         margin: 10px auto;
+                        gap: 12px;
                         select {
                             background: $lightBlueMainColor;
                             border: 1px solid rgba(7, 77, 209, 0.1);
