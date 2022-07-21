@@ -9,6 +9,7 @@ var i = setInterval(() => {
     dots: false,
     focusOnSelect: false
   })
+  localStorage.removeItem("db")
   let userBoxHeight = $(".user-box").height();
   $(".item-slider-inner").height(userBoxHeight + userBoxHeight / 2);
   // document.querySelectorAll(".head_row").style.display = "none"
@@ -19,10 +20,11 @@ var i = setInterval(() => {
   localStorage.setItem("user_id", 11);
   user_id = localStorage.getItem("user_id")
   second_user_id = localStorage.getItem("user_id")
-
+  let name = "00"
+  variable = "00"
   console.log(user_id, "user_id")
   setTimeout(() => {
-    const url = `${globalURl}/getmembers/${user_id}`;
+    const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
 
     let xhr = new XMLHttpRequest();
 
@@ -30,18 +32,62 @@ var i = setInterval(() => {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     xhr.onreadystatechange = function () {
+      
       if (xhr.readyState == 4 && xhr.status == 200) {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
-        userData.users.map((item, i, arr) => {
-          document.getElementById("searchTopSelect-2").innerHTML += `<option value="${item.linked_to_id}" >${item.username}</option>`
+        userData.data.map((obj) => {
+          // lists.push(obj.id);
+          document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
+        localStorage.setItem("user_id",userData.user_id)
+        localStorage.setItem("name",userData.name)
         $("#searchTopSelect-2").select2().on('change', () => {
           let data = $("#searchTopSelect-2 option:selected").text();
+          if(data == "Select List"){
+            document.getElementById("select2-searchTopSelect-2-container").style.backgroundColor = "#f7fbff"
+            lists = []
+            filter()
+          }
+          else{
+            document.getElementById("select2-searchTopSelect-2-container").style.backgroundColor = "rgb(133, 187, 101)"
+          }
+          console.log("test")
           getvalue(data)
       })
+        // console.log(JSON.stringify(lists))
+        filter()
       }
     }
+    const url1 = `${globalURl}/linkingids?user_id=` + `amateen9909@gmail.com`;
+      var xhr1 = new XMLHttpRequest();
+      xhr1.open("GET", url1, true);
+      xhr1.setRequestHeader("Content-Type", "application/json");
+      xhr1.send();
+      xhr1.onreadystatechange = function () {
+        //Call a function when the state changes.
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+          document.getElementById("searchTopSelect").innerHTML = ``
+          document.getElementById("searchTopSelect").innerHTML = `
+          <option value="Abdul Mateen">Abdul Mateen(you)</option>
+
+          `
+
+          var respon = xhr1.responseText;
+            respon = JSON.parse(respon);
+            if(respon.length > 0){
+              var finalArr = respon.map(function (obj, key) {
+                document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
+              })
+            }
+            $("#searchTopSelect").select2().on('change', () => {
+              let data = $("#searchTopSelect option:selected").text();
+              localStorage.setItem("db",true)
+              getvalue(data)
+          })
+
+        }
+      }
 
   }, 2000)
 
@@ -144,6 +190,7 @@ if (document.getElementById("pills-home-tab")) {
 }
 
 function filter() {
+  second_user_id = localStorage.getItem("user_id")
   check = localStorage.getItem("views")
   if (check != "list") {
     document.getElementById("linkdin_campaign").innerHTML = `<div class="heading">LinkedIn Campaign <span></span></div>
@@ -215,9 +262,14 @@ function filter() {
 
     document.getElementById("the_canban").style.display = "block";
     let view = localStorage.getItem("views")
-    let lists = [];
     weekArray = [];
     var search = document.getElementById("search").value
+    if(search != ""){
+      document.getElementById("search").style.backgroundColor = "rgb(133, 187, 101)"
+    }
+    else{
+      document.getElementById("search").style.backgroundColor = "transparent"
+    }
     // let arr = [{ field0: 'and', field1: 'status', field2: '=',field3:'' },
     // { field0: 'and', field1: 'status', field2: '=',field3:'' }]
 
@@ -693,7 +745,6 @@ if (document.getElementById("search")) {
 function showlists() {
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
-  localStorage.setItem("user_id", 11);
   user_id = localStorage.getItem("user_id")
   second_user_id = localStorage.getItem("user_id")
 
@@ -719,9 +770,14 @@ function showlists() {
     }
   });
 
-  let lists = [];
   weekArray = [];
   var search = document.getElementById("search").value
+  if(search != ""){
+    document.getElementById("search").style.backgroundColor = "rgb(133, 187, 101)"
+  }
+  else{
+    document.getElementById("search").style.backgroundColor = "transparent"
+  }
   // let arr = [{ field0: 'and', field1: 'status', field2: '=',field3:'' },
   // { field0: 'and', field1: 'status', field2: '=',field3:'' }]
 
@@ -785,12 +841,17 @@ function showlists() {
       <td>${obj.company ? `${obj.company.length > 22 ? `${obj.company.slice(0,22)}...`: `${obj.company}`}` : `No Company`} </td>
       <td>${obj.address ? `${obj.address.length > 22 ? `${obj.address.slice(0,22)}...`: `${obj.address}`}` : `No address`} </td>
       <td class="badge-own compain" ><span style="background-color:${color} !important">${obj.status}</span></td>
-      <td><a href="Single-details-page.html" class="view-btn">View Details</a>
+      <td><a href="#"  class="view-btn view_detail_button" data-prospect-id=${obj.id} >View Details</a>
       </td>
       <td><span class="reply-count">${obj.count}</span></tr></td>`
         });
         document.getElementById("adding_lists").innerHTML = ``;
         document.getElementById("adding_lists").innerHTML = row
+        if (document.querySelector(".view_detail_button")) {
+          document.querySelectorAll(".view_detail_button").forEach((ele) => {
+            ele.addEventListener("click", detailpage);
+          });
+        }
       } else {
         document.getElementById("adding_lists").innerHTML = `<tr><td>No Record Found</td></tr>`
         document.querySelector(".count").innerHTML = 0
@@ -924,25 +985,65 @@ setInterval(() => {
 function getvalue(data) {
   console.log(data)
   let name = data
-  const url = `${globalURl}/get_users_lists/${name}`;
+  variable = "00"
+  user_id = localStorage.getItem("user_id")
+  check = localStorage.getItem("db")
+  if(!check){
+    const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
 
-  let xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
 
-  xhr.open("GET", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let userData = JSON.parse(xhr.responseText);
-      userData.data.map((obj) => {
-        lists.push(obj.id);
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        lists = []
+        let userData = JSON.parse(xhr.responseText);
+        
+          lists.push(JSON.stringify(userData.data.id));
+        
+        // JSON.stringify(lists)
+        filter()
+      }
+    };
+  }
+  else{
+    variable = "11"
+    const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        lists = []
+        let userData = JSON.parse(xhr.responseText);
+        document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
+        userData.data.map((obj) => {
+          // lists.push(obj.id);
+          document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
+        })
+        localStorage.setItem("user_id",userData.user_id)
+        console.log(JSON.stringify(lists))
+        localStorage.removeItem("db")
+        $("#searchTopSelect-2").select2().on('change', () => {
+          let data = $("#searchTopSelect-2 option:selected").text();
+          getvalue(data)
       })
-      console.log(JSON.stringify(lists))
-      
-    }
-  };
+        filter()
+      }
+    };
+  }
 }
+function detailpage(e){
+  prospect_id = e.currentTarget.getAttribute("data-prospect-id");
+  localStorage.setItem("prospect_id",prospect_id)
+  window.location.href = "Single-details-page.html";
 
+}
 
 
 

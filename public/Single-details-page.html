@@ -33,19 +33,19 @@
                         </a>
                     </strong>
                 </div>
-                <div class="col-xxl-7 col-8">
+                <div class="col-xxl-7 col-8" >
                     <div class="input-con">
                         <div class="input-inner">
                             <img src="./Assets/img/search.png" alt="search-img-icon">
                             <input type="search" name="search" id="search" placeholder="Search Prspects">
                             <!-- select with search functionality  -->
-                            <select id="searchTopSelect">
+                            <!-- <select id="searchTopSelect" style="display:none !important">
                                 <option value="DB">Select Database</option>
                                 <option value="DB">Kolin's Database</option>
                                 <option value="DB">Jawad Database</option>
                                 <option value="DB">Michael's Database</option>
                                 <option value="DB">MJ Pactores Database</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
                             aria-haspopup="true" aria-expanded="false">
                             <div class="dropdown-inner d-flex align-items-center mx-3">
                                 <div class="drop-name d-flex flex-column">
-                                    <span class="name text-main font-weight-bold text-capitalize">Kolin</span>
+                                    <span class="name text-main font-weight-bold text-capitalize">Abdul</span>
                                     <span class="role text-secondary text-capitalize">admin</span>
                                 </div>
                                 <div class="profile-pix">
-                                    <img src="./Assets/img/Avatar.png" alt="avatar" class="profile-img">
+                                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHL-9J7Z-aSgw/profile-displayphoto-shrink_200_200/0/1657122304091?e=1663804800&v=beta&t=pBxWH08e0ySCLVXWJDsSjZ5P7mqSIJ--dela-0eI4Pw" alt="avatar" class="profile-img">
                                 </div>
                                 <img src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
                             </div>
@@ -77,7 +77,7 @@
         </div>
         <!-- filter container  -->
         <div class="filter-con">
-            <div class="wraper">
+            <div class="wraper" style="display:none !important">
                 <div class="filter-items">
                     <div class="filter-item">
                         <label for="dateFilter" class="filter-item-heading">Filter By Date
@@ -199,13 +199,13 @@
                             <div class="profile-left-side-con h-100">
                                 <div class="profile-details-top">
                                     <div class="profile-img-box">
-                                        <img src="https://picsum.photos/200" alt="user-img" class="single-profile-img">
+                                        <img id="prospect_image" src="" alt="user-img" class="single-profile-img">
                                     </div>
                                     <div class="name-listing">
                                         <h1 class="name-heading">
-                                            <span class="name mr-3">Jawad Bashir</span>
-                                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
+                                            <span class="name mr-3" id="prospect_name"></span>
+                                            <svg id="open_linkedin" width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" style="cursor:pointer" title="Open Linkedin">
                                                 <path
                                                     d="M19.5948 0H6.36866C3.39355 0 0.98175 2.4118 0.98175 5.38691V18.6131C0.98175 21.5882 3.39355 24 6.36866 24H19.5948C22.57 24 24.9818 21.5882 24.9818 18.6131V5.38691C24.9818 2.4118 22.57 0 19.5948 0Z"
                                                     fill="#0B86CA" />
@@ -219,16 +219,7 @@
 
                                         </h1>
                                         <select name="" id="select-listing" class="select-listing">
-                                            <option value="compain">LinkedIn Compain</option>
-                                            <option value="talking">Talking/Repling</option>
-                                            <option value="t1">Example</option>
-                                            <option value="t2">Example</option>
-                                            <option value="t3">Example</option>
-                                            <option value="t4">Example</option>
-                                            <option value="t5">Example</option>
-                                            <option value="t6">Example</option>
-                                            <option value="t7">Example</option>
-                                            <option value="t8">Example</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -250,7 +241,7 @@
                                     <div class="row2">
                                         <div class="left">Follow Up:</div>
                                         <div class="right">
-                                            <input type="datetime-local" name="date-time" id="" class="date-time-local">
+                                            <input type="date" name="date-time" id="follow_up_date" class="date-time-local">
                                         </div>
                                     </div>
                                     <div class="row2">
@@ -258,8 +249,8 @@
                                         <div class="right">
                                             <div class="text-editor">
                                                 <div class="editor-wrapper">
-                                                    <div id="content" class="content" contenteditable></div>
-                                                    <div id="toolbar" class="toolbar"></div>
+                                                    <div id="content" class="content" contenteditable style="height: 133px !important"></div>
+                                                    <div id="toolbar" class="toolbar" style="height: 33px !important;"></div>
                                                 </div>
                                                 <input id="image-upload-input" class="image-upload-input" type="file"
                                                     accept="image/*" />
@@ -269,27 +260,27 @@
                                     <div class="row2">
                                         <div class="left">Work Title:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="" placeholder="Creative Director">
+                                            <input type="text" name="" id="description_name" placeholder="Creative Director">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Company:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="" placeholder="SIZ Pure Drinking Water">
+                                            <input type="text" name="" id="company_name" placeholder="SIZ Pure Drinking Water">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Location:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="" placeholder="Location"
+                                            <input type="text" name="company_address" id="company_address" placeholder="Location"
                                                 value="Los Angeles , California , United State">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">About:</div>
                                         <div class="right">
-                                            <textarea name="" rows="8"
-                                                placeholder="About">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsum possimus tempore! Aperiam, amet? Reiciendis esse laboriosam quia neque. Aut at sit officia facere, dolore consectetur libero eos officiis porro doloremque hic voluptatum omnis cum voluptates iure consequuntur autem quam saepe deleniti suscipit culpa reiciendis nesciunt. Quibusdam deleniti cum et!</textarea>
+                                            <textarea name="" rows="8" id="prospect_about"
+                                                placeholder="About"></textarea>
                                         </div>
                                     </div>
                                     <div class="compaign-data">
@@ -298,13 +289,13 @@
                                     <div class="row2">
                                         <div class="left">Discovery Call Date:</div>
                                         <div class="right">
-                                            <input type="date" name="" id="">
+                                            <input type="date" name="" id="discovery_call_date">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Strategy Session Date:</div>
                                         <div class="right">
-                                            <input type="date" name="" id="">
+                                            <input type="date" name="" id="strategy_date">
                                         </div>
                                     </div>
                                     <div class="row2">
@@ -312,13 +303,7 @@
                                         <div class="right">
                                             <div class="select-db-list">
                                                 <select id="searchTopSelect-4">
-                                                    <option value="a">New Job Congrats</option>
-                                                    <option value="a">Example</option>
-                                                    <option value="a">Example</option>
-                                                    <option value="a">Example</option>
-                                                    <option value="a">Example</option>
-                                                    <option value="a">Example</option>
-                                                    <option value="a">Example</option>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -326,22 +311,22 @@
                                     <div class="row2">
                                         <div class="left">Weekly Source:</div>
                                         <div class="right">
-                                            <input type="week" name="" id="week" value="2024-W04" class="week">
+                                            <input type="date" name="" id="weeklu_source" value="" class="week">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Total Messages Sent:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="">
+                                            <input type="text" name="" id="total_messages">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Endorsement Given:</div>
                                         <div class="right">
                                             <div class="redio-box">
-                                                <input type="radio" name="end-given" value="yes" id="end-given-yes">
+                                                <input type="radio" name="end-given" value="Yes" id="end-given-yes">
                                                 <label for="end-given-yes">Yes</label>
-                                                <input type="radio" name="end-given" value="no" id="end-given-no">
+                                                <input type="radio" name="end-given" value="No" id="end-given-no">
                                                 <label for="end-given-no">No</label>
                                             </div>
                                         </div>
@@ -350,13 +335,13 @@
                                         <div class="left">Prospects Priority:</div>
                                         <div class="right">
                                             <div class="redio-box prospects">
-                                                <input type="radio" name="prospects" value="yes" id="prospects-a">
+                                                <input type="radio" name="prospects" value="A" id="prospects-a">
                                                 <label for="prospects-a">A</label>
-                                                <input type="radio" name="prospects" value="yes" id="prospects-b">
+                                                <input type="radio" name="prospects" value="B" id="prospects-b">
                                                 <label for="prospects-b">B</label>
-                                                <input type="radio" name="prospects" value="yes" id="prospects-c">
+                                                <input type="radio" name="prospects" value="C" id="prospects-c">
                                                 <label for="prospects-c">C</label>
-                                                <input type="radio" name="prospects" value="yes" id="prospects-d">
+                                                <input type="radio" name="prospects" value="D" id="prospects-d">
                                                 <label for="prospects-d">D</label>
                                             </div>
                                         </div>
@@ -364,7 +349,7 @@
                                     <div class="row2">
                                         <div class="left">Record Link:</div>
                                         <div class="right url">
-                                            <input type="url" name="" id="">
+                                            <input type="url" name="" id="record_link">
                                             <i class="fas fa-copy"></i>
                                         </div>
                                     </div>
@@ -378,7 +363,7 @@
                                     <div class="row2">
                                         <div class="left">Last Modified:</div>
                                         <div class="right">
-                                            <input type="date" name="" id="">
+                                            <input type="date" name="" id="last_modified">
                                         </div>
                                     </div>
                                 </div>
@@ -388,126 +373,16 @@
                         <div class="col-5">
                             <div class="comments-box">
                                 <div class="inner-con">
-                                    <div class="user-comment-con">
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-comment">
-                                            <div class="img-box">
-                                                <img src="./Assets/img/profile.png" alt="" class="profile">
-                                            </div>
-                                            <div class="comment-text">
-                                                <div class="top-content">
-                                                    <span class="user-name-comment">Jawad Bashir Commented</span>
-                                                    <span class="time-ago">3 Minute Ago</span>
-                                                </div>
-                                                <div class="bottom-box-content">
-                                                    Hye <span class="User">@Jawad Basheer</span> Any Updates
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="user-comment-con" id="comments_div">
+                                        
+                                        
                                     </div>
                                     <div class="reply-box">
                                         <div class="img mr-3">
                                             <img src="./Assets/img/profile.png" alt="">
                                         </div>
                                         <div class="input-box">
-                                            <input type="text" name="" id="" placeholder="Comments">
+                                            <input type="text" name="" id="add_comment" placeholder="Comments">
                                             <button class="btn-@">@</button>
                                         </div>
                                     </div>
@@ -540,6 +415,7 @@
     <!-- for calander cdn link  -->
     <script src="./Assets/evo-calendar/js/evo-calendar.js"></script>
     <!-- custom  js script  -->
+    <script type="text/javascript" src="singlepage.js"></script>
     <script src="./Assets/js/script.js"></script>
 </body>
 
