@@ -4,6 +4,11 @@ commentArray = []
 setTimeout(() => {
 
     user_id = localStorage.getItem("user_id")
+    second_user_id = localStorage.getItem("second_user_id")
+    if(second_user_id){
+      user_id = second_user_id
+    }
+
     getId = localStorage.getItem("prospect_id")
     str = localStorage.getItem("name")
     test_name = str.split(" ")
