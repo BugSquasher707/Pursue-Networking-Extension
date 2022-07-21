@@ -28,7 +28,7 @@ var i = setInterval(() => {
   variable = "00"
   console.log(user_id, "user_id")
   setTimeout(() => {
-    const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
+    const url = `${globalURl}/get_users_lists/${name}/${11}/${variable}`;
     console.log("yeeeen")
     let xhr = new XMLHttpRequest();
 
