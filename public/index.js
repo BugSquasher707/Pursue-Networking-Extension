@@ -16,10 +16,7 @@ var i = setInterval(() => {
   // document.querySelectorAll(".head_row").style.display = "none"
   views = "canban"
   // document.getElementById("admin_name").innerHTML = localStorage.getItem("name")
-  str = localStorage.getItem("name")
-  test_name = str.split(" ")
-  document.getElementById("admin_name").innerHTML = test_name[0]
-  document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+  
 
   localStorage.setItem("views", views)
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
@@ -44,7 +41,12 @@ var i = setInterval(() => {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
         document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
-
+        localStorage.setItem("name",userData.name)
+        localStorage.setItem("profilepic",userData.image)
+        str = localStorage.getItem("name")
+        test_name = str.split(" ")
+        document.getElementById("admin_name").innerHTML = test_name[0]
+        document.getElementById("admin_image").src = localStorage.getItem("profilepic")
         userData.data.map((obj) => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
