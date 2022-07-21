@@ -15,7 +15,10 @@ var i = setInterval(() => {
   $(".item-slider-inner").height(userBoxHeight + userBoxHeight / 2);
   // document.querySelectorAll(".head_row").style.display = "none"
   views = "canban"
-  document.getElementById("admin_name").innerHTML = localStorage.getItem("name")
+  // document.getElementById("admin_name").innerHTML = localStorage.getItem("name")
+  str = localStorage.getItem("name")
+  test_name = str.split(" ")
+  document.getElementById("admin_name").innerHTML = test_name
   document.getElementById("admin_image").src = localStorage.getItem("profilepic")
 
   localStorage.setItem("views", views)
