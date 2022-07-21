@@ -23,7 +23,6 @@ var i = setInterval(() => {
   console.log("Working")
   user_id = localStorage.getItem("user_id")
   username = localStorage.getItem("username")
-  second_user_id = localStorage.getItem("user_id")
   let name = "00"
   variable = "00"
   console.log(user_id, "user_id")
