@@ -22,6 +22,7 @@ var i = setInterval(() => {
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
   user_id = localStorage.getItem("user_id")
+  username = localStorage.getItem("username")
   second_user_id = localStorage.getItem("user_id")
   let name = "00"
   variable = "00"
@@ -62,7 +63,7 @@ var i = setInterval(() => {
         filter()
       }
     }
-    const url1 = `${globalURl}/linkingids?user_id=` + `amateen9909@gmail.com`;
+    const url1 = `${globalURl}/linkingids?user_id=` + `${username}`;
       var xhr1 = new XMLHttpRequest();
       xhr1.open("GET", url1, true);
       xhr1.setRequestHeader("Content-Type", "application/json");
@@ -72,13 +73,15 @@ var i = setInterval(() => {
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
           document.getElementById("searchTopSelect").innerHTML = `
-          <option value="Abdul Mateen">Abdul Mateen</option>
-
+          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
           `
 
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
             if(respon.length > 0){
+              document.getElementById("searchTopSelect").innerHTML = `
+          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+          `
               var finalArr = respon.map(function (obj, key) {
                 document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
               })
