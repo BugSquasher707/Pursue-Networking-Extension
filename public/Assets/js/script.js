@@ -389,3 +389,6 @@ const customTextEditor = (toolbarId, contentId) => {
 }
 
 customTextEditor('toolbar', 'content');
+new Calendar({
+    id: '#color-calendar',
+})

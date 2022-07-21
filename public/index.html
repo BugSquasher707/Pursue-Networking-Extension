@@ -17,47 +17,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css">
     <!-- Themes? Add them right after the main css -->
     <link rel="stylesheet" type="text/css" href="./Assets/evo-calendar/css/evo-calendar-custom.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-basic.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-glass.css" />
     <!-- custom style sheet  -->
     <link rel="stylesheet" href="./Assets/style/main.css">
     <title>Extension Dashboard</title>
 </head>
 
 <body>
-<style>
-    .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  position: relative;
-    left: 150% !important;
-  -webkit-animation: spin 1s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-}
-.loader_canban {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 60px;
-  height: 60px;
-  position: relative;
-    left: 40% !important;
-  -webkit-animation: spin 1s linear infinite; /* Safari */
-  animation: spin 1s linear infinite;
-}
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            left: 150% !important;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+        }
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
+        .loader_canban {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 60px;
+            height: 60px;
+            position: relative;
+            left: 40% !important;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 1s linear infinite;
+        }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
     <!-- header start  -->
     <header class="header pt-3" id="header">
         <div class="wraper-fluid">
@@ -129,6 +144,17 @@
                                 <div class="date-btn">Last week</div>
                             </div>
                             <button class="btn-main">Custom</button>
+                            <div class="custom-date-next-box-con">
+                                <div class="custom-date-next-box">
+                                    <p class="top-title">Select a custom date range</p>
+                                    <div class="btn-boxs">
+                                        <div class="date-btn">Date From</div>
+                                        <div class="date-btn">Date to</div>
+                                    </div>
+                                    <div class="calander-vanila-box" id="color-calendar"></div>
+                                    <button class="btn-main">Apply This date Range</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="filter-item">
@@ -138,75 +164,75 @@
                         <input type="checkbox" id="dateFilter2">
                         <div class="filter-item-list date-filter-list-by">
                             <div id="containing_div">
-                            <div class="filter-row">
-                                <select name="where" id="where" class="where">
-                                    <option value="and" selected>Where</option>
-                                </select>
-                                <select name="status" id="status" class="where statuss">
-                                    <option value="status" selected>Status</option>
-                                    <option value="priority">Priority</option>
-                                    <option value="conversion">Conversion Messages</option>
-                                    <option value="discovery_call">Discovery</option>
-                                    <option value="follow_up">Follow</option>
+                                <div class="filter-row">
+                                    <select name="where" id="where" class="where">
+                                        <option value="and" selected>Where</option>
+                                    </select>
+                                    <select name="status" id="status" class="where statuss">
+                                        <option value="status" selected>Status</option>
+                                        <option value="priority">Priority</option>
+                                        <option value="conversion">Conversion Messages</option>
+                                        <option value="discovery_call">Discovery</option>
+                                        <option value="follow_up">Follow</option>
 
-                                </select>
-                                <select name="operator" id="operator" class="where">
-                                    <option value="="selected>is</option>
-                                    <option value="!=">is not</option>
-                                    <option value="LIKE">contain</option>
-                                    <option value="exp">not contain</option>
-                                </select>
-                                <div class="removeing">
-                                <select name="option" id="option" class="where optionss">
-                                    <option value selected>Select Options</option>
-                                    <option value="LinkedIn Campaign">LinkedIn Campaign</option>
-                                    <option value="Talking/Replied">Talking/Replied</option>
-                                    <option value="Serious Conversations">Serious Conversations</option>
-                                    <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
-                                    <option value="Discovery Call Completed">Discovery Call Completed</option>
-                                    <option value="Boom">Boom</option>
-                                    <option value="Lost">Lost</option>
+                                    </select>
+                                    <select name="operator" id="operator" class="where">
+                                        <option value="=" selected>is</option>
+                                        <option value="!=">is not</option>
+                                        <option value="LIKE">contain</option>
+                                        <option value="exp">not contain</option>
+                                    </select>
+                                    <div class="removeing">
+                                        <select name="option" id="option" class="where optionss">
+                                            <option value selected>Select Options</option>
+                                            <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+                                            <option value="Talking/Replied">Talking/Replied</option>
+                                            <option value="Serious Conversations">Serious Conversations</option>
+                                            <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+                                            <option value="Discovery Call Completed">Discovery Call Completed</option>
+                                            <option value="Boom">Boom</option>
+                                            <option value="Lost">Lost</option>
 
-                                </select>
+                                        </select>
+                                    </div>
+                                    <button class="btn-own">
+                                        <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
+                                    </button>
                                 </div>
-                                <button class="btn-own">
-                                    <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
-                                </button>
+                                <div class="filter-row">
+                                    <select name="where" id="" class="where">
+                                        <option value="and" selected>Where</option>
+                                    </select>
+                                    <select name="status" id="" class="where statuss">
+                                        <option value="status" selected>Status</option>
+                                        <option value="priority">Priority</option>
+                                        <option value="conversion">Conversion Messages</option>
+                                        <option value="discovery_call">Discovery</option>
+                                        <option value="follow_up">Follow</option>
+                                    </select>
+                                    <select name="operator" id="" class="where">
+                                        <option value="=" selected>is</option>
+                                        <option value="!=">is not</option>
+                                        <option value="LIKE">contain</option>
+                                        <option value="exp">not contain</option>
+                                    </select>
+                                    <div class="removeing">
+                                        <select name="option" id="" class="where optionss">
+                                            <option value selected>Select Options</option>
+                                            <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+                                            <option value="Talking/Replied">Talking/Replied</option>
+                                            <option value="Serious Conversations">Serious Conversations</option>
+                                            <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+                                            <option value="Discovery Call Completed">Discovery Call Completed</option>
+                                            <option value="Boom">Boom</option>
+                                            <option value="Lost">Lost</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn-own ">
+                                        <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
+                                    </button>
+                                </div>
                             </div>
-                            <div class="filter-row">
-                                <select name="where" id="" class="where">
-                                    <option value="and" selected>Where</option>
-                                </select>
-                                <select name="status" id="" class="where statuss">
-                                    <option value="status" selected>Status</option>
-                                    <option value="priority">Priority</option>
-                                    <option value="conversion">Conversion Messages</option>
-                                    <option value="discovery_call">Discovery</option>
-                                    <option value="follow_up">Follow</option>
-                                </select>
-                                <select name="operator" id="" class="where">
-                                    <option value="="selected>is</option>
-                                    <option value="!=">is not</option>
-                                    <option value="LIKE">contain</option>
-                                    <option value="exp">not contain</option>
-                                </select>
-                                <div class="removeing">
-                                <select name="option" id="" class="where optionss">
-                                    <option value selected>Select Options</option>
-                                    <option value="LinkedIn Campaign">LinkedIn Campaign</option>
-                                    <option value="Talking/Replied">Talking/Replied</option>
-                                    <option value="Serious Conversations">Serious Conversations</option>
-                                    <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
-                                    <option value="Discovery Call Completed">Discovery Call Completed</option>
-                                    <option value="Boom">Boom</option>
-                                    <option value="Lost">Lost</option>
-                                </select>
-                            </div>
-                                <button class="btn-own " >
-                                    <img class="refresh" src="./Assets/img/refresh.png" alt="refresh-button">
-                                </button>
-                            </div>
-                        </div>
                             <div class="add-btn-row">
                                 <button class="add-another" id="add_another">+ Add Another</button>
                                 <button class="ml-5 btn btn-info" id="apply_filter">Apply</button>
@@ -243,7 +269,8 @@
                         <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                                    role="tab" aria-controls="pills-home" aria-selected="false" onclick="setWidthSlider()">
+                                    role="tab" aria-controls="pills-home" aria-selected="false"
+                                    onclick="setWidthSlider()">
                                     <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect y="1.24265" width="5.9045" height="6" rx="1" fill="white" />
@@ -313,20 +340,20 @@
                                     </div>
                                     <div class="items-slider Serious" id="serious">
                                         <div class="heading">Serious Conversations <span></span></div>
-                                        <div class="item-slider-inner" >
+                                        <div class="item-slider-inner">
                                             <div class="user-box" id="for_serious">
                                                 <div class="loader_canban"></div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="items-slider call-Scheduled" id="scheduled">
                                         <div class="heading">Discovery-Call Scheduled <span></span></div>
-                                        <div class="item-slider-inner" >
+                                        <div class="item-slider-inner">
                                             <div class="user-box" id="for_scheduled">
                                                 <div class="loader_canban"></div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="items-slider call-completed" id="completed">
@@ -338,7 +365,8 @@
                                         </div>
                                     </div>
                                     <div class="items-slider boom" id="boom">
-                                        <div class="heading" style="background-color: rgb(133, 187, 101) !important;">Boom <span></span></div>
+                                        <div class="heading" style="background-color: rgb(133, 187, 101) !important;">
+                                            Boom <span></span></div>
                                         <div class="item-slider-inner">
                                             <div class="user-box" id="for_boom">
                                                 <div class="loader_canban"></div>
@@ -346,7 +374,8 @@
                                         </div>
                                     </div>
                                     <div class="items-slider lost" id="lost">
-                                        <div class="heading" style="background-color: rgb(128, 128, 128) !important;">Lost <span></span></div>
+                                        <div class="heading" style="background-color: rgb(128, 128, 128) !important;">
+                                            Lost <span></span></div>
                                         <div class="item-slider-inner">
                                             <div class="user-box" id="for_lost">
                                                 <div class="loader_canban"></div>
@@ -363,7 +392,7 @@
                                 <table class="list-view-table">
                                     <thead>
 
-                                        <tr >
+                                        <tr>
                                             <th>Name</th>
                                             <th>Title</th>
                                             <th>Company</th>
@@ -374,7 +403,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="adding_lists">
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -691,6 +720,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <!-- for calander cdn link  -->
     <script src="./Assets/evo-calendar/js/evo-calendar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.min.js"></script>
     <!-- custom  js script  -->
     <script type="text/javascript" src="index.js"></script>
     <script src="./Assets/js/script.js"></script>
