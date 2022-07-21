@@ -21,14 +21,14 @@ var i = setInterval(() => {
   localStorage.setItem("views", views)
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
-  user_id = localStorage.getItem("user_id")
+  yeen = localStorage.getItem("user_id")
   console.log(user_id)
   username = localStorage.getItem("username")
   let name = "00"
   variable = "00"
   console.log(user_id, "user_id")
   setTimeout(() => {
-    const url = `${globalURl}/get_users_lists/${name}/${11}/${variable}`;
+    const url = `${globalURl}/get_users_lists/${name}/${yeen}/${variable}`;
     console.log("yeeeen")
     let xhr = new XMLHttpRequest();
 
