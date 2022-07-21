@@ -921,7 +921,8 @@ function add_another() {
 
   document.getElementById("containing_div").innerHTML += `<div class="filter-row">
   <select name="where" id="where" class="where">
-      <option value="and" selected>Where</option>
+      <option value="and" selected>and</option>
+      <option value="or" selected>or</option>
   </select>
   <select name="status" id="status" class="where statuss">
       <option value="status" selected>Status</option>

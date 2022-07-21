@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-2 offset-xxl-1 d-flex justify-content-around">
-                    <button class="notify">
+                    <button class="notify" style="display:none">
                         <img src="./Assets/img/bell.png" alt="notify_btn">
                     </button>
                     <div class="dropdown">
@@ -106,13 +106,13 @@
                             aria-haspopup="true" aria-expanded="false">
                             <div class="dropdown-inner d-flex align-items-center mx-3">
                                 <div class="drop-name d-flex flex-column">
-                                    <span class="name text-main font-weight-bold text-capitalize">Abdul</span>
+                                    <span id="admin_name" class="name text-main font-weight-bold text-capitalize">Abdul</span>
                                     <span class="role text-secondary text-capitalize">admin</span>
                                 </div>
                                 <div class="profile-pix">
-                                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHL-9J7Z-aSgw/profile-displayphoto-shrink_200_200/0/1657122304091?e=1663804800&v=beta&t=pBxWH08e0ySCLVXWJDsSjZ5P7mqSIJ--dela-0eI4Pw" alt="avatar" class="profile-img">
+                                    <img id="admin_image" src="" alt="avatar" class="profile-img">
                                 </div>
-                                <img src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
+                                <img style="display:none" src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
                             </div>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

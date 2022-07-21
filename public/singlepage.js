@@ -5,6 +5,11 @@ setTimeout(() => {
 
     user_id = localStorage.getItem("user_id")
     getId = localStorage.getItem("prospect_id")
+    str = localStorage.getItem("name")
+    test_name = str.split(" ")
+    document.getElementById("admin_name").innerHTML = test_name[0]
+    document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+
     const url = `${globalURl}/get_prospectData/${getId}/${user_id}`;
 
   let xhr = new XMLHttpRequest();
