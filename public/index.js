@@ -1,5 +1,6 @@
 const globalURl = "https://linkedin.thefastech.com";
 lists = []
+weekArray = []
 
 var i = setInterval(() => {
   $('.slider-canban').slick({
@@ -50,7 +51,7 @@ var i = setInterval(() => {
             filter()
           }
           else{
-            document.getElementById("select2-searchTopSelect-2-container").style.backgroundColor = "rgb(133, 187, 101)"
+            document.getElementById("select2-searchTopSelect-2-container").style.backgroundColor = "#a0c8f1"
           }
           console.log("test")
           getvalue(data)
@@ -69,7 +70,7 @@ var i = setInterval(() => {
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
           document.getElementById("searchTopSelect").innerHTML = `
-          <option value="Abdul Mateen">Abdul Mateen(you)</option>
+          <option value="Abdul Mateen">Abdul Mateen</option>
 
           `
 
@@ -241,6 +242,12 @@ function filter() {
     let counting = 0;
     let counter = 0;
     var element = document.querySelectorAll(".where");
+    if(element[3].value == ""){
+      document.getElementById("major_filters").style.backgroundColor = "#f7fbff"
+    }
+    else{
+      document.getElementById("major_filters").style.backgroundColor = "#a0c8f1"
+    }
     document.querySelectorAll(".where").forEach((ele, i) => {
 
 
@@ -262,13 +269,12 @@ function filter() {
 
     document.getElementById("the_canban").style.display = "block";
     let view = localStorage.getItem("views")
-    weekArray = [];
     var search = document.getElementById("search").value
     if(search != ""){
-      document.getElementById("search").style.backgroundColor = "rgb(133, 187, 101)"
+      document.querySelector(".input-con").style.border = "2px solid #a0c8f1"
     }
     else{
-      document.getElementById("search").style.backgroundColor = "transparent"
+      document.querySelector(".input-con").style.border = null
     }
     // let arr = [{ field0: 'and', field1: 'status', field2: '=',field3:'' },
     // { field0: 'and', field1: 'status', field2: '=',field3:'' }]
@@ -322,9 +328,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                            <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("linkdin_campaign").innerHTML = ``;
                 document.getElementById("linkdin_campaign").innerHTML = row
@@ -356,9 +367,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("talking").innerHTML = ``;
                 document.getElementById("talking").innerHTML = row
@@ -387,9 +403,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("serious").innerHTML = ``;
                 document.getElementById("serious").innerHTML = row
@@ -419,9 +440,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("scheduled").innerHTML = ``;
                 document.getElementById("scheduled").innerHTML = row
@@ -451,9 +477,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("completed").innerHTML = ``;
                 document.getElementById("completed").innerHTML = row
@@ -483,9 +514,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("boom").innerHTML = ``;
                 document.getElementById("boom").innerHTML = row
@@ -515,9 +551,14 @@ function filter() {
                             <div class="lo-content">${obj2.address ? `${obj2.address.length > 28 ? `${obj2.address.slice(0,28)}...`: `${obj2.address}`}` : `No Address`} </div>
                         </div>
                         <div class="view-btn">
-                            <a href="Single-details-page.html" class="view-btn">View Details</a>
+                        <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
+                    if (document.querySelector(".view_detail_button")) {
+                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                        ele.addEventListener("click", detailpage);
+                      });
+                    }
                 })
                 document.getElementById("lost").innerHTML = ``;
                 document.getElementById("lost").innerHTML = row
@@ -770,10 +811,9 @@ function showlists() {
     }
   });
 
-  weekArray = [];
   var search = document.getElementById("search").value
   if(search != ""){
-    document.getElementById("search").style.backgroundColor = "rgb(133, 187, 101)"
+    document.getElementById("search").style.backgroundColor = "#a0c8f1"
   }
   else{
     document.getElementById("search").style.backgroundColor = "transparent"
@@ -1044,6 +1084,256 @@ function detailpage(e){
   window.location.href = "Single-details-page.html";
 
 }
+
+if (document.getElementById("this_month")) {
+  document.getElementById("this_month").addEventListener("click", () => {
+    if(document.getElementById("this_month").style.backgroundColor == "rgb(133, 187, 101)"){
+      document.getElementById("this_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_month").style.color = "#7c7c7c"
+      weekArray = []
+      filter()
+    }
+    else{
+      weekArray = []
+      document.getElementById("this_month").style.backgroundColor = "rgb(133, 187, 101)"
+      document.getElementById("this_month").style.color = "white"
+      document.getElementById("last_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_month").style.color = "#7c7c7c"
+      document.getElementById("this_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_week").style.color = "#7c7c7c"
+      document.getElementById("last_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_week").style.color = "#7c7c7c" 
+      const nameOfMonth = new Date().toLocaleString(
+        'default', {month: 'short'}
+      );
+      const currentYear = new Date().getFullYear();
+      currentYearstring = JSON.stringify(currentYear)
+       getMonthYear = currentYearstring.slice(2, 4);
+      console.log(getMonthYear)
+      let week1 = `${nameOfMonth} Week 1 -${getMonthYear}`;
+        let week2 = `${nameOfMonth} Week 2 -${getMonthYear}`;
+        let week3 = `${nameOfMonth} Week 3 -${getMonthYear}`;
+        let week4 = `${nameOfMonth} Week 4 -${getMonthYear}`;
+        let week5 = `${nameOfMonth} Week 5 -${getMonthYear}`;
+        weekArray.push(week1, week2, week3, week4, week5);
+        filter()
+    }
+    
+
+  });
+}
+
+if (document.getElementById("last_month")) {
+  document.getElementById("last_month").addEventListener("click", () => {
+    if(document.getElementById("last_month").style.backgroundColor == "rgb(133, 187, 101)"){
+      document.getElementById("last_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_month").style.color = "#7c7c7c"
+      weekArray = []
+      filter()
+    }
+    else{
+      weekArray = []
+      document.getElementById("last_month").style.backgroundColor = "rgb(133, 187, 101)"
+      document.getElementById("last_month").style.color = "white"
+      document.getElementById("this_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_month").style.color = "#7c7c7c"
+      document.getElementById("this_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_week").style.color = "#7c7c7c"
+      document.getElementById("last_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_week").style.color = "#7c7c7c" 
+      const current = new Date();
+      current.setMonth(current.getMonth()-1);
+      const previousMonth = current.toLocaleString('default', { month: 'short' });
+      
+      console.log(previousMonth);
+
+      const currentYear = new Date().getFullYear();
+      currentYearstring = JSON.stringify(currentYear)
+       getMonthYear = currentYearstring.slice(2, 4);
+      console.log(getMonthYear)
+      let week1 = `${previousMonth} Week 1 -${getMonthYear}`;
+        let week2 = `${previousMonth} Week 2 -${getMonthYear}`;
+        let week3 = `${previousMonth} Week 3 -${getMonthYear}`;
+        let week4 = `${previousMonth} Week 4 -${getMonthYear}`;
+        let week5 = `${previousMonth} Week 5 -${getMonthYear}`;
+        weekArray.push(week1, week2, week3, week4, week5);
+        filter()
+    }
+    
+
+  });
+}
+
+if (document.getElementById("this_week")) {
+  document.getElementById("this_week").addEventListener("click", () => {
+    if(document.getElementById("this_week").style.backgroundColor == "rgb(133, 187, 101)"){
+      document.getElementById("this_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_week").style.color = "#7c7c7c"
+      weekArray = []
+      filter()
+    }
+    else{
+      weekArray = []
+      document.getElementById("this_week").style.backgroundColor = "rgb(133, 187, 101)"
+      document.getElementById("this_week").style.color = "white"
+      document.getElementById("this_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_month").style.color = "#7c7c7c"
+      document.getElementById("last_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_month").style.color = "#7c7c7c"
+      document.getElementById("last_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_week").style.color = "#7c7c7c" 
+      const current = new Date();
+      current.setMonth(current.getMonth());
+      const previousMonth = current.toLocaleString('default', { month: 'short' });
+      
+      console.log(previousMonth);
+      const d = new Date();
+      const date = d.getDate();
+      const day = d.getDay();
+      const weekOfMonth = Math.ceil((date - 1 - day) / 7);
+      console.log(weekOfMonth)
+      const currentYear = new Date().getFullYear();
+      currentYearstring = JSON.stringify(currentYear)
+       getMonthYear = currentYearstring.slice(2, 4);
+      console.log(getMonthYear)
+      let week1 = `${previousMonth} Week ${weekOfMonth} -${getMonthYear}`;
+        
+        weekArray.push(week1);
+        filter()
+    }
+    
+
+  });
+}
+
+if (document.getElementById("last_week")) {
+  document.getElementById("last_week").addEventListener("click", () => {
+    if(document.getElementById("last_week").style.backgroundColor == "rgb(133, 187, 101)"){
+      document.getElementById("last_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_week").style.color = "#7c7c7c"
+      weekArray = []
+      filter()
+    }
+    else{
+      weekArray = []
+      document.getElementById("last_week").style.backgroundColor = "rgb(133, 187, 101)"
+      document.getElementById("last_week").style.color = "white"
+      document.getElementById("this_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_month").style.color = "#7c7c7c"
+      document.getElementById("last_month").style.backgroundColor = "#edf2f6"
+      document.getElementById("last_month").style.color = "#7c7c7c"
+      document.getElementById("this_week").style.backgroundColor = "#edf2f6"
+      document.getElementById("this_week").style.color = "#7c7c7c" 
+      const current = new Date();
+      current.setMonth(current.getMonth());
+      const previousMonth = current.toLocaleString('default', { month: 'short' });
+      
+      console.log(previousMonth);
+      const d = new Date();
+      const date = d.getDate();
+      const day = d.getDay();
+      const weekOfMonth = Math.ceil((date - 1 - day) / 7) - 1;
+      if(weekOfMonth <= 0){
+        weekOfMonth = 5
+        current = new Date();
+        current.setMonth(current.getMonth()-1);
+       previousMonth = current.toLocaleString('default', { month: 'short' });
+      
+      }
+      console.log(weekOfMonth)
+      const currentYear = new Date().getFullYear();
+      currentYearstring = JSON.stringify(currentYear)
+       getMonthYear = currentYearstring.slice(2, 4);
+      console.log(getMonthYear)
+      let week1 = `${previousMonth} Week ${weekOfMonth} -${getMonthYear}`;
+        
+        weekArray.push(week1);
+        filter()
+    }
+    
+
+  });
+}
+
+if (document.getElementById("custom_open")) {
+  document.getElementById("custom_open").addEventListener("click", () => {
+    if(document.querySelector(".custom-date-next-box-con").style.display == "block"){
+      document.querySelector(".custom-date-next-box-con").style.display = "none"
+    }
+    else{
+      document.querySelector(".custom-date-next-box-con").style.display = "block"
+
+    }
+
+  });
+}
+// if (document.getElementById("major_filters")) {
+//   document.getElementById("major_filters").addEventListener("click", () => {
+    
+//     document.getElementById("major_date").style.visibility = "hidden"
+//     document.getElementById("major_filter_div").style.visibility = "visible"
+
+//   });
+// }
+
+setTimeout(() => {
+  if (document.querySelector(".calendar__day-text")) {
+    if (document.querySelector(".calendar__day")) {
+      document.querySelectorAll(".calendar__day").forEach((ele) => {
+        ele.addEventListener("click", calender_dates);
+      });
+    }
+  }
+  
+},3000)
+
+setTimeout(() => {
+    if (document.querySelector(".calendar__arrow-inner")) {
+      document.querySelectorAll(".calendar__arrow-inner").forEach((ele) => {
+        ele.addEventListener("click", again);
+      });
+    }
+  
+  
+},3000)
+
+function calender_dates(e){
+  day = e.currentTarget.querySelector(".calendar__day-text").innerHTML
+  month = document.querySelector(".calendar__month").innerHTML
+  year = document.querySelector(".calendar__year").innerHTML
+  // others = document.querySelectorAll(".calendar__day-other")
+  // console.log(others.length)
+  // temp = 35 - others.length
+  // console.log(temp);
+  // weeks 
+}
+function again(){
+  setTimeout(() => {
+  if (document.querySelector(".calendar__day-text")) {
+    if (document.querySelector(".calendar__day")) {
+      document.querySelectorAll(".calendar__day").forEach((ele) => {
+        ele.addEventListener("click", calender_dates);
+      });
+    }
+  }
+},1500)
+}
+
+setInterval(() => {
+  if(weekArray.length > 0){
+    document.getElementById("major_date").style.backgroundColor = "#a0c8f1"
+  }
+  else{
+    document.getElementById("major_date").style.backgroundColor = "rgb(247, 251, 255)"
+  }
+  console.log(weekArray.length)
+},500)
+
+$(document).ready(function() {
+  $('.js-example-basic-multiple').select2();
+});
+
+
 
 
 

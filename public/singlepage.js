@@ -1,4 +1,5 @@
 const globalURl = "https://linkedin.thefastech.com";
+commentArray = []
 
 setTimeout(() => {
 
@@ -202,6 +203,12 @@ setTimeout(() => {
 
 
         }
+        document.getElementById("searchTopSelect-3").innerHTML = ``
+        if(userData.lists){
+          userData.lists.map((obj) => {
+            document.getElementById("searchTopSelect-3").innerHTML += `<option value="DB">${obj.name}</option>`
+          })
+        }
     }
 }
 },100)
@@ -373,8 +380,51 @@ if (document.getElementById("add_comment")) {
     }
   });
 }
+if (document.getElementById("add_comment")) {
+  document.getElementById("add_comment").addEventListener("keyup", function(event) {
+    value_get = document.getElementById("add_comment").value
+    if(value_get.includes("@")){
+      console.log("yes")
+      getMutuals();
+    }
+    else{
+      document.getElementById("myDropdown").style.display = "none";
+    }
+  });
+}
 function add_comment(){
   var user_id = localStorage.getItem("user_id");
+  var receiver = localStorage.getItem("commentID");
+  receiver_id = JSON.parse(receiver);
+  var prospect_id = localStorage.getItem("prospect_id");
+  var text = document.getElementById("add_comment").value;
+
+  if (receiver && prospect_id) {
+    
+
+
+    receiver_id.forEach((item) => {
+      const url = `${globalURl}/send_message`;
+
+      let xhr = new XMLHttpRequest();
+
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          user_id,
+          receiver_id: item,
+          prospect_id,
+          text: text,
+          replied_id: "",
+        })
+      );
+    });
+  }
+  // localStorage.setItem("commentID", JSON.stringify(commentArray));
+  localStorage.removeItem("commentID")
+  commentArray = [];
+
 
   const url = `${globalURl}/addComment`;
   var actual_id = localStorage.getItem("user_id");
@@ -523,4 +573,140 @@ if (document.getElementById("open_linkedin")) {
   document.getElementById("open_linkedin").addEventListener("click", function() {
     window.open(document.getElementById("record_link").value)
   });
+}
+
+function getMutuals() {
+  let text = document.getElementById("add_comment").value;
+  let lenght = 0;
+  const myArray = text.split("@");
+
+  let mutuals = text.includes("@");
+
+  if (mutuals == true) {
+    length_second = myArray[myArray.length - 1].length;
+    if (length_second <= 15) {
+      const myArray = text.split("@");
+      length = myArray[myArray.length - 1].length;
+      let value = text.slice(-1);
+
+      if (value == "@" && length == 0) {
+        var user_id = localStorage.getItem("user_id");
+        const url1 = `${globalURl}/chats/` + user_id;
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", url1, true);
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.send();
+
+        xhr1.onreadystatechange = function () {
+          //Call a function when the state changes.
+          if (xhr1.readyState == 4 && xhr1.status == 200) {
+            let userData = JSON.parse(xhr1.responseText);
+            document.getElementById("myDropdown").innerHTML = "";
+
+            userData.map((item, i, arr) => {
+              var row =
+                item.name != null
+                  ? `<span data-id=${item.linked_to_id} data-email=${item.mutual} class="addtocomment" >${item.mutual}</span>`
+                  : "";
+              document.getElementById("myDropdown").innerHTML += row;
+            });
+            document.querySelectorAll(".addtocomment").forEach((ele) => {
+              ele.addEventListener("click", addMemberToComment);
+            });
+          }
+        };
+        document.getElementById("myDropdown").style.display = "Block";
+      }
+      if (value != "@" && length > 0) {
+        var user_id = localStorage.getItem("user_id");
+        const url1 =
+          `${globalURl}/addMemberComment/` +
+          user_id +
+          `/` +
+          myArray[myArray.length - 1];
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", url1, true);
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.send();
+
+        xhr1.onreadystatechange = function () {
+          //Call a function when the state changes.
+          if (xhr1.readyState == 4 && xhr1.status == 200) {
+            let userData = JSON.parse(xhr1.responseText);
+            document.getElementById("myDropdown").innerHTML = "";
+
+            userData.map((item, i, arr) => {
+              var row =
+                item.name != null
+                  ? `<span data-id=${item.linked_to_id} data-email=${item.mutual} class="addtocomment" >${item.mutual}</span>`
+                  : "";
+              document.getElementById("myDropdown").innerHTML += row;
+            });
+            document.querySelectorAll(".addtocomment").forEach((ele) => {
+              ele.addEventListener("click", addMemberToComment);
+            });
+          }
+          document.getElementById("myDropdown").style.display = "Block";
+        };
+      }
+
+      if (value != "@" && lenght == 0) {
+        document.getElementById("myDropdown").style.display = "none";
+        document.getElementById("myDropdown").innerHTML = "";
+      }
+    } else {
+      document.getElementById("myDropdown").style.display = "none";
+    }
+  } else {
+    document.getElementById("myDropdown").style.display = "none";
+  }
+}
+
+
+function addMemberToComment(e) {
+  var check = "false";
+  var receiver_id = e.currentTarget.getAttribute("data-id");
+  var prospect_id = localStorage.getItem("prospect_id");
+  var email = e.currentTarget.getAttribute("data-email");
+
+  if (!prospect_id) {
+    // var myToast = Toastify({
+    //   text: "Save This Prospect To Start A Collaboration Chat",
+    //   duration: 2000,
+    // });
+    // myToast.showToast();
+  } else {
+    msg = document.getElementById("add_comment").value;
+    yeen = msg.split("@");
+    yeen[yeen.length - 1] = email;
+    let string = yeen.join("");
+
+    let tagDiv = ` <span class='tag' data-id='${receiver_id}'>${
+      yeen[yeen.length - 1]
+    } <i class="fas fa-times tagIcon"></i></span>`;
+
+    commentArray.forEach((item) => {
+      if (item === receiver_id) {
+        check = "true";
+      }
+      if (check == true) {
+        commentArray.push(receiver_id);
+        // document.querySelector(".taggedUser").innerHTML += tagDiv;
+      }
+    });
+
+    if (check == "false") {
+      commentArray.push(receiver_id);
+      // document.querySelector(".taggedUser").innerHTML += tagDiv;
+    }
+
+    localStorage.setItem("commentID", JSON.stringify(commentArray));
+
+    // document.querySelectorAll(".tagIcon").forEach((ele, i) => {
+    //   ele.addEventListener("click", deleteTag);
+    // });
+
+    document.getElementById("add_comment").value = `${string} `;
+    document.getElementById("myDropdown").style.display = "none";
+  }
 }

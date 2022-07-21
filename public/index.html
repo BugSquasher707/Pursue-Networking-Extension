@@ -128,41 +128,41 @@
             <div class="wraper">
                 <div class="filter-items">
                     <div class="filter-item">
-                        <label for="dateFilter" class="filter-item-heading">Filter By Date
+                        <label for="dateFilter" class="filter-item-heading" id="major_date">Filter By Date
                             <img src="./Assets/img/arrow.png" alt="">
                         </label>
                         <input type="checkbox" id="dateFilter">
                         <div class="filter-item-list date-filter-list">
                             <div class="topRow">
                                 <span class="">Custom</span>
-                                <span class="">June 16-23, 2022</span>
+                                <!-- <span class="">June 16-23, 2022</span> -->
                             </div>
                             <div class="btn-boxs">
-                                <div class="date-btn">This month</div>
-                                <div class="date-btn">Last month</div>
-                                <div class="date-btn">This week</div>
-                                <div class="date-btn">Last week</div>
+                                <div class="date-btn" id="this_month">This month</div>
+                                <div class="date-btn" id="last_month">Last month</div>
+                                <div class="date-btn" id="this_week">This week</div>
+                                <div class="date-btn" id="last_week">Last week</div>
                             </div>
-                            <button class="btn-main">Custom</button>
-                            <div class="custom-date-next-box-con">
-                                <div class="custom-date-next-box">
-                                    <p class="top-title">Select a custom date range</p>
-                                    <div class="btn-boxs">
-                                        <div class="date-btn">Date From</div>
-                                        <div class="date-btn">Date to</div>
-                                    </div>
-                                    <div class="calander-vanila-box" id="color-calendar"></div>
-                                    <button class="btn-main">Apply This date Range</button>
+                            <button class="btn-main" id="custom_open">Custom</button>
+                        </div>
+                        <div class="custom-date-next-box-con" style="display:none">
+                            <div class="custom-date-next-box">
+                                <p class="top-title">Select a custom date range</p>
+                                <div class="btn-boxs">
+                                    <div class="date-btn">Date From</div>
+                                    <div class="date-btn">Date to</div>
                                 </div>
+                                <div class="calander-vanila-box" id="color-calendar"></div>
+                                <button class="btn-main">Apply This date Range</button>
                             </div>
                         </div>
                     </div>
-                    <div class="filter-item">
-                        <label for="dateFilter2" class="filter-item-heading">Filter By
+                    <div class="filter-item" >
+                        <label for="dateFilter2" class="filter-item-heading" id="major_filters">Filter By
                             <img src="./Assets/img/arrow.png" alt="">
                         </label>
                         <input type="checkbox" id="dateFilter2">
-                        <div class="filter-item-list date-filter-list-by">
+                        <div class="filter-item-list date-filter-list-by" id="major_filter_div">
                             <div id="containing_div">
                                 <div class="filter-row">
                                     <select name="where" id="where" class="where">
@@ -416,13 +416,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="prospects-chart">
+                <div class="prospects-chart" style="display:none">
                     <h1 class="total-pros">Total Prospects</h1>
                     <div id="circle-chart"></div>
                 </div>
             </div>
         </section>
-        <section class="converstion-messages">
+        <section class="converstion-messages" style="display:none">
             <div class="wraper">
                 <div class="inner-con">
                     <div class="row">
@@ -672,7 +672,7 @@
                 </div>
             </div>
         </section>
-        <section class="call-sheduled-notes">
+        <section class="call-sheduled-notes" style="display:none">
             <div class="wraper">
                 <div class="row">
                     <div class="col-6">
