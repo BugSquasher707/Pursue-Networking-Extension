@@ -40,6 +40,8 @@ var i = setInterval(() => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
+        document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
+
         userData.data.map((obj) => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
