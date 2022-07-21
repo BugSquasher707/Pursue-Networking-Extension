@@ -197,11 +197,6 @@ setTimeout(() => {
             else{
               document.getElementById("comments_div").innerHTML = `No Comments To Show`
             }
-            
-
-
-
-
         }
         document.getElementById("searchTopSelect-3").innerHTML = ``
         if(userData.lists){

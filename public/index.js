@@ -15,10 +15,12 @@ var i = setInterval(() => {
   $(".item-slider-inner").height(userBoxHeight + userBoxHeight / 2);
   // document.querySelectorAll(".head_row").style.display = "none"
   views = "canban"
+  document.getElementById("admin_name").innerHTML = localStorage.getItem("name")
+  document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+
   localStorage.setItem("views", views)
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
-  localStorage.setItem("user_id", 11);
   user_id = localStorage.getItem("user_id")
   second_user_id = localStorage.getItem("user_id")
   let name = "00"
