@@ -29,7 +29,7 @@ var i = setInterval(() => {
   console.log(user_id, "user_id")
   setTimeout(() => {
     const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
-    console.log(url)
+    console.log("yeeeen")
     let xhr = new XMLHttpRequest();
 
     xhr.open("GET", url, true);
