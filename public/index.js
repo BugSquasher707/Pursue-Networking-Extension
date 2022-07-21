@@ -79,7 +79,7 @@ var i = setInterval(() => {
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
             if(respon.length > 0){
-              document.getElementById("searchTopSelect").innerHTML = `
+              document.getElementById("searchTopSelect").innerHTML += `
           <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
           `
               var finalArr = respon.map(function (obj, key) {
