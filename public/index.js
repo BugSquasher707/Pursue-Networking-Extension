@@ -21,6 +21,7 @@ var i = setInterval(() => {
   localStorage.setItem("views", views)
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
+  user_id = localStorage.getItem("user_id")
   yeen = localStorage.getItem("user_id")
   console.log(user_id)
   username = localStorage.getItem("username")
