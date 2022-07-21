@@ -22,6 +22,7 @@ var i = setInterval(() => {
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
   user_id = localStorage.getItem("user_id")
+  console.log(user_id)
   username = localStorage.getItem("username")
   let name = "00"
   variable = "00"
@@ -40,14 +41,14 @@ var i = setInterval(() => {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
         document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
-        if(localStorage.getItem("user_id") == userData.user_id){
+        // if(localStorage.getItem("user_id") == userData.user_id){
           localStorage.setItem("name",userData.name)
           localStorage.setItem("profilepic",userData.image)
           str = localStorage.getItem("name")
           test_name = str.split(" ")
           document.getElementById("admin_name").innerHTML = test_name[0]
           document.getElementById("admin_image").src = localStorage.getItem("profilepic")
-        }
+        // }
         
         userData.data.map((obj) => {
           // lists.push(obj.id);
