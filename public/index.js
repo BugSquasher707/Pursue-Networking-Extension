@@ -40,12 +40,15 @@ var i = setInterval(() => {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
         document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
-        localStorage.setItem("name",userData.name)
-        localStorage.setItem("profilepic",userData.image)
-        str = localStorage.getItem("name")
-        test_name = str.split(" ")
-        document.getElementById("admin_name").innerHTML = test_name[0]
-        document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+        if(localStorage.getItem("user_id") == userData.user_id){
+          localStorage.setItem("name",userData.name)
+          localStorage.setItem("profilepic",userData.image)
+          str = localStorage.getItem("name")
+          test_name = str.split(" ")
+          document.getElementById("admin_name").innerHTML = test_name[0]
+          document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+        }
+        
         userData.data.map((obj) => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
