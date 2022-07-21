@@ -18,7 +18,7 @@ var i = setInterval(() => {
   // document.getElementById("admin_name").innerHTML = localStorage.getItem("name")
   str = localStorage.getItem("name")
   test_name = str.split(" ")
-  document.getElementById("admin_name").innerHTML = test_name
+  document.getElementById("admin_name").innerHTML = test_name[0]
   document.getElementById("admin_image").src = localStorage.getItem("profilepic")
 
   localStorage.setItem("views", views)
@@ -1072,6 +1072,8 @@ function getvalue(data) {
         lists = []
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
+        document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
+
         userData.data.map((obj) => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
