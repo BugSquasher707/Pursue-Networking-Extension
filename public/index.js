@@ -201,7 +201,13 @@ if (document.getElementById("pills-home-tab")) {
 }
 
 function filter() {
-  second_user_id = localStorage.getItem("user_id")
+  second_user_id = localStorage.getItem("second_user_id")
+  if(!second_user_id){
+    second_user_id = localStorage.getItem("user_id")
+  }
+  else{
+    user_id = second_user_id
+  }
   check = localStorage.getItem("views")
   if (check != "list") {
     document.getElementById("linkdin_campaign").innerHTML = `<div class="heading">LinkedIn Campaign <span></span></div>
@@ -797,7 +803,13 @@ function showlists() {
   document.getElementById("adding_lists").innerHTML = `<tr><div class="loader"></div></tr>`
   console.log("Working")
   user_id = localStorage.getItem("user_id")
-  second_user_id = localStorage.getItem("user_id")
+  second_user_id = localStorage.getItem("second_user_id")
+  if(!second_user_id){
+    second_user_id = localStorage.getItem("user_id")
+  }
+  else{
+    user_id = second_user_id
+  }
 
   let arr = [];
   let counter = 0;
@@ -1079,7 +1091,7 @@ function getvalue(data) {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
-        localStorage.setItem("user_id",userData.user_id)
+        localStorage.setItem("second_user_id",userData.user_id)
         console.log(JSON.stringify(lists))
         localStorage.removeItem("db")
         $("#searchTopSelect-2").select2().on('change', () => {
