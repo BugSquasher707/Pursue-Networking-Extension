@@ -83,18 +83,47 @@ var i = setInterval(() => {
         //Call a function when the state changes.
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
-          document.getElementById("searchTopSelect").innerHTML = `
-          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-          `
+          second_name = localStorage.getItem("second_user_name")
+          if(second_name)
+          {
+            document.getElementById("searchTopSelect").innerHTML += `
+            <option value="Abdul Mateen">${localStorage.getItem("second_name")}</option>
+            `
+          }
+          else
+          {
+            document.getElementById("searchTopSelect").innerHTML += `
+            <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+            `
+          }
 
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
             if(respon.length > 0){
-              document.getElementById("searchTopSelect").innerHTML += `
-          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-          `
+              if(second_name){
+                document.getElementById("searchTopSelect").innerHTML += `
+                <option value="Abdul Mateen">${localStorage.getItem("second_name")}</option>
+                `
+                document.getElementById("searchTopSelect").innerHTML += `
+                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+                `
+              }
+              else{
+                document.getElementById("searchTopSelect").innerHTML += `
+                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+                `
+              }
+              
               var finalArr = respon.map(function (obj, key) {
-                document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
+                if(second_name){
+                  if(second_name == obj.names_original){}
+                  else{
+                    document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
+                  }
+                }
+                else{
+                  document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
+                }
               })
             }
             $("#searchTopSelect").select2().on('change', () => {
