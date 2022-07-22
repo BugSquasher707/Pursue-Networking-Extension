@@ -87,7 +87,7 @@ var i = setInterval(() => {
           if(second_name)
           {
             document.getElementById("searchTopSelect").innerHTML += `
-            <option value="Abdul Mateen">${localStorage.getItem("second_name")}</option>
+            <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
             `
           }
           else
@@ -102,7 +102,7 @@ var i = setInterval(() => {
             if(respon.length > 0){
               if(second_name){
                 document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("second_name")}</option>
+                <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
                 `
                 document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
