@@ -27,16 +27,79 @@ setTimeout(() => {
       let userData = JSON.parse(xhr.responseText);
         if (userData.data) {
             document.getElementById("prospect_name").innerText = userData.data.name
-
-            document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
-            document.getElementById("select-listing").innerHTML += `
-            <option value="LinkedIn Campaign">LinkedIn Campaign</option>
-            <option value="Talking/Replied">Talking/Replied</option>
-            <option value="Serious Conversations">Serious Conversations</option>
-            <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
-            <option value="Discovery Call Completed">Discovery Call Completed</option>
-            <option value="Boom">Boom</option>
-            <option value="Lost">Lost</option>`
+            if(userData.data.status == "LinkedIn Campaign"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Boom">Boom</option>
+              <option value="Lost">Lost</option>`
+              document.getElementById("select-listing").style.backgroundColor = "#fff !important"
+            }
+            else if(userData.data.status == "Talking/Replied"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Boom">Boom</option>
+              <option value="Lost">Lost</option>`
+            }
+            else if(userData.data.status == "Serious Conversations"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Boom">Boom</option>
+              <option value="Lost">Lost</option>`
+            }
+            else if(userData.data.status == "Discovery Call Scheduled"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Boom">Boom</option>
+              <option value="Lost">Lost</option>`
+            }
+            else if(userData.data.status == "Discovery Call Completed"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Boom">Boom</option>
+              <option value="Lost">Lost</option>`
+            }
+            else if(userData.data.status == "Boom"){
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Lost">Lost</option>`
+            }
+            else{
+              document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+              document.getElementById("select-listing").innerHTML += `
+              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="Talking/Replied">Talking/Replied</option>
+              <option value="Serious Conversations">Serious Conversations</option>
+              <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
+              <option value="Discovery Call Completed">Discovery Call Completed</option>
+              <option value="Boom">Boom</option>
+              `
+            }
+            
             $(".select-listing").select2().on('change', () => {
                 let data = $(".select-listing option:selected").text();
                 event_save()
