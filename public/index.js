@@ -377,7 +377,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -417,7 +417,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -454,7 +454,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -492,7 +492,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -530,7 +530,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -568,7 +568,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -606,7 +606,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -946,13 +946,13 @@ function showlists() {
           document.querySelector(".count").innerHTML = arr.length
 
 
-          row += `<tr><td>
+          row += `<tr><td style="width:30%!important">
       <img src="${obj.image}" alt="user-image">
-      <span class="name">${obj.name}</span>
+      <span class="name" >${obj.name}</span>
       </td>
-      <td>${obj.description ? `${obj.description.length > 22 ? `${obj.description.slice(0,22)}...`: `${obj.description}`}` : `No Title`} </td>
-      <td>${obj.company ? `${obj.company.length > 22 ? `${obj.company.slice(0,22)}...`: `${obj.company}`}` : `No Company`} </td>
-      <td>${obj.address ? `${obj.address.length > 22 ? `${obj.address.slice(0,22)}...`: `${obj.address}`}` : `No address`} </td>
+      <td>${obj.description ? `${obj.description.length > 18 ? `${obj.description.slice(0,18)}...`: `${obj.description}`}` : `No Title`} </td>
+      <td>${obj.company ? `${obj.company.length > 18 ? `${obj.company.slice(0,18)}...`: `${obj.company}`}` : `No Company`} </td>
+      <td>${obj.address ? `${obj.address.length > 18 ? `${obj.address.slice(0,18)}...`: `${obj.address}`}` : `No address`} </td>
       <td class="badge-own compain" ><span style="background-color:${color} !important">${obj.status}</span></td>
       <td><a href="#"  class="view-btn view_detail_button" data-prospect-id=${obj.id} >View Details</a>
       </td>

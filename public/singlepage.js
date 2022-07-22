@@ -35,6 +35,7 @@ setTimeout(() => {
         if (userData.data) {
             document.getElementById("prospect_name").innerText = userData.data.name
             if(userData.data.status == "LinkedIn Campaign"){
+              console.log("here")
               document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
               document.getElementById("select-listing").innerHTML += `
               <option value="Talking/Replied">Talking/Replied</option>
@@ -43,7 +44,9 @@ setTimeout(() => {
               <option value="Discovery Call Completed">Discovery Call Completed</option>
               <option value="Boom">Boom</option>
               <option value="Lost">Lost</option>`
-              document.getElementById("select-listing").style.backgroundColor = "#fff !important"
+              // document.getElementById("select2-select-listing-container").style.backgroundColor = "#fff !important"
+              // document.querySelectorAll(".select2-selection--single").style.backgroundColor = "black"
+
             }
             else if(userData.data.status == "Talking/Replied"){
               document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
@@ -281,8 +284,12 @@ setTimeout(() => {
         document.getElementById("searchTopSelect-3").innerHTML = ``
         if(userData.lists){
           userData.lists.map((obj) => {
-            document.getElementById("searchTopSelect-3").innerHTML += `<option value="DB">${obj.name}</option>`
+            document.getElementById("searchTopSelect-3").innerHTML += `<option style="background-color:blue !important" value="DB">${obj.name}</option>`
           })
+          // setTimeout(() => {
+          // document.querySelector(".select2-results__option").style.backgroundColor = "blue"
+          // },2000)
+
         }
     }
 }
