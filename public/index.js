@@ -888,7 +888,7 @@ function showlists() {
             color = "#0e76a8"
           }
           if (obj.status == "Talking/Replied") {
-            color = "#0e76a8"
+            color = "rgb(137, 207, 240);"
           }
           if (obj.status == "Serious Conversations") {
             color = "#FFA500"
