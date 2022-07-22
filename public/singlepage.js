@@ -28,7 +28,6 @@ setTimeout(() => {
         if (userData.data) {
             document.getElementById("prospect_name").innerText = userData.data.name
             if(userData.data.status == "LinkedIn Campaign"){
-              document.querySelector(".select2-selection__rendered").style.backgroundColor = "#fff !important"
               document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
               document.getElementById("select-listing").innerHTML += `
               <option value="Talking/Replied">Talking/Replied</option>
@@ -37,6 +36,7 @@ setTimeout(() => {
               <option value="Discovery Call Completed">Discovery Call Completed</option>
               <option value="Boom">Boom</option>
               <option value="Lost">Lost</option>`
+              document.querySelector(".select2-selection__rendered").style.backgroundColor = "#fff !important"
             }
             else if(userData.data.status == "Talking/Replied"){
               document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
