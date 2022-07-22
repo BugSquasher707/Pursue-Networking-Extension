@@ -19,6 +19,19 @@ $(document).ready(function () {
         if (!container.is(e.target) && container.has(e.target).length === 0) {
             $('#searchTopSelect').select2('close');
         }
+        let container2 = $(".filter-item-list ");
+        if (!container2.is(e.target) && container2.has(e.target).length === 0) {
+            if ($("#dateFilter").prop("checked") == true) {
+                $("#dateFilter").prop("checked", false);
+            }
+        }
+        let container3 = $(".date-filter-list-by");
+        if (!container3.is(e.target) && container3.has(e.target).length === 0) {
+            if ($("#dateFilter2").prop("checked") == true) {
+                $("#dateFilter2").prop("checked", false);
+            }
+        }
+
     });
 
     // slider script 
