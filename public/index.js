@@ -94,18 +94,18 @@ var i = setInterval(() => {
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
           second_name = localStorage.getItem("second_user_name")
-          if(second_name)
-          {
-            document.getElementById("searchTopSelect").innerHTML += `
-            <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
-            `
-          }
-          else
-          {
-            document.getElementById("searchTopSelect").innerHTML += `
-            <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-            `
-          }
+          // if(second_name)
+          // {
+          //   document.getElementById("searchTopSelect").innerHTML += `
+          //   <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
+          //   `
+          // }
+          // else
+          // {
+          //   document.getElementById("searchTopSelect").innerHTML += `
+          //   <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+          //   `
+          // }
 
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
