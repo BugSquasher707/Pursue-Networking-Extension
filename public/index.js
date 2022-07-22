@@ -1350,6 +1350,7 @@ if (document.getElementById("custom_open")) {
 
   });
 }
+
 // if (document.getElementById("major_filters")) {
 //   document.getElementById("major_filters").addEventListener("click", () => {
     
@@ -1417,6 +1418,18 @@ $(document).ready(function() {
 });
 
 
+
+if (document.getElementById("major_date")) {
+  document.getElementById("major_date").addEventListener("click", () => {
+    if(document.getElementById("yeen").style.visibility == "visible"){
+      document.getElementById("yeen").style.visibility = "hidden"
+    }
+    else{
+      document.getElementById("yeen").style.visibility = "visible"
+    }
+
+  });
+}
 
 
 
