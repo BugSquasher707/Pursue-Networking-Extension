@@ -10,10 +10,10 @@ setTimeout(() => {
     }
     second_user_name = localStorage.getItem("second_user_name")
     if(second_user_name){
-      document.getElementById("database_name").value = second_user_name
+      document.getElementById("database_name").innerHTML = second_user_name
     }
     else{
-      document.getElementById("database_name").value = localStorage.getItem("name")
+      document.getElementById("database_name").innerHTML = localStorage.getItem("name")
     }
 
     getId = localStorage.getItem("prospect_id")
