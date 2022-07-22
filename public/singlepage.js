@@ -28,7 +28,7 @@ setTimeout(() => {
         if (userData.data) {
             document.getElementById("prospect_name").innerText = userData.data.name
             if(userData.data.status == "LinkedIn Campaign"){
-              document.querySelector(".select-listing").style.backgroundColor = "black"
+              document.querySelector(".select2-selection__rendered").style.backgroundColor = "black"
               document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
               document.getElementById("select-listing").innerHTML += `
               <option value="Talking/Replied">Talking/Replied</option>
