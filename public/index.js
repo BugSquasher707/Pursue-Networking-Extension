@@ -1134,7 +1134,13 @@ function getvalue(data) {
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
         localStorage.setItem("second_user_id",userData.user_id)
-        localStorage.setItem("second_user_name",name)
+        actual_name = localStorage.getItem("name")
+        if(name == actual_name){
+          localStorage.removeItem("second_user_name")
+        }
+        else{
+          localStorage.setItem("second_user_name",name)
+        }
         console.log(JSON.stringify(lists))
         localStorage.removeItem("db")
         $("#searchTopSelect-2").select2().on('change', () => {
