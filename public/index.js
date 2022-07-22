@@ -56,7 +56,7 @@ var i = setInterval(() => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
-        localStorage.setItem("second_user_id",userData.user_id)
+        // localStorage.setItem("second_user_id",userData.user_id)
         $("#searchTopSelect-2").select2().on('change', () => {
           let data = $("#searchTopSelect-2 option:selected").text();
           if(data == "Select List"){
