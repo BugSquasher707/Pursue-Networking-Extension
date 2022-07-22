@@ -353,15 +353,16 @@ function filter() {
                             <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("linkdin_campaign").innerHTML = ``;
                 document.getElementById("linkdin_campaign").innerHTML = row
                 document.getElementById("linkdin_campaign").innerHTML += `</div>`
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
 
               }
@@ -392,15 +393,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("talking").innerHTML = ``;
                 document.getElementById("talking").innerHTML = row
                 document.getElementById("talking").innerHTML += `</div>`
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
               }
               if (obj1[0].status == "Serious Conversations") {
                 let row = `<div class="heading">Serious Conversations <span>(${obj1.length})</span></div><div class="item-slider-inner">`
@@ -428,15 +430,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("serious").innerHTML = ``;
                 document.getElementById("serious").innerHTML = row
                 document.getElementById("serious").innerHTML += "</div>"
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
               }
               if (obj1[0].status == "Discovery Call Scheduled") {
@@ -465,15 +468,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("scheduled").innerHTML = ``;
                 document.getElementById("scheduled").innerHTML = row
                 document.getElementById("scheduled").innerHTML += "</div>"
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
               }
               if (obj1[0].status == "Discovery Call Completed") {
@@ -502,15 +506,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("completed").innerHTML = ``;
                 document.getElementById("completed").innerHTML = row
                 document.getElementById("completed").innerHTML += "</div>"
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
               }
               if (obj1[0].status == "Boom") {
@@ -539,15 +544,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("boom").innerHTML = ``;
                 document.getElementById("boom").innerHTML = row
                 document.getElementById("boom").innerHTML += "</div>"
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
               }
               if (obj1[0].status == "Lost") {
@@ -576,15 +582,16 @@ function filter() {
                         <a href="#" class="view-btn view_detail_button" data-prospect-id=${obj2.id}>View Details</a>
                         </div>
                     </div>`
-                    if (document.querySelector(".view_detail_button")) {
-                      document.querySelectorAll(".view_detail_button").forEach((ele) => {
-                        ele.addEventListener("click", detailpage);
-                      });
-                    }
+                    
                 })
                 document.getElementById("lost").innerHTML = ``;
                 document.getElementById("lost").innerHTML = row
                 document.getElementById("lost").innerHTML += "</div>"
+                if (document.querySelector(".view_detail_button")) {
+                  document.querySelectorAll(".view_detail_button").forEach((ele) => {
+                    ele.addEventListener("click", detailpage);
+                  });
+                }
 
               }
             }
@@ -841,10 +848,10 @@ function showlists() {
 
   var search = document.getElementById("search").value
   if(search != ""){
-    document.getElementById("search").style.backgroundColor = "#a0c8f1"
+    document.querySelector(".input-con").style.border = "2px solid #a0c8f1"
   }
   else{
-    document.getElementById("search").style.backgroundColor = "transparent"
+    document.querySelector(".input-con").style.border = null
   }
   // let arr = [{ field0: 'and', field1: 'status', field2: '=',field3:'' },
   // { field0: 'and', field1: 'status', field2: '=',field3:'' }]
