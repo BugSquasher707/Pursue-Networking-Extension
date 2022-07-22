@@ -45,7 +45,6 @@ var i = setInterval(() => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
-        document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
         if(localStorage.getItem("user_id") == userData.user_id){
           console.log(userData.user_id)
           localStorage.setItem("name",userData.name)
