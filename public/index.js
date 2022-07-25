@@ -23,10 +23,6 @@ var i = setInterval(() => {
   console.log("Working")
   user_id = localStorage.getItem("user_id")
   yeen = localStorage.getItem("user_id")
-  second = localStorage.getItem("second_user_id")
-  if(second){
-    yeen = second
-  }
   console.log(user_id)
   username = localStorage.getItem("username")
   let name = "00"
@@ -45,7 +41,8 @@ var i = setInterval(() => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
-        if(localStorage.getItem("user_id") == userData.user_id){
+        document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
+        // if(localStorage.getItem("user_id") == userData.user_id){
           console.log(userData.user_id)
           localStorage.setItem("name",userData.name)
           localStorage.setItem("profilepic",userData.image)
@@ -53,19 +50,13 @@ var i = setInterval(() => {
           test_name = str.split(" ")
           document.getElementById("admin_name").innerHTML = test_name[0]
           document.getElementById("admin_image").src = localStorage.getItem("profilepic")
-        }
-        else{
-          str = localStorage.getItem("name")
-          test_name = str.split(" ")
-          document.getElementById("admin_name").innerHTML = test_name[0]
-          document.getElementById("admin_image").src = localStorage.getItem("profilepic")
-        }
+        // }
         
         userData.data.map((obj) => {
           // lists.push(obj.id);
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
-        // localStorage.setItem("second_user_id",userData.user_id)
+        localStorage.setItem("second_user_id",userData.user_id)
         $("#searchTopSelect-2").select2().on('change', () => {
           let data = $("#searchTopSelect-2 option:selected").text();
           if(data == "Select List"){
@@ -92,47 +83,18 @@ var i = setInterval(() => {
         //Call a function when the state changes.
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
-          second_name = localStorage.getItem("second_user_name")
-          // if(second_name)
-          // {
-          //   document.getElementById("searchTopSelect").innerHTML += `
-          //   <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
-          //   `
-          // }
-          // else
-          // {
-          //   document.getElementById("searchTopSelect").innerHTML += `
-          //   <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-          //   `
-          // }
+          document.getElementById("searchTopSelect").innerHTML = `
+          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+          `
 
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
             if(respon.length > 0){
-              if(second_name){
-                document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
-                `
-                document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-                `
-              }
-              else{
-                document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-                `
-              }
-              
+              document.getElementById("searchTopSelect").innerHTML += `
+          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+          `
               var finalArr = respon.map(function (obj, key) {
-                if(second_name){
-                  if(second_name == obj.names_original){}
-                  else{
-                    document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
-                  }
-                }
-                else{
-                  document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
-                }
+                document.getElementById("searchTopSelect").innerHTML += `<option value="Abdul Mateen">${obj.names_original}</option>`
               })
             }
             $("#searchTopSelect").select2().on('change', () => {
@@ -377,7 +339,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -417,7 +379,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -454,7 +416,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -492,7 +454,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -530,7 +492,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -568,7 +530,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -606,7 +568,7 @@ function filter() {
                         </div>
                         <div class="name-box">
                             <div class="name">${obj2.name.length > 18 ? `${obj2.name.slice(0,18)}...`: `${obj2.name}`}</div>
-                            <div class="desig">${obj2.description ? `${obj2.description.length > 100 ? `${obj2.description.slice(0,100)}...`: `${obj2.description}`}` : `No Title`} </div>
+                            <div class="desig">${obj2.description ? `${obj2.description.length > 20 ? `${obj2.description.slice(0,20)}...`: `${obj2.description}`}` : `No Title`} </div>
                         </div>
                         <div class="company">
                             <span class="co">Company:</span>
@@ -946,13 +908,13 @@ function showlists() {
           document.querySelector(".count").innerHTML = arr.length
 
 
-          row += `<tr><td style="width:30%!important">
+          row += `<tr><td>
       <img src="${obj.image}" alt="user-image">
-      <span class="name" >${obj.name}</span>
+      <span class="name">${obj.name}</span>
       </td>
-      <td>${obj.description ? `${obj.description.length > 18 ? `${obj.description.slice(0,18)}...`: `${obj.description}`}` : `No Title`} </td>
-      <td>${obj.company ? `${obj.company.length > 18 ? `${obj.company.slice(0,18)}...`: `${obj.company}`}` : `No Company`} </td>
-      <td>${obj.address ? `${obj.address.length > 18 ? `${obj.address.slice(0,18)}...`: `${obj.address}`}` : `No address`} </td>
+      <td>${obj.description ? `${obj.description.length > 22 ? `${obj.description.slice(0,22)}...`: `${obj.description}`}` : `No Title`} </td>
+      <td>${obj.company ? `${obj.company.length > 22 ? `${obj.company.slice(0,22)}...`: `${obj.company}`}` : `No Company`} </td>
+      <td>${obj.address ? `${obj.address.length > 22 ? `${obj.address.slice(0,22)}...`: `${obj.address}`}` : `No address`} </td>
       <td class="badge-own compain" ><span style="background-color:${color} !important">${obj.status}</span></td>
       <td><a href="#"  class="view-btn view_detail_button" data-prospect-id=${obj.id} >View Details</a>
       </td>
@@ -1143,13 +1105,6 @@ function getvalue(data) {
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
         localStorage.setItem("second_user_id",userData.user_id)
-        actual_name = localStorage.getItem("name")
-        if(name == actual_name){
-          localStorage.removeItem("second_user_name")
-        }
-        else{
-          localStorage.setItem("second_user_name",name)
-        }
         console.log(JSON.stringify(lists))
         localStorage.removeItem("db")
         $("#searchTopSelect-2").select2().on('change', () => {
@@ -1350,7 +1305,6 @@ if (document.getElementById("custom_open")) {
 
   });
 }
-
 // if (document.getElementById("major_filters")) {
 //   document.getElementById("major_filters").addEventListener("click", () => {
     
@@ -1418,18 +1372,6 @@ $(document).ready(function() {
 });
 
 
-
-if (document.getElementById("major_date")) {
-  document.getElementById("major_date").addEventListener("click", () => {
-    if(document.getElementById("yeen").style.visibility == "visible"){
-      document.getElementById("yeen").style.visibility = "hidden"
-    }
-    else{
-      document.getElementById("yeen").style.visibility = "visible"
-    }
-
-  });
-}
 
 
 
