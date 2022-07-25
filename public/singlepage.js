@@ -110,9 +110,14 @@ setTimeout(() => {
               `
         }
 
-        $(".select-listing").select2().on('change', () => {
-          let data = $(".select-listing option:selected").text();
-          event_save()
+        // $(".select-listing").select2().on('change', () => {
+        //   let data = $(".select-listing option:selected").text();
+        //   event_save()
+        // })
+
+        createCustomSelect('select-listing').click(function () {
+          let dataselect = $(".select-listing-list-item.selected").text();
+          console.log(dataselect)
         })
 
 
@@ -783,4 +788,33 @@ function addMemberToComment(e) {
     document.getElementById("add_comment").value = `${string} `;
     document.getElementById("myDropdown").style.display = "none";
   }
+}
+
+
+
+
+
+
+// custom code
+const createCustomSelect = (id, placeholder = 'Select List') => {
+  $('#' + id).hide();
+  let selectListArray = '';
+  const optionList = $("#" + id)[0].children;
+  for (let i = 0; i < optionList.length; i++) {
+    let optionValue = optionList[i].value;
+    let optionText = optionList[i].innerText;
+
+    selectListArray += `<li class='${optionList[i].value} ${id}-list-item'>${optionText}</li>`
+    console.log(selectListArray)
+  }
+  $("#" + id).parent().append(`<div id='${id}-container' class='select-style-select-listing'> <ul> ${selectListArray} </ul> </div>`)
+  $('#' + id + '-container').prepend(`<div id='${id}-heading'>${placeholder}</div>`)
+
+  // retun value 
+  $('.' + id + '-list-item').click(function () {
+    $(`#${id}-heading`).html($(this).text())
+    $('.' + id + '-list-item').removeClass('selected');
+    $(this).addClass('selected');
+  });
+  return $(`.${id}-list-item`);
 }
