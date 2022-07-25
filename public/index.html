@@ -51,6 +51,19 @@
             /* Safari */
             animation: spin 1s linear infinite;
         }
+        .loader_select {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            left: 88% !important;
+            display: none;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 1s linear infinite;
+        }
 
         /* Safari */
         @-webkit-keyframes spin {
@@ -90,10 +103,11 @@
                         <div class="input-inner">
                             <img src="./Assets/img/search.png" alt="search-img-icon">
                             <input type="search" name="search" id="search" placeholder="Search Prospects">
+                            <div class="loader_select select2-container"></div>
                             <!-- select with search functionality  -->
                             <select id="searchTopSelect">
 
-                            </select>
+                            </select> 
                         </div>
                     </div>
                 </div>

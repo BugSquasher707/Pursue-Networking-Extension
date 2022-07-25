@@ -114,10 +114,16 @@ var i = setInterval(() => {
                 <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
                 `
                 document.getElementById("searchTopSelect").innerHTML += `
+                <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
+                `
+                document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
                 `
               }
               else{
+                document.getElementById("searchTopSelect").innerHTML += `
+                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
+                `
                 document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
                 `
@@ -138,6 +144,8 @@ var i = setInterval(() => {
             $("#searchTopSelect").select2().on('change', () => {
               let data = $("#searchTopSelect option:selected").text();
               localStorage.setItem("db",true)
+              document.querySelector(".loader_select").style.display = "block"
+              document.querySelector(".select2-selection").style.display = "none"
               getvalue(data)
           })
 
@@ -245,6 +253,8 @@ if (document.getElementById("pills-home-tab")) {
 }
 
 function filter() {
+      // document.querySelector(".loader_select").style.display = "block"
+      // document.querySelector(".select2-selection").style.display = "none"
   second_user_id = localStorage.getItem("second_user_id")
   if(!second_user_id){
     second_user_id = localStorage.getItem("user_id")
@@ -722,14 +732,17 @@ function filter() {
           }
         }
       }, 8000)
+      document.querySelector(".loader_select").style.display = "none"
+      document.querySelector(".select2-selection").style.display = "block"
       document.querySelector(".count").innerHTML = counting
     }
 
     // alert('ok')
-
+    
 
   } else {
     showlists()
+    
   }
 }
 if (document.getElementById("apply_filter")) {
@@ -923,19 +936,19 @@ function showlists() {
       if (arr != '200') {
         arr.map((obj) => {
           if (obj.status == "LinkedIn Campaign") {
-            color = "#0e76a8"
+            color = "#074dd"
           }
           if (obj.status == "Talking/Replied") {
-            color = "rgb(137, 207, 240);"
+            color = "#0fb2f8"
           }
           if (obj.status == "Serious Conversations") {
-            color = "#FFA500"
+            color = "##f8630f"
           }
           if (obj.status == "Discovery Call Scheduled") {
-            color = "#FF0000"
+            color = "##f80f0f"
           }
           if (obj.status == "Discovery Call Completed") {
-            color = "#FFCB05"
+            color = "#edc038"
           }
           if (obj.status == "Boom") {
             color = "rgb(133, 187, 101)"
@@ -944,6 +957,8 @@ function showlists() {
             color = "rgb(128, 128, 128)"
           }
           document.querySelector(".count").innerHTML = arr.length
+          document.querySelector(".loader_select").style.display = "none"
+          document.querySelector(".select2-selection").style.display = "block"
 
 
           row += `<tr><td style="width:30%!important">
@@ -972,6 +987,7 @@ function showlists() {
       }
     }
   }
+  
 
 }
 if (document.getElementById("add_another")) {
@@ -1422,14 +1438,38 @@ $(document).ready(function() {
 if (document.getElementById("major_date")) {
   document.getElementById("major_date").addEventListener("click", () => {
     if(document.getElementById("yeen").style.visibility == "visible"){
+      document.getElementById("yeen").style.display = "none"
       document.getElementById("yeen").style.visibility = "hidden"
+
     }
     else{
+      document.getElementById("yeen").style.display = "block"
       document.getElementById("yeen").style.visibility = "visible"
+
+
     }
 
   });
 }
+if (document.getElementById("major_filters")) {
+  document.getElementById("major_filters").addEventListener("click", () => {
+    if(document.getElementById("major_filter_div").style.visibility == "visible"){
+      document.getElementById("major_filter_div").style.visibility = "hidden"
+    }
+    else{
+      document.getElementById("major_filter_div").style.visibility = "visible"
+    }
+
+  });
+}
+// $( document.body ).click(function() {
+//   if(document.getElementById("yeen").style.visibility == "visible"){
+//     document.getElementById("yeen").style.visibility = "hidden"
+//   }
+//   else{
+//     document.getElementById("yeen").style.visibility = "visible"
+//   }});
+
 
 
 

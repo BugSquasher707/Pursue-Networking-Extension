@@ -118,7 +118,7 @@ setTimeout(() => {
 
             document.getElementById("prospect_image").src = userData.data.image
             document.getElementById("follow_up_date").value = userData.data.follow_up
-            document.getElementById("content").innerText = userData.data.notes
+            document.getElementById("content").innerHTML = userData.data.notes
             document.getElementById("description_name").value = userData.data.description
             document.getElementById("company_name").value = userData.data.company
             document.getElementById("company_address").value = userData.data.address
@@ -306,7 +306,7 @@ function event_save(){
     company = document.getElementById("company_name").value
     about = document.getElementById("prospect_about").value
     address = document.getElementById("company_address").value
-    notes = document.getElementById("content").innerText
+    notes = document.getElementById("content").innerHTML
     follow_up = document.getElementById("follow_up_date").value
     discovery_call = document.getElementById("discovery_call_date").value
     updated_at = document.getElementById("last_modified").value
