@@ -23,6 +23,10 @@ var i = setInterval(() => {
   console.log("Working")
   user_id = localStorage.getItem("user_id")
   yeen = localStorage.getItem("user_id")
+  second_user = localStorage.getItem("second_user_id")
+  if(second_user){
+    yeen = second_user
+  }
   console.log(user_id)
   username = localStorage.getItem("username")
   let name = "00"
@@ -83,20 +87,21 @@ var i = setInterval(() => {
         //Call a function when the state changes.
         if (xhr1.readyState == 4 && xhr1.status == 200) {
           document.getElementById("searchTopSelect").innerHTML = ``
-          document.getElementById("searchTopSelect").innerHTML = `
-          <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-          `
+          
 
           var respon = xhr1.responseText;
             respon = JSON.parse(respon);
-            if(respon.length > 0){
+            second_name = localStorage.getItem("second_user_name")
+            console.log("here")
+            if(respon){
+              console.log(respon)
+
+
               if(second_name){
                 document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
                 `
-                document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("second_user_name")}</option>
-                `
+                
                 document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
                 `
@@ -105,9 +110,7 @@ var i = setInterval(() => {
                 document.getElementById("searchTopSelect").innerHTML += `
                 <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
                 `
-                document.getElementById("searchTopSelect").innerHTML += `
-                <option value="Abdul Mateen">${localStorage.getItem("name")}</option>
-                `
+                
               }
               
               var finalArr = respon.map(function (obj, key) {
@@ -115,6 +118,7 @@ var i = setInterval(() => {
               })
             }
             $("#searchTopSelect").select2().on('change', () => {
+              console.log("hete")
               let data = $("#searchTopSelect option:selected").text();
               localStorage.setItem("db",true)
               document.querySelector(".loader_select").style.display = "block"
@@ -1132,6 +1136,13 @@ function getvalue(data) {
           document.getElementById("searchTopSelect-2").innerHTML += `<option value="${obj.id}" >${obj.title}</option>`
         })
         localStorage.setItem("second_user_id",userData.user_id)
+        localStorage.setItem("second_user_name",name)
+        original_name = localStorage.getItem("name")
+          if(original_name == name){
+            localStorage.removeItem("second_user_name")
+          }
+        
+
         console.log(JSON.stringify(lists))
         localStorage.removeItem("db")
         $("#searchTopSelect-2").select2().on('change', () => {
