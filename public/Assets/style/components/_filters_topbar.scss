@@ -237,10 +237,25 @@
         z-index: 44;
         width: 100%;
         &.boom {
-            background-color: red;
+            background-color:  rgb(133, 187, 101) !important;
         }
         &.lost {
-            background-color: green;
+            background-color: rgb(128, 128, 128);
+        }
+        &.compain {
+            background-color: #074dd1;
+        }
+        &.talking/replied {
+            background-color: #0fb2f8;
+        }
+        &.serious-conversations {
+            background-color: #f8630f;
+        }
+        &.discovery-call-scheduled {
+            background-color: #f80f0f;
+        }
+        &.discovery-call-completed {
+            background-color: #edc038;
         }
         & + ul {
             max-width: 300px;

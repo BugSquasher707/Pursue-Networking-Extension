@@ -35,7 +35,6 @@ setTimeout(() => {
       if (userData.data) {
         document.getElementById("prospect_name").innerText = userData.data.name
         if (userData.data.status == "LinkedIn Campaign") {
-          console.log("here")
           document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
               <option value="Talking/Replied">Talking/Replied</option>
@@ -47,11 +46,12 @@ setTimeout(() => {
           // document.getElementById("select2-select-listing-container").style.backgroundColor = "#fff !important"
           // document.querySelectorAll(".select2-selection--single").style.backgroundColor = "black"
 
+
         }
         else if (userData.data.status == "Talking/Replied") {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Talking/Replied" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Serious Conversations">Serious Conversations</option>
               <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
               <option value="Discovery Call Completed">Discovery Call Completed</option>
@@ -59,9 +59,9 @@ setTimeout(() => {
               <option value="Lost">Lost</option>`
         }
         else if (userData.data.status == "Serious Conversations") {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Serious Conversations" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Talking/Replied">Talking/Replied</option>
               <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
               <option value="Discovery Call Completed">Discovery Call Completed</option>
@@ -69,9 +69,9 @@ setTimeout(() => {
               <option value="Lost">Lost</option>`
         }
         else if (userData.data.status == "Discovery Call Scheduled") {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Discovery Call Scheduled" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Talking/Replied">Talking/Replied</option>
               <option value="Serious Conversations">Serious Conversations</option>
               <option value="Discovery Call Completed">Discovery Call Completed</option>
@@ -79,9 +79,9 @@ setTimeout(() => {
               <option value="Lost">Lost</option>`
         }
         else if (userData.data.status == "Discovery Call Completed") {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Discovery Call Completed" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Talking/Replied">Talking/Replied</option>
               <option value="Serious Conversations">Serious Conversations</option>
               <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
@@ -89,9 +89,9 @@ setTimeout(() => {
               <option value="Lost">Lost</option>`
         }
         else if (userData.data.status == "Boom") {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Boom" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Talking/Replied">Talking/Replied</option>
               <option value="Serious Conversations">Serious Conversations</option>
               <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
@@ -99,9 +99,9 @@ setTimeout(() => {
               <option value="Lost">Lost</option>`
         }
         else {
-          document.getElementById("select-listing").innerHTML = `<option value="compain" selected >${userData.data.status}</option>`
+          document.getElementById("select-listing").innerHTML = `<option value="Lost" selected >${userData.data.status}</option>`
           document.getElementById("select-listing").innerHTML += `
-              <option value="LinkedIn Campaign">LinkedIn Campaign</option>
+              <option value="compain">LinkedIn Campaign</option>
               <option value="Talking/Replied">Talking/Replied</option>
               <option value="Serious Conversations">Serious Conversations</option>
               <option value="Discovery Call Scheduled">Discovery Call Scheduled</option>
@@ -109,11 +109,39 @@ setTimeout(() => {
               <option value="Boom">Boom</option>
               `
         }
+        
 
         createCustomSelect('select-listing').click(function () {
           let dataselect = $(".select-listing-list-item.selected").text();
+          if(dataselect == "Boom"){
+          }
+          if(dataselect == "Boom"){
+            document.getElementById("select-listing-heading").classList.add("boom")
+          }
+          event_save()
           console.log(dataselect)
         })
+        document.querySelector(".custom-select-heading").innerHTML = `${userData.data.status}`
+
+        if(userData.data.status == "LinkedIn Campaign"){
+          document.getElementById("select-listing-heading").classList.add("compain")
+        } 
+        if(userData.data.status == "Talking/Replied"){
+          document.getElementById("select-listing-heading").classList.add("talking/replied")
+        }if(userData.data.status == "Serious Conversations"){
+          document.getElementById("select-listing-heading").classList.add("serious-conversations")
+        }if(userData.data.status == "Discovery Call Scheduled"){
+          document.getElementById("select-listing-heading").classList.add("discovery-call-scheduled")
+        }if(userData.data.status == "Discovery Call Completed"){
+          document.getElementById("select-listing-heading").classList.add("discovery-call-completed")
+        }
+        if(userData.data.status == "Boom"){
+          document.getElementById("select-listing-heading").classList.add("boom")
+        }if(userData.data.status == "Lost"){
+          document.getElementById("select-listing-heading").classList.add("lost")
+        }
+
+
 
 
         document.getElementById("prospect_image").src = userData.data.image
@@ -296,7 +324,7 @@ function event_save() {
 
   user_id = localStorage.getItem("user_id")
   fname = document.getElementById("prospect_name").innerText
-  let status = $(".select-listing option:selected").text();
+  let status = $(".select-listing-list-item.selected").text();
   profile_image = document.getElementById("prospect_image").src
   description = document.getElementById("description_name").value
   company = document.getElementById("company_name").value
