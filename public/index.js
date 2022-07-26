@@ -46,7 +46,7 @@ var i = setInterval(() => {
         let userData = JSON.parse(xhr.responseText);
         document.getElementById("searchTopSelect-2").innerHTML = `<option value="">Select List</option>`
         document.getElementById("searchTopSelect-2").innerHTML += `<option value="">Select List</option>`
-        // if(localStorage.getItem("user_id") == userData.user_id){
+        if(localStorage.getItem("user_id") == userData.user_id){
           console.log(userData.user_id)
           localStorage.setItem("name",userData.name)
           localStorage.setItem("profilepic",userData.image)
@@ -54,7 +54,12 @@ var i = setInterval(() => {
           test_name = str.split(" ")
           document.getElementById("admin_name").innerHTML = test_name[0]
           document.getElementById("admin_image").src = localStorage.getItem("profilepic")
-        // }
+        }
+        else{
+          temp = localStorage.getItem("name").split(" ")
+          document.getElementById("admin_name").innerHTML = temp[0]
+          document.getElementById("admin_image").src = localStorage.getItem("profilepic")
+        }
         
         userData.data.map((obj) => {
           // lists.push(obj.id);
@@ -1094,6 +1099,10 @@ function getvalue(data) {
   let name = data
   variable = "00"
   user_id = localStorage.getItem("user_id")
+  second_user_id = localStorage.getItem("second_user_id")
+  if(second_user_id){
+    user_id = second_user_id
+  }
   check = localStorage.getItem("db")
   if(!check){
     const url = `${globalURl}/get_users_lists/${name}/${user_id}/${variable}`;
