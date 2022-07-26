@@ -94,35 +94,35 @@
         }
 
         .iconMsgPicContainer:hover {
-			cursor: pointer !important;
-		}
+            cursor: pointer !important;
+        }
 
         .smallgroupBox .tooltiptext {
-			visibility: hidden;
-			width: fit-content;
-			background-color: #DFE9FA;
-			color: #000 !important;
-			text-align: center;
-			border-radius: 6px;
-			padding: 3px 15px;
-			font-size: 10px;
-			font-weight: 500;
-			white-space: nowrap;
-			/* Position the tooltip */
-			position: absolute;
-			z-index: 10;
-			top: -57%;
-			left: 0%;
+            visibility: hidden;
+            width: fit-content;
+            background-color: #DFE9FA;
+            color: #000 !important;
+            text-align: center;
+            border-radius: 6px;
+            padding: 3px 3px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 10;
+            top: -57%;
+            left: 0%;
 
-		}
+        }
 
-		.smallgroupBox:hover .tooltiptext {
-			visibility: visible;
-		}
+        .smallgroupBox:hover .tooltiptext {
+            visibility: visible;
+        }
 
-		.smallgroupBox:hover {
-			cursor: pointer !important;
-		}
+        .smallgroupBox:hover {
+            cursor: pointer !important;
+        }
 
         .countNum,
         .countNum1 {
@@ -169,7 +169,7 @@
             width: 45px;
             height: 40px;
             background-color: #edf4fd;
-            border-radius: 5px;
+            border-radius: 50%;
             margin-top: -5px;
             margin-left: 5px;
             box-sizing: border-box;
@@ -182,8 +182,8 @@
         }
 
         .smalluserIconDemo {
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             box-sizing: border-box;
             margin: 5%;
             margin-top: 0px;
@@ -200,6 +200,12 @@
             cursor: pointer;
             opacity: 1;
             transition: all 0.2s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            border-radius: 50%;
         }
 
         .searchDiv {
@@ -235,6 +241,7 @@
             margin-left: 20px;
             margin-bottom: 0px;
         }
+
         .loadergroupIcons {
             border: 5px solid #f3f3f3;
             border-radius: 50%;
@@ -248,7 +255,7 @@
         }
 
         .loader {
-			border: 7px solid #f3f3f3;
+            border: 7px solid #f3f3f3;
             border-radius: 50%;
             border-top: 7px solid #3498db;
             width: 50px;
@@ -260,13 +267,13 @@
             position: relative;
             top: 40%;
             left: 35%;
-		}
+        }
 
         @-webkit-keyframes spin {
             0% {
                 -webkit-transform: rotate(0deg);
             }
-            
+
             100% {
                 -webkit-transform: rotate(360deg);
             }
@@ -282,7 +289,7 @@
             }
         }
 
-        .membersModal{
+        .membersModal {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -297,7 +304,7 @@
             transition: opacity 0.2s ease-in-out;
         }
 
-        .membersModalContainer{
+        .membersModalContainer {
             width: 85%;
             height: 520px;
             background: #F7FBFF 0% 0% no-repeat padding-box;
@@ -308,7 +315,7 @@
             margin-top: 40px;
         }
 
-        .membersMainContentContainer{
+        .membersMainContentContainer {
             width: 100%;
             height: 430px;
             overflow: hidden;
@@ -334,7 +341,7 @@
             display: block;
         }
 
-        .prospectContent{
+        .prospectContent {
             width: 100%;
             height: 50px;
             display: flex;
@@ -350,33 +357,33 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .prospectContent:hover{
+        .prospectContent:hover {
             background-color: #084DD1;
         }
 
-        .prospectContent:hover h1{
+        .prospectContent:hover h1 {
             color: white;
         }
 
-        .prospectContent:hover i{
+        .prospectContent:hover i {
             color: white;
         }
 
-        .prospectContent i{
+        .prospectContent i {
             font-size: 18px;
             margin-right: 15px;
             color: black;
             transition: all .3s ease-in-out;
         }
 
-        .prospectContent img{
+        .prospectContent img {
             width: 30px;
             height: 30px;
             border-radius: 50%;
             margin-right: 15px;
         }
 
-        .prospectContent h1{
+        .prospectContent h1 {
             width: fit-content;
             font: normal normal normal 14.5px Roboto;
             letter-spacing: 0px;
@@ -386,7 +393,7 @@
             transition: all 0.2s ease-in-out;
         }
 
-        .prospectContent span{
+        .prospectContent span {
             width: 25px;
             height: 25px;
             border-radius: 50%;
@@ -401,7 +408,8 @@
             transform: translateY(-50%);
         }
 
-        .showMembersAll, .showGroupsAll{
+        .showMembersAll,
+        .showGroupsAll {
             padding: 10px;
             box-sizing: border-box;
             background-color: #DFE9FA;
@@ -420,19 +428,19 @@
         }
 
         .showMembersAll:hover,
-		.showGroupsAll:hover{
+        .showGroupsAll:hover {
             background-color: #084DD1;
         }
 
-		.showMembersAll:hover .fa-eye{
-			color: #fff !important;
-		}
+        .showMembersAll:hover .fa-eye {
+            color: #fff !important;
+        }
 
-		.showGroupsAll:hover .fa-eye{
-			color: #fff !important;
-		}
+        .showGroupsAll:hover .fa-eye {
+            color: #fff !important;
+        }
 
-        .closeDiv{
+        .closeDiv {
             width: 30px;
             height: 30px;
             background: #C4DEFF 0% 0% no-repeat padding-box;
@@ -443,7 +451,7 @@
             cursor: pointer;
         }
 
-        .closeDiv img{
+        .closeDiv img {
             width: 13px;
             height: 13px;
         }
@@ -464,81 +472,85 @@
         }
 
         .groupContainer {
-			width: 100%;
-			height: 100%;
-			background: #FFFFFF 0% 0% no-repeat padding-box;
-			border-radius: 20px;
-			padding: 0px 15px;
-			padding-bottom: 15px;
-			box-sizing: border-box;
-			position: relative;
-			overflow-x: hidden;
-			overflow-y: scroll;
-		}
+            width: 100%;
+            height: 100%;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            padding: 0px 15px;
+            padding-bottom: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
 
-		.groupBoxContainer {
-			width: 100%;
-			height: fit-content;
-			position: relative;
-			display: grid;
-			grid-template-columns: repeat(3, 30%);
-			justify-content: space-between;
-		}
+        .groupBoxContainer {
+            width: 100%;
+            height: fit-content;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            justify-content: space-between;
+        }
 
-		.groupBox {
-			width: 100%;
-			height: 100px;
-			background-color: #edf4fd;
-			border-radius: 10px;
-			padding: 0px 10px;
-			margin-top: 15px;
-			box-sizing: border-box;
-			display: grid;
-			grid-template-columns: repeat(2, 40%);
-			justify-content: space-between;
-			cursor: pointer;
-			transition: all 0.3s ease-in-out;	
-		}
+        .groupBox {
+            width: 100%;
+            height: 100px;
+            border-radius: 50%;
+            padding: 0px 10px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(2, 40%);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
 
         .groupBox:hover {
-			background-color: #084DD1;
-		}
-        
+            background-color: #084DD1;
+        }
+
         .userIconDemo {
-			width: 30px;
-			height: 30px;
-			box-sizing: border-box;
-			margin: 0%;
-			margin-top: 10px;
-			border-radius: 10px;
-			background: #E5E8ED 0% 0% no-repeat;
-			display: flex;
-			justify-content: center;
-			flex-wrap: nowrap;
-			align-items: center;
-			font: normal normal bold 12px/14px Roboto;
-			color: #030D47;
-			line-height: 0%;
-			cursor: pointer;
-			opacity: 1;
-			transition: all 0.2s ease-in-out;
-		}
+            width: 83%;
+            height: 83%;
+            box-sizing: border-box;
+            margin: 0%;
+            /* margin-top: 10px; */
+            background: #E5E8ED 0% 0% no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            align-items: center;
+            font: normal normal bold 12px/14px Roboto;
+            color: #030D47;
+            line-height: 0%;
+            cursor: pointer;
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
 
         .groupName {
-			font-size: 13px;
-			font-weight: 600;
-			margin-top: 2px;
-			color: black !important;
-			z-index: 10;
-			width: 100%;
-			height: 25px;
-			border-radius: 5px;
-			cursor: default;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-		}
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 2px;
+            color: black !important;
+            z-index: 10;
+            width: 100%;
+            height: 25px;
+            border-radius: 5px;
+            cursor: default;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
         .notificationBox {
             width: 25px;
@@ -555,7 +567,6 @@
             cursor: default;
             font-size: 12px;
         }
-
     </style>
     <div class="main__container" style="margin-top: 5px;">
 
@@ -599,7 +610,9 @@
 
         <div class="user-img-and-text" style=" text-align: center; padding-bottom: 10px;">
             <div class="userImage" style="margin-bottom:13px !important">
-                <img src="" style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px;" id="profilePic">
+                <img src=""
+                    style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px; cursor: pointer;"
+                    id="profilePic">
             </div>
             <span class="new-header-record" style="color: #757575 !important;
             font-size: 14px !important;" id="savedUserMessage"></span>
@@ -774,7 +787,8 @@
                     <div class="rightSection weeklyWeek5"></div>
 
                 </div>
-                <div class="weekContainer weeklyWeekContainer6" style="padding: 0% 10px; margin-top: 10px; display: none;">
+                <div class="weekContainer weeklyWeekContainer6"
+                    style="padding: 0% 10px; margin-top: 10px; display: none;">
 
                     <div class="rightSection weeklyWeek6"></div>
 
@@ -829,7 +843,6 @@
 
         </div>
 
-
     </div>
 
     <!-- View Prospect Data -->
@@ -846,13 +859,14 @@
                 <p id="follow_up_print">Follow Up Date</p>
 
                 <i class="fas fa-calendar-alt" id="openDatePicker"></i>
-                <div class="datePickerDiv" style="width: 100%; ">    
+                <div class="datePickerDiv" style="width: 100%; ">
                     <div class="triangleDiv"></div>
                     <div class="textBox">
-                        <input type="date" class="filterInputField" style="width: 90%; margin-top: 12px;" id="follow_up">
+                        <input type="date" class="filterInputField" style="width: 90%; margin-top: 12px;"
+                            id="follow_up">
                         <input id="profile_url" type="hidden" value="">
                     </div>
-    
+
                 </div>
             </div>
 
@@ -916,9 +930,9 @@
 
                 <div class="groupContainer">
 
-					<div class="groupBoxContainer groupDynamicContainer"></div>
+                    <div class="groupBoxContainer groupDynamicContainer"></div>
 
-				</div>
+                </div>
 
             </div>
 

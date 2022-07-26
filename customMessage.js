@@ -32,6 +32,9 @@ let groupUsersArr = [];
 let groupmembersArr = [];
 let subgroupmembersArr = [];
 let groupprospectsArr = [];
+let SearchUserArray = [];
+let tempVariable;
+
 
 
 // Test URL
@@ -73,6 +76,8 @@ setTimeout(() => {
 function topbaricons() {
   var user_id = localStorage.getItem("user_id");
 
+
+  
 
   
 
@@ -688,10 +693,17 @@ document.getElementById("add_member_in_screen").style.display ="block"
               .join("")}
                   
                   </div>
-                  <div class="groupName">${item.name.length > 10
-              ? `${item.name.slice(0, 10)} ...`
-              : item.name
-            }</div>
+                  <div class="groupName" style="display: -webkit-box;
+                  -webkit-line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                  max-width: 328px;
+                  width: auto;
+    height: auto;
+    line-height: 12px;
+    font-size: 11px;
+    white-space: break-spaces;
+                  ">${item.name}</div>
                   
                   
                 </div>
@@ -1774,6 +1786,7 @@ function showNullMembersChats() {
       let userMessages = JSON.parse(xhr.responseText);
       localStorage.setItem("dms",true);
       if(prospect_id != null){
+        document.getElementById("Conversations_button").style.display = "block"
         let userData = JSON.parse(xhr.responseText);
 
 
@@ -2264,6 +2277,7 @@ function showNullMembersChats() {
 
       }
       else{
+        document.getElementById("Conversations_button").style.display = "none"
 
       document.getElementById("customScreenChattBox").style.display = "block"
       document.querySelector(".prospect_name_heading").innerText =
@@ -2569,17 +2583,18 @@ position: absolute;
 top: -3px;
 right: 7px;
 ">
-<button data-id=${ele.temporary_id} title="Open Chat"  class="opening_perspective" style="
-         border: 0;
-         background: none;
-         cursor:pointer;
-         ">
-         <img class="new_class" style="width: 18px;
-         height: 18px;
-         object-fit: cover;
-         border-radius: 50%;" src="./Assets/img/chat_redirect.png">
-      </button> 
-<button data-url=${ele.url}  class="opening_background" style="
+${ele.delete_status == 0 ? `<button data-id=${ele.temporary_id} data-title="View Prospect Chat"  class="opening_perspective" style="
+border: 0;
+background: none;
+cursor:pointer;
+">
+<img class="new_class" style="width: 18px;
+height: 18px;
+object-fit: cover;
+border-radius: 50%;" src="./Assets/img/chat_redirect.png">
+</button> ` : ``}
+
+<button data-url=${ele.url} data-title="View LinkedIn Profile" class="opening_background" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -2589,7 +2604,7 @@ right: 7px;
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
       </button> 
-      <a href="#modal-12" data-id=${ele.sender_id} data-url=${ele.url} class="opening_clipper" style="
+      <a href="#modal-12" data-title="View Prospect" data-prospect-id=${ele.temporary_id} data-id=${ele.sender_id} data-url=${ele.url} class="opening_clipper" style="
       border: 0;
       background: none;
       cursor:pointer;
@@ -2608,6 +2623,13 @@ right: 7px;
                 </div>
                 ${ ele.name ? `
                 <span class="prospect_updating_text" style="display:none">${ele.text}</span>
+
+                <button class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn" style="top: 8px; right: 8px">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <div class="dropdown-list">
+                        <span  data-replied_id=${ele.id} class="Dmsprospect_message_delete_button">Delete</span>
+                        </div>
+                        </button>
 
                 ` : `
                 
@@ -2689,6 +2711,48 @@ right: 7px;
 
                   var profile_link = e.currentTarget.getAttribute("data-url");
               var user_id = e.currentTarget.getAttribute("data-id");
+              var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
+              var sending_id = localStorage.getItem("user_id");
+
+
+              const url = `${globalURl}/get_prospect_Data`;
+
+                              let xhr = new XMLHttpRequest();
+
+                              xhr.open("POST", url, true);
+                              xhr.setRequestHeader("Content-Type", "application/json");
+                              xhr.send(
+                                JSON.stringify({
+                                  prospect_id,
+                                  user_id: sending_id,
+                                })
+                              );
+
+                              xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                  let userData = JSON.parse(xhr.responseText);
+                                  if (userData.data) {
+                                    if(userData.data.prospect_status == "no"){
+                                      document.getElementById("send_CRM").style.display = "none";
+                                    }
+                                    else{
+                                      document.getElementById("send_CRM").style.display = "block";
+                                      document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                      document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;
+                                    }
+                                    document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
+                                    document.getElementById("prospect_image_heading_comment").src = userData.data.image
+                                    document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
+                                    document.querySelector(".prospect_group_name_comment").innerText = userData.data.company
+                                    document.querySelector(".prospect_subgroup_name_comment").innerText = userData.data.address
+                                    document.querySelector(".prospect_subgroup_status_comment").innerText = userData.data.status
+                                    document.querySelector(".notes_comment").innerText = `${userData.data.notes == null ? `Notes not added` : `${userData.data.notes}`}`  
+                                  }
+                                    
+                                  
+                                }
+                              }
+
 
 
 
@@ -2697,6 +2761,8 @@ right: 7px;
                 document.getElementById("comment_box").value = "";
                 document.getElementById("temporary_sender").value = user_id;
                 document.getElementById("temporary_url").value = profile_link;
+                document.getElementById("temporary_prospect_id").value = prospect_id;
+
 
 
                 var access_token = localStorage.getItem("access_token");
@@ -3073,7 +3139,7 @@ right: 7px;
                     <div class="prospectContent" data-prospect_id=${ele.prospect_id
               }>
                                 
-                      <img src=${ele.prospect_data.image} alt=""/>
+                      <img src=${ele.prospect_data.image ? `${ele.prospect_data.image}` : `.Assets/img/user.png`} alt=""/>
               
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
@@ -3132,6 +3198,12 @@ right: 7px;
 }
 
 function activeClassInject(e) {
+  check = Number(e.currentTarget.getAttribute("date-linkedId"));
+  console.log(check,"check");
+  if(SearchUserArray.indexOf(check) !== -1){
+    SearchUserArray.splice(SearchUserArray.indexOf(check), 1)
+  }
+  console.log("here",SearchUserArray)
   e.currentTarget.classList.toggle("chatContentH1DotActive");
 }
 
@@ -3274,11 +3346,14 @@ function openModal25() {
 }
 
 function closeModal1() {
+  SearchUserArray = [];
   modalContainer1.style.transform = "scale(0)";
   modalContainer1.style.opacity = 0;
 }
 
 function closeModal2() {
+  var mainContentContainer = document.querySelector(".mainContentContainer1");
+  mainContentContainer.innerHTML = ``
   modalContainer2.style.transform = "scale(0)";
   modalContainer2.style.opacity = 0;
   document.querySelector('#groupAvatar').src = "./Assets/img/group-bg.png"
@@ -3649,16 +3724,57 @@ function sendMessage(e) {
                     ele.addEventListener("click", (e) => {
     
     
-                      var profile_link = e.currentTarget.getAttribute("data-url");
+                  var profile_link = e.currentTarget.getAttribute("data-url");
                   var user_id = e.currentTarget.getAttribute("data-id");
-    
-    
+                  var sending_id = localStorage.getItem("user_id");
+                  var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
+                            
+                  const url = `${globalURl}/get_prospect_Data`;
+
+                    let xhr = new XMLHttpRequest();
+
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(
+                      JSON.stringify({
+                        prospect_id,
+                        user_id: sending_id,
+                      })
+                    );
+
+                    xhr.onreadystatechange = function () {
+                      if (xhr.readyState == 4 && xhr.status == 200) {
+                        let userData = JSON.parse(xhr.responseText);
+                        if (userData.data) {
+                          if(userData.data.prospect_status == "no"){
+                            document.getElementById("send_CRM").style.display = "none";
+                          }
+                          else{
+                            document.getElementById("send_CRM").style.display = "block";
+                            document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                            document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+
+                          }
+                          document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
+                          document.getElementById("prospect_image_heading_comment").src = userData.data.image
+                          document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
+                          document.querySelector(".prospect_group_name_comment").innerText = userData.data.company
+                          document.querySelector(".prospect_subgroup_name_comment").innerText = userData.data.address
+                          document.querySelector(".prospect_subgroup_status_comment").innerText = userData.data.status
+                          document.querySelector(".notes_comment").innerText = `${userData.data.notes == null ? `Notes not added` : `${userData.data.notes}`}`  
+                        }
+                          
+                        
+                      }
+                    }
     
                   localStorage.setItem("commentID", JSON.stringify(commentArray));
                     document.querySelector(".taggedUser").innerHTML = "";
                     document.getElementById("comment_box").value = "";
                     document.getElementById("temporary_sender").value = user_id;
                     document.getElementById("temporary_url").value = profile_link;
+                    document.getElementById("temporary_prospect_id").value = prospect_id;
+
     
     
                     var access_token = localStorage.getItem("access_token");
@@ -5358,7 +5474,7 @@ function updateSubbGroupName() {
           //   : userData.name
           // }`;
           document.getElementById("subgroup_setting_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
-          document.getElementById("subgroup_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
+          document.getElementById("subgroup_name").innerText = userData.name?.length > 20 ? `${userData.name.slice(0, 15)}...` : userData.name;
           document.getElementById("Subgroup_group_setting_name_sub").innerText = userData.name
           document.getElementById("heading_group").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           
@@ -5416,7 +5532,7 @@ function updateSubbGroupTopic() {
           
 
           var myToast = Toastify({
-            text: "Group Topic changed successfully",
+            text: "Subgroup Topic changed successfully",
             duration: 2000,
           });
 
@@ -5433,7 +5549,7 @@ function updateSubbGroupTopic() {
           // document.getElementById("subgroup_setting_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           // document.getElementById("subgroup_name").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           document.getElementById("subgroup_group_setting_topic").innerText = userData.name
-          document.getElementById("nameofgroup").innerText = `${userData.name ? `${userData.name.length > 8 ? `${userData.name.slice(0,8)}...` : `${userData.name}`}` : ``}` 
+          document.getElementById("nameofgroup").innerText = userData.name 
 
           // document.getElementById("heading_group").innerText = userData.name?.length > 15 ? `${userData.name.slice(0, 15)}...` : userData.name;
           
@@ -5704,7 +5820,7 @@ function groupDeleteion(e) {
       .getAttribute("data-group_id");
   }
 
-  const url = `${globalURl}/delete_group/${group_id}`;
+  const url = `${globalURl}/delete_sub_group/${group_id}`;
 
   let xhr = new XMLHttpRequest();
 
@@ -5842,6 +5958,8 @@ function sendGroupInfo() {
             if (xhr.readyState == 4 && xhr.status == 200) {
               modalContainer2.style.transform = "scale(0)";
               modalContainer2.style.opacity = 0;
+              var mainContentContainer = document.querySelector(".mainContentContainer1");
+              mainContentContainer.innerHTML = ``
               document.getElementById("discrpition").value = "";
               document.getElementById("groupName").value = "";
               document.getElementById("topic").value = "";
@@ -6059,6 +6177,8 @@ function sendGroupInfo() {
               document.getElementById("discrpition").value = "";
               document.getElementById("groupName").value = "";
               document.getElementById("topic").value = "";
+              var mainContentContainer = document.querySelector(".mainContentContainer1");
+              mainContentContainer.innerHTML = ``
               fetchGroupInfo()
               modalContainer2.style.transform = "scale(0)";
               modalContainer2.style.opacity = 0;
@@ -6925,6 +7045,7 @@ function dynamicModalOpenM() {
 }
 
 function dynamicModalOpenP() {
+  SearchUserArray = [];
   localStorage.removeItem("edit_id")
   document.getElementById("send_message_div").value = null
   document.getElementById("send_message_button").style.display = 'block'
@@ -6974,6 +7095,7 @@ document.getElementById("opening_description_here").style.display = "none"
       }else{
         document.getElementById("Delete_current_group").style.display = "none"
       }
+      document.getElementById("showprospectBox").style.color = "#084dd1"
       document.getElementById("subgroup_notify_img_second").style.display = "none";
       document.getElementById("notify_img_second").style.display = "block";
       document.getElementById("showprospectBox").innerText = "Prospect:" + userData.total_prospect
@@ -6982,8 +7104,8 @@ document.getElementById("opening_description_here").style.display = "none"
 
       
       document.getElementById('nameofgroup').innerText = ``;
-      document.getElementById('nameofgroups').innerText = userData.group_name?.length > 15 ? `${userData.group_name.slice(0, 15)}...` : userData.group_name;
-      document.getElementById('group_setting_name').innerText = userData.group_name?.length > 15 ? `${userData.group_name.slice(0, 15)}...` : userData.group_name;
+      document.getElementById('nameofgroups').innerText = userData.group_name
+      document.getElementById('group_setting_name').innerText = userData.group_name
       document.getElementById('group_name_in_settings').innerText = userData.group_name;
       document.getElementById('group_setting_name_sub').innerText = userData.group_name;
       document.getElementById('admin_name').innerText = userData.admin;
@@ -7032,7 +7154,7 @@ document.getElementById("opening_description_here").style.display = "none"
                     <div class="prospectContent" data-prospect_id=${ele.prospect_id
               }>
                                 
-                      <img src=${ele.prospect_data.image} alt=""/>
+                      <img src=${ele.prospect_data.image ? `${ele.prospect_data.image}` : `./Assets/img/user.png`} alt=""/>
               
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
@@ -7353,17 +7475,18 @@ document.getElementById("opening_description_here").style.display = "none"
       top: -3px;
       right: 7px;
       ">
-      <button data-id=${ele.temporary_id} title="Open Chat"  class="opening_perspective" style="
-         border: 0;
-         background: none;
-         cursor:pointer;
-         ">
-         <img class="new_class" style="width: 18px;
-         height: 18px;
-         object-fit: cover;
-         border-radius: 50%;" src="./Assets/img/chat_redirect.png">
-      </button> 
-      <button data-url=${ele.url}  class="opening_background" style="
+      ${ele.delete_status == 0 ? `<button data-id=${ele.temporary_id} data-title="View Prospect Chat"  class="opening_perspective" style="
+      border: 0;
+      background: none;
+      cursor:pointer;
+      ">
+      <img class="new_class" style="width: 18px;
+      height: 18px;
+      object-fit: cover;
+      border-radius: 50%;" src="./Assets/img/chat_redirect.png">
+   </button> ` : ``}
+      
+      <button data-url=${ele.url} data-title="View LinkedIn Profile"  class="opening_background" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -7373,7 +7496,7 @@ document.getElementById("opening_description_here").style.display = "none"
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
       </button>                        
-      <a href="#modal-12" data-prospect-id=${ele.temporary_id} data-id=${ele.sender_id} data-url=${ele.url} class="opening_clipper" style="
+      <a href="#modal-12" data-title="View Prospect" data-prospect-id=${ele.temporary_id} data-id=${ele.sender_id} data-url=${ele.url} class="opening_clipper" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -7390,7 +7513,14 @@ document.getElementById("opening_description_here").style.display = "none"
                         </div>
                       </div>
                       ${ ele.name ? `
-                      <span class="updating_text" style="display:none">${ele.text}</span>
+                      <span class="updating_text" style="display:none">${ele.text}</span> <button
+                      class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
+                       style="top: 8px; right: 8px" >
+                       <i class="fas fa-ellipsis-v"></i>
+                       <div class='dropdown-list'>
+                       <span data-replied_id=${ele.id} class="message_delete_button">Delete</span>
+                       </div>
+                       </button>
                       ` : `<button
                       class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
                        style="top: 8px; right: 8px" >
@@ -7457,7 +7587,7 @@ document.getElementById("opening_description_here").style.display = "none"
                             var profile_link = e.currentTarget.getAttribute("data-url");
                             var user_id = e.currentTarget.getAttribute("data-id");
                             var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                            
+                            var sending_id = localStorage.getItem("user_id");
                             const url = `${globalURl}/get_prospect_Data`;
 
                               let xhr = new XMLHttpRequest();
@@ -7466,7 +7596,8 @@ document.getElementById("opening_description_here").style.display = "none"
                               xhr.setRequestHeader("Content-Type", "application/json");
                               xhr.send(
                                 JSON.stringify({
-                                  prospect_id
+                                  prospect_id,
+                                  user_id: sending_id,
                                 })
                               );
 
@@ -7474,6 +7605,16 @@ document.getElementById("opening_description_here").style.display = "none"
                                 if (xhr.readyState == 4 && xhr.status == 200) {
                                   let userData = JSON.parse(xhr.responseText);
                                   if (userData.data) {
+                                    if(userData.data.prospect_status == "no"){
+                                      document.getElementById("send_CRM").style.display = "none";
+                                    }
+                                    else{
+                                      document.getElementById("send_CRM").style.display = "block";
+                                      document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                      document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+
+                                    }
+                                    
                                     document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                     document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                     document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -7496,6 +7637,7 @@ document.getElementById("opening_description_here").style.display = "none"
                 document.querySelector(".taggedUser").innerHTML = "";
                 document.getElementById("comment_box").value = "";
                 document.getElementById("temporary_sender").value = user_id;
+                document.getElementById("temporary_prospect_id").value = prospect_id;
                 document.getElementById("temporary_url").value = profile_link;
 
 
@@ -7955,7 +8097,7 @@ document.getElementById("opening_description_here").style.display = "none"
         userData.subgroups_data && userData?.subgroups_data.map((ele) => {
           document.getElementById("listOfSubGroups").innerHTML += `
                     <li class="subgroups_div position-relative" date-subgroup_id="${ele.sub_group_id}" >
-                      <a href="#">#${ele.name} ${ele.notifications > 0 ? ` <span style="background: red;
+                      <a href="#">#${ele.name} ${ele.notifications > 0 ? ` <span class="notifications_span" style="background: red;
                       color: #fff;
                       display: inline-block;
                       position: absolute;
@@ -7987,6 +8129,9 @@ document.getElementById("opening_description_here").style.display = "none"
 
               let subgroupcheck = e.currentTarget
               currentSubGroup = subgroupcheck.closest('li');
+              if(subgroupcheck.getElementsByClassName("notifications_span")[0]){
+                tempVariable = subgroupcheck.getElementsByClassName("notifications_span")[0];
+              }
               currentSubGroup.classList.add("active");
               let subgroup_id = currentSubGroup.getAttribute('date-subgroup_id');
               localStorage.setItem('subgroup_id',subgroup_id)
@@ -8237,7 +8382,7 @@ function showProspectChat(e) {
       }
       document.querySelector(".social-btn-box").innerHTML = ``
       document.querySelector(".social-btn-box").innerHTML = `
-      <button data-url=${userData.prospect_data.profile_link} class="opening_background_screen" style="
+      <button data-url=${userData.prospect_data.profile_link} data-title="View LinkedIn Profile" class="opening_background_screen" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -8247,7 +8392,7 @@ function showProspectChat(e) {
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
                 </button>
-                <a href="#modal-12" data-prospect-id=${userData.prospect_data.id} data-id=${userData.actuals_id} data-url=${userData.prospect_data.profile_link}
+                <a href="#modal-12" data-title="View Prospect" data-prospect-id=${userData.prospect_data.id} data-id=${userData.actuals_id} data-url=${userData.prospect_data.profile_link}
                   class="opening_clipper_screen" style="
          border: 0;
          background: none;
@@ -8262,194 +8407,210 @@ function showProspectChat(e) {
       document.querySelectorAll(".opening_clipper_screen").forEach((ele) => {
         ele.addEventListener("click", (e) => {
 
-                        var profile_link = e.currentTarget.getAttribute("data-url");
-                        var user_id = e.currentTarget.getAttribute("data-id");
-                        var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                        
-                        const url = `${globalURl}/get_prospect_Data`;
+          var profile_link = e.currentTarget.getAttribute("data-url");
+          var user_id = e.currentTarget.getAttribute("data-id");
+          var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
+          var sending_id = localStorage.getItem("user_id");
+          const url = `${globalURl}/get_prospect_Data`;
 
-                          let xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
 
-                          xhr.open("POST", url, true);
-                          xhr.setRequestHeader("Content-Type", "application/json");
-                          xhr.send(
-                            JSON.stringify({
-                              prospect_id
-                            })
-                          );
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(
+              JSON.stringify({
+                prospect_id,
+                user_id: sending_id,
+              })
+            );
 
-                          xhr.onreadystatechange = function () {
-                            if (xhr.readyState == 4 && xhr.status == 200) {
-                              let userData = JSON.parse(xhr.responseText);
-                              if (userData.data) {
-                                document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
-                                document.getElementById("prospect_image_heading_comment").src = userData.data.image
-                                document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
-                                document.querySelector(".prospect_group_name_comment").innerText = userData.data.company
-                                document.querySelector(".prospect_subgroup_name_comment").innerText = userData.data.address
-                                document.querySelector(".prospect_subgroup_status_comment").innerText = userData.data.status
-                                document.querySelector(".notes_comment").innerText = `${userData.data.notes == null ? `Notes not added` : `${userData.data.notes}`}`  
-                              }
-                                
-                              
-                            }
-                          }
-          
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                let userData = JSON.parse(xhr.responseText);
 
-          
-
-
-
-          localStorage.setItem("commentID", JSON.stringify(commentArray));
-            document.querySelector(".taggedUser").innerHTML = "";
-            document.getElementById("comment_box").value = "";
-            document.getElementById("temporary_sender").value = user_id;
-            document.getElementById("temporary_url").value = profile_link;
-
-
-            var access_token = localStorage.getItem("access_token");
-            var username = localStorage.getItem("username");
-
-            if (access_token && username) {
-              document.getElementById("comment_box").disabled = false;
-
-              setTimeout(() => {
-                const url = `${globalURl}/getComments`;
-
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url, true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(
-                  JSON.stringify({
-                    profile_link: profile_link,
-                    secondary_id: user_id,
-                  })
-                );
-
-                xhr.onreadystatechange = function () {
-                  //Call a function when the state changes.
-                  if (xhr.readyState == 4 && xhr.status == 200) {
-                    if (xhr.responseText != "400") {
-                      document.getElementById("comments_data").innerHTML = "";
-                      let comments = JSON.parse(xhr.responseText);
-
-                      if (comments.length > 0) {
-                        comments.map(function (obj, key) {
-                          let getDate = new Date().getDate();
-                          let getMonth = new Date().getMonth() + 1;
-                          let getYear = new Date().getFullYear();
-
-                          let currentDate = `${getYear}-${
-                            getMonth < 10 ? "0" + getMonth : "" + getMonth
-                          }-${getDate < 10 ? "0" + getDate : "" + getDate}`;
-
-                          let dbDate = obj.created_at.slice(0, 10);
-
-                          const date1 = new Date(dbDate);
-                          const date2 = new Date(currentDate);
-
-                          const diffTime = Math.abs(date2 - date1);
-                          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                          let msg = "";
-
-                          if (diffDays < 1) {
-                            let getHours = new Date().getUTCHours();
-                            let getMinutes = new Date().getUTCMinutes();
-                            let getSeconds = new Date().getUTCSeconds();
-
-                            let dbTime = obj.created_at.slice(11, 19);
-
-                            let currentTime = `${
-                              getHours < 10 ? "0" + getHours : "" + getHours
-                            }:${getMinutes < 10 ? "0" + getMinutes : "" + getMinutes}:${
-                              getSeconds < 10 ? "0" + getSeconds : "" + getSeconds
-                            }`;
-
-                            var valuestart = dbTime;
-                            var valuestop = currentTime;
-
-                            //create date format
-                            var timeStart = new Date(
-                              `${dbDate} ` + valuestart
-                            ).getHours();
-                            var timeEnd = new Date(
-                              `${currentDate} ` + valuestop
-                            ).getHours();
-
-                            let hourDiff = "";
-
-                            if (timeStart > timeEnd) {
-                              hourDiff = timeStart - timeEnd;
-                            } else {
-                              hourDiff = timeEnd - timeStart;
-                            }
-
-                            if (hourDiff < 1) {
-                              msg = "Less than an hour ago";
-                            }
-
-                            if (hourDiff >= 1 && hourDiff < 24) {
-                              msg = `${hourDiff} hours ago`;
-                            }
-                          } else {
-                            msg = `${diffDays} days ago`;
-                          }
-
-                          row = `
-                          <div class="commentsContainer">
-                            <img src="${obj.image}" alt="user pic"/>
-                            <div class="popup_left">
-                            <div class="upperDetails">
-                                <p>${obj.name}</p>
-                                <i class="far fa-ellipsis-h threeDotsMenu"></i>
-                                <p class="timePara">${msg}</p>
-                                </div>
-                                <div class='menuBox' style="display: none">
-                                  <div class='editContainer'>
-                                    <i class="far fa-edit"></i>
-                                    <h1>Edit</h1>
-                                  </div>
-                                  <div class="deleteContainer">
-                                    <i class="far fa-trash"></i>
-                                    <h1>Delete</h1>
-                                  </div>
-                                </div>
-                                <div class="messageDiv">
-                                <p class="msgPara" data-comment_id=${obj.id}>${obj.comment}</p>
-                              </div> 
-                            </div>
-                          </div>`;
-
-                          document.getElementById("comments_data").innerHTML += row;
-                        });
-
-                        setTimeout(() => {
-                          document.querySelectorAll(".threeDotsMenu").forEach((ele) => {
-                            ele.addEventListener("click", openThreeDotMenu);
-                          });
-                        }, 100);
-                      }
-                    }
+                if (userData.data) {
+                  if(userData.data.prospect_status == "no"){
+                    document.getElementById("send_CRM").style.display = "none";
                   }
-                };
-                commentArray = [];
-              }, 1000);
-            } else {
-              var myToast = Toastify({
-                text: "Login to access",
-                duration: 2000,
-              });
-
-              myToast.showToast();
-
-              document.getElementById("comment_box").disabled = true;
-
-              setTimeout(() => {
-                document.getElementById("comments_data").innerHTML = "";
-                document.getElementById("comments_data").innerHTML = "No Data to show";
-              }, 1000);
+                  else{
+                    document.getElementById("send_CRM").style.display = "block";
+                    document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                    document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+                    document.getElementById("temporary_sender").value = userData.data.user_id;
+                    user_id = userData.data.user_id
+                  }
+                  
+                  document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
+                  document.getElementById("prospect_image_heading_comment").src = userData.data.image
+                  document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
+                  document.querySelector(".prospect_group_name_comment").innerText = userData.data.company
+                  document.querySelector(".prospect_subgroup_name_comment").innerText = userData.data.address
+                  document.querySelector(".prospect_subgroup_status_comment").innerText = userData.data.status
+                  document.querySelector(".notes_comment").innerText = `${userData.data.notes == null ? `Notes not added` : `${userData.data.notes}`}`  
+                }
+                  
+                
+              }
             }
+
+
+
+
+
+
+localStorage.setItem("commentID", JSON.stringify(commentArray));
+document.querySelector(".taggedUser").innerHTML = "";
+document.getElementById("comment_box").value = "";
+document.getElementById("temporary_prospect_id").value = prospect_id;
+document.getElementById("temporary_url").value = profile_link;
+
+
+var access_token = localStorage.getItem("access_token");
+var username = localStorage.getItem("username");
+
+if (access_token && username) {
+document.getElementById("comment_box").disabled = false;
+
+setTimeout(() => {
+  const url = `${globalURl}/getComments`;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(
+    JSON.stringify({
+      profile_link: profile_link,
+      secondary_id: user_id,
+    })
+  );
+
+  xhr.onreadystatechange = function () {
+    //Call a function when the state changes.
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.responseText != "400") {
+        document.getElementById("comments_data").innerHTML = "";
+        let comments = JSON.parse(xhr.responseText);
+
+        if (comments.length > 0) {
+          comments.map(function (obj, key) {
+            let getDate = new Date().getDate();
+            let getMonth = new Date().getMonth() + 1;
+            let getYear = new Date().getFullYear();
+
+            let currentDate = `${getYear}-${
+              getMonth < 10 ? "0" + getMonth : "" + getMonth
+            }-${getDate < 10 ? "0" + getDate : "" + getDate}`;
+
+            let dbDate = obj.created_at.slice(0, 10);
+
+            const date1 = new Date(dbDate);
+            const date2 = new Date(currentDate);
+
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            let msg = "";
+
+            if (diffDays < 1) {
+              let getHours = new Date().getUTCHours();
+              let getMinutes = new Date().getUTCMinutes();
+              let getSeconds = new Date().getUTCSeconds();
+
+              let dbTime = obj.created_at.slice(11, 19);
+
+              let currentTime = `${
+                getHours < 10 ? "0" + getHours : "" + getHours
+              }:${getMinutes < 10 ? "0" + getMinutes : "" + getMinutes}:${
+                getSeconds < 10 ? "0" + getSeconds : "" + getSeconds
+              }`;
+
+              var valuestart = dbTime;
+              var valuestop = currentTime;
+
+              //create date format
+              var timeStart = new Date(
+                `${dbDate} ` + valuestart
+              ).getHours();
+              var timeEnd = new Date(
+                `${currentDate} ` + valuestop
+              ).getHours();
+
+              let hourDiff = "";
+
+              if (timeStart > timeEnd) {
+                hourDiff = timeStart - timeEnd;
+              } else {
+                hourDiff = timeEnd - timeStart;
+              }
+
+              if (hourDiff < 1) {
+                msg = "Less than an hour ago";
+              }
+
+              if (hourDiff >= 1 && hourDiff < 24) {
+                msg = `${hourDiff} hours ago`;
+              }
+            } else {
+              msg = `${diffDays} days ago`;
+            }
+
+            row = `
+            <div class="commentsContainer">
+              <img src="${obj.image}" alt="user pic"/>
+              <div class="popup_left">
+              <div class="upperDetails">
+                  <p>${obj.name}</p>
+                  <i class="far fa-ellipsis-h threeDotsMenu"></i>
+                  <p class="timePara">${msg}</p>
+                  </div>
+                  <div class='menuBox' style="display: none">
+                    <div class='editContainer'>
+                      <i class="far fa-edit"></i>
+                      <h1>Edit</h1>
+                    </div>
+                    <div class="deleteContainer">
+                      <i class="far fa-trash"></i>
+                      <h1>Delete</h1>
+                    </div>
+                  </div>
+                  <div class="messageDiv">
+                  <p class="msgPara" data-comment_id=${obj.id}>${obj.comment}</p>
+                </div> 
+              </div>
+            </div>`;
+
+            document.getElementById("comments_data").innerHTML += row;
+          });
+
+          setTimeout(() => {
+            document.querySelectorAll(".threeDotsMenu").forEach((ele) => {
+              ele.addEventListener("click", openThreeDotMenu);
+            });
+          }, 100);
+        }
+      }
+    }
+  };
+  commentArray = [];
+}, 1000);
+} else {
+var myToast = Toastify({
+  text: "Login to access",
+  duration: 2000,
+});
+
+myToast.showToast();
+
+document.getElementById("comment_box").disabled = true;
+
+setTimeout(() => {
+  document.getElementById("comments_data").innerHTML = "";
+  document.getElementById("comments_data").innerHTML = "No Data to show";
+}, 1000);
+}
+
+
+          
 
 
                         
@@ -8487,8 +8648,8 @@ function showProspectChat(e) {
         userData.prospect_data.description.slice(0, 45) + "...";
       document.querySelector(
         ".prospect_group_name"
-      ).innerText = `${userData.group_name.length > 10
-        ? `${userData.group_name.slice()} ...`
+      ).innerText = `${userData.group_name.length > 30
+        ? `${userData.group_name.slice(0,30)} ...`
         : userData.group_name
       }`;
       if(sub_group_id != null){
@@ -8512,6 +8673,7 @@ function showProspectChat(e) {
      }else{
       document.getElementById("Conversations_button").innerText = userData.group_name.slice(0,5) + ` > ` + userData.sub_group_name.slice(0,5);
      }
+     document.getElementById("Conversations_button").style.display = "block"
       document.getElementById("for_clipper").style.display = "block"
       document.querySelector(".desigination").style.display = "block"
 
@@ -8953,6 +9115,7 @@ function showProspectChat(e) {
     }
 
     else{
+      document.getElementById("Conversations_button").style.display = "block"
       if(document.getElementById("Conversations_button").innerText == "Conversations"){
         document.getElementById("Conversations_button").innerText = document.querySelector(".prospect_name_heading").innerText
       }
@@ -9006,7 +9169,7 @@ function showProspectChat(e) {
       }
       document.querySelector(".social-btn-box").innerHTML = ``
       document.querySelector(".social-btn-box").innerHTML = `
-      <button data-url=${userData.prospect_data.profile_link} class="opening_background_screen" style="
+      <button data-url=${userData.prospect_data.profile_link} data-title="View LinkedIn Profile" class="opening_background_screen" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -9016,7 +9179,7 @@ function showProspectChat(e) {
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
                 </button>
-                <a href="#modal-12" data-prospect-id=${userData.prospect_data.id} data-id=${userData.actuals_id} data-url=${userData.prospect_data.profile_link}
+                <a href="#modal-12" data-title="View Prospect" data-prospect-id=${userData.prospect_data.id} data-id=${userData.actuals_id} data-url=${userData.prospect_data.profile_link}
                   class="opening_clipper_screen" style="
          border: 0;
          background: none;
@@ -9035,7 +9198,8 @@ function showProspectChat(e) {
                         var profile_link = e.currentTarget.getAttribute("data-url");
                         var user_id = e.currentTarget.getAttribute("data-id");
                         var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                        
+                        var sending_id = localStorage.getItem("user_id");
+
                         const url = `${globalURl}/get_prospect_Data`;
 
                           let xhr = new XMLHttpRequest();
@@ -9044,7 +9208,8 @@ function showProspectChat(e) {
                           xhr.setRequestHeader("Content-Type", "application/json");
                           xhr.send(
                             JSON.stringify({
-                              prospect_id
+                              prospect_id,
+                              user_id: sending_id,
                             })
                           );
 
@@ -9052,6 +9217,16 @@ function showProspectChat(e) {
                             if (xhr.readyState == 4 && xhr.status == 200) {
                               let userData = JSON.parse(xhr.responseText);
                               if (userData.data) {
+                                if(userData.data.prospect_status == "no"){
+                                  document.getElementById("send_CRM").style.display = "none";
+                                }
+                                else{
+                                  document.getElementById("send_CRM").style.display = "block";
+                                  document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                  document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+                                  document.getElementById("temporary_sender").value = userData.data.user_id;
+                                  user_id = userData.data.user_id
+                                }
                                 document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                 document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                 document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -9073,8 +9248,9 @@ function showProspectChat(e) {
           localStorage.setItem("commentID", JSON.stringify(commentArray));
             document.querySelector(".taggedUser").innerHTML = "";
             document.getElementById("comment_box").value = "";
-            document.getElementById("temporary_sender").value = user_id;
             document.getElementById("temporary_url").value = profile_link;
+            document.getElementById("temporary_prospect_id").value = prospect_id;
+
 
 
             var access_token = localStorage.getItem("access_token");
@@ -10111,17 +10287,18 @@ function deleteGroupMessage(e) {
                 top: -3px;
                 right: 7px;
                 ">
-                <button data-id=${obj.temporary_id} title="Open Chat"  class="opening_perspective" style="
-         border: 0;
-         background: none;
-         cursor:pointer;
-         ">
-         <img class="new_class" style="width: 18px;
-         height: 18px;
-         object-fit: cover;
-         border-radius: 50%;" src="./Assets/img/chat_redirect.png">
-      </button>
-                <button data-url=${obj.url}  class="opening_background" style="
+                ${obj.delete_status == 0 ?`<button data-id=${obj.temporary_id} data-title="View Prospect Chat"  class="opening_perspective" style="
+                border: 0;
+                background: none;
+                cursor:pointer;
+                ">
+                <img class="new_class" style="width: 18px;
+                height: 18px;
+                object-fit: cover;
+                border-radius: 50%;" src="./Assets/img/chat_redirect.png">
+             </button>`: ``}
+                
+                <button data-url=${obj.url} data-title="View LinkedIn Profile" class="opening_background" style="
                    border: 0;
                    background: none;
                    cursor:pointer;
@@ -10131,7 +10308,7 @@ function deleteGroupMessage(e) {
                    object-fit: cover;
                    border-radius: 50%;" src="./Assets/img/open_prospect.svg">
                 </button>                        
-                <a href="#modal-12" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
+                <a href="#modal-12" data-title="View Prospect" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
                    border: 0;
                    background: none;
                    cursor:pointer;
@@ -10145,7 +10322,16 @@ function deleteGroupMessage(e) {
           </div> ` : `` }        
                                   </div>
                                 </div>
-                                ${ obj.name ? `<span class="updating_text" style="display:none">${obj.text}</span>` : `<button
+                                ${ obj.name ? `<span class="updating_text" style="display:none">${obj.text}</span>
+                                <button
+                      class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
+                       style="top: 8px; right: 8px" >
+                       <i class="fas fa-ellipsis-v"></i>
+                       <div class='dropdown-list'>
+                       <span data-replied_id=${obj.id} class="message_delete_button">Delete</span>
+                       </div>
+                       </button>
+                                ` : `<button
                       class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
                        style="top: 8px; right: 8px" >
                        <i class="fas fa-ellipsis-v"></i>
@@ -10211,7 +10397,8 @@ function deleteGroupMessage(e) {
                                       var profile_link = e.currentTarget.getAttribute("data-url");
                                       var user_id = e.currentTarget.getAttribute("data-id");
                                       var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                                      
+                                      var sending_id = localStorage.getItem("user_id");
+
                                       const url = `${globalURl}/get_prospect_Data`;
           
                                         let xhr = new XMLHttpRequest();
@@ -10220,7 +10407,8 @@ function deleteGroupMessage(e) {
                                         xhr.setRequestHeader("Content-Type", "application/json");
                                         xhr.send(
                                           JSON.stringify({
-                                            prospect_id
+                                            prospect_id,
+                                            user_id: sending_id,
                                           })
                                         );
           
@@ -10228,6 +10416,15 @@ function deleteGroupMessage(e) {
                                           if (xhr.readyState == 4 && xhr.status == 200) {
                                             let userData = JSON.parse(xhr.responseText);
                                             if (userData.data) {
+                                              if(userData.data.prospect_status == "no"){
+                                                document.getElementById("send_CRM").style.display = "none";
+                                              }
+                                              else{
+                                                document.getElementById("send_CRM").style.display = "block";
+                                                document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                                document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+          
+                                              }
                                               document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                               document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                               document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -10251,6 +10448,8 @@ function deleteGroupMessage(e) {
                           document.getElementById("comment_box").value = "";
                           document.getElementById("temporary_sender").value = user_id;
                           document.getElementById("temporary_url").value = profile_link;
+                          document.getElementById("temporary_prospect_id").value = prospect_id;
+
           
           
                           var access_token = localStorage.getItem("access_token");
@@ -10917,7 +11116,9 @@ function showNullChats() {
       top: -3px;
       right: 7px;
       ">
-      <button data-id=${obj.temporary_id} title="Open Chat"  class="opening_perspective" style="
+      ${obj.delete_status == 0 ? `
+      
+      <button data-id=${obj.temporary_id} data-title="View Prospect Chat"  class="opening_perspective" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -10927,7 +11128,9 @@ function showNullChats() {
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/chat_redirect.png">
       </button>
-      <button data-url=${obj.url}  class="opening_background" style="
+      ` : ``}
+      
+      <button data-url=${obj.url}  data-title="View LinkedIn Profile" class="opening_background" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -10937,7 +11140,7 @@ function showNullChats() {
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
       </button>                        
-      <a href="#modal-12" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
+      <a href="#modal-12" data-title="View Prospect" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -10953,7 +11156,15 @@ function showNullChats() {
                                 </div>
 
                                 ${ obj.name ? `
-                                <span class="updating_text" style="display:none">${obj.text}</span>
+                                <span class="updating_text" style="display:none">${obj.text}</span>   
+                                <button
+                      class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
+                       style="top: 8px; right: 8px" >
+                       <i class="fas fa-ellipsis-v"></i>
+                       <div class='dropdown-list'>
+                       <span data-replied_id=${obj.id} class="message_delete_button">Delete</span>
+                       </div>
+                       </button>
                                 ` : `<button
                       class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
                        style="top: 8px; right: 8px" >
@@ -11020,7 +11231,8 @@ function showNullChats() {
                               var profile_link = e.currentTarget.getAttribute("data-url");
                               var user_id = e.currentTarget.getAttribute("data-id");
                               var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                              
+                              var sending_id = localStorage.getItem("user_id");
+
                               const url = `${globalURl}/get_prospect_Data`;
   
                                 let xhr = new XMLHttpRequest();
@@ -11029,7 +11241,8 @@ function showNullChats() {
                                 xhr.setRequestHeader("Content-Type", "application/json");
                                 xhr.send(
                                   JSON.stringify({
-                                    prospect_id
+                                    prospect_id,
+                                    user_id: sending_id,
                                   })
                                 );
   
@@ -11037,6 +11250,14 @@ function showNullChats() {
                                   if (xhr.readyState == 4 && xhr.status == 200) {
                                     let userData = JSON.parse(xhr.responseText);
                                     if (userData.data) {
+                                      if(userData.data.prospect_status == "no"){
+                                        document.getElementById("send_CRM").style.display = "none";
+                                      }
+                                      else{
+                                        document.getElementById("send_CRM").style.display = "block";
+                                        document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                        document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;
+                                      }
                                       document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                       document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                       document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -11060,6 +11281,8 @@ function showNullChats() {
                   document.getElementById("comment_box").value = "";
                   document.getElementById("temporary_sender").value = user_id;
                   document.getElementById("temporary_url").value = profile_link;
+                  document.getElementById("temporary_prospect_id").value = prospect_id;
+
   
   
                   var access_token = localStorage.getItem("access_token");
@@ -11871,6 +12094,41 @@ function subGroupleaveion(e) {
     }
   };
 }
+function subGroupdeleteion(e) {
+  let sub_group_id = "";
+
+  if (localStorage.getItem("subgroup_id")) {
+    sub_group_id = localStorage.getItem("subgroup_id");
+  } 
+
+  let user_id = localStorage.getItem("user_id");
+
+  const url = `${globalURl}/leave_sub_group/${sub_group_id}/${user_id}`;
+
+  let xhr = new XMLHttpRequest();
+
+  xhr.open("GET", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let userData = JSON.parse(xhr.responseText);
+
+      if ((userData.status = "Deleted")) {
+        document.getElementById("SubgroupsettingModl").style.transform = "scale(0)";
+        document.getElementById("SubgroupsettingModl").style.opacity = "0";
+        var myToast = Toastify({
+          text: "SubGroup deleted successfully",
+          duration: 2000,
+        });
+        myToast.showToast();
+
+        dynamicModalOpenP();
+      }
+    }
+  };
+}
 
 function closeSubGroupModal() {
   document.getElementById("MessageDeleteModal").style.transform = "scale(0)";
@@ -12366,10 +12624,13 @@ function showSubGroupProspectChat(e) {
 }
 
 function nullSubGroupChats() {
+  SearchUserArray = [];
   document.getElementById("customScreenChattBox").style.display = "none"
   document.querySelector(".profileMainBox").style.display = "block";
   console.log("SUBGROUP")
   localStorage.removeItem("nullGroupChat");
+
+
   
   localStorage.removeItem("editGroupName");
   localStorage.setItem('nullSubGroupChat', true)
@@ -12414,9 +12675,33 @@ function nullSubGroupChats() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let userData = JSON?.parse(xhr.responseText);
-      document.getElementById('subgroup_name').innerHTML =  userData.sub_group_name?.length > 10 ? `#${userData.sub_group_name.slice(0, 10)}...` : `#${userData.sub_group_name}` + ` <i class="fas fa-sort-down"></i>`
+      if(userData.adminis == "yes"){
+        document.getElementById("Subgroup_delete_current_group").style.display = "block"
+      }
+      else{
+        document.getElementById("Subgroup_delete_current_group").style.display = "none"
+      }
+      document.getElementById('subgroup_name').innerHTML =  userData.sub_group_name?.length > 15 ? `#${userData.sub_group_name.slice(0, 15)}...` : `#${userData.sub_group_name}` + ` <i class="fas fa-sort-down"></i>`
+      console.log(tempVariable)
+      if(tempVariable){
+        if(userData.totalNotifications > 0){
+          tempVariable.innerText = userData.totalNotifications
+        }
+        else{
+          tempVariable.remove()
+        }
+      }
+      tempVariable = null
+      prospecting = userData.totalNotifications - userData.non_prospect_notifications
+      if(prospecting > 0){
+        document.getElementById("showprospectBox").style.color = "red"
+      }
+      else{
+        document.getElementById("showprospectBox").style.color = "#084dd1"
+      }
+      
       // document.getElementById('nameofgroup').innerHTML = `${userData.sub_group_topic.length > 10 ? `${userData.sub_group_topic.slice(0,10)}` : `${userData.sub_group_topic}`}` 
-       document.getElementById('nameofgroup').innerHTML = `${userData.sub_group_topic ? `${userData.sub_group_topic.length > 8 ? `${userData.sub_group_topic.slice(0,8)}...` : `${userData.sub_group_topic}`}` : ``}` 
+       document.getElementById('nameofgroup').innerHTML = userData.sub_group_topic
 
       document.getElementById('heading_group').innerHTML = userData.sub_group_name?.length > 20 ? `${userData.sub_group_name.slice(0, 20)}...` : userData.sub_group_name
       localStorage.removeItem("Subgroup_name");
@@ -12425,7 +12710,7 @@ function nullSubGroupChats() {
       document.getElementById('admin_name').innerHTML = userData.admin
 
       
-      document.getElementById('created_at_date').innerHTML = " created this group on " + userData.month
+      document.getElementById('created_at_date').innerHTML = " created this subgroup on " + userData.month
 
       
       document.getElementById('description').innerHTML = `${userData.sub_group_description ? `${userData.sub_group_description}` : `"No description added"`}`
@@ -12772,17 +13057,21 @@ function nullSubGroupChats() {
       top: -3px;
       right: 7px;
       ">
-      <button data-id=${obj.temporary_id} title="Open Chat"  class="opening_perspective" style="
-         border: 0;
-         background: none;
-         cursor:pointer;
-         ">
-         <img class="new_class" style="width: 18px;
-         height: 18px;
-         object-fit: cover;
-         border-radius: 50%;" src="./Assets/img/chat_redirect.png">
-      </button>
-      <button data-url=${obj.url}  class="opening_background" style="
+      ${obj.delete_status == 0 ? `
+      <button data-id=${obj.temporary_id} data-title="View Prospect Chat"  class="opening_perspective" style="
+      border: 0;
+      background: none;
+      cursor:pointer;
+      ">
+      <img class="new_class" style="width: 18px;
+      height: 18px;
+      object-fit: cover;
+      border-radius: 50%;" src="./Assets/img/chat_redirect.png">
+   </button>
+      ` : ``}
+      
+      
+      <button data-url=${obj.url} data-title="View LinkedIn Profile" class="opening_background" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -12792,7 +13081,7 @@ function nullSubGroupChats() {
          object-fit: cover;
          border-radius: 50%;" src="./Assets/img/open_prospect.svg">
       </button>
-      <a href="#modal-12" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
+      <a href="#modal-12" data-title="View Prospect" data-prospect-id=${obj.temporary_id} data-id=${obj.sender_id} data-url=${obj.url} class="opening_clipper" style="
          border: 0;
          background: none;
          cursor:pointer;
@@ -12811,7 +13100,16 @@ function nullSubGroupChats() {
                         </div>
                       </div>
                       ${ obj.name ? `
-                      <span class="updating_text" style="display:none">${obj.text}</span>
+                      <span class="updating_text" style="display:none">${obj.text}</span> 
+
+                      <button
+                      class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
+                       style="top: 8px; right: 8px" >
+                       <i class="fas fa-ellipsis-v"></i>
+                       <div class='dropdown-list'>
+                       <span data-replied_id=${obj.id} class="message_delete_button">Delete</span>
+                       </div>
+                       </button>
                       ` : `<button
                       class="border-0 bg-transparent f-10 pointer position-absolute dropdown-btn"
                        style="top: 8px; right: 8px" >
@@ -12874,7 +13172,8 @@ function nullSubGroupChats() {
                             var profile_link = e.currentTarget.getAttribute("data-url");
                             var user_id = e.currentTarget.getAttribute("data-id");
                             var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                            
+                            var sending_id = localStorage.getItem("user_id");
+
                             const url = `${globalURl}/get_prospect_Data`;
 
                               let xhr = new XMLHttpRequest();
@@ -12883,7 +13182,8 @@ function nullSubGroupChats() {
                               xhr.setRequestHeader("Content-Type", "application/json");
                               xhr.send(
                                 JSON.stringify({
-                                  prospect_id
+                                  prospect_id,
+                                  user_id: sending_id,
                                 })
                               );
 
@@ -12891,6 +13191,14 @@ function nullSubGroupChats() {
                                 if (xhr.readyState == 4 && xhr.status == 200) {
                                   let userData = JSON.parse(xhr.responseText);
                                   if (userData.data) {
+                                    if(userData.data.prospect_status == "no"){
+                                      document.getElementById("send_CRM").style.display = "none";
+                                    }
+                                    else{
+                                      document.getElementById("send_CRM").style.display = "block";
+                                      document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                      document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;;
+                                    }
                                     document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                     document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                     document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -12914,6 +13222,7 @@ function nullSubGroupChats() {
                 document.getElementById("comment_box").value = "";
                 document.getElementById("temporary_sender").value = user_id;
                 document.getElementById("temporary_url").value = profile_link;
+                document.getElementById("temporary_prospect_id").value = prospect_id;
 
 
                 var access_token = localStorage.getItem("access_token");
@@ -13446,25 +13755,14 @@ function nullSubGroupChats() {
           groupprospectsArr.push(prospect);
           console.log(groupmembersArr);
           console.log(prospect);
-          if (ele.prospect_data) {
-
-            var http = new XMLHttpRequest();
-
-               http.open('HEAD',ele.prospect_data.image, false);
-               http.send();
-              //  console.log(http)
-               if(http.status != 200){
-                console.log("test")
-
-                ele.prospect_data.image ="./Assets/img/user.png"
-               }
+          if (ele.prospect_data) {               
             document.querySelector(".dynamicContainer").innerHTML += `
   
                   <div class="prospectContentContainer">
                     <div class="prospectContent" data-prospect_id=${ele.prospect_id
               }>
                                 
-                      <img src=${ele.prospect_data.image} alt=""/>
+                      <img src=${ele.prospect_data.image ? `${ele.prospect_data.image}` : `./Assets/img/user.png`} alt=""/>
               
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
@@ -15257,7 +15555,8 @@ if(prospect_id){
                                   var profile_link = e.currentTarget.getAttribute("data-url");
                                   var user_id = e.currentTarget.getAttribute("data-id");
                                   var prospect_id = e.currentTarget.getAttribute("data-prospect-id");
-                                  
+                                  var sending_id = localStorage.getItem("user_id");
+
                                   const url = `${globalURl}/get_prospect_Data`;
       
                                     let xhr = new XMLHttpRequest();
@@ -15266,7 +15565,8 @@ if(prospect_id){
                                     xhr.setRequestHeader("Content-Type", "application/json");
                                     xhr.send(
                                       JSON.stringify({
-                                        prospect_id
+                                        prospect_id,
+                                        user_id: sending_id,
                                       })
                                     );
       
@@ -15274,6 +15574,14 @@ if(prospect_id){
                                       if (xhr.readyState == 4 && xhr.status == 200) {
                                         let userData = JSON.parse(xhr.responseText);
                                         if (userData.data) {
+                                          if(userData.data.prospect_status == "no"){
+                                            document.getElementById("send_CRM").style.display = "none";
+                                          }
+                                          else{
+                                            document.getElementById("send_CRM").style.display = "block";
+                                            document.getElementById("prospect_status_image").value = userData.data.prospect_status_image;
+                                            document.getElementById("prospect_status_name").value = userData.data.prospect_status_name;
+                                          }
                                           document.querySelector(".prospect_name_heading_comment").innerText = userData.data.name
                                           document.getElementById("prospect_image_heading_comment").src = userData.data.image
                                           document.querySelector(".desigination_comment").innerText = `${userData.data.description.length > 30 ? `${userData.data.description.slice(0,30)}....` : `${userData.data.description}`}`;
@@ -15297,6 +15605,8 @@ if(prospect_id){
                       document.getElementById("comment_box").value = "";
                       document.getElementById("temporary_sender").value = user_id;
                       document.getElementById("temporary_url").value = profile_link;
+                      document.getElementById("temporary_prospect_id").value = prospect_id;
+
       
       
                       var access_token = localStorage.getItem("access_token");
@@ -17292,7 +17602,17 @@ function closeAddMeemberModal() {
   document.getElementById("subGroupModal").style.opacity = 0;
 }
 
+
 function fetchDmsInfo() {
+
+
+  // const urls = `  http://api.linkedin.com/v1/people/C4D03AQHL-9J7Z-aSgw/https://media-exp2.licdn.com/dms/image/C4D03AQFEingXMw7osA/profile-displayphoto-shrink_800_800/0/1566099548392?e=1663200000&v=beta&t=u-1jtJ2aTeSveWTcQMMp2uNZE6ccuZgnJazZHsyVVCc
+  // `;
+  // let res = new XMLHttpRequest();
+
+  // res.open("GET", urls, true);
+  // res.setRequestHeader("Content-Type", "application/json");
+  // res.send();
   localStorage.removeItem("sub_group_id");
   localStorage.removeItem("subgroup_id");
   localStorage.removeItem("group_id");
@@ -17637,6 +17957,11 @@ if (document.getElementById("Subgroup_Leave_current_group")) {
     .getElementById("Subgroup_Leave_current_group")
     .addEventListener("click", subGroupleaveion);
 }
+if (document.getElementById("Subgroup_delete_current_group")) {
+  document
+    .getElementById("Subgroup_delete_current_group")
+    .addEventListener("click", subGroupdeleteion);
+}
 function querySelector() {
   let userArray = [];
   group_id = localStorage.getItem('group_id')
@@ -17648,7 +17973,10 @@ function querySelector() {
   document.querySelectorAll(".chatContentH1DotActive").forEach((item) => {
     userArray.push(Number(item.getAttribute("date-linkedId")));
   });
-
+  if(userArray.length == 0){
+    userArray = SearchUserArray;
+  }
+  console.log(userArray,"Array")
   if (userArray.length > 0) {
 
     const url = `${globalURl}/add_members_to_group`;
@@ -17751,6 +18079,7 @@ function querySelector() {
           localStorage.setItem("group_members", JSON.stringify(groupmembersArr));
           document.getElementById("subGroupModal").style.transform = "scale(0)";
           document.getElementById("subGroupModal").style.opacity = 0;
+          SearchUserArray = [];
 
           if(subgroup_id != null){
             nullSubGroupChats()
@@ -18085,6 +18414,7 @@ if (document.getElementById("Conversations_button")) {
   document.getElementById("Conversations_button").addEventListener("click", () => {
     group_id = localStorage.getItem("group_id")
     if(group_id != null){
+
       conversation_button()
     }
     else{
@@ -18516,8 +18846,29 @@ if (document.getElementById("select2")) {
 
 if (document.getElementById("searching_members_to_add")) {
   document.getElementById("searching_members_to_add").addEventListener("keyup", () => {
-
+    let tempArray = []
     console.log("searching")
+    document.querySelectorAll(".chatContentH1DotActive").forEach((item) => {
+      tempArray.push(Number(item.getAttribute("date-linkedId")));
+    });
+    for(i = 0;i <= tempArray.length - 1;i++){
+      console.log(SearchUserArray.indexOf(tempArray[i]))
+      if(SearchUserArray.indexOf(tempArray[i]) !== -1 ){
+
+      }else{
+        SearchUserArray.push(tempArray[i]);
+      }
+    }
+    // for(i = 0;i <= SearchUserArray.length - 1;i++){
+    //   console.log(tempArray.indexOf(SearchUserArray[i]))
+    //   if(tempArray.indexOf(SearchUserArray[i]) !== -1 ){
+
+    //   }else{
+    //     SearchUserArray.splice(i, 1)
+    //   }
+    // }
+    
+    console.log(SearchUserArray,"Search")
     user_id = localStorage.getItem("user_id")
     value = document.getElementById("searching_members_to_add").value
     console.log(value);
@@ -18543,9 +18894,30 @@ if (document.getElementById("searching_members_to_add")) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let userData = JSON.parse(xhr.responseText);
       if(subgroup_id){
+
         document.getElementById('add_member_container').innerHTML = ``
         userData.map((item, i, arr) => {
-          var row = `
+          if(SearchUserArray.indexOf(item.id) !== -1){
+            var row = `
+          <div class="chatContent chatContentH1DotActive" date-linkedId=${item.id}>
+                    <div class="defaultIcon" style="border: none; margin-left: 10px">
+                    <img src="${item.image}">
+                        
+                    </div>
+        
+                    <h1 class="userEmail">${item.name}</h1>
+        
+                    <div class="dotCircle"></div>
+                        
+                  </div>
+          
+          `;
+  
+          document.getElementById('add_member_container').innerHTML += row;
+          }
+          else{
+
+            var row = `
           <div class="chatContent" date-linkedId=${item.id}>
                     <div class="defaultIcon" style="border: none; margin-left: 10px">
                     <img src="${item.image}">
@@ -18561,30 +18933,56 @@ if (document.getElementById("searching_members_to_add")) {
           `;
   
           document.getElementById('add_member_container').innerHTML += row;
+          }
+          
         });
       }
       else
       {
       document.getElementById('add_member_container').innerHTML = ``
       userData.map((item, i, arr) => {
-        if(item.name){
-        var row = `
-        <div class="chatContent" date-linkedId=${item.linked_to_id}>
-                  <div class="defaultIcon" style="border: none; margin-left: 10px">
-                  <img src="${item.image}">
-                      
-                  </div>
-      
-                  <h1 class="userEmail">${item.name}</h1>
-      
-                  <div class="dotCircle"></div>
-                      
-                </div>
         
-        `;
 
-        document.getElementById('add_member_container').innerHTML += row;
-      }
+          if(item.name){
+              if(SearchUserArray.indexOf(item.linked_to_id) !== -1){
+              var row = `
+              <div class="chatContent chatContentH1DotActive" date-linkedId=${item.linked_to_id}>
+                        <div class="defaultIcon" style="border: none; margin-left: 10px">
+                        <img src="${item.image}">
+                            
+                        </div>
+            
+                        <h1 class="userEmail">${item.name}</h1>
+            
+                        <div class="dotCircle"></div>
+                            
+                      </div>
+              
+              `;
+      
+              document.getElementById('add_member_container').innerHTML += row;
+            }
+            else{
+              var row = `
+              <div class="chatContent" date-linkedId=${item.linked_to_id}>
+                        <div class="defaultIcon" style="border: none; margin-left: 10px">
+                        <img src="${item.image}">
+                            
+                        </div>
+            
+                        <h1 class="userEmail">${item.name}</h1>
+            
+                        <div class="dotCircle"></div>
+                            
+                      </div>
+              
+              `;
+      
+              document.getElementById('add_member_container').innerHTML += row;
+            }
+        }
+
+        
       });
     }
 
@@ -19526,3 +19924,73 @@ document.getElementById("second_message_div").addEventListener("keypress", funct
   }
   
 });
+
+
+
+if (document.getElementById("send_CRM")) {
+  document.getElementById("send_CRM").addEventListener("click", () => {
+   
+
+    var myToast = Toastify({
+      text: "Database Changed",
+      duration: 2000,
+    });
+
+    myToast.showToast();
+
+    prospect_id = document.getElementById("temporary_prospect_id").value;
+    link = document.getElementById("temporary_url").value;
+
+    let params = {
+      active: true,
+      currentWindow: true,
+    };
+    chrome.tabs.query(params, gotTab);
+    function gotTab(tabs) {
+    let msg = {
+      txt: link,
+    };
+    chrome.tabs.sendMessage(tabs[0].id, msg);
+  }
+  localStorage.setItem("modalProspectId", prospect_id);
+    localStorage.setItem("modalProspectLink", link);
+    localStorage.setItem("isImageClicked", true);
+    naming = localStorage.getItem("user_id")
+    const url = `${globalURl}/get_prospect_Data`;
+  
+                                let xhr = new XMLHttpRequest();
+  
+                                xhr.open("POST", url, true);
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.send(
+                                  JSON.stringify({
+                                    prospect_id,
+                                    user_id: naming,
+                                  })
+                                );
+  
+                                xhr.onreadystatechange = function () {
+                                  if (xhr.readyState == 4 && xhr.status == 200) {
+                                    let userData = JSON.parse(xhr.responseText);
+                                    if (userData.data) {
+                                      user_name = document.getElementById("prospect_status_name").value;
+                                      user_image = document.getElementById("prospect_status_image").value;
+                                      user_idd = document.getElementById("temporary_sender").value;
+
+                                      localStorage.setItem("prospectData", JSON.stringify(userData.data));
+                                      localStorage.setItem("secondUserPic",user_image)
+                                      localStorage.setItem("second_user_id",user_idd)
+                                      localStorage.setItem("second_user_name",user_name)
+                                      window.location.replace("popup.html");
+                                    }
+                                      
+                                    
+                                  }
+                                }
+
+
+
+
+    
+  });
+}

@@ -249,7 +249,17 @@ function topbaricons() {
                                 : ""
                             }
                             </div>
-                            <div class="groupName">${item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</div>
+                            <div class="groupName" style="display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            max-width: 328px;
+                            width: auto;
+              height: auto;
+              line-height: 12px;
+              font-size: 11px;
+              white-space: break-spaces;
+                            ">${item.name}</div>
                           </div>
                         `;
                       });
@@ -282,7 +292,7 @@ function topbaricons() {
         userData.groups.slice(0, 3).map((item, i, arr) => {
           document.querySelector(".new_header_right_imgs").innerHTML += `
             <div class="smallgroupBox" data-group_id=${item.group_id}>
-            <span class="tooltiptext">${item.group_name}</span>
+            <span class="tooltiptext">${item.group_name.length > 8 ? `${item.group_name.slice(0,8)}...` : `${item.group_name}`}</span>
             ${
               item.notifications != 0
                 ? `<div class="countNum">${item.notifications}</div>`
@@ -785,4 +795,42 @@ if (document.getElementById("signoutDiv")) {
     localStorage.clear();
     window.close();
   });
+}
+if (document.getElementById("profilePic")) {
+  document.getElementById("profilePic").addEventListener("click", () => {
+    localStorage.setItem("OpenShowDataBase",true)
+    window.location.href = "popup.html";
+
+  });
+}
+if (document.getElementById("dashboard_open")) {
+  document
+    .getElementById("dashboard_open")
+    .addEventListener("click", openprofile);
+}
+
+function openprofile() {
+  console.log("here");
+  var link = "https://extension-dashboard.vercel.app/index.html";
+  var id = localStorage.getItem("user_id")
+  var profilepic = localStorage.getItem("secondUserPic")
+  var fname = localStorage.getItem("second_user_name");
+  var username = localStorage.getItem("username")
+
+  let params = {
+    active: true,
+    currentWindow: true,
+  };
+  chrome.tabs.query(params, gotTab);
+
+  function gotTab(tabs) {
+    let msg = {
+      txt: link,
+      temp: id,
+      profilepic,
+      fname,
+      username,
+    };
+    chrome.tabs.sendMessage(tabs[0].id, msg);
+  }
 }

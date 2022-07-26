@@ -647,7 +647,7 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-		} 
+		}
 		.btn-default {border-color: #0085a6;}
 		a.btn-default:hover {background-color:#0085a6; color:#fff;}
 		pre {overflow:auto;font-size:1em;}
@@ -1233,13 +1233,12 @@
 
 		.new-content-notes {
 			width: 99%;
-			height: 100px;
-			font-size: 14px;
-			margin-top: 5px;
-			outline: none;
-			border: none;
-			border-radius: 10px;
-			resize: vertical;
+		    height: fit-content;
+		    font-size: 14px;
+		    margin-top: 5px;
+		    outline: none;
+		    border: none;
+		    border-radius: 10px;
 		}
 
 		.new-content-notes::-webkit-scrollbar{
@@ -1247,9 +1246,9 @@
 			/* background-color: transparent; */
 		}
 
-		
 
-		
+
+
 
 		.new-open-clender {
 			display: flex;
@@ -1574,7 +1573,7 @@
 			color: #0073FF;
 			/* Sit on top of everything */
 			/*border:1px solid black;*/
-			/*  opacity: 0;  Hide buttons until carousel is initialised 
+			/*  opacity: 0;  Hide buttons until carousel is initialised
   transition:opacity 1s;*/
 		}
 
@@ -1595,7 +1594,7 @@
 			color: #0073FF;
 			/* Sit on top of everything */
 			/*border:1px solid black;*/
-			/*  opacity: 0;  Hide buttons until carousel is initialised 
+			/*  opacity: 0;  Hide buttons until carousel is initialised
   transition:opacity 1s;*/
 		}
 
@@ -2124,7 +2123,7 @@
 
 		.startApplyBtn:hover,
 		.applyListBtn:hover,
-		.saveListBtn:hover, 
+		.saveListBtn:hover,
 		.createNewListBtn:hover,
 		.updateNewListBtn:hover,
 		.shareInGroupBtn:hover {
@@ -2567,7 +2566,6 @@
 			display: flex;
 			flex-wrap: wrap;
 			/* grid-template-columns: repeat(3, 30%); */
-			justify-content: space-between;
 		}
 
 		.subGroupBoxContainer{
@@ -2893,7 +2891,7 @@
 			color: #000 !important;
 			text-align: center;
 			border-radius: 6px;
-			padding: 3px 15px;
+			padding: 3px 4px;
 			font-size: 10px;
 			font-weight: 500;
 			white-space: nowrap;
@@ -2901,7 +2899,7 @@
 			position: absolute;
 			z-index: 10;
 			top: -57%;
-			left: -10%;
+			left: -6%;
 
 		}
 
@@ -3466,7 +3464,7 @@
 			overflow-x: hidden;
 			overflow-y: scroll;
 		}
-		
+
 		.openChooseFilterContainer{
 			height: 75%;
 		}
@@ -3580,8 +3578,8 @@
 			font-weight: 600;
 			color: #000;
 		}
-		
-		.inputFields input, 
+
+		.inputFields input,
 		.inputFields textarea{
 			width: 100%;
 			height: 30px;
@@ -3800,6 +3798,10 @@
             color: red;
         }
 
+		.new-content-notes img {
+			width: 150px;
+		}
+
 	</style>
 
 </head>
@@ -3939,9 +3941,9 @@
 			</div>
 
 			<div class="openChooseContainer" style="height: 75%;">
-				
+
 				<div class="listInpContainer">
-					
+
 					<div class="inputFields">
 						<label for="listTitle">List Title</label>
 						<input type="text" autocomplete="off" id="listTitle" placeholder="Enter Title" class="listTitleInp">
@@ -3980,13 +3982,13 @@
 	<div class="optionChooseModal" id="shareInGroupsModal">
 		<div class="optionChooseModalContainer">
 			<div class="upperRow">
-	
+
 				<h1>Choose the option</h1>
-	
+
 				<div class="closeDiv" id='shareInGroupsModalCloseBtn'>
 					<img src="./Assets/img/close.png" alt="">
 				</div>
-	
+
 			</div>
 			<div class="openChooseContainer">
 				<button type="button" style="width: 100%;" class="shareInGroupBtn" id="shareProspectBtn" >Share in Groups</button>
@@ -4000,13 +4002,13 @@
 	<div class="optionChooseModal" id="showSubGroupsModal">
 		<div class="showSubGroupsModalContainer">
 			<div class="upperRow">
-	
+
 				<h1>Sub Groups</h1>
-	
+
 				<div class="closeDiv" id='showSubGroupsModalCloseBtn'>
 					<img src="./Assets/img/close.png" alt="">
 				</div>
-	
+
 			</div>
 			<div class="showSubGroupsContainer">
 				<div class="subGroupContainer">
@@ -4035,7 +4037,7 @@
 			</div>
 
 			<div style="display: none" id="results">
-				<button style="padding: 0% 20px;height: 40px; border-radius: 5px; background-color: #fff; color: #0A66C2; 
+				<button style="padding: 0% 20px;height: 40px; border-radius: 5px; background-color: #fff; color: #0A66C2;
 				border: none; outline: none; cursor: pointer; margin: auto; margin-top: 20px; box-shadow: 0px 0px 10px #999; font-size: 14px;
 				font-weight: 500; display: flex; justify-content: space-between; align-items: center;" id="loginBtn">Login via
 					LinkedIn <i class="fab fa-linkedin"
@@ -4097,7 +4099,7 @@
 
 
 
-					<!-- <span id="alreadyStored" style="color: red; font-size: 10px; margin-left: 4%; "></span> 
+					<!-- <span id="alreadyStored" style="color: red; font-size: 10px; margin-left: 4%; "></span>
 		</div> -->
 
 
@@ -4105,13 +4107,13 @@
 			<i class="fas fa-home fa-2x m-3  btn btn-info bg-own" style="color: green; cursor: pointer;" id="admin_home"></i>
 			<strong id="username"></strong>
 			<i class="fas fa-sign-out-alt fa-2x m-3  btn btn-info bg-own" style="color: green; cursor: pointer; float: right" id="logout1"></i>
-		
+
 		</div> -->
 
 
 					<!-- <div style=" margin-left: 15px; top: 160px; ">
-			<img 
-			style="border-radius: 8%; height:100px; width: 100px;  margin-right: 3%; cursor: pointer;" 
+			<img
+			style="border-radius: 8%; height:100px; width: 100px;  margin-right: 3%; cursor: pointer;"
 			src="" id="image">
 		</div> -->
 
@@ -4235,7 +4237,8 @@
 
 					<p class="hero-content-names-head">Notes</p>
 					<div class="new-motes">
-						<textarea class="new-content-notes" id="notes"></textarea>
+						<div contenteditable="true" class="new-content-notes" id="notes" style="resize: vertical;
+    text-align: left; min-height: 100px;padding: 5px"></div>
 					</div>
 
 
@@ -4286,7 +4289,7 @@
 				<strong class="" style="margin-left: 10px !important;">About: </strong>
 				<textarea rows="3" class="form-control border-0 shadow-0 " id="about" style="background-color: #ffffff !important;width: 95%; padding: 10px !important; margin-left: 12px; font-size: 13px !important;"></textarea>
 			</div>
-			
+
 			<div  class="mt-2 d-flex justify-content-between rounded status_bar_color" id="statusbg" style="padding-top: 8px; padding-bottom: 4px; border-radius: 10px !important; margin-left: 14px; margin-right: 13px; height: 45px; font-size: 14px;">
 				<label for="input-select-1" class="p-1 input-select-1 ml-3 font-weight-bold mb-0"><strong style=" margin-left: -10px !important;">Status</strong></label>
 				<select class="form-select mr-3 bg-transparent border-0 text-light" style="padding-bottom: 6px !important; font-size: 14px !important;" aria-label="Default select example" id="status">
@@ -4297,9 +4300,9 @@
 					<option id="Discovery Call Completed" style="color:#FFCB05 !important">Discovery Call Completed</option>
 					<option id="Boom" style="color:#85bb65 !important">Boom</option>
 					<option id="Lost" style="color:#808080 !important">Lost</option>
-					
+
 				</select>
-			</div> 
+			</div>
 
 			 <div class="bg-light d-flex round shadow-on-hover rounded"
 			style="justify-content: space-between;
@@ -4542,7 +4545,7 @@
 				font-size: 14px;">
 							<strong class="" style="padding-left: 10px !important; padding-top: 10px;">Profile
 								Link</strong>
-							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px; 
+							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px;
 				         padding-left: 50px;"></span>
 							<span style="position: relative; right: 14px; top: 10px;">
 								<i id="profileCopyBtn" class="fal fa-clone"></i></span>
@@ -4580,7 +4583,7 @@
 				font-size: 14px;">
 							<strong class="" style="padding-left: 10px !important; padding-top: 10px;">Record
 								Link</strong>
-							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px; 
+							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px;
 				         padding-left: 50px;"></span>
 							<span style="position: relative; right: 14px; top: 10px;"><i
 									class="fal fa-clone"></i></span>
@@ -4597,7 +4600,7 @@
 				font-size: 14px;">
 							<strong class="" style="padding-left: 10px !important; padding-top: 10px;">Inbox
 								URL</strong>
-							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px; 
+							<span id="profile_link" class="profile-link" style="font-size: 11px; padding-top: 12px;
 				         padding-left: 50px;"></span>
 							<span style="position: relative; right: 14px; top: 10px;"><i
 									class="fal fa-clone"></i></span>
@@ -4794,7 +4797,7 @@
 
 				<div class="user-img-and-text" style=" text-align: center;margin-bottom:7px">
 					<div class="userImage" style="margin-bottom: 0px !important;">
-						<img src="" style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px;" id="profilePicc">
+						<img src="" style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px; cursor: pointer;" id="profilePicc">
 					</div>
 					<span class="new-header-record" style="color: #757575 !important;
 					font-size: 14px !important;" id="savedUserMessagee"></span>
@@ -4819,7 +4822,7 @@
 					<li class="nav-item tabs_btns">
 						<a class="nav-link active btn_tabs_link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Canban</a>
 					</li>
-					
+
 				</ul>  -->
 
 
@@ -4841,7 +4844,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="swipeArrowContainer">
 						<div class="swipeLeftContainer">
 							<i class="fas fa-long-arrow-alt-left swipeArrow"></i>
@@ -5307,8 +5310,8 @@
 			<!-- third modal code start -->
 			<!--  <div id="my-new-modal-3" class="newmodal_3">
 			<div class="new-modal-content_3">
-			  
-		
+
+
 			  <div class="new-modal-body_3"> -->
 
 			<!-- modal header
@@ -5320,7 +5323,7 @@
 				 Lina Adams
 			 </div>
 
-			 
+
 			 <div class="new-modal-follow-update">
 				 <div class="new-modal-left">Follow Up Date</div>
 				 <div class="new-modal-right">
@@ -5328,7 +5331,7 @@
 				 </div>
 			 </div>
 
-			 
+
 			 <div class="new-index-m-1">
 				<p class="work-title-index-modal">Work Title</p>
 				<p class="work-detail-index-modal">Major League Pitching Coach</p>
@@ -5338,13 +5341,13 @@
 				<p class="work-title-index-modal">Company Name</p>
 				<p class="work-detail-index-modal">Big Bird</p>
 			 </div>
-		
+
 			   </div>
 			 </div>
-		
-		
-		
-				
+
+
+
+
 			  </div>  -->
 
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

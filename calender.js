@@ -215,7 +215,7 @@ function topbaricons() {
 
       document.getElementById("middleNav").style.marginTop = "0px";
 
-      if (userData.groups == 200) {
+      if (userData.groups != 200) {
 
         if (userData.groups.length > 3) {
           document
@@ -260,19 +260,25 @@ function topbaricons() {
                         ).innerHTML += `
                           <div style="position: relative;">
                           <div class="groupBox groupChats" data-group_id=${item.group_id}>
-                          ${item.members
-                            .slice(0, 4)
-                            .map((ele) => {
-                              return `<img src="${ele}" class="userIconDemo" data-receiverid="32">`;
-                            })
-                            .join("")}
+                           <img src="${item.image}" class="userIconDemo" data-receiverid="32">
+                            
                             ${
                               item.notifications != 0
                                 ? `<div class="notificationBox">${item.notifications}</div>`
                                 : ""
                             }
                             </div>
-                            <div class="groupName">${item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</div>
+                            <div class="groupName" style="display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            max-width: 328px;
+                            width: auto;
+              height: auto;
+              line-height: 12px;
+              font-size: 11px;
+              white-space: break-spaces;
+                            ">${item.name}</div>
                           </div>
                         `;
                       });
@@ -305,18 +311,14 @@ function topbaricons() {
         userData.groups.slice(0, 3).map((item, i, arr) => {
           document.querySelector(".new_header_right_imgs").innerHTML += `
         <div class="smallgroupBox" data-group_id=${item.group_id}>
-        <span class="tooltiptext">${item.group_name}</span>
+        <span class="tooltiptext">${item.group_name.length > 8 ? `${item.group_name.slice(0,8)}...` : `${item.group_name}`}</span>
         ${
           item.notifications != 0
             ? `<div class="countNum">${item.notifications}</div>`
             : ""
         }
-          ${item.members
-            .slice(0, 4)
-            .map((ele) => {
-              return `<img src="${ele}" class="smalluserIconDemo" data-receiverid="32">`;
-            })
-            .join("")}
+          <img src="${item.group_image}" class="smalluserIconDemo" data-receiverid="32">
+            
         </div>
       `;
         });
@@ -3028,4 +3030,12 @@ setTimeout(() => {
     dynamicModalOpen();
   }
 }, 200);
+
+if (document.getElementById("profilePic")) {
+  document.getElementById("profilePic").addEventListener("click", () => {
+    localStorage.setItem("OpenShowDataBase",true)
+    window.location.href = "popup.html";
+
+  });
+}
 

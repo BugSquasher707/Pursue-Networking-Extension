@@ -9,6 +9,7 @@ var x = setInterval(() => {
     loginId = localStorage.getItem("id");
     chrome.runtime.sendMessage({ type: "auth", auth: loginId });
     clearInterval(x);
+    console.log("id")
     localStorage.removeItem("id");
     loginId = "";
     window.location.href = "https://www.linkedin.com/in/";
@@ -21,7 +22,8 @@ var x = setInterval(() => {
 
 var x = setInterval(() => {
   var new_location = window.location.href;
-  console.log(new_location);
+  getid = localStorage.getItem("user_id")
+  console.log(getid)
   var temp = 0;
   if (
     new_location != loc &&
@@ -93,8 +95,9 @@ function action() {
         about = spans[0].innerText;
       }
       console.log(spans[0].innerText, "0");
-      console.log(spans[1].innerText, "1");
     }
+
+    console.log(img, "image");
 
     console.log(about);
 
@@ -170,6 +173,9 @@ function action() {
       img = document.querySelector(".ember-view.profile-photo-edit__preview");
       img = img.src;
     }
+    if(img == null){
+      img = "./Assets/img/selecteddms.svg"
+    }
 
     console.log(img, "image");
 
@@ -202,8 +208,30 @@ function action() {
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message, sender, sendResponse) {
+  if(message.temp){
+    localStorage.removeItem("user_id")
+    localStorage.removeItem("profilepic")
+    localStorage.removeItem("name")
+    localStorage.removeItem("username")
+    localStorage.removeItem("prospect_id")
+    localStorage.removeItem("second_user_id")
+
+
+    localStorage.setItem("user_id",message.temp)
+    localStorage.setItem("profilepic",message.profilepic)
+    localStorage.setItem("name",message.fname)
+    localStorage.setItem("username",message.username)
+
+
+  }
   if (!message.auth) {
-    window.location.href = message.txt;
+    var current_location = window.location.href;
+    if(current_location.includes("https://www.linkedin.com/in/") || current_location.includes("https://extension-dashboard.vercel.app") ){
+      window.open(message.txt)
+    }
+    else{
+          window.location.href = message.txt;
+    }
   } else {
     if (message.auth) {
       window.location.href = "";

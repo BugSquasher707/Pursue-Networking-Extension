@@ -81,7 +81,7 @@ function setup() {
             localStorage.setItem("access_token", user.access_token);
             localStorage.setItem("user_id", user.id);
             localStorage.setItem("username", user.username);
-			localStorage.setItem("second_user_id", user.id);
+			      localStorage.setItem("second_user_id", user.id);
             localStorage.setItem("second_user_name", user.name);
             localStorage.setItem("secondUserPic", user.image);
 
@@ -115,19 +115,17 @@ isImage =  localStorage.getItem("profilePic");
     imageIS =  localStorage.getItem("profilePic");
     if(imageIS){
         var http = new XMLHttpRequest();
-
         http.open('HEAD', imageIS, false);
         http.send();
                   console.log('yeen',http)
                   if(http.status != 200){
                     localStorage.clear()
-                      console.log("hehehe");
+                      console.log("User Image Damaged");
                       window.location.reload();
-
-
-                  }else{
-                    console.log("hehwhwhehe");
-
+                  }
+                  else
+                  {
+                    console.log("User Image Correct");
                   }
           }
     clearInterval(e)
@@ -263,6 +261,7 @@ isImage =  localStorage.getItem("profilePic");
 
         if (userData.users) {
           userData.users.slice(0, 3).map((item, i, arr) => {
+            
             var row =
               item.image != null
                 ? `<span class="new-top-img" id="sharedm${count}">
@@ -275,6 +274,7 @@ isImage =  localStorage.getItem("profilePic");
               ? `<div class="countNum1">${item.total_notifications}</div>`
               : ""
           }
+            
             <img class="new-header-item-img" src="${item.image}">
             <span class="tooltiptext">${item.username}</span>
             </div>
@@ -449,7 +449,7 @@ isImage =  localStorage.getItem("profilePic");
                             document.querySelector(
                               ".groupDynamicContainer"
                             ).innerHTML += `
-                              <div style="position: relative;width: calc(30% - 20px); margin: auto 10px;">
+                              <div style="position: relative;width: calc(30% - 20px); margin: auto 15px;">
                               <div class="groupBox groupChats" data-group_id=${
                                 item.group_id
                               }>
@@ -462,11 +462,19 @@ isImage =  localStorage.getItem("profilePic");
                                     : ""
                                 }
                                 </div>
-                                <div class="groupName">${
-                                  item.name.length > 10
-                                    ? `${item.name.slice(0, 10)} ...`
-                                    : item.name
-                              }</div>
+                                <div class="groupName" style="display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                max-width: 328px;
+                                width: auto;
+                  height: auto;
+                  line-height: 12px;
+                  font-size: 11px;
+                  white-space: break-spaces;
+                                "
+                                >${
+                                  item.name}</div>
                               </div>
                             `;
                           });
@@ -504,7 +512,7 @@ isImage =  localStorage.getItem("profilePic");
                 .forEach((chats1) => {
                   chats1.innerHTML += `
                 <div class="smallgroupBox" data-group_id=${item.group_id}>
-                <span class="tooltiptext">${item.group_name}</span>
+                <span class="tooltiptext">${item.group_name.length > 8 ? `${item.group_name.slice(0,8)}...` : `${item.group_name}`}</span>
                   ${
                     item.notifications != 0
                       ? `<div class="countNum">${item.notifications}</div>`
@@ -550,6 +558,7 @@ isImage =  localStorage.getItem("profilePic");
     }
   } else {
     document.getElementById("loginBtn").style.display = "block";
+    document.getElementById("savedUserMessage").style.display = "none";
   }
 
   if (bgpage.word.loader == "loader") {
@@ -666,7 +675,8 @@ isImage =  localStorage.getItem("profilePic");
             document.getElementById("description").value = prev.description;
             document.getElementById("company").value = prev.company;
             document.getElementById("about").value = prev.about;
-            document.getElementById("notes").value = prev.notes;
+            // document.getElementById("notes").value = prev.notes;
+            document.getElementById("notes").innerHTML = prev.notes;
 
             document.getElementById("strategy_date").value = prev.strategy_date;
 
@@ -793,8 +803,15 @@ isImage =  localStorage.getItem("profilePic");
 
             var starIcon = document.getElementById("star__delete__icon");
             starIcon.src = "Assets/img/star-black.png";
-            document.getElementById("savedUserMessage").innerText = "";
-            // document.getElementById("yeen").innerHTML = `<i class="fa fa-spinner fa-spin"></i>`;
+            name = localStorage.getItem("second_user_name")
+            if(name != "null" && name != ""){
+              document.getElementById("savedUserMessage").innerText =
+              `You're in ${name}'s Database`;
+            }
+            else{
+            document.getElementById("savedUserMessage").innerText =
+              "Records from Database";
+            }            // document.getElementById("yeen").innerHTML = `<i class="fa fa-spinner fa-spin"></i>`;
           }
         }
       };
@@ -962,7 +979,8 @@ isImage =  localStorage.getItem("profilePic");
           document.getElementById("description").value = prev.description;
           document.getElementById("company").value = prev.company;
           document.getElementById("about").value = prev.about;
-          document.getElementById("notes").value = prev.notes;
+          // document.getElementById("notes").value = prev.notes;
+          document.getElementById("notes").innerHTML = prev.notes;
 
           document.getElementById("strategy_date").value = prev.strategy_date;
 
@@ -1098,7 +1116,15 @@ isImage =  localStorage.getItem("profilePic");
           starIcon.src = "Assets/img/star-black.png";
           // document.getElementById("yeen").innerHTML = `<img class="new_img_main_icon" id="star__delete__icon" src="Assets/img/star-black.png"
           // height="18px;" width="18px;">`;
-          document.getElementById("savedUserMessage").innerText = "";
+          name = localStorage.getItem("second_user_name")
+            if(name != "null" && name != ""){
+              document.getElementById("savedUserMessage").innerText =
+              `You're in ${name}'s Database`;
+            }
+            else{
+            document.getElementById("savedUserMessage").innerText =
+              "Records from Database";
+            }
         }
       }
     };
@@ -1673,13 +1699,21 @@ function starDeleteProspect() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText != "400") {
           deleteProspect();
-          document.getElementById("savedUserMessage").innerText = "";
+          getname = localStorage.getItem("second_user_name")
+            if(getname != "null" && getname != ""){
+              document.getElementById("savedUserMessage").innerText =
+              `You're in ${getname}'s Database`;
+            }
+            else{
+            document.getElementById("savedUserMessage").innerText =
+              "Records from Database";
+            }
         } else {
           getRequest();
-          name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
+          getname = localStorage.getItem("second_user_name")
+            if(getname != "null" && getname != ""){
               document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
+              `You're in ${getname}'s Database`;
             }
             else{
             document.getElementById("savedUserMessage").innerText =
@@ -2292,6 +2326,9 @@ function getAllDatabases() {
             document.getElementById("multi_database").style.display = "block";
 
             document.getElementById("results").style.display = "none";
+            document.getElementById("list_table_view").style.display = "none";
+
+            
           }
         }
       };
@@ -2684,7 +2721,8 @@ function getLoginPage() {
 }
 
 function getAll() {
-
+  btn = document.getElementById("view_all_1")
+  btn.disabled = true
   secondUserPic = localStorage.getItem("secondUserPic");
   if(secondUserPic != "")
   {
@@ -2695,11 +2733,11 @@ function getAll() {
     profilePic = localStorage.getItem("profilePicc");
     document.getElementById("profilePicc").src = profilePic
   }
-  name = localStorage.getItem("second_user_name")
-  if(name != "null" && name != "")
+  getname = localStorage.getItem("second_user_name")
+  if(getname != "null" && getname != "")
   {
     document.getElementById("savedUserMessagee").innerText =
-    `You're in ${name}'s Database`;
+    `You're in ${getname}'s Database`;
   }
   else
   {
@@ -2727,17 +2765,11 @@ function getAll() {
       arr = JSON.parse(arr);
       // alert(arr);
       document.getElementById("getAll").innerHTML = "";
-      document.getElementById("list_table_view").style.display = "block";
 
       var finalArray = arr.map(function (obj, key) {
 
               
-        var http = new XMLHttpRequest();
-
-        http.open('HEAD',obj.image, false);
-        http.send();
-       //  console.log(http)
-        if(obj.image.includes("http") || obj.image.includes("chrome-extension")){
+        if(obj.image.includes("http") || obj.image.includes("chrome-extension") || obj.image == null){
          console.log("test")
          
         const url = `${globalURl}/updating_prospect_image`;
@@ -2858,6 +2890,9 @@ function getAll() {
       // ArrayMaker();
       document.getElementById("api_return").style.display = "none";
       document.getElementById("results").style.display = "none";
+      document.getElementById("list_table_view").style.display = "block";
+      document.getElementById("view_all_1").disabled = false
+
       document.getElementById("getAll").style.display = "contents";
       document.getElementById("getAllButtons").style.display = "block";
 
@@ -3045,10 +3080,10 @@ function getSinglePage(e) {
 
         localStorage.setItem("prospect_id", res.user.id);
 
-        name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
+        getname = localStorage.getItem("second_user_name")
+            if(getname != "null" && getname != ""){
               document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
+              `You're in ${getname}'s Database`;
             }
             else{
             document.getElementById("savedUserMessage").innerText =
@@ -3098,7 +3133,8 @@ function getSinglePage(e) {
         document.getElementById("profile_link").innerText =
           res.user.profile_link;
 
-        document.getElementById("notes").value = res.user.notes;
+        // document.getElementById("notes").value = res.user.notes;
+        document.getElementById("notes").innerHTML = res.user.notes;
         if (document.getElementById(res.user.status)) {
           document.getElementById(res.user.status).selected = true;
           var status_tag = document.getElementById("status");
@@ -3215,8 +3251,15 @@ function getSinglePage(e) {
         var starIcon = document.getElementById("star__delete__icon");
         starIcon.src = "Assets/img/star-black.png";
 
-        document.getElementById("savedUserMessage").innerText = "";
-
+        getname = localStorage.getItem("second_user_name")
+        if(getname != "null" && getname != ""){
+          document.getElementById("savedUserMessage").innerText =
+          `You're in ${getname}'s Database`;
+        }
+        else{
+        document.getElementById("savedUserMessage").innerText =
+          "Records from Database";
+        }
         var user_id = localStorage.getItem("user_id");
         var secondary_id = localStorage.getItem("second_user_id");
         if (!secondary_id) {
@@ -3281,6 +3324,8 @@ function getWeekOfMonth(date) {
 }
 
 function getProfile() {
+  document.getElementById("get_all_message").style.display = "none"
+  document.getElementById("search_box").value = null
   document.getElementById("yeen").style.display = "block";
   document.getElementById("star__delete__icon").style.display = "none";
   var clipper = localStorage.getItem("clipperpageCheck");
@@ -3315,10 +3360,10 @@ function getProfile() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText != "400") {
-          name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
+          getname = localStorage.getItem("second_user_name")
+            if(getname != "null" && getname != ""){
               document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
+              `You're in ${getname}'s Database`;
             }
             else{
             document.getElementById("savedUserMessage").innerText =
@@ -3400,8 +3445,15 @@ function getProfile() {
             }
           };
 
-          document.getElementById("savedUserMessage").innerText = "";
-          var deleteIcon = document.getElementById("star__delete__icon");
+          getname = localStorage.getItem("second_user_name")
+          if(getname != "null" && getname != ""){
+            document.getElementById("savedUserMessage").innerText =
+            `You're in ${getname}'s Database`;
+          }
+          else{
+          document.getElementById("savedUserMessage").innerText =
+            "Records from Database";
+          }          var deleteIcon = document.getElementById("star__delete__icon");
           deleteIcon.src = "Assets/img/star-black.png";
           document.getElementById("yeen").style.display = "none";
           document.getElementById("star__delete__icon").style.display = "block";
@@ -3468,7 +3520,7 @@ function getRequest() {
   }
   // }
   var notes = document.getElementById("notes")
-    ? document.getElementById("notes").value
+    ? document.getElementById("notes").innerHTML
     : "";
   var follow_up = document.getElementById("follow_up").value;
   var status = document.getElementById("status").value;
@@ -3531,8 +3583,9 @@ function getRequest() {
     console.log(decodedString,'decoded');
   }
  })()
- console.log(img,'imgg')
+//  console.log(img,'imgg')
  var i = setInterval(() => {
+  if(img != null){
   const url = `${globalURl}/api-test`;
 
   var xhr = new XMLHttpRequest();
@@ -3578,7 +3631,8 @@ function getRequest() {
     }
   };
   clearInterval(i)
-}, 700)
+}
+}, 1500)
 }
 
 function apiCall(url, params = []) {
@@ -4083,7 +4137,7 @@ function eventSave() {
     var company = document.getElementById("company").value;
     let address = document.getElementById("address").value;
     var about = document.getElementById("about").value;
-    var notes = document.getElementById("notes").value;
+    var notes = document.getElementById("notes").innerHTML;
     var follow_up = document.getElementById("follow_up").value;
     var status = document.getElementById("status").value;
     var discovery_call = document.getElementById("discovery_call").value;
@@ -4137,6 +4191,7 @@ function eventSave() {
 
 
     var i = setInterval(() => {
+      if(profile_image != null){
 
     const url = `${globalURl}/event-save`;
 
@@ -4174,8 +4229,8 @@ function eventSave() {
       }
     };
     clearInterval(i)
-
-  }, 500)
+  }
+  }, 1500)
   } else {
     var myToast = Toastify({
       text: "Login to access",
@@ -5376,7 +5431,7 @@ function openProspectModal() {
       if (userData.length > 0) {
         userData.map((item) => {
           document.querySelector(".groupBoxContainer1").innerHTML += `
-            <div style="position: relative;width: calc(30% - 20px); margin: auto 10px;"">
+            <div style="position: relative;width: calc(30% - 20px); margin: auto 15px;"">
             <div class="groupBox" data-group_id=${item.group_id} style="border-radius: 50%;
             padding: 5px;
             
@@ -5390,11 +5445,18 @@ function openProspectModal() {
                   : ""
               }
               </div>
-              <div class="groupName">${
-                item.name.length > 10
-                  ? `${item.name.slice(0, 10)} ...`
-                  : item.name
-              }</div>
+              <div class="groupName" style="display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              max-width: 328px;
+              width: auto;
+height: auto;
+line-height: 12px;
+font-size: 11px;
+white-space: break-spaces;
+              ">${
+                item.name }</div>
             </div>
           `;
         });
@@ -6689,4 +6751,23 @@ function shareProspectInSubGroup() {
     });
     myToast.showToast();
   }
+}
+
+var i = setInterval(() => {
+  database = localStorage.getItem("OpenShowDataBase")
+  if(database){
+    localStorage.removeItem("OpenShowDataBase");
+    getAllDatabases();
+  }
+  clearInterval(i)
+
+}, 50)
+
+
+
+if (document.getElementById("profilePicc")) {
+  document.getElementById("profilePicc").addEventListener("click", () => {
+    localStorage.setItem("OpenShowDataBase",true)
+    window.location.href = "popup.html";
+  });
 }

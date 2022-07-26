@@ -2314,7 +2314,7 @@
 
     .chatt-box-2,
     .chatt-box {
-      padding: 15px 0px;
+      padding: 30px 0px;
     }
 
     .today-date {
@@ -3397,6 +3397,37 @@
       border-radius: 50%;
     }
 
+    [data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+/* box for title text */
+[data-title]:after {
+    content: attr(data-title);
+  	/* position for title view box */
+  	position: absolute;
+    color: #084DD1;
+    left: -280%;
+    top: -60%;
+
+    font: normal normal normal 12px/16px Roboto;
+    z-index: 99999;
+    visibility: hidden;
+    /* optional */
+    white-space: nowrap;
+  	/* stilization */
+    background-color: #dfe9fa;
+    color: #111;
+    font-size: 60%;
+    padding: 1px 3px 2px 3px;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border-radius: 6px;
+}
+[data-title] {
+    position: relative;
+}
 
 
     .lastcss {}
@@ -3491,7 +3522,7 @@
             </div>
           </div>
           <div class="row profileMainBox-2">
-            <div class="w-100 btn-boxs my-2">
+            <div class="w-100 btn-boxs my-2 d-flex">
               <button id="Conversations_button" class="btn btn-own  btn-sm" style="margin-right: 10px;">
                 Conversations
               </button>
@@ -3718,6 +3749,16 @@
                     line-height: 14px;
                     margin-top: 10px;
                     font-weight: 700;
+                    display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                max-width: 328px;
+                                width: auto;
+                  height: auto;
+                  line-height: 12px;
+                  font-size: 11px;
+                  white-space: break-spaces;
                   "></h6>
             </div>
             <div class="nav-list-ui">
@@ -3736,11 +3777,11 @@
           <div class="w-70 rounded-full">
             <div class="top-info-box">
               <div class="row">
-                <div class="list_name" style="display: flex;
+                <div class="list_name" style="
                 align-items: center;">
                   <a id="subgroup_name" href="#" class="text-dark font-weight-bolder" style="margin-right: 10px;">#General <i
                       class="fas fa-sort-down"></i></a>
-                  <p id="nameofgroup" class="m-0">Ui Design</p>
+                  <p id="nameofgroup" class="m-0" style="max-width: 153px;line-height: normal;">Ui Design</p>
                   <span></span>
                 </div>
                 <div id="notify_img_second" class="notify_img">
@@ -3754,7 +3795,7 @@
                   <a href="#"><img src="https://picsum.photos/200/200" alt="" /></a>
                 </div>
                 <div class="w-100 btn-boxs mt-2">
-                  <button class="btn btn-own btn-active btn-sm">
+                  <button style="display:none"class="btn btn-own btn-active btn-sm">
                     Conversations
                   </button>
                   <button id="showprospectBox" class="btn btn-own btn-sm">
@@ -4328,7 +4369,14 @@
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;cursor: pointer;;
                   ">
-                <h1 class="name" style="color: red">Leave Group</h1>
+                <h1 class="name" style="color: red">Leave SubGroup</h1>
+              </div>
+              <div id="Subgroup_delete_current_group" class="group-name-box" style="
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;cursor: pointer;
+                    display:none
+                  ">
+                <h1 class="name" style="color: red">Delete SubGroup</h1>
               </div>
             </div>
 
@@ -4718,6 +4766,7 @@
 
 
   <div data-ml-modal id="modal-12">
+    
     <a href="#!" class="modal-overlay">
       <div class="modal-dialog modal-dialog-lg">
         <div class="top-info-box">
@@ -4748,6 +4797,7 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           max-width: 328px;"></p>
+          
         </div>
             </div>
           </div>
@@ -4762,9 +4812,15 @@
         <a href="#!" class="modal-close">&times;</a>
         <h3>Comments</h3>
         <input type="hidden" id="temporary_sender" value="">
+        <input type="hidden" id="prospect_status_image" value="">
+        <input type="hidden" id="prospect_status_name" value="">
+        <input type="hidden" id="temporary_prospect_id" value="">
         <input type="hidden" id="temporary_url" value="">
 
         <div class="modal-content modal-content-comments">
+          <button id="send_CRM" class="send_CRM btn btn-sm" style="margin-bottom: 10px;">
+            Open in CRM
+          </button>
           <div id="comments_data">
             <div class="loader1"></div>
           </div>
@@ -4788,6 +4844,7 @@
         </div>
       </div>
     </a>
+    
 
   </div>
   <!-- group name edit modal  -->
