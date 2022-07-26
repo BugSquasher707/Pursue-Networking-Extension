@@ -23,51 +23,51 @@
 <body>
     <style>
         .dropdown {
-			position: relative;
-			display: inline-block;
-		}
+            position: relative;
+            display: inline-block;
+        }
 
-		/* / Dropdown Content (Hidden by Default) / */
-		#myDropdown {
-			display: none;
-		}
+        /* / Dropdown Content (Hidden by Default) / */
+        #myDropdown {
+            display: none;
+        }
 
-		.dropdown-content {
-			width: fit-content;
-			height: 240px;
-			overflow-x: hidden;
-			overflow-y: scroll;
-			transition: all .2s ease-in-out;
-			position: absolute;
-			top: -199%;
-			left: 11%;
-			z-index: 10;
-			background-color: #f1f1f1;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			border-radius: 10px;
-			box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.22), 0px 0px 24px rgba(0, 0, 0, 0.4);
-		}
+        .dropdown-content {
+            width: fit-content;
+            height: 240px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            transition: all .2s ease-in-out;
+            position: absolute;
+            top: -199%;
+            left: 11%;
+            z-index: 10;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.22), 0px 0px 24px rgba(0, 0, 0, 0.4);
+        }
 
-		.dropdown-content::-webkit-scrollbar {
-			background-color: transparent;
-			display: none;
-		}
+        .dropdown-content::-webkit-scrollbar {
+            background-color: transparent;
+            display: none;
+        }
 
-		/* / Links inside the dropdown / */
-		.dropdown-content span {
-			color: black;
-			padding: 12px 16px;
-			text-decoration: none;
-			display: block;
-		}
+        /* / Links inside the dropdown / */
+        .dropdown-content span {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-		/* / Change color of dropdown links on hover / */
-		.dropdown-content span:hover {
-			background-color: #ddd;
-			cursor: pointer
-		}
+        /* / Change color of dropdown links on hover / */
+        .dropdown-content span:hover {
+            background-color: #ddd;
+            cursor: pointer
+        }
     </style>
     <!-- header start  -->
     <header class="header pt-3" id="header">
@@ -81,13 +81,15 @@
                         </a>
                     </strong>
                 </div>
-                <div class="col-xxl-7 col-8" >
+                <div class="col-xxl-7 col-8">
                     <div class="input-con">
                         <div class="input-inner">
                             <img src="./Assets/img/search.png" alt="search-img-icon">
                             <div style="width: 100%; height: 100%; position: relative;">
                                 <input type="search" name="search" id="search" placeholder="Search Prospects">
-                                <div  id="database_name"  style="width: 100%; max-width: max-content; min-height: 33px; height: auto; position: absolute; right: 2%; border-radius: 5px; bottom: 11%; background-color: #fff; border: 1px solid rgba(15,178,248,.15); z-index: 1000;padding:5px"></div>
+                                <div id="database_name"
+                                    style="width: 100%; max-width: max-content; min-height: 33px; height: auto; position: absolute; right: 2%; border-radius: 5px; bottom: 11%; background-color: #fff; border: 1px solid rgba(15,178,248,.15); z-index: 1000;padding:5px">
+                                </div>
                             </div>
                             <!-- select with search functionality  -->
                             <!-- <select id="searchTopSelect" >
@@ -109,13 +111,15 @@
                             aria-haspopup="true" aria-expanded="false">
                             <div class="dropdown-inner d-flex align-items-center mx-3">
                                 <div class="drop-name d-flex flex-column">
-                                    <span id="admin_name" class="name text-main font-weight-bold text-capitalize">Abdul</span>
+                                    <span id="admin_name"
+                                        class="name text-main font-weight-bold text-capitalize">Abdul</span>
                                     <span class="role text-secondary text-capitalize">admin</span>
                                 </div>
                                 <div class="profile-pix">
                                     <img id="admin_image" src="" alt="avatar" class="profile-img">
                                 </div>
-                                <img style="display:none" src="./Assets/img/arrow.png" alt="arrow_down" style="width: 15px;height: 10px;">
+                                <img style="display:none" src="./Assets/img/arrow.png" alt="arrow_down"
+                                    style="width: 15px;height: 10px;">
                             </div>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -251,8 +255,9 @@
                                     <div class="name-listing">
                                         <h1 class="name-heading">
                                             <span class="name mr-3" id="prospect_name"></span>
-                                            <svg id="open_linkedin" width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="cursor:pointer" title="Open Linkedin">
+                                            <svg id="open_linkedin" width="25" height="24" viewBox="0 0 25 24"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor:pointer"
+                                                title="Open Linkedin">
                                                 <path
                                                     d="M19.5948 0H6.36866C3.39355 0 0.98175 2.4118 0.98175 5.38691V18.6131C0.98175 21.5882 3.39355 24 6.36866 24H19.5948C22.57 24 24.9818 21.5882 24.9818 18.6131V5.38691C24.9818 2.4118 22.57 0 19.5948 0Z"
                                                     fill="#0B86CA" />
@@ -266,7 +271,7 @@
 
                                         </h1>
                                         <select name="" id="select-listing" class="select-listing">
-                                            
+
                                         </select>
                                     </div>
                                 </div>
@@ -278,7 +283,7 @@
                                                 <select id="searchTopSelect-3">
                                                     <option value="DB">Select List</option>
                                                     <option value="DB">(family) Kolin's Database</option>
-                                                    <option value="DB">(Client) Jawad Database</option>
+                                                    <option value="green">(Client) Jawad Database</option>
                                                     <option value="DB">(Reach) Daud Database</option>
                                                     <option value="DB">(New) Daud Database</option>
                                                 </select>
@@ -288,7 +293,8 @@
                                     <div class="row2">
                                         <div class="left">Follow Up:</div>
                                         <div class="right">
-                                            <input type="date" name="date-time" id="follow_up_date" class="date-time-local">
+                                            <input type="date" name="date-time" id="follow_up_date"
+                                                class="date-time-local">
                                         </div>
                                     </div>
                                     <div class="row2">
@@ -296,8 +302,10 @@
                                         <div class="right">
                                             <div class="text-editor">
                                                 <div class="editor-wrapper">
-                                                    <div id="content" class="content" contenteditable style="height: 133px !important"></div>
-                                                    <div id="toolbar" class="toolbar" style="height: 33px !important;"></div>
+                                                    <div id="content" class="content" contenteditable
+                                                        style="height: 133px !important"></div>
+                                                    <div id="toolbar" class="toolbar" style="height: 33px !important;">
+                                                    </div>
                                                 </div>
                                                 <input id="image-upload-input" class="image-upload-input" type="file"
                                                     accept="image/*" />
@@ -307,20 +315,22 @@
                                     <div class="row2">
                                         <div class="left">Work Title:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="description_name" placeholder="Creative Director">
+                                            <input type="text" name="" id="description_name"
+                                                placeholder="Creative Director">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Company:</div>
                                         <div class="right">
-                                            <input type="text" name="" id="company_name" placeholder="SIZ Pure Drinking Water">
+                                            <input type="text" name="" id="company_name"
+                                                placeholder="SIZ Pure Drinking Water">
                                         </div>
                                     </div>
                                     <div class="row2">
                                         <div class="left">Location:</div>
                                         <div class="right">
-                                            <input type="text" name="company_address" id="company_address" placeholder="Location"
-                                                value="Los Angeles , California , United State">
+                                            <input type="text" name="company_address" id="company_address"
+                                                placeholder="Location" value="Los Angeles , California , United State">
                                         </div>
                                     </div>
                                     <div class="row2">
@@ -350,7 +360,7 @@
                                         <div class="right">
                                             <div class="select-db-list">
                                                 <select id="searchTopSelect-4">
-                                                    
+
                                                 </select>
                                             </div>
                                         </div>
@@ -421,8 +431,8 @@
                             <div class="comments-box">
                                 <div class="inner-con">
                                     <div class="user-comment-con" id="comments_div">
-                                        
-                                        
+
+
                                     </div>
                                     <div class="reply-box">
                                         <div class="img mr-3">
@@ -430,7 +440,8 @@
                                         </div>
                                         <div class="input-box">
                                             <!-- <input type="text" name="" id="add_comment" placeholder="Comments"> -->
-                                            <textarea name="" id="add_comment" style="resize:vertical !important"></textarea>
+                                            <textarea name="" id="add_comment"
+                                                style="resize:vertical !important"></textarea>
                                             <button class="btn-@">@</button>
                                         </div>
                                         <div id="myDropdown" class="dropdown-content">

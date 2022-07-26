@@ -237,7 +237,7 @@
         z-index: 44;
         width: 100%;
         &.boom {
-            background-color:  rgb(133, 187, 101) !important;
+            background-color: rgb(133, 187, 101) !important;
         }
         &.lost {
             background-color: rgb(128, 128, 128);
@@ -245,7 +245,7 @@
         &.compain {
             background-color: #074dd1;
         }
-        &.talking/replied {
+        &.talking-replied {
             background-color: #0fb2f8;
         }
         &.serious-conversations {
@@ -308,5 +308,14 @@
                 }
             }
         }
+    }
+}
+
+.searchTopSelect-3-list-item {
+    &.db {
+        color: red;
+    }
+    &.green {
+        color: green;
     }
 }

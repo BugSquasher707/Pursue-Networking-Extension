@@ -79,9 +79,9 @@
                         width: 60%;
                         margin-right: 10%;
                         .select-db-list {
-                            select {
-                                display: none;
-                            }
+                            // select {
+                            //     display: none;
+                            // }
                             .select2 {
                                 width: 100% !important;
                                 .selection {
@@ -306,5 +306,4 @@
     padding: 3px 15px;
     border-radius: 15px;
     cursor: pointer;
-    
 }

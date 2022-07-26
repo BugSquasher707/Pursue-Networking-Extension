@@ -109,35 +109,36 @@ setTimeout(() => {
               <option value="Boom">Boom</option>
               `
         }
-        
+
 
         createCustomSelect('select-listing').click(function () {
           let dataselect = $(".select-listing-list-item.selected").text();
-          if(dataselect == "Boom"){
+          if (dataselect == "Boom") {
           }
-          if(dataselect == "Boom"){
+          if (dataselect == "Boom") {
             document.getElementById("select-listing-heading").classList.add("boom")
           }
           event_save()
           console.log(dataselect)
         })
+        createCustomSelect('searchTopSelect-3');
         document.querySelector(".custom-select-heading").innerHTML = `${userData.data.status}`
 
-        if(userData.data.status == "LinkedIn Campaign"){
+        if (userData.data.status == "LinkedIn Campaign") {
           document.getElementById("select-listing-heading").classList.add("compain")
-        } 
-        if(userData.data.status == "Talking/Replied"){
+        }
+        if (userData.data.status == "Talking/Replied") {
           document.getElementById("select-listing-heading").classList.add("talking/replied")
-        }if(userData.data.status == "Serious Conversations"){
+        } if (userData.data.status == "Serious Conversations") {
           document.getElementById("select-listing-heading").classList.add("serious-conversations")
-        }if(userData.data.status == "Discovery Call Scheduled"){
+        } if (userData.data.status == "Discovery Call Scheduled") {
           document.getElementById("select-listing-heading").classList.add("discovery-call-scheduled")
-        }if(userData.data.status == "Discovery Call Completed"){
+        } if (userData.data.status == "Discovery Call Completed") {
           document.getElementById("select-listing-heading").classList.add("discovery-call-completed")
         }
-        if(userData.data.status == "Boom"){
+        if (userData.data.status == "Boom") {
           document.getElementById("select-listing-heading").classList.add("boom")
-        }if(userData.data.status == "Lost"){
+        } if (userData.data.status == "Lost") {
           document.getElementById("select-listing-heading").classList.add("lost")
         }
 
@@ -812,6 +813,7 @@ function addMemberToComment(e) {
     document.getElementById("myDropdown").style.display = "none";
   }
 }
+
 
 
 
