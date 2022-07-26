@@ -279,7 +279,8 @@
                     .input-box {
                         width: 100%;
                         position: relative;
-                        input , textarea {
+                        input,
+                        textarea {
                             width: 100%;
                             background: #edf2f6;
                             border: 1px solid rgba(7, 77, 209, 0.1);
@@ -298,4 +299,12 @@
             }
         }
     }
+}
+#select-listing-heading {
+    background-color: #0fb2f8;
+    color: #fff;
+    padding: 3px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    
 }

@@ -108,34 +108,33 @@ setTimeout(() => {
               <option value="Discovery Call Completed">Discovery Call Completed</option>
               <option value="Boom">Boom</option>
               `
-            }
-            
-            $(".select-listing").select2().on('change', () => {
-                let data = $(".select-listing option:selected").text();
-                event_save()
-            })
-            
+        }
 
-            document.getElementById("prospect_image").src = userData.data.image
-            document.getElementById("follow_up_date").value = userData.data.follow_up
-            document.getElementById("content").innerHTML = userData.data.notes
-            document.getElementById("description_name").value = userData.data.description
-            document.getElementById("company_name").value = userData.data.company
-            document.getElementById("company_address").value = userData.data.address
-            document.getElementById("prospect_about").value = userData.data.about
-            document.getElementById("prospect_about").innerText = userData.data.about
-            
-            document.getElementById("discovery_call_date").value = userData.data.discovery_call
-            document.getElementById("strategy_date").value = userData.data.strategy_date
-            document.getElementById("weeklu_source").value = userData.data.weekly_date
-            
-            document.getElementById("total_messages").value = userData.data.total_messages
-            document.getElementById("record_link").value = userData.data.profile_link
-            document.getElementById("last_modified").value = userData.data.weekly_date
-            if(userData.data.conversion)
-            {
-              document.getElementById("searchTopSelect-4").innerHTML = `<option value="compain" selected >${userData.data.conversion}</option>`
-              document.getElementById("searchTopSelect-4").innerHTML += `
+        createCustomSelect('select-listing').click(function () {
+          let dataselect = $(".select-listing-list-item.selected").text();
+          console.log(dataselect)
+        })
+
+
+        document.getElementById("prospect_image").src = userData.data.image
+        document.getElementById("follow_up_date").value = userData.data.follow_up
+        document.getElementById("content").innerHTML = userData.data.notes
+        document.getElementById("description_name").value = userData.data.description
+        document.getElementById("company_name").value = userData.data.company
+        document.getElementById("company_address").value = userData.data.address
+        document.getElementById("prospect_about").value = userData.data.about
+        document.getElementById("prospect_about").innerText = userData.data.about
+
+        document.getElementById("discovery_call_date").value = userData.data.discovery_call
+        document.getElementById("strategy_date").value = userData.data.strategy_date
+        document.getElementById("weeklu_source").value = userData.data.weekly_date
+
+        document.getElementById("total_messages").value = userData.data.total_messages
+        document.getElementById("record_link").value = userData.data.profile_link
+        document.getElementById("last_modified").value = userData.data.weekly_date
+        if (userData.data.conversion) {
+          document.getElementById("searchTopSelect-4").innerHTML = `<option value="compain" selected >${userData.data.conversion}</option>`
+          document.getElementById("searchTopSelect-4").innerHTML += `
                   <option id="New Job - Congrats">New Job - Congrats</option>
                   <option id="Work Anniversary - Congrats">Work Anniversary - Congrats</option>
                   <option id="Birthday - Congrats">Birthday - Congrats</option>
@@ -289,92 +288,92 @@ setTimeout(() => {
 
       }
     }
-}
-},100)
+  }
+}, 100)
 
-function event_save(){
+function event_save() {
 
-  
-    user_id = localStorage.getItem("user_id")
-    fname =  document.getElementById("prospect_name").innerText 
-    let status = $(".select-listing option:selected").text();
-    profile_image = document.getElementById("prospect_image").src
-    description =  document.getElementById("description_name").value
-    company = document.getElementById("company_name").value
-    about = document.getElementById("prospect_about").value
-    address = document.getElementById("company_address").value
-    notes = document.getElementById("content").innerHTML
-    follow_up = document.getElementById("follow_up_date").value
-    discovery_call = document.getElementById("discovery_call_date").value
-    updated_at = document.getElementById("last_modified").value
-    conversion = $("#searchTopSelect-4 option:selected").text();
-    total_messages = document.getElementById("total_messages").value
-    endorsement = null;
-    if (document.querySelector('input[name="end-given"]:checked')) {
-      endorsement = document.querySelector(
-        'input[name="end-given"]:checked'
-      ).value;
-    }
-     
-    priority = null;
-    if (document.querySelector('input[name="prospects"]:checked')) {
-      priority = document.querySelector(
-        'input[name="prospects"]:checked'
-      ).value;
-    }
-    profile_link = document.getElementById("record_link").value
-    weekly_date = document.getElementById("weeklu_source").value
-    strategy_date = document.getElementById("strategy_date").value
 
-    var today = new Date(weekly_date);
-          var today = today.toISOString().substring(0, 10);
-          var weekly_source = today;
-          var options = {
-            month: "short",
-          };
-          var options_year = {
-            year: "2-digit",
-          };
-          var today = new Date(weekly_source);
+  user_id = localStorage.getItem("user_id")
+  fname = document.getElementById("prospect_name").innerText
+  let status = $(".select-listing option:selected").text();
+  profile_image = document.getElementById("prospect_image").src
+  description = document.getElementById("description_name").value
+  company = document.getElementById("company_name").value
+  about = document.getElementById("prospect_about").value
+  address = document.getElementById("company_address").value
+  notes = document.getElementById("content").innerHTML
+  follow_up = document.getElementById("follow_up_date").value
+  discovery_call = document.getElementById("discovery_call_date").value
+  updated_at = document.getElementById("last_modified").value
+  conversion = $("#searchTopSelect-4 option:selected").text();
+  total_messages = document.getElementById("total_messages").value
+  endorsement = null;
+  if (document.querySelector('input[name="end-given"]:checked')) {
+    endorsement = document.querySelector(
+      'input[name="end-given"]:checked'
+    ).value;
+  }
 
-          //init date
-          var date = new Date(weekly_source);
+  priority = null;
+  if (document.querySelector('input[name="prospects"]:checked')) {
+    priority = document.querySelector(
+      'input[name="prospects"]:checked'
+    ).value;
+  }
+  profile_link = document.getElementById("record_link").value
+  weekly_date = document.getElementById("weeklu_source").value
+  strategy_date = document.getElementById("strategy_date").value
 
-          weekly_source = today.toLocaleDateString("en-US", options) +
-          " Week " +
-          getWeekOfMonth(date) +
-          " -" +
-          today.toLocaleDateString("en-US", options_year);
+  var today = new Date(weekly_date);
+  var today = today.toISOString().substring(0, 10);
+  var weekly_source = today;
+  var options = {
+    month: "short",
+  };
+  var options_year = {
+    year: "2-digit",
+  };
+  var today = new Date(weekly_source);
 
-    const url = `${globalURl}/event-save`;
+  //init date
+  var date = new Date(weekly_source);
 
-    var xhr1 = new XMLHttpRequest();
-    xhr1.open("POST", url, true);
-    xhr1.setRequestHeader("Content-Type", "application/json");
-    xhr1.send(
-      JSON.stringify({
-        user_id: user_id,
-        profile_image: profile_image,
-        name: fname,
-        description: description,
-        company: company,
-        about: about,
-        address: address,
-        notes: notes,
-        follow_up: follow_up,
-        status: status,
-        discovery_call: discovery_call,
-        updated_at: updated_at,
-        conversion: conversion,
-        total_messages: total_messages,
-        endorsement: endorsement,
-        priority: priority,
-        profile_link: profile_link,
-        weekly_date: weekly_date,
-        weekly_source: weekly_source,
-        strategy_date: strategy_date,
-      })
-    );
+  weekly_source = today.toLocaleDateString("en-US", options) +
+    " Week " +
+    getWeekOfMonth(date) +
+    " -" +
+    today.toLocaleDateString("en-US", options_year);
+
+  const url = `${globalURl}/event-save`;
+
+  var xhr1 = new XMLHttpRequest();
+  xhr1.open("POST", url, true);
+  xhr1.setRequestHeader("Content-Type", "application/json");
+  xhr1.send(
+    JSON.stringify({
+      user_id: user_id,
+      profile_image: profile_image,
+      name: fname,
+      description: description,
+      company: company,
+      about: about,
+      address: address,
+      notes: notes,
+      follow_up: follow_up,
+      status: status,
+      discovery_call: discovery_call,
+      updated_at: updated_at,
+      conversion: conversion,
+      total_messages: total_messages,
+      endorsement: endorsement,
+      priority: priority,
+      profile_link: profile_link,
+      weekly_date: weekly_date,
+      weekly_source: weekly_source,
+      strategy_date: strategy_date,
+    })
+  );
 }
 function getWeekOfMonth(date) {
   let adjustedDate = date.getDate() + date.getDay();
@@ -797,20 +796,24 @@ const createCustomSelect = (id, placeholder = 'Select List') => {
   let selectListArray = '';
   const optionList = $("#" + id)[0].children;
   for (let i = 0; i < optionList.length; i++) {
-    let optionValue = optionList[i].value;
     let optionText = optionList[i].innerText;
 
-    selectListArray += `<li class='${optionList[i].value} ${id}-list-item'>${optionText}</li>`
-    console.log(selectListArray)
+    selectListArray += `<li class='${optionList[i].value.replace(/\s+/g, '-').toLowerCase()} ${id}-list-item custom-select-listing'>${optionText}</li>`
   }
   $("#" + id).parent().append(`<div id='${id}-container' class='select-style-select-listing'> <ul> ${selectListArray} </ul> </div>`)
-  $('#' + id + '-container').prepend(`<div id='${id}-heading'>${placeholder}</div>`)
+  $('#' + id + '-container').prepend(`<div id='${id}-heading' class='custom-select-heading '>${placeholder}</div>`)
+
+  $(`#${id}-heading`).click(() => {
+    $(`#${id}-heading + ul`).toggleClass("active-list");
+  })
 
   // retun value 
   $('.' + id + '-list-item').click(function () {
     $(`#${id}-heading`).html($(this).text())
     $('.' + id + '-list-item').removeClass('selected');
     $(this).addClass('selected');
+    $(`#${id}-heading`).attr('class', `custom-select-heading ${this.className.split(' ')[0]}`)
+    // console.log(this.className.split(' ')[0])
   });
   return $(`.${id}-list-item`);
 }
