@@ -4,6 +4,14 @@ var globalArr = [];
 var commentArray = [];
 let x = 0;
 
+var bgpage = {
+  word: {
+    loader: null,
+  },
+  loginId: null,
+  msg: null,
+};
+
 // Test URL
 
 const globalURl = "https://linkedin.thefastech.com";
@@ -20,13 +28,60 @@ const globalURl = "https://linkedin.thefastech.com";
 
 // const globalURl = "https://testlinkedin.thefastech.com";
 
+setInterval(() => {
+  chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    bgpage = msg;
+    console.log(msg.word)
+
+    if (bgpage.word?.name) {
+      localStorage.setItem("bgData", JSON.stringify(bgpage.word));
+      removeLoader();
+
+      if (bgpage.loginId) {
+        const url = `${globalURl}/login`;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(
+          JSON.stringify({
+            id: bgpage.loginId,
+          })
+        );
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            let user = JSON.parse(xhr.responseText);
+
+            if (user) {
+              localStorage.removeItem("loginId");
+              localStorage.setItem("access_token", user.access_token);
+              localStorage.setItem("user_id", user.id);
+              localStorage.setItem("username", user.username);
+              localStorage.setItem("second_user_id", user.id);
+              localStorage.setItem("second_user_name", user.name);
+              localStorage.setItem("secondUserPic", user.image);
+
+              localStorage.setItem("profilePic", user.image);
+              window.location.reload();
+            }
+          }
+        };
+      }
+    } else {
+      addLoader();
+    }
+
+    sendResponse(1);
+  });
+}, 100);
+
 function setup() {
   noCanvas();
 
   localStorage.removeItem("group_id");
   localStorage.removeItem("receiver_id");
   localStorage.removeItem("prospect_id");
-  localStorage.removeItem("loginId");
   localStorage.removeItem("isProspectCollabClicked1");
   localStorage.removeItem("prospectCollabData1");
   localStorage.removeItem("prospect_id1");
@@ -35,13 +90,31 @@ function setup() {
 
   profile_check = 0;
 
-  var bgpage = chrome.extension.getBackgroundPage();
+  // var bgpage = chrome.extension.getBackgroundPage();
 
-  var loginId = bgpage.loginId;
+  let bgData = JSON.parse(localStorage.getItem("bgData"));
 
-  if (loginId) {
-    localStorage.setItem("loginId", loginId);
-    chrome.extension.getBackgroundPage().loginId = "";
+  let loginIdLocal = "";
+
+  let x = setInterval(() => {
+    if (localStorage.getItem("loginId")) {
+      loginIdLocal = localStorage.getItem("loginId");
+      clearInterval(x);
+    }
+  }, 100);
+
+  if (loginIdLocal) {
+    bgpage.loginId = loginIdLocal;
+  }
+
+  if (bgData) {
+    bgpage.word = bgData;
+  }
+
+  var loginId = "";
+
+  if (bgpage.loginId) {
+    loginId = bgpage.loginId;
   }
 
   if (localStorage.getItem("profilePic")) {
@@ -56,45 +129,7 @@ function setup() {
     document.getElementById("profilePic").src = "./Assets/img/user.png";
   }
 
-  loginId = localStorage.getItem("loginId");
-
-  if (loginId) {
-    setTimeout(() => {
-      const url = `${globalURl}/login`;
-
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          id: loginId,
-        })
-      );
-
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          let user = JSON.parse(xhr.responseText);
-
-          if (user) {
-            loginId = "";
-            localStorage.removeItem("loginId");
-            localStorage.setItem("access_token", user.access_token);
-            localStorage.setItem("user_id", user.id);
-            localStorage.setItem("username", user.username);
-			      localStorage.setItem("second_user_id", user.id);
-            localStorage.setItem("second_user_name", user.name);
-            localStorage.setItem("secondUserPic", user.image);
-
-            localStorage.setItem("profilePic", user.image);
-            window.location.reload();
-          }
-        }
-      };
-    }, 100);
-  }
-
-
-isImage =  localStorage.getItem("profilePic");
+  isImage = localStorage.getItem("profilePic");
 
   // var http = new XMLHttpRequest();
 
@@ -108,39 +143,35 @@ isImage =  localStorage.getItem("profilePic");
   //   console.log('yeenyeen',);
   // }
 
+  var e = setInterval(() => {
+    imageIS = localStorage.getItem("profilePic");
+    if (imageIS) {
+      var http = new XMLHttpRequest();
+      http.open("HEAD", imageIS, false);
+      http.send();
+      console.log("yeen", http);
+      if (http.status != 200) {
+        localStorage.clear();
+        console.log("User Image Damaged");
+        window.location.reload();
+      } else {
+        console.log("User Image Correct");
+      }
+    }
+    clearInterval(e);
+  }, 4000);
 
-
-
- var e = setInterval(() => {
-    imageIS =  localStorage.getItem("profilePic");
-    if(imageIS){
-        var http = new XMLHttpRequest();
-        http.open('HEAD', imageIS, false);
-        http.send();
-                  console.log('yeen',http)
-                  if(http.status != 200){
-                    localStorage.clear()
-                      console.log("User Image Damaged");
-                      window.location.reload();
-                  }
-                  else
-                  {
-                    console.log("User Image Correct");
-                  }
-          }
-    clearInterval(e)
-  },4000)
-
-  
   // var e = setInterval(() => {
-  var title = bgpage.word.title;
-  var name = bgpage.word.name;
-  var description = bgpage.word.description;
-  var address = bgpage.word.address;
-  var company = bgpage.word.company;
-  var about = bgpage.word.about;
-  var img = bgpage.word.img;
-  var profile_link = bgpage.word.profile_link;
+
+  // var title = bgpage.word.title;
+  // var name = bgpage.word.name;
+  // var description = bgpage.word.description;
+  // var address = bgpage.word.address;
+  // var company = bgpage.word.company;
+  // var about = bgpage.word.about;
+  // var img = bgpage.word.img;
+  // var profile_link = bgpage.word.profile_link;
+
   //   clearInterval(e)
   // },6000)
   // var xhr = new XMLHttpRequest();
@@ -168,27 +199,22 @@ isImage =  localStorage.getItem("profilePic");
   // }
   // xhr.send();
 
-//   const imageUrl = img;
+  //   const imageUrl = img;
 
-// (async () => {
-//   const response = await fetch(imageUrl)
-//   const imageBlob = await response.blob()
-//   const reader = new FileReader();
-//   reader.readAsDataURL(imageBlob);
-//   reader.onloadend = () => {
-//     const base64data = reader.result;
-//     var encodedString = btoa(base64data);
-//     var decodedString = atob(encodedString);
-//     img = decodedString;
-//     console.log(decodedString,'decoded');
-//   }
-// })()
-// console.log(img,'imgg')
-
-
-        
-
-
+  // (async () => {
+  //   const response = await fetch(imageUrl)
+  //   const imageBlob = await response.blob()
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(imageBlob);
+  //   reader.onloadend = () => {
+  //     const base64data = reader.result;
+  //     var encodedString = btoa(base64data);
+  //     var decodedString = atob(encodedString);
+  //     img = decodedString;
+  //     console.log(decodedString,'decoded');
+  //   }
+  // })()
+  // console.log(img,'imgg')
 
   var prev = null;
   var access_token = localStorage.getItem("access_token");
@@ -220,7 +246,7 @@ isImage =  localStorage.getItem("profilePic");
     xhr6.setRequestHeader("Content-Type", "application/json");
     xhr6.send(
       JSON.stringify({
-        profile_link: profile_link,
+        profile_link: bgpage.word?.profile_link,
         user_id: user_id1,
         secondary_id: secondary_id1,
       })
@@ -261,7 +287,6 @@ isImage =  localStorage.getItem("profilePic");
 
         if (userData.users) {
           userData.users.slice(0, 3).map((item, i, arr) => {
-            
             var row =
               item.image != null
                 ? `<span class="new-top-img" id="sharedm${count}">
@@ -274,7 +299,7 @@ isImage =  localStorage.getItem("profilePic");
               ? `<div class="countNum1">${item.total_notifications}</div>`
               : ""
           }
-            
+
             <img class="new-header-item-img" src="${item.image}">
             <span class="tooltiptext">${item.username}</span>
             </div>
@@ -357,11 +382,11 @@ isImage =  localStorage.getItem("profilePic");
                       userData.map((item, i, arr) => {
                         var row = `
                       <div class="prospectContent memberDiv" data-member_id=${item.linked_to_id}>
-                                  
+
                         <img src=${item.image} alt=""/>
-          
+
                         <h1>${item.mutual}</h1>
-    
+
                       </div>
                     `;
 
@@ -371,9 +396,9 @@ isImage =  localStorage.getItem("profilePic");
                     } else {
                       document.querySelector(".membersContainer").innerHTML = `
                     <div class="prospectContent">
-                                    
+
                       <h1>No Chat Memebers</h1>
-  
+
                     </div>
                   `;
                     }
@@ -453,9 +478,13 @@ isImage =  localStorage.getItem("profilePic");
                               <div class="groupBox groupChats" data-group_id=${
                                 item.group_id
                               }>
-                                ${item.image ? `<img src="${item.image}" class="userIconDemo" data-receiverid="32">` : `<img src="./Assets/img/group-bg.png" class="userIconDemo" data-receiverid="32">`}
-                                   
-                                
+                                ${
+                                  item.image
+                                    ? `<img src="${item.image}" class="userIconDemo" data-receiverid="32">`
+                                    : `<img src="./Assets/img/group-bg.png" class="userIconDemo" data-receiverid="32">`
+                                }
+
+
                                 ${
                                   item.notifications != 0
                                     ? `<div class="notificationBox">${item.notifications}</div>`
@@ -473,8 +502,7 @@ isImage =  localStorage.getItem("profilePic");
                   font-size: 11px;
                   white-space: break-spaces;
                                 "
-                                >${
-                                  item.name}</div>
+                                >${item.name}</div>
                               </div>
                             `;
                           });
@@ -512,15 +540,21 @@ isImage =  localStorage.getItem("profilePic");
                 .forEach((chats1) => {
                   chats1.innerHTML += `
                 <div class="smallgroupBox" data-group_id=${item.group_id}>
-                <span class="tooltiptext">${item.group_name.length > 8 ? `${item.group_name.slice(0,8)}...` : `${item.group_name}`}</span>
+                <span class="tooltiptext">${
+                  item.group_name.length > 8
+                    ? `${item.group_name.slice(0, 8)}...`
+                    : `${item.group_name}`
+                }</span>
                   ${
                     item.notifications != 0
                       ? `<div class="countNum">${item.notifications}</div>`
                       : ""
                   }
-                  
-                       <img src="${item.group_image}" class="smalluserIconDemo" data-receiverid="32">
-                    
+
+                       <img src="${
+                         item.group_image
+                       }" class="smalluserIconDemo" data-receiverid="32">
+
                 </div>
               `;
                 });
@@ -564,7 +598,7 @@ isImage =  localStorage.getItem("profilePic");
   if (bgpage.word.loader == "loader") {
     addLoader();
     var j = setTimeout(function () {
-      var bgpage = chrome.extension.getBackgroundPage();
+      // var bgpage = chrome.extension.getBackgroundPage();
       var profile_link = bgpage.word.profile_link;
 
       var user_id = localStorage.getItem("user_id");
@@ -574,6 +608,289 @@ isImage =  localStorage.getItem("profilePic");
         user_id = second_user_id;
       }
 
+      if (user_id) {
+        const url = `${globalURl}/alreadyStored`;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(
+          JSON.stringify({
+            id: bgpage.word?.profile_link,
+            user_id: user_id,
+          })
+        );
+
+        xhr.onreadystatechange = function () {
+          //Call a function when the state changes.
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            res = JSON.parse(xhr.responseText);
+            if (xhr.responseText != "400") {
+              profile_check = 500;
+              // document.getElementById('alreadyStored').innerText = 'Already Stored';
+              prev = res.data;
+              console.log("hey im here");
+
+              var user_id = localStorage.getItem("user_id");
+              var secondary_id = localStorage.getItem("second_user_id");
+              if (!secondary_id) {
+                var secondary_id = null;
+              }
+              if (secondary_id == user_id) {
+                secondary_id = null;
+              }
+              var profile_link = bgpage.word.profile_link;
+              const url = `${globalURl}/getCommentsCount`;
+
+              var xhr4 = new XMLHttpRequest();
+              xhr4.open("POST", url, true);
+              xhr4.setRequestHeader("Content-Type", "application/json");
+              xhr4.send(
+                JSON.stringify({
+                  profile_link: profile_link,
+                  user_id: user_id,
+                  secondary_id: secondary_id,
+                })
+              );
+              xhr4.onreadystatechange = function () {
+                if (xhr4.readyState == 4 && xhr4.status == 200) {
+                  res = JSON.parse(xhr4.responseText);
+                  var count = res.count;
+                  if (count == 0) {
+                    document.getElementById("comment_count").style.display =
+                      "none";
+                  } else {
+                    document.getElementById("comment_count").style.display =
+                      "block";
+                    document.getElementById("comment_count").innerHTML = count;
+                  }
+                }
+              };
+
+              console.log("here i am");
+
+              try {
+                prev.image = bgpage.word.img;
+                imageprofileInterval = setTimeout(() => {
+                  eventSave();
+                  clearInterval(imageprofileInterval);
+                }, 6000);
+              } catch (err) {
+                prev.image = bgpage.word.img;
+                imageprofileInterval = setTimeout(() => {
+                  eventSave();
+                  clearInterval(imageprofileInterval);
+                }, 6000);
+              }
+              name = localStorage.getItem("second_user_name");
+              if (name != "null" && name != "") {
+                document.getElementById(
+                  "savedUserMessage"
+                ).innerText = `You're in ${name}'s Database`;
+              } else {
+                document.getElementById("savedUserMessage").innerText =
+                  "Records from Database";
+              }
+              var deleteIcon = document.getElementById("star__delete__icon");
+              deleteIcon.src = "Assets/img/star-yellow.png";
+
+              document.getElementById("star__delete__icon").style.display =
+                "block";
+              document.getElementById("yeen").style.display = "none";
+
+              document.getElementById("topTitleName").innerText = prev.name;
+              document.getElementById("fname").value = prev.name;
+              document.getElementById("description").value = prev.description;
+              document.getElementById("company").value = prev.company;
+              document.getElementById("about").value = prev.about;
+
+              document.getElementById("notes").innerHTML = prev.messages;
+              document.getElementById("client_messages").value = prev.notes;
+
+              document.getElementById("strategy_date").value =
+                prev.strategy_date;
+
+              if (document.getElementById(prev.status)) {
+                document.getElementById(prev.status).selected = true;
+                var status_tag = document.getElementById("status");
+                status_tag = status_tag[status_tag.selectedIndex].style.color;
+                document.getElementById("status_color").style.backgroundColor =
+                  status_tag;
+              }
+
+              document.getElementById("profile_link").innerText =
+                prev.profile_link;
+
+              if (prev.discovery_call) {
+                var dbDateDiscovery = prev.discovery_call;
+                var dateDiscovery = new Date(dbDateDiscovery);
+                var formattedDateDiscovery = dateDiscovery
+                  .toISOString()
+                  .slice(0, 10);
+                document.getElementById("discovery_call").value =
+                  formattedDateDiscovery;
+              }
+
+              var dbDateUpdated = prev.updated_at;
+
+              var dateUpdated = new Date(dbDateUpdated);
+
+              var formattedDateUpdated = dateUpdated.toISOString().slice(0, 10);
+
+              document.getElementById("updated_at").value =
+                formattedDateUpdated;
+
+              if (prev.endorsement == "Yes") {
+                document.getElementById("endorsement_yes").checked = true;
+              } else if (prev.endorsement == "No") {
+                document.getElementById("endorsement_no").checked = true;
+              }
+
+              if (prev.priority == "A") {
+                document.getElementById("priority_a").checked = true;
+              } else if (prev.priority == "B") {
+                document.getElementById("priority_b").checked = true;
+              } else if (prev.priority == "C") {
+                document.getElementById("priority_c").checked = true;
+              } else if (prev.priority == "D") {
+                document.getElementById("priority_d").checked = true;
+              }
+
+              document.getElementById("total_messages").value =
+                prev.total_messages;
+              document.getElementById("follow_up").value = prev.follow_up;
+              document.getElementById("conversion").value = prev.conversion;
+              document.getElementById("weekly_date").value = prev.weekly_date;
+              localStorage.setItem("prospect_id", prev.id);
+
+              var today = new Date(prev.weekly_date);
+              var today = today.toISOString().substring(0, 10);
+              document.getElementById("weekly_date").value = today;
+              document.getElementById("weekly_date").max = today;
+              var weekly_source = today;
+              var options = {
+                month: "short",
+              };
+              var options_year = {
+                year: "2-digit",
+              };
+              var today = new Date(weekly_source);
+
+              //init date
+              var date = new Date(weekly_source);
+
+              document.getElementById("week_number").innerHTML =
+                getWeekOfMonth(date);
+              document.getElementById("week_number").innerHTML =
+                "Week - Month" +
+                ' <i class="far fa-calendar-alt clender_icons"></i>';
+
+              document.getElementById("weekly_source").value =
+                today.toLocaleDateString("en-US", options) +
+                " Week " +
+                getWeekOfMonth(date) +
+                " -" +
+                today.toLocaleDateString("en-US", options_year);
+            } else {
+              document.getElementById("star__delete__icon").style.display =
+                "block";
+              document.getElementById("yeen").style.display = "none";
+
+              var user_id = localStorage.getItem("user_id");
+              var secondary_id = localStorage.getItem("second_user_id");
+              if (!secondary_id) {
+                var secondary_id = null;
+              }
+              if (secondary_id == user_id) {
+                secondary_id = null;
+              }
+              var profile_link = bgpage.word.profile_link;
+              const url = `${globalURl}/getCommentsCount`;
+
+              var xhr4 = new XMLHttpRequest();
+              xhr4.open("POST", url, true);
+              xhr4.setRequestHeader("Content-Type", "application/json");
+              xhr4.send(
+                JSON.stringify({
+                  profile_link: profile_link,
+                  user_id: user_id,
+                  secondary_id: secondary_id,
+                })
+              );
+              xhr4.onreadystatechange = function () {
+                if (xhr4.readyState == 4 && xhr4.status == 200) {
+                  res = JSON.parse(xhr4.responseText);
+                  var count = res.count;
+                  if (count == 0) {
+                    document.getElementById("comment_count").style.display =
+                      "none";
+                  } else {
+                    document.getElementById("comment_count").style.display =
+                      "block";
+                    document.getElementById("comment_count").innerHTML = count;
+                  }
+                }
+              };
+
+              var starIcon = document.getElementById("star__delete__icon");
+              starIcon.src = "Assets/img/star-black.png";
+              name = localStorage.getItem("second_user_name");
+              if (name != "null" && name != "") {
+                document.getElementById(
+                  "savedUserMessage"
+                ).innerText = `You're in ${name}'s Database`;
+              } else {
+                document.getElementById("savedUserMessage").innerText =
+                  "Records from Database";
+              } // document.getElementById("yeen").innerHTML = `<i class="fa fa-spinner fa-spin"></i>`;
+            }
+          }
+        };
+
+        removeLoader();
+        clearInterval(j);
+        var today = new Date();
+        var today = today.toISOString().substring(0, 10);
+        document.getElementById("weekly_date").value = today;
+        document.getElementById("weekly_date").max = today;
+        var weekly_source = today;
+        var options = {
+          month: "short",
+        };
+        var options_year = {
+          year: "2-digit",
+        };
+        var today = new Date(weekly_source);
+
+        // init date
+        var date = new Date(weekly_source);
+
+        // document.getElementById("week_number").innerHTML =(getWeekOfMonth(date));
+        document.getElementById("week_number").innerHTML =
+          "Week - Month" + ' <i class="far fa-calendar-alt clender_icons"></i>';
+
+        document.getElementById("weekly_source").value =
+          today.toLocaleDateString("en-US", options) +
+          " Week " +
+          getWeekOfMonth(date) +
+          " -" +
+          today.toLocaleDateString("en-US", options_year);
+      }
+    }, 7000);
+  } else {
+    localStorage.removeItem("clipperpageCheck", true);
+
+    document.getElementById("star__delete__icon").style.display = "none";
+    document.getElementById("yeen").style.display = "block";
+    var user_id = localStorage.getItem("user_id");
+
+    var second_user_id = localStorage.getItem("second_user_id");
+
+    if (second_user_id != null) {
+      user_id = second_user_id;
+    }
+
+    if (user_id) {
       const url = `${globalURl}/alreadyStored`;
 
       var xhr = new XMLHttpRequest();
@@ -581,7 +898,7 @@ isImage =  localStorage.getItem("profilePic");
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(
         JSON.stringify({
-          id: profile_link,
+          id: bgpage.word?.profile_link,
           user_id: user_id,
         })
       );
@@ -590,11 +907,21 @@ isImage =  localStorage.getItem("profilePic");
         //Call a function when the state changes.
         if (xhr.readyState == 4 && xhr.status == 200) {
           res = JSON.parse(xhr.responseText);
+
           if (xhr.responseText != "400") {
             profile_check = 500;
-            // document.getElementById('alreadyStored').innerText = 'Already Stored';
+
             prev = res.data;
-            console.log("hey im here")
+
+            name = localStorage.getItem("second_user_name");
+            if (name != "null" && name != "") {
+              document.getElementById(
+                "savedUserMessage"
+              ).innerText = `You're in ${name}'s Database`;
+            } else {
+              document.getElementById("savedUserMessage").innerText =
+                "Records from Database";
+            }
 
             var user_id = localStorage.getItem("user_id");
             var secondary_id = localStorage.getItem("second_user_id");
@@ -607,19 +934,19 @@ isImage =  localStorage.getItem("profilePic");
             var profile_link = bgpage.word.profile_link;
             const url = `${globalURl}/getCommentsCount`;
 
-            var xhr4 = new XMLHttpRequest();
-            xhr4.open("POST", url, true);
-            xhr4.setRequestHeader("Content-Type", "application/json");
-            xhr4.send(
+            var xhr5 = new XMLHttpRequest();
+            xhr5.open("POST", url, true);
+            xhr5.setRequestHeader("Content-Type", "application/json");
+            xhr5.send(
               JSON.stringify({
                 profile_link: profile_link,
                 user_id: user_id,
                 secondary_id: secondary_id,
               })
             );
-            xhr4.onreadystatechange = function () {
-              if (xhr4.readyState == 4 && xhr4.status == 200) {
-                res = JSON.parse(xhr4.responseText);
+            xhr5.onreadystatechange = function () {
+              if (xhr5.readyState == 4 && xhr5.status == 200) {
+                res = JSON.parse(xhr5.responseText);
                 var count = res.count;
                 if (count == 0) {
                   document.getElementById("comment_count").style.display =
@@ -631,52 +958,42 @@ isImage =  localStorage.getItem("profilePic");
                 }
               }
             };
-            
-          console.log("here i am")
 
-          try {
-            
-            prev.image = bgpage.word.img;
-            imageprofileInterval = setTimeout(() => {
-              eventSave();
-              clearInterval(imageprofileInterval);
-            }, 6000);
-
-          
-
-          }
-          catch(err) {
-            prev.image = bgpage.word.img;
-            imageprofileInterval = setTimeout(() => {
-              
-              eventSave();
-              clearInterval(imageprofileInterval);
-            }, 6000);
-
-          }
-            name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
-            }
-            else{
-            document.getElementById("savedUserMessage").innerText =
-              "Records from Database";
-            }
-            var deleteIcon = document.getElementById("star__delete__icon");
-            deleteIcon.src = "Assets/img/star-yellow.png";
+            localStorage.setItem("prospect_id", prev.id);
 
             document.getElementById("star__delete__icon").style.display =
               "block";
             document.getElementById("yeen").style.display = "none";
+            var deleteIcon = document.getElementById("star__delete__icon");
+            deleteIcon.src = "Assets/img/star-yellow.png";
 
+            console.log("here i am");
+
+            try {
+              console.log("http", http);
+
+              prev.image = bgpage.word.img;
+              imageprofileInterval = setTimeout(() => {
+                eventSave();
+                clearInterval(imageprofileInterval);
+              }, 4000);
+            } catch (err) {
+              prev.image = bgpage.word.img;
+              imageprofileInterval = setTimeout(() => {
+                eventSave();
+                clearInterval(imageprofileInterval);
+              }, 6000);
+            }
+
+            document.getElementById("image").src = prev.image;
             document.getElementById("topTitleName").innerText = prev.name;
             document.getElementById("fname").value = prev.name;
             document.getElementById("description").value = prev.description;
             document.getElementById("company").value = prev.company;
             document.getElementById("about").value = prev.about;
-            // document.getElementById("notes").value = prev.notes;
-            document.getElementById("notes").innerHTML = prev.notes;
+
+            document.getElementById("notes").innerHTML = prev.messages;
+            document.getElementById("client_messages").value = prev.notes;
 
             document.getElementById("strategy_date").value = prev.strategy_date;
 
@@ -686,6 +1003,8 @@ isImage =  localStorage.getItem("profilePic");
               status_tag = status_tag[status_tag.selectedIndex].style.color;
               document.getElementById("status_color").style.backgroundColor =
                 status_tag;
+              // alert(status_tag);
+              // document.getElementById('statusbg').style.backgroundColor = status_tag;
             }
 
             document.getElementById("profile_link").innerText =
@@ -729,8 +1048,12 @@ isImage =  localStorage.getItem("profilePic");
               prev.total_messages;
             document.getElementById("follow_up").value = prev.follow_up;
             document.getElementById("conversion").value = prev.conversion;
+            // alert(prev.weekly_date);
+            var today = new Date();
+            var today = today.toISOString().substring(0, 10);
+
             document.getElementById("weekly_date").value = prev.weekly_date;
-            localStorage.setItem("prospect_id", prev.id);
+            document.getElementById("weekly_date").max = today;
 
             var today = new Date(prev.weekly_date);
             var today = today.toISOString().substring(0, 10);
@@ -761,9 +1084,11 @@ isImage =  localStorage.getItem("profilePic");
               " -" +
               today.toLocaleDateString("en-US", options_year);
           } else {
-            document.getElementById("star__delete__icon").style.display =
-              "block";
-            document.getElementById("yeen").style.display = "none";
+            var today = new Date();
+            var today = today.toISOString().substring(0, 10);
+
+            document.getElementById("weekly_date").value = today;
+            document.getElementById("weekly_date").max = today;
 
             var user_id = localStorage.getItem("user_id");
             var secondary_id = localStorage.getItem("second_user_id");
@@ -776,19 +1101,19 @@ isImage =  localStorage.getItem("profilePic");
             var profile_link = bgpage.word.profile_link;
             const url = `${globalURl}/getCommentsCount`;
 
-            var xhr4 = new XMLHttpRequest();
-            xhr4.open("POST", url, true);
-            xhr4.setRequestHeader("Content-Type", "application/json");
-            xhr4.send(
+            var xhr5 = new XMLHttpRequest();
+            xhr5.open("POST", url, true);
+            xhr5.setRequestHeader("Content-Type", "application/json");
+            xhr5.send(
               JSON.stringify({
                 profile_link: profile_link,
                 user_id: user_id,
                 secondary_id: secondary_id,
               })
             );
-            xhr4.onreadystatechange = function () {
-              if (xhr4.readyState == 4 && xhr4.status == 200) {
-                res = JSON.parse(xhr4.responseText);
+            xhr5.onreadystatechange = function () {
+              if (xhr5.readyState == 4 && xhr5.status == 200) {
+                res = JSON.parse(xhr5.responseText);
                 var count = res.count;
                 if (count == 0) {
                   document.getElementById("comment_count").style.display =
@@ -801,363 +1126,55 @@ isImage =  localStorage.getItem("profilePic");
               }
             };
 
+            document.getElementById("star__delete__icon").style.display =
+              "block";
+            document.getElementById("yeen").style.display = "none";
             var starIcon = document.getElementById("star__delete__icon");
             starIcon.src = "Assets/img/star-black.png";
-            name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
+            // document.getElementById("yeen").innerHTML = `<img class="new_img_main_icon" id="star__delete__icon" src="Assets/img/star-black.png"
+            // height="18px;" width="18px;">`;
+            name = localStorage.getItem("second_user_name");
+            if (name != "null" && name != "") {
+              document.getElementById(
+                "savedUserMessage"
+              ).innerText = `You're in ${name}'s Database`;
+            } else {
               document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
+                "Records from Database";
             }
-            else{
-            document.getElementById("savedUserMessage").innerText =
-              "Records from Database";
-            }            // document.getElementById("yeen").innerHTML = `<i class="fa fa-spinner fa-spin"></i>`;
           }
         }
       };
+      var today = new Date();
+      var today = today.toISOString().substring(0, 10);
+      // document.getElementById("discovery_call").value = today;
+      document.getElementById("weekly_date").value = today;
+      document.getElementById("weekly_date").max = today;
+      var weekly_source = today;
+      var options = {
+        month: "short",
+      };
+      var options_year = {
+        year: "2-digit",
+      };
+      var today = new Date(weekly_source);
+
+      // init date
+      var date = new Date(weekly_source);
+
+      // document.getElementById("week_number").innerHTML =(getWeekOfMonth(date));
+      document.getElementById("week_number").innerHTML =
+        "Week - Month" + ' <i class="far fa-calendar-alt clender_icons"></i>';
+
+      document.getElementById("weekly_source").value =
+        today.toLocaleDateString("en-US", options) +
+        " Week " +
+        getWeekOfMonth(date) +
+        " -" +
+        today.toLocaleDateString("en-US", options_year);
 
       removeLoader();
-      clearInterval(j);
-    }, 7000);
-
-    var today = new Date();
-    var today = today.toISOString().substring(0, 10);
-    document.getElementById("weekly_date").value = today;
-    document.getElementById("weekly_date").max = today;
-    var weekly_source = today;
-    var options = {
-      month: "short",
-    };
-    var options_year = {
-      year: "2-digit",
-    };
-    var today = new Date(weekly_source);
-
-    // init date
-    var date = new Date(weekly_source);
-
-    // document.getElementById("week_number").innerHTML =(getWeekOfMonth(date));
-    document.getElementById("week_number").innerHTML =
-      "Week - Month" + ' <i class="far fa-calendar-alt clender_icons"></i>';
-
-    document.getElementById("weekly_source").value =
-      today.toLocaleDateString("en-US", options) +
-      " Week " +
-      getWeekOfMonth(date) +
-      " -" +
-      today.toLocaleDateString("en-US", options_year);
-  }
-  // else {
-  // if (bgpage.word.loader == "home") {
-  // var pipe = localStorage.getItem("pipeLineClick");
-  // if (pipe) {
-  // getAll();
-  // localStorage.removeItem("pipeLineClick");
-  // } else {
-  // localStorage.setItem("clipperpageCheck", true);
-  // window.location.href = "home.html";
-  // }
-  // }
-  else {
-    localStorage.removeItem("clipperpageCheck", true);
-
-    document.getElementById("star__delete__icon").style.display = "none";
-    document.getElementById("yeen").style.display = "block";
-    var user_id = localStorage.getItem("user_id");
-
-    var second_user_id = localStorage.getItem("second_user_id");
-
-    if (second_user_id != null) {
-      user_id = second_user_id;
     }
-
-    const url = `${globalURl}/alreadyStored`;
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(
-      JSON.stringify({
-        id: profile_link,
-        user_id: user_id,
-      })
-    );
-
-    xhr.onreadystatechange = function () {
-      //Call a function when the state changes.
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        res = JSON.parse(xhr.responseText);
-
-        if (xhr.responseText != "400") {
-          profile_check = 500;
-
-          prev = res.data;
-
-          name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
-            }
-            else{
-            document.getElementById("savedUserMessage").innerText =
-              "Records from Database";
-            }
-
-          var user_id = localStorage.getItem("user_id");
-          var secondary_id = localStorage.getItem("second_user_id");
-          if (!secondary_id) {
-            var secondary_id = null;
-          }
-          if (secondary_id == user_id) {
-            secondary_id = null;
-          }
-          var profile_link = bgpage.word.profile_link;
-          const url = `${globalURl}/getCommentsCount`;
-
-          var xhr5 = new XMLHttpRequest();
-          xhr5.open("POST", url, true);
-          xhr5.setRequestHeader("Content-Type", "application/json");
-          xhr5.send(
-            JSON.stringify({
-              profile_link: profile_link,
-              user_id: user_id,
-              secondary_id: secondary_id,
-            })
-          );
-          xhr5.onreadystatechange = function () {
-            if (xhr5.readyState == 4 && xhr5.status == 200) {
-              res = JSON.parse(xhr5.responseText);
-              var count = res.count;
-              if (count == 0) {
-                document.getElementById("comment_count").style.display = "none";
-              } else {
-                document.getElementById("comment_count").style.display =
-                  "block";
-                document.getElementById("comment_count").innerHTML = count;
-              }
-            }
-          };
-
-          localStorage.setItem("prospect_id", prev.id);
-
-          document.getElementById("star__delete__icon").style.display = "block";
-          document.getElementById("yeen").style.display = "none";
-          var deleteIcon = document.getElementById("star__delete__icon");
-          deleteIcon.src = "Assets/img/star-yellow.png";
-
-          
-          console.log("here i am")
-
-          try {
-            
-            console.log('http',http);
-          
-            prev.image = bgpage.word.img;
-            imageprofileInterval = setTimeout(() => {
-              eventSave();
-              clearInterval(imageprofileInterval);
-            }, 4000);
-
-          
-
-          }
-          catch(err) {
-            prev.image = bgpage.word.img;
-            imageprofileInterval = setTimeout(() => {
-              
-              eventSave();
-              clearInterval(imageprofileInterval);
-            }, 6000);
-
-          }
-          
-      
-
-          document.getElementById("image").src = prev.image;
-          document.getElementById("topTitleName").innerText = prev.name;
-          document.getElementById("fname").value = prev.name;
-          document.getElementById("description").value = prev.description;
-          document.getElementById("company").value = prev.company;
-          document.getElementById("about").value = prev.about;
-          // document.getElementById("notes").value = prev.notes;
-          document.getElementById("notes").innerHTML = prev.notes;
-
-          document.getElementById("strategy_date").value = prev.strategy_date;
-
-          if (document.getElementById(prev.status)) {
-            document.getElementById(prev.status).selected = true;
-            var status_tag = document.getElementById("status");
-            status_tag = status_tag[status_tag.selectedIndex].style.color;
-            document.getElementById("status_color").style.backgroundColor =
-              status_tag;
-            // alert(status_tag);
-            // document.getElementById('statusbg').style.backgroundColor = status_tag;
-          }
-
-          document.getElementById("profile_link").innerText = prev.profile_link;
-
-          if (prev.discovery_call) {
-            var dbDateDiscovery = prev.discovery_call;
-            var dateDiscovery = new Date(dbDateDiscovery);
-            var formattedDateDiscovery = dateDiscovery
-              .toISOString()
-              .slice(0, 10);
-            document.getElementById("discovery_call").value =
-              formattedDateDiscovery;
-          }
-
-          var dbDateUpdated = prev.updated_at;
-
-          var dateUpdated = new Date(dbDateUpdated);
-
-          var formattedDateUpdated = dateUpdated.toISOString().slice(0, 10);
-
-          document.getElementById("updated_at").value = formattedDateUpdated;
-
-          if (prev.endorsement == "Yes") {
-            document.getElementById("endorsement_yes").checked = true;
-          } else if (prev.endorsement == "No") {
-            document.getElementById("endorsement_no").checked = true;
-          }
-
-          if (prev.priority == "A") {
-            document.getElementById("priority_a").checked = true;
-          } else if (prev.priority == "B") {
-            document.getElementById("priority_b").checked = true;
-          } else if (prev.priority == "C") {
-            document.getElementById("priority_c").checked = true;
-          } else if (prev.priority == "D") {
-            document.getElementById("priority_d").checked = true;
-          }
-
-          document.getElementById("total_messages").value = prev.total_messages;
-          document.getElementById("follow_up").value = prev.follow_up;
-          document.getElementById("conversion").value = prev.conversion;
-          // alert(prev.weekly_date);
-          var today = new Date();
-          var today = today.toISOString().substring(0, 10);
-
-          document.getElementById("weekly_date").value = prev.weekly_date;
-          document.getElementById("weekly_date").max = today;
-
-          var today = new Date(prev.weekly_date);
-          var today = today.toISOString().substring(0, 10);
-          document.getElementById("weekly_date").value = today;
-          document.getElementById("weekly_date").max = today;
-          var weekly_source = today;
-          var options = {
-            month: "short",
-          };
-          var options_year = {
-            year: "2-digit",
-          };
-          var today = new Date(weekly_source);
-
-          //init date
-          var date = new Date(weekly_source);
-
-          document.getElementById("week_number").innerHTML =
-            getWeekOfMonth(date);
-          document.getElementById("week_number").innerHTML =
-            "Week - Month" +
-            ' <i class="far fa-calendar-alt clender_icons"></i>';
-
-          document.getElementById("weekly_source").value =
-            today.toLocaleDateString("en-US", options) +
-            " Week " +
-            getWeekOfMonth(date) +
-            " -" +
-            today.toLocaleDateString("en-US", options_year);
-        } else {
-          var today = new Date();
-          var today = today.toISOString().substring(0, 10);
-
-          document.getElementById("weekly_date").value = today;
-          document.getElementById("weekly_date").max = today;
-
-          var user_id = localStorage.getItem("user_id");
-          var secondary_id = localStorage.getItem("second_user_id");
-          if (!secondary_id) {
-            var secondary_id = null;
-          }
-          if (secondary_id == user_id) {
-            secondary_id = null;
-          }
-          var profile_link = bgpage.word.profile_link;
-          const url = `${globalURl}/getCommentsCount`;
-
-          var xhr5 = new XMLHttpRequest();
-          xhr5.open("POST", url, true);
-          xhr5.setRequestHeader("Content-Type", "application/json");
-          xhr5.send(
-            JSON.stringify({
-              profile_link: profile_link,
-              user_id: user_id,
-              secondary_id: secondary_id,
-            })
-          );
-          xhr5.onreadystatechange = function () {
-            if (xhr5.readyState == 4 && xhr5.status == 200) {
-              res = JSON.parse(xhr5.responseText);
-              var count = res.count;
-              if (count == 0) {
-                document.getElementById("comment_count").style.display = "none";
-              } else {
-                document.getElementById("comment_count").style.display =
-                  "block";
-                document.getElementById("comment_count").innerHTML = count;
-              }
-            }
-          };
-
-          document.getElementById("star__delete__icon").style.display = "block";
-          document.getElementById("yeen").style.display = "none";
-          var starIcon = document.getElementById("star__delete__icon");
-          starIcon.src = "Assets/img/star-black.png";
-          // document.getElementById("yeen").innerHTML = `<img class="new_img_main_icon" id="star__delete__icon" src="Assets/img/star-black.png"
-          // height="18px;" width="18px;">`;
-          name = localStorage.getItem("second_user_name")
-            if(name != "null" && name != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${name}'s Database`;
-            }
-            else{
-            document.getElementById("savedUserMessage").innerText =
-              "Records from Database";
-            }
-        }
-      }
-    };
-
-    var today = new Date();
-    var today = today.toISOString().substring(0, 10);
-    // document.getElementById("discovery_call").value = today;
-    document.getElementById("weekly_date").value = today;
-    document.getElementById("weekly_date").max = today;
-    var weekly_source = today;
-    var options = {
-      month: "short",
-    };
-    var options_year = {
-      year: "2-digit",
-    };
-    var today = new Date(weekly_source);
-
-    // init date
-    var date = new Date(weekly_source);
-
-    // document.getElementById("week_number").innerHTML =(getWeekOfMonth(date));
-    document.getElementById("week_number").innerHTML =
-      "Week - Month" + ' <i class="far fa-calendar-alt clender_icons"></i>';
-
-    document.getElementById("weekly_source").value =
-      today.toLocaleDateString("en-US", options) +
-      " Week " +
-      getWeekOfMonth(date) +
-      " -" +
-      today.toLocaleDateString("en-US", options_year);
-
-    removeLoader();
   }
 }
 
@@ -1177,12 +1194,9 @@ isImage =  localStorage.getItem("profilePic");
     localStorage.removeItem("modalProspectLink");
     localStorage.removeItem("prospectData");
 
-    chrome.extension.getBackgroundPage().word = prospectData;
+    bgpage.word = prospectData;
 
     profile_check = 500;
-
-    
-
 
     let imageInterval = setInterval(() => {
       if (document.getElementById("image")) {
@@ -1207,7 +1221,7 @@ isImage =  localStorage.getItem("profilePic");
     localStorage.removeItem("isProspectCollabClicked");
     localStorage.removeItem("prospectCollabData");
 
-    chrome.extension.getBackgroundPage().word = prospectCollabData;
+    bgpage.word = prospectCollabData;
 
     profile_check = 500;
 
@@ -1230,7 +1244,7 @@ isImage =  localStorage.getItem("profilePic");
   if (prospectCollabData != null) {
     localStorage.removeItem("homeProspectData");
 
-    chrome.extension.getBackgroundPage().word = prospectCollabData;
+    bgpage.word = prospectCollabData;
 
     profile_check = 500;
 
@@ -1248,30 +1262,22 @@ isImage =  localStorage.getItem("profilePic");
 })();
 
 setInterval(() => {
-  // alert();
   if (profile_check < 100) {
-    let bgpage = chrome.extension.getBackgroundPage();
-    let title = bgpage.word.title;
-    let name = bgpage.word.name;
-    let description = bgpage.word.description;
-    let address = bgpage.word.address;
-    let company = bgpage.word.company;
-    let about = bgpage.word.about;
-    let img = bgpage.word.img;
-    let profile_link = bgpage.word.profile_link;
-    let pipelineCheck = localStorage.getItem("pipeLineClick");
+    let bgData = JSON.parse(localStorage.getItem("bgData"));
 
-    if (!name) {
-      addLoader();
+    if (bgData) {
+      document.getElementById("results").style.display = "block";
 
-      // setTimeout(() => {
-      //   removeLoader();
-      //   alert('hh');
-      //   clearInterval(i)
+      bgpage.word = bgData;
 
-      // }, 10000)
-    } else {
-      removeLoader();
+      let name = bgpage.word.name;
+      let description = bgpage.word.description;
+      let address = bgpage.word.address;
+      let company = bgpage.word.company;
+      let about = bgpage.word.about;
+      let img = bgpage.word.img;
+      let profile_link = bgpage.word.profile_link;
+      let pipelineCheck = localStorage.getItem("pipeLineClick");
 
       if (pipelineCheck) {
         getAll();
@@ -1285,28 +1291,24 @@ setInterval(() => {
         document.querySelector(".upperBackBtn").style.visibility = "visible";
         document.querySelector(".upperMessageBtn").style.display = "visible";
       }
+      document.getElementById("topTitleName").innerText = name;
+      document.getElementById("fname").value = name;
+      document.getElementById("description").value = description;
+      document.getElementById("address").value = address;
+      document.getElementById("company").value = company;
+      document.getElementById("about").value = about;
+      var copy_link = profile_link;
+
+      document.getElementById("profile_link").innerText = copy_link;
+      let image = document.getElementById("image");
+      image.src = img;
+
+      var status_tag = document.getElementById("status");
+      status_tag = status_tag[status_tag.selectedIndex].style.color;
+      document.getElementById("status_color").style.backgroundColor =
+        status_tag;
     }
-
-    // document.getElementById('name').innerText = name;
-    document.getElementById("topTitleName").innerText = name;
-    document.getElementById("fname").value = name;
-    document.getElementById("description").value = description;
-    document.getElementById("address").value = address;
-    document.getElementById("company").value = company;
-    document.getElementById("about").value = about;
-    var copy_link = profile_link;
-
-    document.getElementById("profile_link").innerText = copy_link;
-    let image = document.getElementById("image");
-    image.src = img;
-
-    var status_tag = document.getElementById("status");
-    status_tag = status_tag[status_tag.selectedIndex].style.color;
-    document.getElementById("status_color").style.backgroundColor = status_tag;
   }
-
-  profile_check++;
-  // window.location.href = "login.html";
 }, 200);
 
 (function () {
@@ -1325,7 +1327,6 @@ setInterval(() => {
       document.getElementById("results").style.display = "none";
       document.getElementById("list_table_view").style.display = "block";
       getAll();
-      var bgpage = chrome.extension.getBackgroundPage();
 
       prev = bgpage.word;
 
@@ -1368,25 +1369,21 @@ setInterval(() => {
       document.getElementById("description").value = prev.description;
       document.getElementById("company").value = prev.company;
       document.getElementById("about").value = prev.about;
-      
-      var http = new XMLHttpRequest();
 
       var http = new XMLHttpRequest();
 
-      http.open('HEAD', prev.image, false);
+      var http = new XMLHttpRequest();
+
+      http.open("HEAD", prev.image, false);
       http.send();
-      console.log('http',http)
-      w = document.getElementById("image")
-      if(http.status != 200 || w.src.includes("user.png")){
-        console.log(http,'here')
+      w = document.getElementById("image");
+      if (http.status != 200 || w.src.includes("user.png")) {
         prev.image = bgpage.word.img;
         imageprofilesecondInterval = setTimeout(() => {
           eventSave();
           clearInterval(imageprofilesecondInterval);
         }, 6000);
-
-      }else{
-        console.log('yeenyeenyeen',bgpage.word.img);
+      } else {
       }
       document.getElementById("image").src = prev.img;
 
@@ -1509,7 +1506,6 @@ if (document.getElementById("view_type")) {
     .addEventListener("change", weekFilterChange);
 }
 if (document.getElementById("search_box")) {
-  console.log("searched")
   document
     .getElementById("search_box")
     .addEventListener("change", searchProspects);
@@ -1518,6 +1514,11 @@ if (document.getElementById("search_box")) {
 
 if (document.getElementById("weekly_date")) {
   document.getElementById("weekly_date").addEventListener("change", weekChange);
+}
+if (document.getElementById("client_messages")) {
+  document
+    .getElementById("client_messages")
+    .addEventListener("input", eventSave);
 }
 if (document.getElementById("notes")) {
   document.getElementById("notes").addEventListener("input", eventSave);
@@ -1699,26 +1700,26 @@ function starDeleteProspect() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText != "400") {
           deleteProspect();
-          getname = localStorage.getItem("second_user_name")
-            if(getname != "null" && getname != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${getname}'s Database`;
-            }
-            else{
+          getname = localStorage.getItem("second_user_name");
+          if (getname != "null" && getname != "") {
+            document.getElementById(
+              "savedUserMessage"
+            ).innerText = `You're in ${getname}'s Database`;
+          } else {
             document.getElementById("savedUserMessage").innerText =
               "Records from Database";
-            }
+          }
         } else {
           getRequest();
-          getname = localStorage.getItem("second_user_name")
-            if(getname != "null" && getname != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${getname}'s Database`;
-            }
-            else{
+          getname = localStorage.getItem("second_user_name");
+          if (getname != "null" && getname != "") {
+            document.getElementById(
+              "savedUserMessage"
+            ).innerText = `You're in ${getname}'s Database`;
+          } else {
             document.getElementById("savedUserMessage").innerText =
               "Records from Database";
-            }
+          }
         }
       }
     };
@@ -2010,8 +2011,6 @@ function viewComments() {
     document.getElementById("comment_box").disabled = false;
 
     setTimeout(() => {
-      
-
       if (secondary_id == user_id) {
         secondary_id = null;
       }
@@ -2121,7 +2120,7 @@ function viewComments() {
                       </div>
                       <div class="messageDiv">
                       <p class="msgPara" data-comment_id=${obj.id}>${obj.comment}</p>
-                    </div> 
+                    </div>
                   </div>
                 </div>`;
 
@@ -2302,7 +2301,7 @@ function getAllDatabases() {
             var finalArr = respon.map(function (obj, key) {
               row =
                 `<div class="mt-2 text-center single_database" id="` +
-                obj.link_id + 
+                obj.link_id +
                 `" data-name=${obj.naming} data-image=${
                   obj.image != null ? obj.image : "./Assets/img/user.png"
                 } style="padding-bottom:2%; margin-top:5% !important; cursor:pointer"><p class="pl-2" style="margin-bottom:0"><strong>  - ` +
@@ -2327,8 +2326,6 @@ function getAllDatabases() {
 
             document.getElementById("results").style.display = "none";
             document.getElementById("list_table_view").style.display = "none";
-
-            
           }
         }
       };
@@ -2489,6 +2486,7 @@ function showFilters() {
 }
 
 function weekFilterChange(e) {
+  pageNo = 10;
   ArrayMaker();
 }
 
@@ -2721,187 +2719,36 @@ function getLoginPage() {
 }
 
 function getAll() {
-  btn = document.getElementById("view_all_1")
-  btn.disabled = true
-  secondUserPic = localStorage.getItem("secondUserPic");
-  if(secondUserPic != "")
-  {
-    document.getElementById("profilePicc").src = secondUserPic
-  }
-  else
-  {
+  btn = document.getElementById("view_all_1");
+  btn.disabled = true;
+  let secondUserPic = localStorage.getItem("secondUserPic");
+  if (secondUserPic != "") {
+    document.getElementById("profilePicc").src = secondUserPic;
+  } else {
     profilePic = localStorage.getItem("profilePicc");
-    document.getElementById("profilePicc").src = profilePic
+    document.getElementById("profilePicc").src = profilePic;
   }
-  getname = localStorage.getItem("second_user_name")
-  if(getname != "null" && getname != "")
-  {
+  getname = localStorage.getItem("second_user_name");
+  if (getname != "null" && getname != "") {
+    document.getElementById(
+      "savedUserMessagee"
+    ).innerText = `You're in ${getname}'s Database`;
+  } else {
     document.getElementById("savedUserMessagee").innerText =
-    `You're in ${getname}'s Database`;
+      "Records from Database";
   }
-  else
-  {
-    document.getElementById("savedUserMessagee").innerText =
-    "Records from Database";
-  }
+
   profile_check = 500;
-  var user_id = localStorage.getItem("user_id");
-  var second_user_id = localStorage.getItem("second_user_id");
 
-  if (second_user_id == null) {
-    second_user_id = 0;
-  }
+  document.getElementById("api_return").style.display = "none";
+  document.getElementById("results").style.display = "none";
+  document.getElementById("list_table_view").style.display = "block";
+  document.getElementById("view_all_1").disabled = false;
 
-  const url = `${globalURl}/getAll/${user_id}/${second_user_id}`;
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send();
+  document.getElementById("getAll").style.display = "contents";
+  document.getElementById("getAllButtons").style.display = "block";
 
-  xhr.onreadystatechange = function () {
-    //Call a function when the state changes.
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      arr = xhr.responseText;
-      arr = JSON.parse(arr);
-      // alert(arr);
-      document.getElementById("getAll").innerHTML = "";
-
-      var finalArray = arr.map(function (obj, key) {
-
-              
-        if(obj.image.includes("http") || obj.image.includes("chrome-extension") || obj.image == null){
-         console.log("test")
-         
-        const url = `${globalURl}/updating_prospect_image`;
-
-        let xhr = new XMLHttpRequest();
-    
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(
-          JSON.stringify({
-            id : obj.id,
-          })
-        );
-        obj.image ="./Assets/img/user.png"
-        }
-
-
-        
-
-
-
-
-        row =
-          `<div class="row m-0 tabs_two_main single_profile" id="` +
-          obj.id +
-          `">
-				  <div class="tabs_cols_two_main_1">
-					  <span class="left data_name">
-          ${obj.name != null ? obj.name : "No Name Added"} 
-          </span>
-				  </div>
-				  <div class="tabs_cols_two_main_1"
-				           >
-					  <img src="${
-              obj.image != null ? obj.image : "./Assets/img/user.png"
-            }" class="tabs_two_imgs">
-									  </span>
-					  <span class="right"><i class="far fa-comment-alt comment_icon"></i></span>
-				  </div>
-				  <div class="tabs_cols_two_main_1">
-
-					  <span class="left">
-              ${
-                obj.description != null
-                  ? obj.description
-                  : "No Description Added"
-              }
-            </span>
-
-				  </div>
-
-				  <div class="tabs_cols_two_main_1">
-					  <span class="left">
-              ${obj.company != null ? obj.company : "No Company Added"}
-            </span>
-
-				  </div>
-				  <div class="tabs_cols_two_main_1"
-				           >
-					  <span class="Address_msg">
-              ${obj.address != null ? obj.address : "No Location Added"}
-            </span>
-				  </div>
-				  	<div class="tabs_cols_two_main_1">
-					  	${
-                obj.status === null
-                  ? `<span style="color:#0e76a8 !important;" class="congrats_msg">LinkedIn Campaign</span>`
-                  : ""
-              }
-					  	${
-                obj.status === "LinkedIn Campaign"
-                  ? `<span style="color:#0e76a8 !important;" class="congrats_msg">${obj.status}</span>`
-                  : ""
-              }
-						${
-              obj.status === "Talking/Replied"
-                ? `<span style="color:#89CFF0 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-						${
-              obj.status === "Serious Conversations"
-                ? `<span style="color:#FFA500 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-						${
-              obj.status === "Discovery Call Scheduled"
-                ? `<span style="color:#FF0000 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-						${
-              obj.status === "Discovery Call Completed"
-                ? `<span style="color:#FFCB05 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-						${
-              obj.status === "Boom"
-                ? `<span style="color:#85bb65 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-						${
-              obj.status === "Lost"
-                ? `<span style="color:#808080 !important;" class="congrats_msg">${obj.status}</span>`
-                : ""
-            }
-					</div>
-					<div class="tabs_cols_two_main_1"
-				           >
-					  <span class="left">
-            ${obj.follow_up != null ? obj.follow_up : "No Date Added"} 
-          </span>
-				  </div>
-			  </div>`;
-        document.getElementById("getAll").innerHTML += row;
-      });
-
-      // apiCategories('status_filter');
-      // apiWeekly("weekly_filter");
-      // ArrayMaker();
-      document.getElementById("api_return").style.display = "none";
-      document.getElementById("results").style.display = "none";
-      document.getElementById("list_table_view").style.display = "block";
-      document.getElementById("view_all_1").disabled = false
-
-      document.getElementById("getAll").style.display = "contents";
-      document.getElementById("getAllButtons").style.display = "block";
-
-      var single_profile = document.getElementsByClassName("single_profile");
-      for (var i = 0; i < single_profile.length; i++) {
-        single_profile[i].addEventListener("click", getSinglePage, false);
-      }
-    }
-  };
+  ArrayMaker();
 }
 
 function getAllById(user_id) {
@@ -2972,7 +2819,7 @@ function getAllById(user_id) {
               ${obj.address != null ? obj.address : "No Location Added"}
             </span>
 				  </div>
-				  <div class="tabs_cols_two_main_1">	 
+				  <div class="tabs_cols_two_main_1">
 				  	${
               obj.status === null
                 ? `<span style="color:#0e76a8 !important;" class="congrats_msg">LinkedIn Campaign</span>`
@@ -2982,7 +2829,7 @@ function getAllById(user_id) {
               obj.status === "LinkedIn Campaign"
                 ? `<span style="color:#0e76a8 !important;" class="congrats_msg">${obj.status}</span>`
                 : ""
-            } 
+            }
 					${
             obj.status === "Talking/Replied"
               ? `<span style="color:#89CFF0 !important;" class="congrats_msg">${obj.status}</span>`
@@ -3040,6 +2887,7 @@ function getAllById(user_id) {
 }
 
 function getSinglePage(e) {
+  document.getElementById("go_back").disabled = false;
   var clipper = localStorage.getItem("clipperpageCheck");
   if (clipper) {
     localStorage.removeItem("clipperpageCheck");
@@ -3070,6 +2918,7 @@ function getSinglePage(e) {
         function gotTab(tabs) {
           let msg = {
             txt: res.user.profile_link,
+            donot: "true",
           };
           chrome.tabs.sendMessage(tabs[0].id, msg);
         }
@@ -3080,15 +2929,15 @@ function getSinglePage(e) {
 
         localStorage.setItem("prospect_id", res.user.id);
 
-        getname = localStorage.getItem("second_user_name")
-            if(getname != "null" && getname != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${getname}'s Database`;
-            }
-            else{
-            document.getElementById("savedUserMessage").innerText =
-              "Records from Database";
-            }
+        getname = localStorage.getItem("second_user_name");
+        if (getname != "null" && getname != "") {
+          document.getElementById(
+            "savedUserMessage"
+          ).innerText = `You're in ${getname}'s Database`;
+        } else {
+          document.getElementById("savedUserMessage").innerText =
+            "Records from Database";
+        }
 
         document.getElementById("topTitleName").innerText = res.user.name;
         document.getElementById("fname").value = res.user.name;
@@ -3100,33 +2949,18 @@ function getSinglePage(e) {
         document.getElementById("strategy_date").value = res.user.strategy_date;
         let image = document.getElementById("image");
 
-        
-        
         variable = setTimeout(() => {
-          
-            console.log("l")
-            if(image.src.includes("http") || image.src.includes("Assets")  || image.src.includes("chrome-extension")   ){
+          if (
+            image.src.includes("http") ||
+            image.src.includes("Assets") ||
+            image.src.includes("chrome-extension")
+          ) {
             window.location.reload();
-              eventSave();
-            }
-          
-  
-          
-
-
-
+            eventSave();
+          }
 
           clearInterval(variable);
-
-
-
-        }, 5000)
-
-
-        
-
-
-
+        }, 5000);
 
         image.src = res.user.image;
 
@@ -3134,7 +2968,9 @@ function getSinglePage(e) {
           res.user.profile_link;
 
         // document.getElementById("notes").value = res.user.notes;
-        document.getElementById("notes").innerHTML = res.user.notes;
+        document.getElementById("client_messages").innerHTML = res.user.notes;
+        document.getElementById("notes").innerHTML = res.user.messages;
+
         if (document.getElementById(res.user.status)) {
           document.getElementById(res.user.status).selected = true;
           var status_tag = document.getElementById("status");
@@ -3251,14 +3087,14 @@ function getSinglePage(e) {
         var starIcon = document.getElementById("star__delete__icon");
         starIcon.src = "Assets/img/star-black.png";
 
-        getname = localStorage.getItem("second_user_name")
-        if(getname != "null" && getname != ""){
+        getname = localStorage.getItem("second_user_name");
+        if (getname != "null" && getname != "") {
+          document.getElementById(
+            "savedUserMessage"
+          ).innerText = `You're in ${getname}'s Database`;
+        } else {
           document.getElementById("savedUserMessage").innerText =
-          `You're in ${getname}'s Database`;
-        }
-        else{
-        document.getElementById("savedUserMessage").innerText =
-          "Records from Database";
+            "Records from Database";
         }
         var user_id = localStorage.getItem("user_id");
         var secondary_id = localStorage.getItem("second_user_id");
@@ -3324,8 +3160,8 @@ function getWeekOfMonth(date) {
 }
 
 function getProfile() {
-  document.getElementById("get_all_message").style.display = "none"
-  document.getElementById("search_box").value = null
+  document.getElementById("get_all_message").style.display = "none";
+  document.getElementById("search_box").value = null;
   document.getElementById("yeen").style.display = "block";
   document.getElementById("star__delete__icon").style.display = "none";
   var clipper = localStorage.getItem("clipperpageCheck");
@@ -3335,7 +3171,6 @@ function getProfile() {
       window.location.href = "popup.html";
     }
   } else {
-    var bgpage = chrome.extension.getBackgroundPage();
     var profile_link = bgpage.word.profile_link;
     var user_id = localStorage.getItem("user_id");
 
@@ -3360,15 +3195,15 @@ function getProfile() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText != "400") {
-          getname = localStorage.getItem("second_user_name")
-            if(getname != "null" && getname != ""){
-              document.getElementById("savedUserMessage").innerText =
-              `You're in ${getname}'s Database`;
-            }
-            else{
+          getname = localStorage.getItem("second_user_name");
+          if (getname != "null" && getname != "") {
+            document.getElementById(
+              "savedUserMessage"
+            ).innerText = `You're in ${getname}'s Database`;
+          } else {
             document.getElementById("savedUserMessage").innerText =
               "Records from Database";
-            }
+          }
 
           var deleteIcon = document.getElementById("star__delete__icon");
           deleteIcon.src = "Assets/img/star-yellow.png";
@@ -3445,15 +3280,16 @@ function getProfile() {
             }
           };
 
-          getname = localStorage.getItem("second_user_name")
-          if(getname != "null" && getname != ""){
+          getname = localStorage.getItem("second_user_name");
+          if (getname != "null" && getname != "") {
+            document.getElementById(
+              "savedUserMessage"
+            ).innerText = `You're in ${getname}'s Database`;
+          } else {
             document.getElementById("savedUserMessage").innerText =
-            `You're in ${getname}'s Database`;
+              "Records from Database";
           }
-          else{
-          document.getElementById("savedUserMessage").innerText =
-            "Records from Database";
-          }          var deleteIcon = document.getElementById("star__delete__icon");
+          var deleteIcon = document.getElementById("star__delete__icon");
           deleteIcon.src = "Assets/img/star-black.png";
           document.getElementById("yeen").style.display = "none";
           document.getElementById("star__delete__icon").style.display = "block";
@@ -3487,7 +3323,6 @@ function getRequest() {
     document.getElementById("list_table_view").style.display = "none";
   }
 
-  // let bgpage = chrome.extension.getBackgroundPage();
   let id = 0;
   // let title = bgpage.word.title;
   let name = document.getElementById("fname").value;
@@ -3519,7 +3354,10 @@ function getRequest() {
     user_id = second_user_id;
   }
   // }
-  var notes = document.getElementById("notes")
+  var notes = document.getElementById("client_messages")
+    ? document.getElementById("client_messages").innerHTML
+    : "";
+  var messages = document.getElementById("notes")
     ? document.getElementById("notes").innerHTML
     : "";
   var follow_up = document.getElementById("follow_up").value;
@@ -3570,69 +3408,69 @@ function getRequest() {
   var weekly_source = document.getElementById("weekly_source").value;
   const imageUrl = img;
 
- (async () => {
-  const response = await fetch(imageUrl)
-  const imageBlob = await response.blob()
-  const reader = new FileReader();
-  reader.readAsDataURL(imageBlob);
-  reader.onloadend = () => {
-    const base64data = reader.result;
-    var encodedString = btoa(base64data);
-    var decodedString = atob(encodedString);
-    img = decodedString;
-    console.log(decodedString,'decoded');
-  }
- })()
-//  console.log(img,'imgg')
- var i = setInterval(() => {
-  if(img != null){
-  const url = `${globalURl}/api-test`;
+  (async () => {
+    const response = await fetch(imageUrl);
+    const imageBlob = await response.blob();
+    const reader = new FileReader();
+    reader.readAsDataURL(imageBlob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      var encodedString = btoa(base64data);
+      var decodedString = atob(encodedString);
+      img = decodedString;
+    };
+  })();
+  var i = setInterval(() => {
+    if (img != null) {
+      const url = `${globalURl}/api-test`;
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(
-    JSON.stringify({
-      id: id,
-      name: name,
-      description: description,
-      address: address,
-      company: company,
-      about: about,
-      img: img,
-      user_id: user_id,
-      notes: notes,
-      weekly_date: weekly_date,
-      status: status,
-      discovery_call: discovery_call,
-      updated_at: updated_at,
-      conversion: conversion,
-      total_messages: total_messages,
-      endorsement: endorsement,
-      priority: priority,
-      profile_link: profile_link,
-      weekly_source: weekly_source,
-      strategy_date: strategy_date,
-    })
-  );
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          id: id,
+          name: name,
+          description: description,
+          address: address,
+          company: company,
+          about: about,
+          img: img,
+          user_id: user_id,
+          notes: notes,
+          messages: messages,
+          weekly_date: weekly_date,
+          status: status,
+          discovery_call: discovery_call,
+          updated_at: updated_at,
+          conversion: conversion,
+          total_messages: total_messages,
+          endorsement: endorsement,
+          priority: priority,
+          profile_link: profile_link,
+          weekly_source: weekly_source,
+          strategy_date: strategy_date,
+        })
+      );
 
-  xhr.onreadystatechange = function () {
-    //Call a function when the state changes.
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let res = JSON.parse(xhr.responseText);
+      xhr.onreadystatechange = function () {
+        //Call a function when the state changes.
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          let res = JSON.parse(xhr.responseText);
 
-      if (res.status == 200) {
-        localStorage.setItem("prospect_id", res.prospect_id);
-        var deleteIcon = document.getElementById("star__delete__icon");
-        deleteIcon.src = "Assets/img/star-yellow.png";
-        document.getElementById("yeen").style.display = "none";
-        document.getElementById("star__delete__icon").style.display = "block";
-      }
+          if (res.status == 200) {
+            localStorage.setItem("prospect_id", res.prospect_id);
+            var deleteIcon = document.getElementById("star__delete__icon");
+            deleteIcon.src = "Assets/img/star-yellow.png";
+            document.getElementById("yeen").style.display = "none";
+            document.getElementById("star__delete__icon").style.display =
+              "block";
+          }
+        }
+      };
+      clearInterval(i);
     }
-  };
-  clearInterval(i)
-}
-}, 1500)
+  }, 1500);
 }
 
 function apiCall(url, params = []) {
@@ -3678,7 +3516,6 @@ function apiCall(url, params = []) {
 }
 
 function alreadyStored() {
-  let bgpage = chrome.extension.getBackgroundPage();
   let id = bgpage.word.id;
   var user_id = localStorage.getItem("user_id");
 
@@ -3750,12 +3587,10 @@ function apiWeekly(tag) {
   //   if (xhr.readyState == 4 && xhr.status == 200) {
   //     arr = xhr.responseText;
   //     arr = JSON.parse(arr);
-
   //     var finalArray = arr.map(function (obj, key) {
   //       row = `<option>` + obj.weekly_source + `</option>`;
   //       all += row;
   //     });
-
   //     document.getElementById(tag).innerHTML = all;
   //   }
   // };
@@ -3849,7 +3684,7 @@ function filtersChange(
               obj.address +
               `</span>
 				  </div>
-				<div class="tabs_cols_two_main_1"				
+				<div class="tabs_cols_two_main_1"
 					${
             obj.status === null
               ? `<span style="color:#0e76a8 !important;" class="congrats_msg">LinkedIn Campaign</span>`
@@ -3979,47 +3814,47 @@ function filtersChange(
                                 }" alt="">
                                       <span class="new-list-icon"><i class="far fa-comment-alt"></i></span>
                                                           </div>
-            
+
                                                           <div class="card_body">
                                                               <h6 class="c_name">
-                                                                  
+
                               ${obj2.name != null ? obj2.name : "No Name Added"}
                                                               </h6>
                                                               <p class="c_paragraph">
-                                                                  
+
                               ${
                                 obj2.company != null
                                   ? obj2.company
                                   : "No Company Added"
                               }
-                              
+
                                                               </p>
                                                               <h6 class="ceo_name">
-                                                                
+
                               ${
                                 obj2.description != null
                                   ? obj2.description
                                   : "No Description Added"
                               }
-                              
+
                                                               </h6>
                                                               <h6 class="Location_name">
                                                                   Location
                                                               </h6>
                                                               <p class="location_paragraph">
-                                                                
+
                               ${
                                 obj2.address != null
                                   ? obj2.address
                                   : "No Location Added"
                               }
-                              
+
                                                               </p>
                                                               <h6 class="Location_name">
                                                                   Status
                                                               </h6>
                                                               <p class="c_paragraph">
-                                                            
+
                               ${
                                 obj2.status != null
                                   ? obj2.status
@@ -4027,46 +3862,46 @@ function filtersChange(
                               }
                                                               </p>
                                                               <h6 class="Location_name">
-                                                                  Notes
+                                                                  Messages
                                                               </h6>
                                                               <p class="c_paragraph_box">
                               ${
                                 obj2.notes != null
                                   ? obj2.notes
-                                  : "No Notes Added"
+                                  : "No Messages Added"
                               }
                                                               </p>
                                                               <h6 class="Location_name">
                                                                   About Me
                                                               </h6>
                                                               <p class="c_paragraph">
-                                                              
+
                               ${
                                 obj2.about != null
                                   ? obj2.about
                                   : "No About Added"
                               }
-                              
+
                                                               </p>
                                                               <h6 class="Location_name">
                                                                   Profile URL
                                                               </h6>
                                                               <p class="c_paragraph_url">
-                                                                  
+
                               ${
                                 obj2.profile_link != null
                                   ? obj2.profile_link
                                   : "No Profile Link Added"
-                              } 
-                              
+                              }
+
                                                               </p>
-                                                              
-                                                              
+
+
                                                               <h6 class="Location_name">
                                                                   Follow up Date
                                                               </h6>
                                                               <p class="c_paragraph_date_calender">
-            
+
                                                                   <span class="c-date">
                               ${
                                 obj2.follow_up != null
@@ -4076,20 +3911,20 @@ function filtersChange(
                               </span>
                                                                   <span class="c-calender"><i class="far fa-calendar-alt down_arrow"></i></span>
                                                               </p>
-                                                              
-                                                             
-            
+
+
+
                                                               <button class="btn btn-primary w-100 last_c_btn">MAKE CHANGES</button>
-            
+
                                                           </div>
-            
+
                                                       </div>`;
               });
 
               row += `</div>
                                             </div>
 
-                                               
+
                                             </div>
                                         </div>`;
 
@@ -4137,7 +3972,8 @@ function eventSave() {
     var company = document.getElementById("company").value;
     let address = document.getElementById("address").value;
     var about = document.getElementById("about").value;
-    var notes = document.getElementById("notes").innerHTML;
+    var notes = document.getElementById("client_messages").value;
+    var messages = document.getElementById("notes").innerHTML;
     var follow_up = document.getElementById("follow_up").value;
     var status = document.getElementById("status").value;
     var discovery_call = document.getElementById("discovery_call").value;
@@ -4167,70 +4003,64 @@ function eventSave() {
     if (second_user_id != null) {
       user_id = second_user_id;
     }
-    console.log('profile',profile_image)
     var profile_link = document.getElementById("profile_link").innerText;
-
-
 
     const imageUrl = profile_image;
 
     (async () => {
-     const response = await fetch(imageUrl)
-     const imageBlob = await response.blob()
-     const reader = new FileReader();
-     reader.readAsDataURL(imageBlob);
-     reader.onloadend = () => {
-       const base64data = reader.result;
-       var encodedString = btoa(base64data);
-       var decodedString = atob(encodedString);
-       profile_image = decodedString;
-       console.log(decodedString,'decoded');
-     }
-    })()
-
-
+      const response = await fetch(imageUrl);
+      const imageBlob = await response.blob();
+      const reader = new FileReader();
+      reader.readAsDataURL(imageBlob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        var encodedString = btoa(base64data);
+        var decodedString = atob(encodedString);
+        profile_image = decodedString;
+      };
+    })();
 
     var i = setInterval(() => {
-      if(profile_image != null){
+      if (profile_image != null) {
+        const url = `${globalURl}/event-save`;
 
-    const url = `${globalURl}/event-save`;
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("POST", url, true);
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.send(
+          JSON.stringify({
+            user_id: user_id,
+            profile_image: profile_image,
+            name: fname,
+            description: description,
+            company: company,
+            about: about,
+            address: address,
+            notes: notes,
+            messages: messages,
+            follow_up: follow_up,
+            status: status,
+            discovery_call: discovery_call,
+            updated_at: updated_at,
+            conversion: conversion,
+            total_messages: total_messages,
+            endorsement: endorsement,
+            priority: priority,
+            profile_link: profile_link,
+            weekly_date: weekly_date,
+            weekly_source: weekly_source,
+            strategy_date: strategy_date,
+          })
+        );
 
-    var xhr1 = new XMLHttpRequest();
-    xhr1.open("POST", url, true);
-    xhr1.setRequestHeader("Content-Type", "application/json");
-    xhr1.send(
-      JSON.stringify({
-        user_id: user_id,
-        profile_image: profile_image,
-        name: fname,
-        description: description,
-        company: company,
-        about: about,
-        address: address,
-        notes: notes,
-        follow_up: follow_up,
-        status: status,
-        discovery_call: discovery_call,
-        updated_at: updated_at,
-        conversion: conversion,
-        total_messages: total_messages,
-        endorsement: endorsement,
-        priority: priority,
-        profile_link: profile_link,
-        weekly_date: weekly_date,
-        weekly_source: weekly_source,
-        strategy_date: strategy_date,
-      })
-    );
-
-    xhr1.onreadystatechange = function () {
-      //Call a function when the state changes.
-      if (xhr1.readyState == 4 && xhr1.status == "200") {
+        xhr1.onreadystatechange = function () {
+          //Call a function when the state changes.
+          if (xhr1.readyState == 4 && xhr1.status == "200") {
+          }
+        };
+        clearInterval(i);
       }
-    };
-    clearInterval(i)
-  }
-  }, 1500)
+    }, 1500);
   } else {
     var myToast = Toastify({
       text: "Login to access",
@@ -4239,8 +4069,6 @@ function eventSave() {
 
     myToast.showToast();
   }
-  
-  
 }
 
 // ........modal code..........................................
@@ -4414,7 +4242,7 @@ document.querySelectorAll(".resetBtn").forEach((item) => {
     let bottomDropDownFields = parentEle.querySelector(".bottomDropDownFields");
     bottomDropDownFields.innerHTML = `
 		<select class="selectFilter selectFilter1" id="statusFields" style="width: 99% !important; margin-top: 8px;">
-	
+
 			<option value="" selected>Select option</option>
 			<option value="LinkedIn Campaign" >LinkedIn Campaign</option>
 			<option value="Talking/Replied">Talking/Replied</option>
@@ -4423,7 +4251,7 @@ document.querySelectorAll(".resetBtn").forEach((item) => {
 			<option value="Discovery Call Completed">Discovery Call Completed</option>
 			<option value="Boom">Boom</option>
 			<option value="Lost">Lost</option>
-	
+
 		</select>
 		`;
   });
@@ -4504,7 +4332,7 @@ if (document.querySelector(".startCancelBtn")) {
     document.querySelectorAll(".bottomDropDownFields").forEach((ele) => {
       ele.innerHTML = `
 			<select class="selectFilter selectFilter1" id="statusFields" style="width: 99% !important; margin-top: 8px;">
-		
+
 				<option value="" selected>Select option</option>
 				<option value="LinkedIn Campaign" >LinkedIn Campaign</option>
 				<option value="Talking/Replied">Talking/Replied</option>
@@ -4513,7 +4341,7 @@ if (document.querySelector(".startCancelBtn")) {
 				<option value="Discovery Call Completed">Discovery Call Completed</option>
 				<option value="Boom">Boom</option>
 				<option value="Lost">Lost</option>
-		
+
 			</select>
 			`;
     });
@@ -4608,6 +4436,63 @@ function searchProspects(e) {
 
   ArrayMaker();
 }
+
+var pageNo = 10;
+var currentPage = 1;
+var numberOfPages = 0;
+
+document.querySelector("#first").addEventListener("click", () => {
+  document.querySelector("#first").disabled = true;
+  document.querySelector("#next").disabled = true;
+  document.querySelector("#previous").disabled = true;
+  document.querySelector("#last").disabled = true;
+
+  currentPage = 1;
+  pageNo = currentPage * 10;
+  ArrayMaker();
+});
+
+document.querySelector("#next").addEventListener("click", () => {
+  document.querySelector("#first").disabled = true;
+  document.querySelector("#next").disabled = true;
+  document.querySelector("#previous").disabled = true;
+  document.querySelector("#last").disabled = true;
+
+  currentPage = currentPage + 1;
+  pageNo = currentPage * 10;
+
+  if (currentPage >= numberOfPages) {
+    currentPage = numberOfPages;
+    pageNo = numberOfPages * 10;
+  }
+  ArrayMaker();
+});
+
+document.querySelector("#previous").addEventListener("click", () => {
+  document.querySelector("#first").disabled = true;
+  document.querySelector("#next").disabled = true;
+  document.querySelector("#previous").disabled = true;
+  document.querySelector("#last").disabled = true;
+
+  currentPage = currentPage - 1;
+  pageNo = currentPage * 10;
+  if (currentPage === 0) {
+    currentPage = 1;
+    pageNo = 10;
+  }
+  ArrayMaker();
+});
+
+document.querySelector("#last").addEventListener("click", () => {
+  document.querySelector("#first").disabled = true;
+  document.querySelector("#next").disabled = true;
+  document.querySelector("#previous").disabled = true;
+  document.querySelector("#last").disabled = true;
+
+  currentPage = numberOfPages;
+  pageNo = currentPage * 10;
+  ArrayMaker();
+});
 
 function ArrayMaker() {
   closeModal();
@@ -4733,8 +4618,7 @@ function ArrayMaker() {
   if (second_user_id != null) {
     user_id = second_user_id;
   }
-  var i = setTimeout(() => {
-    console.log("finding")
+  // var i = setTimeout(() => {
   const url = `${globalURl}/filters`;
 
   let xhr = new XMLHttpRequest();
@@ -4750,6 +4634,7 @@ function ArrayMaker() {
       user_id,
       second_user_id,
       lists,
+      pageNo,
     })
   );
 
@@ -4760,6 +4645,7 @@ function ArrayMaker() {
       document.getElementById("getAll").innerHTML = "";
       document.getElementById("getAllCanban").innerHTML = "";
       document.getElementById("list_table_view").style.display = "block";
+      document.querySelector(".paginationContainer").style.display = "flex";
 
       if (arr == 200) {
         document.getElementById("get_all_message").style.display = "block";
@@ -4767,8 +4653,30 @@ function ArrayMaker() {
         document.getElementById("get_all_message").style.display = "none";
 
         if (!view_type) {
+          document.querySelector(".paginationContainer").style.display = "flex";
+
+          if (arr.total_data) {
+            numberOfPages = arr.total_data / 10;
+
+            if (Number.isInteger(numberOfPages) === false) {
+              numberOfPages = Math.floor(numberOfPages + 1);
+            }
+          }
+
+          document.getElementById("next").disabled =
+            currentPage === numberOfPages ? true : false;
+
+          document.getElementById("previous").disabled =
+            currentPage === 1 ? true : false;
+
+          document.getElementById("first").disabled =
+            currentPage === 1 ? true : false;
+
+          document.getElementById("last").disabled =
+            currentPage === numberOfPages ? true : false;
+
           arr != 200 &&
-            arr.map(function (obj, key) {
+            arr.arr.map(function (obj, key) {
               row =
                 `<div class="row m-0 tabs_two_main single_profile" id="` +
                 obj.id +
@@ -4789,7 +4697,7 @@ function ArrayMaker() {
 								  <span class="right"><i class="far fa-comment-alt comment_icon"></i></span>
 							  </div>
 							  <div class="tabs_cols_two_main_1">
-			
+
 								  <span class="left">
                     ${
                       obj.description != null
@@ -4797,15 +4705,15 @@ function ArrayMaker() {
                         : "No Description Added"
                     }
                   </span>
-			
+
 							  </div>
-			
+
 							  <div class="tabs_cols_two_main_1">
-	
+
 								  <span class="left">
                     ${obj.company != null ? obj.company : "No Company Added"}
                   </span>
-			
+
 							  </div>
 							  <div class="tabs_cols_two_main_1"
 									   >
@@ -4867,6 +4775,8 @@ function ArrayMaker() {
               document.getElementById("getAllCanban").style.display = "none";
             });
         } else {
+          document.querySelector(".paginationContainer").style.display = "none";
+
           var count_arr = count_arr * 100;
           var temporary = null;
           arr = Object.keys(arr).map((key) => [arr[key]]);
@@ -4946,92 +4856,92 @@ function ArrayMaker() {
                       }" alt="">
                             <span class="new-list-icon"><i class="far fa-comment-alt"></i></span>
                                                 </div>
-  
+
                                                 <div class="card_body">
                                                     <h6 class="c_name">
-                                                        
+
                     ${obj2.name != null ? obj2.name : "No Name Added"}
                                                     </h6>
                                                     <p class="c_paragraph">
-                                                        
+
                     ${obj2.company != null ? obj2.company : "No Company Added"}
-                    
+
                                                     </p>
                                                     <h6 class="ceo_name">
-                                                      
+
                     ${
                       obj2.description != null
                         ? obj2.description
                         : "No Description Added"
                     }
-                    
+
                                                     </h6>
                                                     <h6 class="Location_name">
                                                         Location
                                                     </h6>
                                                     <p class="location_paragraph">
-                                                      
+
                     ${obj2.address != null ? obj2.address : "No Location Added"}
-                    
+
                                                     </p>
                                                     <h6 class="Location_name">
                                                         Status
                                                     </h6>
                                                     <p class="c_paragraph">
-                                                  
+
                     ${obj2.status != null ? obj2.status : "No Status Added"}
                                                     </p>
                                                     <h6 class="Location_name">
-                                                        Notes
+                                                        Messages
                                                     </h6>
                                                     <p class="c_paragraph_box">
-                    ${obj2.notes != null ? obj2.notes : "No Notes Added"}
+                    ${obj2.notes != null ? obj2.notes : "No Messages Added"}
                                                     </p>
                                                     <h6 class="Location_name">
                                                         About Me
                                                     </h6>
                                                     <p class="c_paragraph">
-                                                    
+
                     ${obj2.about != null ? obj2.about : "No About Added"}
-                    
+
                                                     </p>
                                                     <h6 class="Location_name">
                                                         Profile URL
                                                     </h6>
                                                     <p class="c_paragraph_url">
-                                                        
+
                     ${
                       obj2.profile_link != null
                         ? obj2.profile_link
                         : "No Profile Link Added"
-                    } 
-                    
+                    }
+
                                                     </p>
-                                                    
-                                                    
+
+
                                                     <h6 class="Location_name">
                                                         Follow up Date
                                                     </h6>
                                                     <p class="c_paragraph_date_calender">
-  
+
                                                         <span class="c-date">
                     ${obj2.follow_up != null ? obj2.follow_up : "No Date Added"}
                     </span>
                                                         <span class="c-calender"><i class="far fa-calendar-alt down_arrow"></i></span>
                                                     </p>
-                                                    
-                                                   
-  
+
+
+
                                                     <button class="btn btn-primary w-100 last_c_btn">MAKE CHANGES</button>
-  
+
                                                 </div>
-  
+
                                             </div>`;
                 });
                 row += `</div>
                                               </div>
-  
-                                                 
+
+
                                               </div>
                                           </div>`;
 
@@ -5073,8 +4983,8 @@ function ArrayMaker() {
       listView.scroll(0, 0);
     }
   };
-  clearInterval(i)
-}, 1000)
+  clearInterval(i);
+  // }, 1000);
 }
 
 function addFilterDiv() {
@@ -5108,7 +5018,7 @@ function addFilterDiv() {
 
 					<div class="bottomDropDownFields">
 						<select class="filterInputField selectFilter selectFilter1" id="statusFields" style="width: 99% !important; margin-top: 8px;">
-            
+
 							<option value="" selected>Select option</option>
 							<option value="LinkedIn Campaign" >LinkedIn Campaign</option>
 							<option value="Talking/Replied">Talking/Replied</option>
@@ -5117,7 +5027,7 @@ function addFilterDiv() {
 							<option value="Discovery Call Completed">Discovery Call Completed</option>
 							<option value="Boom">Boom</option>
 							<option value="Lost">Lost</option>
-								
+
 						</select>
 					</div>
 
@@ -5139,7 +5049,7 @@ function addFilterDiv() {
 				<option value="Discovery Call Completed">Discovery Call Completed</option>
 				<option value="Boom">Boom</option>
 				<option value="Lost">Lost</option>
-	
+
 			</select>
 			`;
     }
@@ -5147,13 +5057,13 @@ function addFilterDiv() {
       let bottomDropDownFields = ele.querySelector(".bottomDropDownFields");
       bottomDropDownFields.innerHTML = `
 			<select class="filterInputField selectFilter selectFilter1" id="priorityFields" style="width: 99% !important; margin-top: 8px;">
-	
+
 			<option value="" selected>Select option</option>
 				<option value="A">A</option>
 				<option value="B">B</option>
 				<option value="C">C</option>
 				<option value="D">D</option>
-	
+
 			</select>
 			`;
     }
@@ -5161,7 +5071,7 @@ function addFilterDiv() {
       let bottomDropDownFields = ele.querySelector(".bottomDropDownFields");
       bottomDropDownFields.innerHTML = `
 			<select class="filterInputField selectFilter selectFilter1" style="width: 99% !important; margin-top: 8px;" id="conversionFields">
-	
+
 			<option value="" selected>Select option</option>
 				<option value="New Job - Congrats">New Job - Congrats</option>
 				<option value="Work Anniversary - Congrats">Work Anniversary - Congrats</option>
@@ -5182,7 +5092,7 @@ function addFilterDiv() {
 				</option>
 				<option value="Inbound">Inbound</option>
 				<option value="Direct Outreach">Direct Outreach</option>
-	
+
 			</select>
 			`;
     }
@@ -5384,7 +5294,6 @@ document.getElementById("openDatePicker").addEventListener("click", () => {
   var user_id = localStorage.getItem("user_id");
   var prospect = localStorage.getItem("prospect_id");
 
-
   if (access_token && user_id && prospect) {
     document
       .querySelector(".datePickerDiv")
@@ -5432,13 +5341,19 @@ function openProspectModal() {
         userData.map((item) => {
           document.querySelector(".groupBoxContainer1").innerHTML += `
             <div style="position: relative;width: calc(30% - 20px); margin: auto 15px;"">
-            <div class="groupBox" data-group_id=${item.group_id} style="border-radius: 50%;
+            <div class="groupBox" data-group_id=${
+              item.group_id
+            } style="border-radius: 50%;
             padding: 5px;
-            
+
             position: relative;">
-              ${item.image ? `<img src="${item.image}" class="userIconDemo" data-receiverid="32">` :  `<img src="./Assets/img/group-bg.png" class="userIconDemo" data-receiverid="32">`}
-                 
-              
+              ${
+                item.image
+                  ? `<img src="${item.image}" class="userIconDemo" data-receiverid="32">`
+                  : `<img src="./Assets/img/group-bg.png" class="userIconDemo" data-receiverid="32">`
+              }
+
+
               ${
                 item.notifications != 0
                   ? `<div class="notificationBox">${item.notifications}</div>`
@@ -5455,8 +5370,7 @@ height: auto;
 line-height: 12px;
 font-size: 11px;
 white-space: break-spaces;
-              ">${
-                item.name }</div>
+              ">${item.name}</div>
             </div>
           `;
         });
@@ -5554,7 +5468,7 @@ if (document.querySelector(".canban-item-4")) {
 
 if (document.querySelector(".canban-item-3")) {
   document.querySelector(".canban-item-3").addEventListener("click", () => {
-    localStorage.setItem("openchatbox","yeen");
+    localStorage.setItem("openchatbox", "yeen");
     window.location.href = "messagebox.html";
   });
 }
@@ -5917,9 +5831,9 @@ let yInterval = setInterval(() => {
 
   if (access_token && user_id) {
     clearInterval(yInterval);
-    document.getElementById("notes").disabled = false;
+    document.getElementById("client_messages").disabled = false;
   } else {
-    document.getElementById("notes").disabled = true;
+    document.getElementById("client_messages").disabled = true;
   }
 }, 100);
 
@@ -6626,15 +6540,14 @@ document
   .addEventListener("click", shareInSubGroupsModal);
 
 function shareInSubGroupsModal() {
-
   document.getElementById("shareInGroupsModal").style.transform = "scale(0)";
   document.getElementById("shareInGroupsModal").style.opacity = 0;
 
   document.getElementById("showSubGroupsModal").style.transform = "scale(1)";
   document.getElementById("showSubGroupsModal").style.opacity = 1;
 
-  let user_id = localStorage.getItem('user_id');
-  let group_id = localStorage.getItem('group_id');
+  let user_id = localStorage.getItem("user_id");
+  let group_id = localStorage.getItem("group_id");
 
   const url = `${globalURl}/get_sub_groups/${group_id}/${user_id}`;
 
@@ -6653,22 +6566,24 @@ function shareInSubGroupsModal() {
           document.querySelector(".subGroupBoxContainer").innerHTML += `
                 <div style="position: relative;margin-left: 10px;">
 
-                <div class="subGroupBox" data-sub-group_id=${item.sub_group_id} style="cursor:pointer !important">
+                <div class="subGroupBox" data-sub-group_id=${
+                  item.sub_group_id
+                } style="cursor:pointer !important">
                 <span class="tooltiptext"><span style="color:red">Name: </span>${
                   item.name
                 }
                 </span>
 
                  <img src="./Assets/img/user.png" class="userIconDemo" data-receiverid="32">
-                  
-                  
+
+
                   </div>
                   <div class="groupName" >${
                     item.name.length > 10
                       ? `${item.name.slice(0, 10)} ...`
                       : item.name
                   }</div>
-                  
+
                 </div>
             `;
         });
@@ -6681,7 +6596,6 @@ function shareInSubGroupsModal() {
             shareProspectInSubGroup();
           });
         });
-
       } else {
         document.querySelector(".subGroupBoxContainer").innerHTML =
           "<h1 class='groupNullHeading'>No sub groups to show</h1>";
@@ -6690,7 +6604,9 @@ function shareInSubGroupsModal() {
   };
 }
 
-document.getElementById('showSubGroupsModalCloseBtn').addEventListener('click', showSubGroupsModalClose);
+document
+  .getElementById("showSubGroupsModalCloseBtn")
+  .addEventListener("click", showSubGroupsModalClose);
 
 function showSubGroupsModalClose() {
   document.getElementById("showSubGroupsModal").style.transform = "scale(0)";
@@ -6706,7 +6622,7 @@ function shareProspectInSubGroup() {
   var user_id = localStorage.getItem("user_id");
   var group_id = localStorage.getItem("group_id");
   var sub_group_id = localStorage.getItem("sub_group_id");
-  localStorage.setItem("subgroup_id",sub_group_id)
+  localStorage.setItem("subgroup_id", sub_group_id);
   var prospect_id = localStorage.getItem("prospect_id");
 
   if (prospect_id) {
@@ -6754,20 +6670,47 @@ function shareProspectInSubGroup() {
 }
 
 var i = setInterval(() => {
-  database = localStorage.getItem("OpenShowDataBase")
-  if(database){
+  database = localStorage.getItem("OpenShowDataBase");
+  if (database) {
     localStorage.removeItem("OpenShowDataBase");
     getAllDatabases();
   }
-  clearInterval(i)
-
-}, 50)
-
-
+  clearInterval(i);
+}, 50);
 
 if (document.getElementById("profilePicc")) {
   document.getElementById("profilePicc").addEventListener("click", () => {
-    localStorage.setItem("OpenShowDataBase",true)
+    localStorage.setItem("OpenShowDataBase", true);
     window.location.href = "popup.html";
+  });
+}
+
+setTimeout(() => {
+  if (document.getElementById("loader").style.display == "block") {
+    bgpage.word.loader = "yeen";
+    window.location.href = "home.html";
+  }
+}, 7000);
+setTimeout(() => {
+  loader = localStorage.getItem("loader_check");
+  if (loader) {
+    if (document.getElementById("loader").style.display == "block") {
+      document.getElementById("loader").style.display = "none";
+    }
+    if (!bgpage.word.loader || bgpage.word.loader == "yeen") {
+      document.getElementById("go_back").disabled = true;
+    } else {
+      document.getElementById("go_back").disabled = false;
+    }
+    localStorage.removeItem("loader_check");
+  }
+}, 50);
+
+if (document.getElementById("attachmentInp")) {
+  document.getElementById("attachmentInp").addEventListener("change", (e) => {
+    let attachmentImage = document.querySelector(".attachmentPhoto");
+
+    attachmentImage.style.display = "block";
+    attachmentImage.src = URL.createObjectURL(e.target.files[0]);
   });
 }

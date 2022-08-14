@@ -6,15 +6,15 @@ function setup() {
   noCanvas();
   localStorage.removeItem("second_user_id");
   profile_check = 0;
-  var bgpage = chrome.extension.getBackgroundPage();
-  var title = bgpage.word.title;
-  var name = bgpage.word.name;
-  var description = bgpage.word.description;
-  var address = bgpage.word.address;
-  var company = bgpage.word.company;
-  var about = bgpage.word.about;
-  var img = bgpage.word.img;
-  var profile_link = bgpage.word.profile_link;
+  // var bgpage = chrome.extension.getBackgroundPage();
+  var title =  word.title;
+  var name =  word.name;
+  var description =  word.description;
+  var address =  word.address;
+  var company =  word.company;
+  var about =  word.about;
+  var img =  word.img;
+  var profile_link =  word.profile_link;
   var prev = null;
   var access_token = localStorage.getItem("access_token");
   var username = localStorage.getItem("username");
@@ -37,12 +37,12 @@ function setup() {
     document.getElementById('not_logged_in_buttons').style.display = 'block';
   }
 
-  if (bgpage.word.loader == 'loader') {
+  if ( word.loader == 'loader') {
     console.log('loader');
     addLoader();
     setTimeout(function () {
-      var bgpage = chrome.extension.getBackgroundPage();
-      var profile_link = bgpage.word.profile_link;
+      // var bgpage = chrome.extension.getBackgroundPage();
+      var profile_link =  word.profile_link;
       console.log('started');
       var user_id = localStorage.getItem("user_id");
       var url = 'http://linkedin.thefastech.com/alreadyStored';
@@ -236,15 +236,15 @@ setInterval(function () {
   // alert();
   // console.log(profile_check);
   if (profile_check < 100) {
-    var bgpage = chrome.extension.getBackgroundPage();
-    var title = bgpage.word.title;
-    var name = bgpage.word.name;
-    var description = bgpage.word.description;
-    var address = bgpage.word.address;
-    var company = bgpage.word.company;
-    var about = bgpage.word.about;
-    var img = bgpage.word.img;
-    var profile_link = bgpage.word.profile_link;
+    // var bgpage = chrome.extension.getBackgroundPage();
+    var title =  word.title;
+    var name =  word.name;
+    var description =  word.description;
+    var address =  word.address;
+    var company =  word.company;
+    var about =  word.about;
+    var img =  word.img;
+    var profile_link =  word.profile_link;
 
     if (!name) {
       addLoader();
@@ -1235,7 +1235,7 @@ function getRequest() {
   } // let bgpage = chrome.extension.getBackgroundPage();
 
 
-  var id = 0; // let title = bgpage.word.title;
+  var id = 0; // let title =  word.title;
 
   var name = document.getElementById('name').innerText;
   var description = document.getElementById('description').innerText;
@@ -1360,8 +1360,8 @@ function apiCall(url) {
 }
 
 function alreadyStored() {
-  var bgpage = chrome.extension.getBackgroundPage();
-  var id = bgpage.word.id;
+  // var bgpage = chrome.extension.getBackgroundPage();
+  var id =  word.id;
   var user_id = localStorage.getItem("user_id");
   var url = 'http://linkedin.thefastech.com/alreadyStored';
   var xhr = new XMLHttpRequest();

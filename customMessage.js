@@ -1785,7 +1785,7 @@ function showNullMembersChats() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let userMessages = JSON.parse(xhr.responseText);
       localStorage.setItem("dms",true);
-      if(prospect_id != null){
+      if(prospect_id != null){    
         document.getElementById("Conversations_button").style.display = "block"
         let userData = JSON.parse(xhr.responseText);
 
@@ -3144,8 +3144,8 @@ border-radius: 50%;" src="./Assets/img/chat_redirect.png">
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
                         <h2>${ele.sender_name != null
-                ? `By ${ele.sender_name} ${ele.database != null
-                  ? `from ${ele.database}`
+                ? ` ${ele.sender_name} ${ele.database != null
+                  ? `networking on behalf of ${ele.database}`
                   : ""
                 }`
                 : ""
@@ -7159,8 +7159,8 @@ document.getElementById("opening_description_here").style.display = "none"
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
                         <h2>${ele.sender_name != null
-                ? `By ${ele.sender_name} ${ele.database != null
-                  ? `from ${ele.database}`
+                ? ` ${ele.sender_name} ${ele.database != null
+                  ? `networking on behalf of ${ele.database}`
                   : ""
                 }`
                 : ""
@@ -13767,8 +13767,8 @@ function nullSubGroupChats() {
                       <div>
                         <h1>${ele.prospect_data.name}</h1>
                         <h2>${ele.sender_name != null
-                ? `By ${ele.sender_name} ${ele.database != null
-                  ? `from ${ele.database}`
+                ? `${ele.sender_name} ${ele.database != null
+                  ? `networking on behalf of ${ele.database}`
                   : ""
                 }`
                 : ""
@@ -17096,8 +17096,8 @@ if (document.getElementById("search_prospects")) {
               <div>
                 <h1>${ele.name}</h1>
                 <h2>${ele.sender_name != null
-              ? `By ${ele.sender_name} ${ele.database != null
-                ? `from ${ele.database}`
+              ? ` ${ele.sender_name} ${ele.database != null
+                ? `networking on behalf of ${ele.database}`
                 : ""
               }`
               : ""
@@ -17144,8 +17144,8 @@ if (document.getElementById("search_prospects")) {
             <div>
               <h1>${ele.name}</h1>
               <h2>${ele.sender_name != null
-            ? `By ${ele.sender_name} ${ele.database != null
-              ? `from ${ele.database}`
+            ? ` ${ele.sender_name} ${ele.database != null
+              ? `networking on behalf of ${ele.database}`
               : ""
             }`
             : ""

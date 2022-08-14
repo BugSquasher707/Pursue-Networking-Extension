@@ -1,19 +1,18 @@
-<!DOCTYPE html>
 <html>
 
 <head>
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- <link rel="stylesheet" href="./css/fontawesome-com.css" /> -->
+	<script type="text/javascript" src="./js/jsdelivr.net-npm.js"></script>
+	<link rel="stylesheet" href="./css/bootstrap-4.css">
 
 	<title>Linkedin Tester</title>
 
-	<link rel="stylesheet" href="./Assets/css/style.css">
-	</link>
-	<link rel="stylesheet" href="css/style.css">
-	</link>
+	<link rel="stylesheet" href="./Assets/css/style.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -264,7 +263,7 @@
 		.slider:after {
 			color: black !important;
 			position: absolute;
-			content: "CANBAN";
+			content: "KANBAN";
 			height: 27px;
 			padding-top: 2px;
 			width: 48%;
@@ -287,7 +286,7 @@
 		}
 
 		input:checked+.slider:before {
-			content: "CANBAN" !important;
+			content: "KANBAN" !important;
 			-webkit-transform: translateX(104%);
 			-ms-transform: translateX(104%);
 			transform: translateX(104%);
@@ -330,6 +329,10 @@
 			height: 34px;
 			margin-left: 2.5%;
 
+		}
+
+		.new-content-notes img {
+			width: 150px;
 		}
 
 		.switch-2 input {
@@ -1233,15 +1236,15 @@
 
 		.new-content-notes {
 			width: 99%;
-		    height: fit-content;
-		    font-size: 14px;
-		    margin-top: 5px;
-		    outline: none;
-		    border: none;
-		    border-radius: 10px;
+			height: fit-content;
+			font-size: 14px;
+			margin-top: 5px;
+			outline: none;
+			border: none;
+			border-radius: 10px;
 		}
 
-		.new-content-notes::-webkit-scrollbar{
+		.new-content-notes::-webkit-scrollbar {
 			width: 10px;
 			/* background-color: transparent; */
 		}
@@ -2108,7 +2111,8 @@
 			transition: all 300ms ease-in-out;
 		}
 
-		.createNewListBtn, .updateNewListBtn{
+		.createNewListBtn,
+		.updateNewListBtn {
 			width: 100%;
 		}
 
@@ -2440,7 +2444,7 @@
 			margin-bottom: 15px;
 		}
 
-		.prospectMainContentContainer{
+		.prospectMainContentContainer {
 			height: 430px;
 		}
 
@@ -2568,14 +2572,14 @@
 			/* grid-template-columns: repeat(3, 30%); */
 		}
 
-		.subGroupBoxContainer{
-            width: 100%;
-            height: fit-content;
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(3, 30%);
-            justify-content: space-between;
-        }
+		.subGroupBoxContainer {
+			width: 100%;
+			height: fit-content;
+			position: relative;
+			display: grid;
+			grid-template-columns: repeat(3, 30%);
+			justify-content: space-between;
+		}
 
 		/* .groupBox,
 		.subGroupBox {
@@ -2594,44 +2598,44 @@
 		} */
 
 		.groupBox .tooltiptext {
-            visibility: hidden;
-            width: 100%;
-            background-color: #DFE9FA;
-            color: #000 !important;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 700;
-            display: block;
-            word-break: break-all;
-            position: absolute;
-            z-index: 10;
-            top: 0%;
-            left: -10%;
-        }
+			visibility: hidden;
+			width: 100%;
+			background-color: #DFE9FA;
+			color: #000 !important;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 10px;
+			font-size: 10px;
+			font-weight: 700;
+			display: block;
+			word-break: break-all;
+			position: absolute;
+			z-index: 10;
+			top: 0%;
+			left: -10%;
+		}
 
-        .groupBox:hover .tooltiptext {
-            visibility: visible;
-        }
+		.groupBox:hover .tooltiptext {
+			visibility: visible;
+		}
 
-        .subGroupBox .tooltiptext {
-            visibility: hidden;
-            width: 100%;
-            background-color: #DFE9FA;
-            color: #000 !important;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 10px;
-            font-size: 13px;
-            font-weight: 700;
-            display: block;
-            word-break: break-all;
-            position: absolute;
-            z-index: 1;
-            top: 0%;
-            left: -10%;
-        }
+		.subGroupBox .tooltiptext {
+			visibility: hidden;
+			width: 100%;
+			background-color: #DFE9FA;
+			color: #000 !important;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 10px;
+			font-size: 13px;
+			font-weight: 700;
+			display: block;
+			word-break: break-all;
+			position: absolute;
+			z-index: 1;
+			top: 0%;
+			left: -10%;
+		}
 
 		/* .userIconDemo {
             width: 100% !important;
@@ -2665,20 +2669,20 @@
         } */
 
 		.groupName {
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 2px;
-            color: black !important;
-            z-index: 10;
-            width: 100%;
-            height: 25px;
-            border-radius: 5px;
-            cursor: default;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+			font-size: 13px;
+			font-weight: 600;
+			margin-top: 2px;
+			color: black !important;
+			z-index: 10;
+			width: 100%;
+			height: 25px;
+			border-radius: 5px;
+			cursor: default;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
 
 		.smallgroupBox {
 			width: 45px;
@@ -2761,10 +2765,10 @@
 
 		.new-header {
 			width: 95%;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+			margin-bottom: 30px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
 
 		.userImage {
@@ -2781,12 +2785,14 @@
 			justify-content: right;
 			align-items: center;
 		}
-		.groupBox.groupChats{
+
+		.groupBox.groupChats {
 			border-radius: 50%;
 			padding: 5px;
 			/* overflow: hidden; */
 			position: relative;
 		}
+
 		.userIconDemo {
 			width: 100%;
 			height: 73px;
@@ -3407,7 +3413,7 @@
 			height: 13px;
 		}
 
-		.closeDiv i{
+		.closeDiv i {
 			font-size: 13px !important;
 			color: #084DD1;
 		}
@@ -3437,7 +3443,8 @@
 			box-sizing: border-box;
 		}
 
-		.swipeRightContainer, .swipeLeftContainer{
+		.swipeRightContainer,
+		.swipeLeftContainer {
 			width: fit-content;
 			height: fit-content;
 			display: flex;
@@ -3457,7 +3464,8 @@
 			font-size: 18px;
 		}
 
-		.openChooseContainer, .openChooseFilterContainer,
+		.openChooseContainer,
+		.openChooseFilterContainer,
 		.showSubGroupsContainer {
 			width: 100%;
 			height: 85%;
@@ -3465,11 +3473,12 @@
 			overflow-y: scroll;
 		}
 
-		.openChooseFilterContainer{
+		.openChooseFilterContainer {
 			height: 75%;
 		}
 
-		.openChooseContainer::-webkit-scrollbar, .openChooseFilterContainer::-webkit-scrollbar {
+		.openChooseContainer::-webkit-scrollbar,
+		.openChooseFilterContainer::-webkit-scrollbar {
 			display: none;
 		}
 
@@ -3489,7 +3498,8 @@
 			align-items: center;
 		}
 
-		.listDelIcon, .listDelIcon1 {
+		.listDelIcon,
+		.listDelIcon1 {
 			width: 35px;
 			height: 35px;
 			background-color: #FFE5E5;
@@ -3500,12 +3510,14 @@
 			cursor: pointer;
 		}
 
-		.trashIcon, .trashIcon1 {
+		.trashIcon,
+		.trashIcon1 {
 			font-size: 14px;
 			color: #FF0000;
 		}
 
-		.listContentContainer, .listContentContainer1 {
+		.listContentContainer,
+		.listContentContainer1 {
 			width: 86%;
 			height: 35px;
 			background-color: #F4F4F4;
@@ -3531,7 +3543,8 @@
 			overflow: hidden;
 		}
 
-		.listToggleBox, .listToggleBox1 {
+		.listToggleBox,
+		.listToggleBox1 {
 			width: 15px;
 			height: 15px;
 			border-radius: 50%;
@@ -3540,47 +3553,47 @@
 			transition: all .2s ease-in-out;
 		}
 
-		.listToggleBox1Checked{
+		.listToggleBox1Checked {
 			background-color: #084DD1;
 		}
 
-		.editIcon{
+		.editIcon {
 			font-size: 16px;
 			color: #084DD1;
 			cursor: pointer;
 			transition: all .2s ease-in-out;
 		}
 
-		.editIcon:hover{
+		.editIcon:hover {
 			margin-top: -4px;
 		}
 
-		.listInpContainer{
+		.listInpContainer {
 			width: 100%;
 			height: 100%;
 			padding: 5px 10px;
 			box-sizing: border-box;
 		}
 
-		.inputFields{
+		.inputFields {
 			margin-top: 10px;
 		}
 
-		.inputFields label{
+		.inputFields label {
 			display: block;
 			font-size: 12px;
 			font-weight: 600;
 			color: #000;
 		}
 
-		.colorTagLbl{
+		.colorTagLbl {
 			font-size: 12px;
 			font-weight: 600;
 			color: #000;
 		}
 
 		.inputFields input,
-		.inputFields textarea{
+		.inputFields textarea {
 			width: 100%;
 			height: 30px;
 			padding: 5px 10px;
@@ -3594,12 +3607,12 @@
 			font-weight: 400;
 		}
 
-		.inputFields textarea{
+		.inputFields textarea {
 			height: 80px;
 			resize: none;
 		}
 
-		.colorTagContainer{
+		.colorTagContainer {
 			width: 60%;
 			height: fit-content;
 			display: flex;
@@ -3608,7 +3621,7 @@
 			margin-top: -10px;
 		}
 
-		.colorTag{
+		.colorTag {
 			width: 15px;
 			height: 15px;
 			border-radius: 50%;
@@ -3617,38 +3630,38 @@
 			transition: all .2s ease-in-out;
 		}
 
-		.colorTagSelected{
+		.colorTagSelected {
 			padding: 8px;
 			box-sizing: border-box;
 			border: 2px solid #5990f5 !important;
 			transition: all .2s ease-in-out;
 		}
 
-		.color1{
+		.color1 {
 			background-color: #B400FF;
 		}
 
-		.color2{
+		.color2 {
 			background-color: #0033FF;
 		}
 
-		.color3{
+		.color3 {
 			background-color: #00B731;
 		}
 
-		.color4{
+		.color4 {
 			background-color: #6ABB00;
 		}
 
-		.color5{
+		.color5 {
 			background-color: #FF8800;
 		}
 
-		.color6{
+		.color6 {
 			background-color: #FF0000;
 		}
 
-		.noListMessage{
+		.noListMessage {
 			width: 100%;
 			height: 100%;
 			color: #FF0000;
@@ -3659,7 +3672,7 @@
 			align-items: center;
 		}
 
-		.text-right1{
+		.text-right1 {
 			padding: 5px 10px;
 			box-sizing: border-box;
 			color: white !important;
@@ -3669,36 +3682,37 @@
 			margin-left: 8px;
 		}
 
-		#items-container, #items-container-1 {
+		#items-container,
+		#items-container-1 {
 			scroll-behavior: smooth;
 		}
 
-		.resetDiv{
+		.resetDiv {
 			transform: translateY(0px);
 			transition: all .2s ease-in-out;
 		}
 
-		.resetDiv:hover{
+		.resetDiv:hover {
 			transform: translateY(-3px);
 		}
 
 		.notificationBox {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #084DD1;
-            color: white;
-            position: absolute;
-            top: 70%;
-            right: 0%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: default;
-            font-size: 12px;
-        }
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background-color: #084DD1;
+			color: white;
+			position: absolute;
+			top: 70%;
+			right: 0%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: default;
+			font-size: 12px;
+		}
 
-		.threeDotsMenu{
+		.threeDotsMenu {
 			font-size: 14px;
 			color: white !important;
 			margin-right: 4px;
@@ -3707,11 +3721,11 @@
 			transition: all .2s ease-in-out;
 		}
 
-		.threeDotsMenu:hover{
+		.threeDotsMenu:hover {
 			margin-top: -2px;
 		}
 
-		.menuBox{
+		.menuBox {
 			width: 100px;
 			height: fit-content;
 			background-color: white;
@@ -3726,7 +3740,8 @@
 			transition: all .2s ease-in-out;
 		}
 
-		.editContainer, .deleteContainer{
+		.editContainer,
+		.deleteContainer {
 			width: 90%;
 			height: fit-content;
 			display: flex;
@@ -3741,41 +3756,42 @@
 			cursor: pointer;
 		}
 
-		.editContainer:hover{
+		.editContainer:hover {
 			background-color: #084DD1;
 		}
 
-		.deleteContainer:hover{
+		.deleteContainer:hover {
 			background-color: #ffd4d4;
 		}
 
-		.editContainer:hover i{
+		.editContainer:hover i {
 			color: white !important;
 		}
 
-		.deleteContainer:hover i{
+		.deleteContainer:hover i {
 			color: red !important;
 		}
 
-		.editContainer:hover h1{
+		.editContainer:hover h1 {
 			color: white !important;
 		}
 
-		.deleteContainer:hover h1{
+		.deleteContainer:hover h1 {
 			color: red !important;
 		}
 
-		.editContainer i{
+		.editContainer i {
 			font-size: 15px;
 			color: black !important;
 		}
 
-		.deleteContainer i{
+		.deleteContainer i {
 			font-size: 15px;
 			color: red !important;
 		}
 
-		.editContainer h1, .deleteContainer h1{
+		.editContainer h1,
+		.deleteContainer h1 {
 			font-size: 14px;
 			line-height: 0%;
 			margin-bottom: 0%;
@@ -3785,23 +3801,126 @@
 			margin-left: 8px;
 		}
 
-		.deleteContainer h1{
+		.deleteContainer h1 {
 			color: red;
 		}
 
-		.groupNullHeading{
-            position: absolute;
-            top: 180px;
-            left: 120px;
-            font-size: 15px;
-            font-weight: 600;
-            color: red;
-        }
-
-		.new-content-notes img {
-			width: 150px;
+		.groupNullHeading {
+			position: absolute;
+			top: 180px;
+			left: 120px;
+			font-size: 15px;
+			font-weight: 600;
+			color: red;
 		}
 
+		.paginationContainer {
+			width: 100%;
+			height: fit-content;
+			display: none;
+			justify-content: center;
+			align-items: center;
+			margin: 10px 0px;
+		}
+
+		.paginationBtn {
+			width: fit-content;
+			height: fit-content;
+			padding: 5px 15px;
+			box-sizing: border-box;
+			color: #084DD1;
+			background-color: #DEEDFF;
+			transition: all .3s;
+			border-radius: 5px;
+			outline: none;
+			border: none;
+			cursor: pointer;
+		}
+
+		.paginationBtn:disabled {
+			background-color: #eef6ff;
+			color: #999;
+		}
+
+		.paginationBtn:disabled:hover {
+			background-color: #eef6ff;
+			color: #999;
+		}
+
+		.paginationBtn:hover {
+			background-color: #084DD1;
+			color: white;
+		}
+
+		.loaderContainer {
+			width: 100%;
+			height: 105vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: fixed;
+			top: 0%;
+			left: 0%;
+			z-index: 100000;
+			background-color: #F7FBFF;
+		}
+
+		.row2 {
+			width: 100%;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			margin-top: 25px;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+			justify-content: space-between;
+		}
+
+		.row2 .left {
+			width: 30%;
+			font-weight: 500;
+			font-size: 14px;
+			color: #757575 !important;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			padding-left: 15px;
+		}
+
+		.row2 .right {
+			width: 60%;
+			margin-right: 10%;
+		}
+
+		.attachBtn {
+			width: fit-content;
+			height: fit-content;
+			padding: 5px 15px;
+			box-sizing: border-box;
+			background-color: #074dd1;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 14px;
+			margin-top: 10px;
+		}
+
+		.attachBtn:hover {
+			background-color: #074dd1;
+			color: white;
+		}
+
+		.attachmentPhoto {
+			width: 150px;
+			height: 150px;
+			border-radius: 10px;
+			object-fit: cover;
+			display: none;
+			margin-bottom: 5px;
+		}
 	</style>
 
 </head>
@@ -3903,7 +4022,7 @@
 			<div class="openChooseContainer">
 			</div>
 			<div class="bottomBtnContainer">
-				<button type="button" style="width: 100%;" class="createListBtn" >Create New List</button>
+				<button type="button" style="width: 100%;" class="createListBtn">Create New List</button>
 			</div>
 		</div>
 	</div>
@@ -3912,7 +4031,7 @@
 
 	<div class="optionChooseModal" id="optionChooseFilterModal">
 		<div class="optionChooseModalContainer" style="transform: translate(0%, -150px);">
-			<div class="upperRow" >
+			<div class="upperRow">
 				<h1 style="color: #084DD1; font-size: 16px; font-weight: 600; margin: auto;"></h1>
 				<div class="closeDiv resetDiv" id='listFilterReset'>
 					<i class="fas fa-undo"></i>
@@ -3931,8 +4050,11 @@
 	<div class="optionChooseModal" id="createListModal">
 		<div class="optionChooseModalContainer" style=" height: 370px; width: 70%; background-color: white;">
 			<div class="upperRow">
-				<h1 id="createListHeading" style="color: #084DD1; font-size: 16px; font-weight: 600; margin: auto;">Create a New List</h1>
-				<h1 id="updateListHeading" style="color: #084DD1; font-size: 16px; font-weight: 600; margin: auto; display: none;">Update a List</h1>
+				<h1 id="createListHeading" style="color: #084DD1; font-size: 16px; font-weight: 600; margin: auto;">
+					Create a New List</h1>
+				<h1 id="updateListHeading"
+					style="color: #084DD1; font-size: 16px; font-weight: 600; margin: auto; display: none;">Update a
+					List</h1>
 
 				<div class="closeDiv" id='createListModalCloseBtn'>
 					<img src="./Assets/img/close.png" alt="">
@@ -3946,15 +4068,18 @@
 
 					<div class="inputFields">
 						<label for="listTitle">List Title</label>
-						<input type="text" autocomplete="off" id="listTitle" placeholder="Enter Title" class="listTitleInp">
+						<input type="text" autocomplete="off" id="listTitle" placeholder="Enter Title"
+							class="listTitleInp">
 					</div>
 
 					<div class="inputFields">
 						<label for="listDesc">List Description</label>
-						<textarea id="listDesc" autocomplete="off" placeholder="Enter Details (200 characters)" class="listDescInp"></textarea>
+						<textarea id="listDesc" autocomplete="off" placeholder="Enter Details (200 characters)"
+							class="listDescInp"></textarea>
 					</div>
 
-					<div class="inputFields" style="display: flex; justify-content: space-between; align-items: center;">
+					<div class="inputFields"
+						style="display: flex; justify-content: space-between; align-items: center;">
 						<label class="colorTagLbl">Color Tag</label>
 						<div class="colorTagContainer">
 							<span class="colorTag color1 colorTagSelected" data-color-value="#B400FF"></span>
@@ -3991,8 +4116,10 @@
 
 			</div>
 			<div class="openChooseContainer">
-				<button type="button" style="width: 100%;" class="shareInGroupBtn" id="shareProspectBtn" >Share in Groups</button>
-				<button type="button" style="width: 100%;" class="shareInGroupBtn" id="shareInSubGroups">Share in Sub Groups</button>
+				<button type="button" style="width: 100%;" class="shareInGroupBtn" id="shareProspectBtn">Share in
+					Groups</button>
+				<button type="button" style="width: 100%;" class="shareInGroupBtn" id="shareInSubGroups">Share in Sub
+					Groups</button>
 			</div>
 		</div>
 	</div>
@@ -4021,7 +4148,9 @@
 	</div>
 
 	<div class="justify-content-center">
-		<div class="loader" id="loader" style="display: none;"></div>
+		<div class="loaderContainer" id="loader" style="display: none;">
+			<div class="loader"></div>
+		</div>
 		<div>
 
 			<div id="api_return" class="text-center mt-5" style="display: none;">
@@ -4075,7 +4204,8 @@
 						<button type="button" id="view_all_1" class="new-back-btn"><i
 								class="fas fa-arrow-left"></i></button>
 					</div>
-					<div class="item2-sub-header" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+					<div class="item2-sub-header"
+						style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
 						<h1 class="new-header-main-text" id="topTitleName"></h1><br>
 						<div class="userImage">
 
@@ -4234,12 +4364,31 @@
 						</div>
 					</div>
 
+					<div class="row2">
+						<div class="left">Attachment</div>
+						<div class="right">
+							<img src="" class="attachmentPhoto" alt="">
+							<div style="text-align: left;">
+								<label for="attachmentInp" class="attachBtn">
+									Attach a photo
+								</label>
+								<input type="file" style="display: none;" id="attachmentInp"
+									accept="image/png, image/gif, image/jpeg">
+							</div>
+						</div>
+					</div>
 
 					<p class="hero-content-names-head">Notes</p>
 					<div class="new-motes">
 						<div contenteditable="true" class="new-content-notes" id="notes" style="resize: vertical;
     text-align: left; min-height: 100px;padding: 5px"></div>
 					</div>
+					<p class="hero-content-names-head">Messages</p>
+					<div class="new-motes">
+						<textarea contenteditable="true" class="new-content-notes" id="client_messages" style="resize: vertical;
+    text-align: left; min-height: 100px;padding: 5px"></textarea>
+					</div>
+
 
 
 					<div class="new-open-clender">
@@ -4797,7 +4946,9 @@
 
 				<div class="user-img-and-text" style=" text-align: center;margin-bottom:7px">
 					<div class="userImage" style="margin-bottom: 0px !important;">
-						<img src="" style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px; cursor: pointer;" id="profilePicc">
+						<img src=""
+							style="display: block;position: relative;width: 56px;height: 56px;border-radius: 50%;margin: 0px  auto 10px; cursor: pointer;"
+							id="profilePicc">
 					</div>
 					<span class="new-header-record" style="color: #757575 !important;
 					font-size: 14px !important;" id="savedUserMessagee"></span>
@@ -4838,7 +4989,8 @@
 					</div>
 
 					<div class="clender_bar">
-						<div class="clender_view_1" id="listingModal" style="width: 100%; height: 40px; display: flex; justify-content: space-between; align-items: center;">
+						<div class="clender_view_1" id="listingModal"
+							style="width: 100%; height: 40px; display: flex; justify-content: space-between; align-items: center;">
 							<span class="text-left">List</span>
 							<div id="listItemContainer" style="display: none;">
 							</div>
@@ -4930,6 +5082,14 @@
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<div class="paginationContainer">
+					<input type="button" id="first" class="paginationBtn" value="First" />
+					<input type="button" id="next" style="margin-left: 5px;" class="paginationBtn" value="Next" />
+					<input type="button" id="previous" style="margin-left: 5px;" class="paginationBtn"
+						value="Previous" />
+					<input type="button" id="last" style="margin-left: 5px;" class="paginationBtn" value="Last" />
 				</div>
 
 			</div>

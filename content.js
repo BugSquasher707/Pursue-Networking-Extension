@@ -5,11 +5,10 @@ var new_location = "";
 var loginId = "";
 
 var x = setInterval(() => {
-  if (localStorage.getItem("id") != null) {
+  if (localStorage.getItem("id") != null && !(window.location.href.includes("https://pursuenetworking.com/"))) {
     loginId = localStorage.getItem("id");
     chrome.runtime.sendMessage({ type: "auth", auth: loginId });
     clearInterval(x);
-    console.log("id")
     localStorage.removeItem("id");
     loginId = "";
     window.location.href = "https://www.linkedin.com/in/";
@@ -22,16 +21,14 @@ var x = setInterval(() => {
 
 var x = setInterval(() => {
   var new_location = window.location.href;
-  getid = localStorage.getItem("user_id")
-  console.log(getid)
+  getid = localStorage.getItem("user_id");
+
   var temp = 0;
   if (
     new_location != loc &&
     new_location.includes("https://www.linkedin.com/in/")
   ) {
     temp = 1;
-    console.log('new_location');
-    console.log('i am here in')
     loc = new_location;
     let message = {
       loader: "loader",
@@ -39,42 +36,9 @@ var x = setInterval(() => {
     chrome.runtime.sendMessage({ type: "message", message });
     action();
   }
-  // else if (
-  //   new_location != loc &&
-  //   new_location.includes("https://www.linkedin.com/feed/")
-  // ) {
-  //   temp = 1;
-  //   console.log('new_location');
-  //   console.log('i am here feed')
-  //   loc = new_location;
-  //   console.log(temp)
-  //   let message = {
-  //     loader: "home",
-  //   };
-  //   chrome.runtime.sendMessage({ type: "message", message });
-  //   // action();
-
-  // }
-  // else if(!new_location.includes("https://www.linkedin.com/feed/") && !new_location.includes("https://www.linkedin.com/in/")){
-  //   console.log(temp)
-  //   let message = {
-  //     loader: "home",
-  //   };
-  //   chrome.runtime.sendMessage({ type: "message", message });
-  // }
-  // else{
-    // window.location.reload();
-  //  }
-  // window.location.reload();
-
-  // clearInterval(x);
-
 }, 100);
 
-// window.addEventListener('load', action);
-
 function action() {
-
   setTimeout(() => {
     window.scroll(0, 1500);
   }, 4000);
@@ -94,12 +58,7 @@ function action() {
       } else {
         about = spans[0].innerText;
       }
-      console.log(spans[0].innerText, "0");
     }
-
-    console.log(img, "image");
-
-    console.log(about);
 
     new_id = document
       .getElementsByClassName("artdeco-card ember-view pv-top-card")[0]
@@ -131,26 +90,6 @@ function action() {
       address = address.innerText.toString().trim();
     }
 
-    // let company = document.querySelector(".pv-entity__secondary-title.t-14.t-black.t-normal");
-    // let company = document.querySelector('[aria-label="Current company"]');
-    // console.log(company, 'company');
-    // if(company != null && company.innerText != null){
-    // 	company = company.innerText.toString().trim();
-    // }
-    // else{
-    // 	company = document.querySelector('.pv-entity__secondary-title.t-14.t-black.t-normal')
-    // 	if(company != null && company.innerText != null){
-    // 		company = company.innerText
-    // 	}
-    // 	else{
-    // 		company = null
-    // 	}
-    // }
-
-    // company = document.querySelector('.t-14.t-normal')
-    // let company_span = company.document.getElementsByTagName("span");
-    // console.log(company)
-
     let company = document.querySelector('[aria-label="Current company"]');
     if (company != null && company.innerText != null) {
       company = company.innerText.toString().trim();
@@ -173,19 +112,9 @@ function action() {
       img = document.querySelector(".ember-view.profile-photo-edit__preview");
       img = img.src;
     }
-    if(img == null){
-      img = "./Assets/img/selecteddms.svg"
+    if (img == null) {
+      img = "./Assets/img/selecteddms.svg";
     }
-
-    console.log(img, "image");
-
-    // else if(img.length == 0){
-    // 	img = document.querySelector(".ember-view.profile-photo-edit__preview");
-
-    // 	if(img != null ){
-    // 		img = img.src;
-    // 	}
-    // }
 
     let profile_link = window.location.href;
 
@@ -208,29 +137,32 @@ function action() {
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message, sender, sendResponse) {
-  if(message.temp){
-    localStorage.removeItem("user_id")
-    localStorage.removeItem("profilepic")
-    localStorage.removeItem("name")
-    localStorage.removeItem("username")
-    localStorage.removeItem("prospect_id")
-    localStorage.removeItem("second_user_id")
-
-
-    localStorage.setItem("user_id",message.temp)
-    localStorage.setItem("profilepic",message.profilepic)
-    localStorage.setItem("name",message.fname)
-    localStorage.setItem("username",message.username)
-
-
+  if (message.temp) {
+    localStorage.setItem("user_id", message.temp);
+    localStorage.setItem("profilepic", message.profilepic);
+    localStorage.setItem("name", message.fname);
+    localStorage.setItem("username", message.username);
   }
+
   if (!message.auth) {
     var current_location = window.location.href;
-    if(current_location.includes("https://www.linkedin.com/in/") || current_location.includes("https://extension-dashboard.vercel.app") ){
-      window.open(message.txt)
-    }
-    else{
-          window.location.href = message.txt;
+    if (
+      current_location.includes("https://www.linkedin.com/in/") &&
+      message.txt.includes("https://extension-dashboard.vercel.app")
+    ) {
+      window.open(message.txt, "_blank");
+      window.focus();
+    } else if (
+      current_location.includes("https://extension-dashboard.vercel.app")
+    ) {
+      if (!message.txt.includes("https://extension-dashboard.vercel.app")) {
+        if (!message.donot) {
+          var myWindow = window.open(message.txt, "", "width=680, height=750");
+          myWindow.blur();
+        }
+      }
+    } else {
+      window.location.href = message.txt;
     }
   } else {
     if (message.auth) {

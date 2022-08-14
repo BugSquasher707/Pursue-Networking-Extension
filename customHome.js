@@ -49,25 +49,20 @@ function openDirectChat(element) {
 
 function topbaricons() {
   secondUserPic = localStorage.getItem("secondUserPic");
-  if(secondUserPic != "")
-  {
-    document.getElementById("profilePic").src = secondUserPic
-  }
-  else
-  {
+  if (secondUserPic != "") {
+    document.getElementById("profilePic").src = secondUserPic;
+  } else {
     profilePic = localStorage.getItem("profilePic");
-    document.getElementById("profilePic").src = profilePic
+    document.getElementById("profilePic").src = profilePic;
   }
-  name = localStorage.getItem("second_user_name")
-  if(name != "null" && name != "")
-  {
+  name = localStorage.getItem("second_user_name");
+  if (name != "null" && name != "") {
+    document.getElementById(
+      "savedUserMessage"
+    ).innerText = `You're in ${name}'s Database`;
+  } else {
     document.getElementById("savedUserMessage").innerText =
-    `You're in ${name}'s Database`;
-  }
-  else
-  {
-    document.getElementById("savedUserMessage").innerText =
-    "Records from Database";
+      "Records from Database";
   }
   document.querySelector(".imgContainer").innerHTML = "";
   document.querySelector(".new_header_right_imgs").innerHTML = "";
@@ -92,15 +87,19 @@ function topbaricons() {
         var row =
           item.image != null
             ? `
-              <input type="hidden" id="value${z}" value="${item.linked_to_id}"></input>
-              
+              <input type="hidden" id="value${z}" value="${
+                item.linked_to_id
+              }"></input>
+
               <div class="iconMsgPicContainer">
               ${
                 item.total_notifications != 0
-                ? `<div class="countNum1">${item.total_notifications}</div>`
-                : ""
-                }
-                <img class="new-top-img" id="shardm${count}" src="${item.image}">
+                  ? `<div class="countNum1">${item.total_notifications}</div>`
+                  : ""
+              }
+                <img class="new-top-img" id="shardm${count}" src="${
+                item.image
+              }">
                 <span class="tooltiptext">${item.username}</span>
               </div>
             `
@@ -112,111 +111,101 @@ function topbaricons() {
         z = z + 1;
       });
 
-      if(userData.users.length > 3){
+      if (userData.users.length > 3) {
+        document.querySelector(
+          ".imgContainer"
+        ).innerHTML += `<span class='showMembersAll'><i class="fas fa-eye"></i></span>`;
 
-      document.querySelector(
-        ".imgContainer"
-      ).innerHTML += `<span class='showMembersAll'><i class="fas fa-eye"></i></span>`;
+        document
+          .querySelector(".showMembersAll")
+          .addEventListener("click", () => {
+            document.querySelector(".membersContainer").innerHTML = "";
 
-      document
-        .querySelector(".showMembersAll")
-        .addEventListener("click", () => {
-          document.querySelector(".membersContainer").innerHTML = ''
-          
-          document.getElementById("membersDynamicModal").style.transform =
-            "scale(1)";
-          document.getElementById("membersDynamicModal").style.opacity = 1;
+            document.getElementById("membersDynamicModal").style.transform =
+              "scale(1)";
+            document.getElementById("membersDynamicModal").style.opacity = 1;
 
-          var user_id = localStorage.getItem("user_id");
+            var user_id = localStorage.getItem("user_id");
 
-          const url = `${globalURl}/chats/${user_id}`;
+            const url = `${globalURl}/chats/${user_id}`;
 
-          let xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
 
-          xhr.open("GET", url, true);
-          xhr.setRequestHeader("Content-Type", "application/json");
-          xhr.send();
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send();
 
-          xhr.onreadystatechange = function () {
-            //Call a function when the state changes.
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              let userData = JSON.parse(xhr.responseText);
+            xhr.onreadystatechange = function () {
+              //Call a function when the state changes.
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                let userData = JSON.parse(xhr.responseText);
 
-              if(userData.length > 0 ){
-                userData.map((item, i, arr) => {
-                  var row = `
-                    <div class="prospectContent memberDiv" data-member_id=${
-                      item.linked_to_id
-                    }>
-                                
+                if (userData.length > 0) {
+                  userData.map((item, i, arr) => {
+                    var row = `
+                    <div class="prospectContent memberDiv" data-member_id=${item.linked_to_id}>
+
                       <img src=${item.image} alt=""/>
-        
+
                       <h1>${item.mutual}</h1>
-  
+
                     </div>
                   `;
 
-                  document.querySelector('.membersContainer').innerHTML += row;
-                });
-              }
-              else{
-                document.querySelector('.membersContainer').innerHTML = `
+                    document.querySelector(".membersContainer").innerHTML +=
+                      row;
+                  });
+                } else {
+                  document.querySelector(".membersContainer").innerHTML = `
                   <div class="prospectContent">
-                                  
+
                     <h1>No Chat Memebers</h1>
 
                   </div>
-                `
+                `;
+                }
               }
-            }
-          };
-        });
-        
+            };
+          });
+
         setInterval(() => {
-          if(document.querySelector('.memberDiv')){
-            document.querySelectorAll('.memberDiv').forEach(ele => {
-              ele.addEventListener('click', (e) => {
-                let receiver_id = ele.getAttribute('data-member_id')
+          if (document.querySelector(".memberDiv")) {
+            document.querySelectorAll(".memberDiv").forEach((ele) => {
+              ele.addEventListener("click", (e) => {
+                let receiver_id = ele.getAttribute("data-member_id");
                 localStorage.setItem("reciever_id", receiver_id);
                 openDirectChat();
-              })
-            })
+              });
+            });
           }
-        }, 100)
+        }, 100);
 
-
-      document
-        .querySelector("#membersDynamicModalCloseBtn")
-        .addEventListener("click", () => {
-          document.getElementById("membersDynamicModal").style.transform =
-            "scale(0)";
-          document.getElementById("membersDynamicModal").style.opacity = 0;
-        });
-
+        document
+          .querySelector("#membersDynamicModalCloseBtn")
+          .addEventListener("click", () => {
+            document.getElementById("membersDynamicModal").style.transform =
+              "scale(0)";
+            document.getElementById("membersDynamicModal").style.opacity = 0;
+          });
       }
 
       if (userData.groups != 200) {
-
         if (userData.groups.length > 3) {
-          document
-            .querySelectorAll(".new_header_right_imgs")
-            .forEach((ele) => {
-              ele.innerHTML = `<span class='showGroupsAll'><i class="fas fa-eye"></i></span>`;
-            });
-          
+          document.querySelectorAll(".new_header_right_imgs").forEach((ele) => {
+            ele.innerHTML = `<span class='showGroupsAll'><i class="fas fa-eye"></i></span>`;
+          });
+
           setTimeout(() => {
             document.querySelectorAll(".showGroupsAll").forEach((ele) => {
               ele.addEventListener("click", () => {
                 document.querySelector(".groupDynamicContainer").innerHTML = "";
 
-                document.getElementById(
-                  "groupsDynamicModal"
-                ).style.transform = "scale(1)";
-                document.getElementById(
-                  "groupsDynamicModal"
-                ).style.opacity = 1;
+                document.getElementById("groupsDynamicModal").style.transform =
+                  "scale(1)";
+                document.getElementById("groupsDynamicModal").style.opacity = 1;
 
-                document.getElementById('groupsDynamicModalH1').innerText = 'Groups'
+                document.getElementById("groupsDynamicModalH1").innerText =
+                  "Groups";
 
                 var user_id = localStorage.getItem("user_id");
 
@@ -229,7 +218,6 @@ function topbaricons() {
                 xhr.send();
 
                 xhr.onreadystatechange = function () {
-
                   if (xhr.readyState == 4 && xhr.status == 200) {
                     let userData = JSON.parse(xhr.responseText);
 
@@ -239,10 +227,14 @@ function topbaricons() {
                           ".groupDynamicContainer"
                         ).innerHTML += `
                           <div style="position: relative;">
-                          <div class="groupBox groupChats" data-group_id=${item.group_id}>
-                          
-                               <img src="${item.image}" class="userIconDemo" data-receiverid="32">
-                          
+                          <div class="groupBox groupChats" data-group_id=${
+                            item.group_id
+                          }>
+
+                               <img src="${
+                                 item.image
+                               }" class="userIconDemo" data-receiverid="32">
+
                             ${
                               item.notifications != 0
                                 ? `<div class="notificationBox">${item.notifications}</div>`
@@ -274,38 +266,38 @@ function topbaricons() {
                 };
               });
             });
-          }, 100)
-          
+          }, 100);
 
           document
             .querySelector("#groupsDynamicModalCloseBtn")
             .addEventListener("click", () => {
-              document.getElementById(
-                "groupsDynamicModal"
-              ).style.transform = "scale(0)";
-              document.getElementById(
-                "groupsDynamicModal"
-              ).style.opacity = 0;
+              document.getElementById("groupsDynamicModal").style.transform =
+                "scale(0)";
+              document.getElementById("groupsDynamicModal").style.opacity = 0;
             });
         }
 
         userData.groups.slice(0, 3).map((item, i, arr) => {
           document.querySelector(".new_header_right_imgs").innerHTML += `
             <div class="smallgroupBox" data-group_id=${item.group_id}>
-            <span class="tooltiptext">${item.group_name.length > 8 ? `${item.group_name.slice(0,8)}...` : `${item.group_name}`}</span>
+            <span class="tooltiptext">${
+              item.group_name.length > 8
+                ? `${item.group_name.slice(0, 8)}...`
+                : `${item.group_name}`
+            }</span>
             ${
               item.notifications != 0
                 ? `<div class="countNum">${item.notifications}</div>`
                 : ""
-              }
-              
-                  <img src="${item.group_image}" class="smalluserIconDemo" data-receiverid="32">
-                
+            }
+
+                  <img src="${
+                    item.group_image
+                  }" class="smalluserIconDemo" data-receiverid="32">
+
             </div>
           `;
         });
-
-
 
         document.querySelectorAll(".smallgroupBox").forEach((ele) => {
           ele.addEventListener("click", iconShareGroupChat);
@@ -321,7 +313,7 @@ if (document.getElementById("msg_btn")) {
 }
 
 function redirectMessagePage() {
-  localStorage.setItem("openchatbox","yeen");
+  localStorage.setItem("openchatbox", "yeen");
   window.location.href = "messagebox.html";
 }
 
@@ -343,8 +335,9 @@ if (document.getElementById("pipelines")) {
 }
 
 function redirectToListingPage() {
-  window.location.href = "popup.html";
   localStorage.setItem("pipeLineClick", true);
+  localStorage.setItem("loader_check", true);
+  window.location.href = "popup.html";
 }
 
 if (document.getElementById("calender")) {
@@ -411,7 +404,7 @@ if (document.getElementById("search_box")) {
     document.querySelector(".tabs-row").style.display = "none";
     document.querySelector(".bottomContent").style.display = "none";
     document.getElementById("errorMessage").innerHTML = "";
-    document.querySelector(".user-img-and-text").style.display = "none"
+    document.querySelector(".user-img-and-text").style.display = "none";
 
     setTimeout(() => {
       var user_id = localStorage.getItem("user_id");
@@ -458,20 +451,20 @@ if (document.getElementById("search_box")) {
                 <span class="right"><i class="far fa-comment-alt comment_icon"></i></span>
               </div>
               <div class="tabs_cols_two_main_1">
-    
+
                 <span class="left">` +
                   obj.description +
                   `</span>
-    
+
               </div>
-    
+
               <div class="tabs_cols_two_main_1">
-    
-    
+
+
                 <span class="left">` +
                   obj.company +
                   `</span>
-    
+
               </div>
               <div class="tabs_cols_two_main_1"
                        >
@@ -524,7 +517,7 @@ if (document.getElementById("search_box")) {
               <div class="tabs_cols_two_main_1"
                        >
                 <span class="left">
-                ${obj.follow_up !== null ? obj.follow_up : "No Date Added"} 
+                ${obj.follow_up !== null ? obj.follow_up : "No Date Added"}
               </span>
               </div>
             </div>`;
@@ -792,15 +785,17 @@ if (document.getElementById("moreSpan1")) {
 
 if (document.getElementById("signoutDiv")) {
   document.getElementById("signoutDiv").addEventListener("click", () => {
+    let bgData = JSON.parse(localStorage.getItem("bgData"));
     localStorage.clear();
+    localStorage.setItem("bgData", JSON.stringify(bgData));
     window.close();
   });
 }
+
 if (document.getElementById("profilePic")) {
   document.getElementById("profilePic").addEventListener("click", () => {
-    localStorage.setItem("OpenShowDataBase",true)
+    localStorage.setItem("OpenShowDataBase", true);
     window.location.href = "popup.html";
-
   });
 }
 if (document.getElementById("dashboard_open")) {
@@ -812,10 +807,10 @@ if (document.getElementById("dashboard_open")) {
 function openprofile() {
   console.log("here");
   var link = "https://extension-dashboard.vercel.app/index.html";
-  var id = localStorage.getItem("user_id")
-  var profilepic = localStorage.getItem("secondUserPic")
+  var id = localStorage.getItem("user_id");
+  var profilepic = localStorage.getItem("secondUserPic");
   var fname = localStorage.getItem("second_user_name");
-  var username = localStorage.getItem("username")
+  var username = localStorage.getItem("username");
 
   let params = {
     active: true,
@@ -834,3 +829,30 @@ function openprofile() {
     chrome.tabs.sendMessage(tabs[0].id, msg);
   }
 }
+
+if (document.getElementById("loginBtn")) {
+  document.getElementById("loginBtn").addEventListener("click", getLoginPage);
+}
+function getLoginPage() {
+  let params = {
+    active: true,
+    currentWindow: true,
+  };
+  chrome.tabs.query(params, gotTab);
+
+  function gotTab(tabs) {
+    let msg = {
+      auth: "https://testlinkedin.thefastech.com/social",
+    };
+    chrome.tabs.sendMessage(tabs[0].id, msg);
+  }
+  window.close();
+}
+
+setTimeout(() => {
+  user_id = localStorage.getItem("user_id");
+  if (!user_id) {
+    document.getElementById("profile_btn").style.display = "none";
+    document.getElementById("loginBtn").style.display = null;
+  }
+});

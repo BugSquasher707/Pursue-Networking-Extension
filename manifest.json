@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Pursue Networking",
   "version": "0.1",
   "content_scripts": [
@@ -7,25 +7,24 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js"]
+      "js": [
+        "content.js"
+      ]
     }
   ],
-  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js; object-src 'self'",
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js",
+    "type": "module"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_title": "Pursue Networking",
     "default_icon": "logo.png"
   },
-  "permissions": ["management","tabs", "*://*.linkedin.com/*","notifications"],
-  "commands": {
-		"_execute_browser_action": {
-    		"suggested_key": {
-          	"default": "Ctrl+Shift+Y"
-        	}
-		}
-	}
-  
+  "permissions": [
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.linkedin.com/*"
+  ]
 }
